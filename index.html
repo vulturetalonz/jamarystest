@@ -44,8 +44,9 @@
       font-size: 24px;
       font-weight: bold;
     }
-    /* Wrap nav links and inquire button in a container */
+    /* Wrap nav links and inquire button */
     .nav-menu {
+      /* On desktop, we'll show it normally */
       display: flex;
       align-items: center;
       gap: 20px;
@@ -64,7 +65,7 @@
       text-decoration: none;
       padding: 8px 16px;
     }
-    /* Mobile menu icon (hamburger) – hidden on desktop */
+    /* Mobile menu icon (three dots) – hidden on desktop */
     .mobile-menu-icon {
       display: none;
       font-size: 2rem;
@@ -92,6 +93,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      /* Attributes to help mobile playback */
       autoplay: true;
       muted: true;
       playsinline: true;
@@ -191,7 +193,7 @@
       margin: 0 auto 40px auto;
       line-height: 1.5;
     }
-    /* BOX CONTAINER: Keep horizontal layout on all devices */
+    /* BOX CONTAINER: Keep horizontal layout; enable horizontal scrolling if needed */
     .box-container {
       display: flex;
       gap: 10px;
@@ -199,7 +201,7 @@
       max-width: 620px;
       margin: 0 auto;
       justify-content: center;
-      overflow-x: auto; /* Enable horizontal scrolling if needed */
+      overflow-x: auto;
     }
     .box {
       flex: 1;
@@ -229,18 +231,12 @@
     .box:hover .hover-text {
       opacity: 1;
     }
-    /* Flexbox hover effect for boxes (on non-touch devices) */
+    /* Desktop hover effect (for non-touch devices) */
     .box-container:hover .box {
       flex: 0.5;
     }
     .box-container:hover .box:hover {
       flex: 3;
-    }
-    /* Price styling */
-    .price {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
     }
     /* FOOTER SECTION */
     .footer {
@@ -275,26 +271,25 @@
         transform: translateY(0);
       }
     }
-    /* Responsive adjustments */
+    /* MOBILE STYLES */
     @media (max-width: 768px) {
-      /* Navbar: Hide nav-menu by default and show hamburger icon */
-      .nav-menu {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: #333;
+      /* Navbar adjustments */
+      nav {
+        justify-content: space-between;
       }
       .mobile-menu-icon {
         display: block;
       }
-      nav {
-        justify-content: space-between;
+      /* Instead of display:none, use max-height for smooth expansion */
+      .nav-menu {
+        display: block;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
       }
-      /* When nav-menu is active, display it */
       .nav-menu.active {
-        display: flex;
+        max-height: 300px;
       }
-      /* Adjust nav links spacing */
       .nav-links {
         flex-direction: column;
         gap: 10px;
@@ -312,9 +307,25 @@
       .hero-content .flair {
         font-size: 1.2rem;
       }
-      /* Keep box container horizontal on mobile */
+      /* For boxes, keep horizontal layout with smooth click-to-expand behavior */
       .box-container {
         flex-wrap: nowrap;
+      }
+      .box {
+        transition: flex 0.5s ease;
+      }
+      /* When a box is clicked, add the .active class to expand it */
+      .box.active {
+        flex: 5 !important;
+      }
+      .box:not(.active) {
+        flex: 1;
+        opacity: 0.6;
+      }
+      /* Disable hover effects on touch devices */
+      .box-container:hover .box,
+      .box-container:hover .box:hover {
+        flex: initial;
       }
     }
   </style>
@@ -324,9 +335,9 @@
   <header id="navbar">
     <nav>
       <div class="logo">Lorem Ipsum</div>
-      <!-- Mobile menu icon -->
+      <!-- Mobile menu icon (three dots) -->
       <div class="mobile-menu-icon" id="mobile-menu-icon">&#8942;</div>
-      <!-- Wrap nav links and inquire button in a container -->
+      <!-- Nav menu (nav links + inquire button) -->
       <div class="nav-menu" id="nav-menu">
         <ul class="nav-links">
           <li>About</li>
@@ -339,7 +350,7 @@
     </nav>
   </header>
   
-  <!-- HERO SECTION (Video at the top only) -->
+  <!-- HERO SECTION (Video at the top) -->
   <section class="hero">
     <div class="video-background">
       <video 
@@ -351,7 +362,7 @@
         preload="auto"
       ></video>
     </div>
-    <!-- Shadow overlay to separate text from video -->
+    <!-- Shadow overlay -->
     <div class="shadow-overlay"></div>
     <div class="hero-content fly-in">
       <p class="welcome-text">WELCOME TO</p>
@@ -453,7 +464,7 @@
       }
       prevScrollPos = currentScrollPos;
       
-      // Update shadow overlay opacity based on scroll position.
+      // Update shadow overlay opacity
       let scroll = window.scrollY;
       let maxOpacity = 0.8;
       let opacity = Math.min((scroll / 500) * maxOpacity, maxOpacity);
@@ -463,17 +474,33 @@
       }
     });
     
-    // Smooth scroll to "About Us" section when "Learn More" is clicked
+    // Smooth scroll to About Us section when "Learn More" is clicked
     document.getElementById("learn-more-btn").addEventListener("click", () => {
       document.querySelector(".about").scrollIntoView({ behavior: "smooth" });
     });
     
-    // Mobile nav toggle
+    // Mobile nav toggle (hamburger menu)
     const mobileMenuIcon = document.getElementById("mobile-menu-icon");
     const navMenu = document.getElementById("nav-menu");
     
     mobileMenuIcon.addEventListener("click", () => {
       navMenu.classList.toggle("active");
+    });
+    
+    // Mobile box click-to-expand behavior
+    const boxes = document.querySelectorAll('.box');
+    boxes.forEach(box => {
+      box.addEventListener('click', () => {
+        // Only trigger in mobile view
+        if (window.innerWidth <= 768) {
+          if(box.classList.contains('active')) {
+            box.classList.remove('active');
+          } else {
+            boxes.forEach(b => b.classList.remove('active'));
+            box.classList.add('active');
+          }
+        }
+      });
     });
   </script>
 </body>
