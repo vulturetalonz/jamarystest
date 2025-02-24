@@ -13,14 +13,12 @@
       padding: 0;
       box-sizing: border-box;
     }
-    
     body {
       font-family: 'Quattrocento Sans', sans-serif;
       overflow-x: hidden;
       background-color: #f4f4f4;
       text-align: center;
     }
-    
     /* NAVBAR */
     #navbar {
       position: fixed;
@@ -32,42 +30,47 @@
       z-index: 9999;
       transition: top 0.3s ease;
     }
-    
     #navbar.hidden {
       top: -80px;
     }
-    
     nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
     }
-    
     .logo {
       font-family: 'Quattrocento Sans', sans-serif;
       font-size: 24px;
       font-weight: bold;
     }
-    
+    /* Wrap nav links and inquire button in a container */
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
     .nav-links {
       list-style: none;
       display: flex;
       gap: 20px;
-      flex-wrap: wrap;
     }
-    
     .nav-links li {
       cursor: pointer;
     }
-    
     .inquire-button {
       background-color: #fff;
       color: #000;
       text-decoration: none;
       padding: 8px 16px;
     }
-    
+    /* Mobile menu icon (hamburger) – hidden on desktop */
+    .mobile-menu-icon {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
+    }
     /* HERO SECTION */
     .hero {
       position: relative;
@@ -75,7 +78,6 @@
       height: 100vh;
       overflow: hidden;
     }
-    
     /* VIDEO BACKGROUND */
     .video-background {
       position: absolute;
@@ -86,15 +88,16 @@
       overflow: hidden;
       z-index: -2;
     }
-    
     .video-background video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      /* Added preload to help with desktop playback */
+      autoplay: true;
+      muted: true;
+      playsinline: true;
+      loop: true;
       preload: auto;
     }
-    
     /* SHADOW OVERLAY */
     .shadow-overlay {
       position: absolute;
@@ -106,7 +109,6 @@
       background: linear-gradient(to top, rgba(0,0,0,0), transparent);
       z-index: -1;
     }
-    
     /* HERO TEXT CONTENT */
     .hero-content {
       position: relative;
@@ -119,14 +121,12 @@
       padding: 0 5%;
       z-index: 1;
     }
-    
     .hero-content .welcome-text {
       font-family: 'Quattrocento Sans', sans-serif;
       font-size: 1.5rem;
       margin-bottom: 5px;
       text-transform: uppercase;
     }
-    
     .hero-content h1 {
       font-family: 'Playfair Display', serif;
       font-size: 4rem;
@@ -134,13 +134,11 @@
       text-transform: uppercase;
       font-weight: 400;
     }
-    
     .hero-content .flair {
       font-family: 'Dancing Script', cursive;
       font-size: 1.5rem;
       margin-bottom: 20px;
     }
-    
     .hero-content button {
       background-color: #fff;
       color: #000;
@@ -148,62 +146,52 @@
       padding: 10px 20px;
       cursor: pointer;
     }
-    
     /* CONTENT SECTION */
     .content {
       min-height: 60vh;
       padding: 50px 5%;
       background-color: #ffffff;
     }
-    
     .content h2 {
       font-size: 2rem;
       margin-bottom: 20px;
     }
-    
     .content p {
       max-width: 800px;
       margin: 0 auto;
       line-height: 1.5;
     }
-    
     /* ABOUT US SECTION */
     .about {
       min-height: 60vh;
       padding: 50px 5%;
       background-color: #fafafa;
     }
-    
     .about h2 {
       font-size: 2rem;
       margin-bottom: 20px;
     }
-    
     .about p {
       max-width: 800px;
       margin: 0 auto 20px auto;
       line-height: 1.5;
     }
-    
     /* TREATMENTS SECTION */
     .treatments {
       min-height: 60vh;
       padding: 50px 5%;
       background-color: #e0e0e0;
     }
-    
     .treatments h2 {
       font-size: 2rem;
       margin-bottom: 20px;
     }
-    
     .treatments p {
       max-width: 800px;
       margin: 0 auto 40px auto;
       line-height: 1.5;
     }
-    
-    /* BOX CONTAINER using flexbox */
+    /* BOX CONTAINER: Keep horizontal layout on all devices */
     .box-container {
       display: flex;
       gap: 10px;
@@ -211,10 +199,11 @@
       max-width: 620px;
       margin: 0 auto;
       justify-content: center;
+      overflow-x: auto; /* Enable horizontal scrolling if needed */
     }
-    
     .box {
       flex: 1;
+      min-width: 200px;
       height: 250px;
       background-color: #999;
       padding: 20px;
@@ -224,7 +213,6 @@
       overflow: hidden;
       position: relative;
     }
-    
     .box h3 {
       font-family: 'Quattrocento Sans', sans-serif;
       margin-bottom: 10px;
@@ -232,41 +220,34 @@
       justify-content: center;
       align-items: center;
     }
-    
     .hover-text {
       font-family: 'Quattrocento Sans', sans-serif;
       opacity: 0;
       transition: opacity 0.8s ease;
       margin-top: 10px;
     }
-    
     .box:hover .hover-text {
       opacity: 1;
     }
-    
-    /* Flexbox hover effect for boxes */
+    /* Flexbox hover effect for boxes (on non-touch devices) */
     .box-container:hover .box {
       flex: 0.5;
     }
-    
     .box-container:hover .box:hover {
       flex: 3;
     }
-    
     /* Price styling */
     .price {
       display: block;
       margin-top: 10px;
       font-weight: bold;
     }
-    
     /* FOOTER SECTION */
     .footer {
       background-color: #333;
       color: #fff;
       padding: 20px 5%;
     }
-    
     .footer ul {
       list-style: none;
       display: flex;
@@ -274,45 +255,51 @@
       gap: 20px;
       margin-bottom: 10px;
     }
-    
     .footer ul li a {
       color: #fff;
       text-decoration: none;
       font-weight: bold;
     }
-    
     .footer p {
       margin-top: 10px;
     }
-    
     /* SIMPLE FLY-IN ANIMATION */
     .fly-in {
       opacity: 0;
       transform: translateY(20px);
       animation: flyIn 1s forwards ease-in-out;
     }
-    
     @keyframes flyIn {
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-    
     /* Responsive adjustments */
     @media (max-width: 768px) {
-      nav {
+      /* Navbar: Hide nav-menu by default and show hamburger icon */
+      .nav-menu {
+        display: none;
         flex-direction: column;
-      }
-      .nav-links {
         width: 100%;
+        background-color: #333;
+      }
+      .mobile-menu-icon {
+        display: block;
+      }
+      nav {
+        justify-content: space-between;
+      }
+      /* When nav-menu is active, display it */
+      .nav-menu.active {
         display: flex;
-        justify-content: center;
-        margin-top: 10px;
       }
-      .nav-links li {
-        margin: 0 10px;
+      /* Adjust nav links spacing */
+      .nav-links {
+        flex-direction: column;
+        gap: 10px;
       }
+      /* Adjust hero section height */
       .hero {
         height: 80vh;
       }
@@ -325,19 +312,9 @@
       .hero-content .flair {
         font-size: 1.2rem;
       }
-      .content, .about, .treatments {
-        padding: 30px 5%;
-      }
-      /* For the boxes, switch to a vertical layout on mobile */
+      /* Keep box container horizontal on mobile */
       .box-container {
-        flex-direction: column;
-        width: 90%;
-        max-width: none;
-      }
-      .box {
-        flex: none;
-        width: 100%;
-        margin-bottom: 10px;
+        flex-wrap: nowrap;
       }
     }
   </style>
@@ -347,13 +324,18 @@
   <header id="navbar">
     <nav>
       <div class="logo">Lorem Ipsum</div>
-      <ul class="nav-links">
-        <li>About</li>
-        <li>Building</li>
-        <li>Location</li>
-        <li>Amenities</li>
-      </ul>
-      <a href="#" class="inquire-button">Inquire</a>
+      <!-- Mobile menu icon -->
+      <div class="mobile-menu-icon" id="mobile-menu-icon">&#8942;</div>
+      <!-- Wrap nav links and inquire button in a container -->
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-links">
+          <li>About</li>
+          <li>Building</li>
+          <li>Location</li>
+          <li>Amenities</li>
+        </ul>
+        <a href="#" class="inquire-button">Inquire</a>
+      </div>
     </nav>
   </header>
   
@@ -365,7 +347,7 @@
         autoplay 
         muted 
         loop 
-        playsinline
+        playsinline 
         preload="auto"
       ></video>
     </div>
@@ -456,6 +438,7 @@
   </footer>
   
   <script>
+    // Navbar hide/reveal and shadow overlay update
     let prevScrollPos = window.pageYOffset;
     const shadowOverlay = document.querySelector('.shadow-overlay');
     
@@ -463,7 +446,6 @@
       const currentScrollPos = window.pageYOffset;
       const navbar = document.getElementById("navbar");
       
-      // Navbar hide/reveal
       if (currentScrollPos > prevScrollPos) {
         navbar.classList.add("hidden");
       } else {
@@ -472,7 +454,6 @@
       prevScrollPos = currentScrollPos;
       
       // Update shadow overlay opacity based on scroll position.
-      // At scroll=0 opacity is 0; at scroll=500 or more, opacity caps at 0.8.
       let scroll = window.scrollY;
       let maxOpacity = 0.8;
       let opacity = Math.min((scroll / 500) * maxOpacity, maxOpacity);
@@ -485,6 +466,14 @@
     // Smooth scroll to "About Us" section when "Learn More" is clicked
     document.getElementById("learn-more-btn").addEventListener("click", () => {
       document.querySelector(".about").scrollIntoView({ behavior: "smooth" });
+    });
+    
+    // Mobile nav toggle
+    const mobileMenuIcon = document.getElementById("mobile-menu-icon");
+    const navMenu = document.getElementById("nav-menu");
+    
+    mobileMenuIcon.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
     });
   </script>
 </body>
