@@ -1,444 +1,478 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>LP/52 Landing Page</title>
-    <!-- Google Fonts: Playfair Display for main header, Dancing Script for flair text, Quattrocento Sans for general text -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Dancing+Script&family=Quattrocento+Sans&display=swap" rel="stylesheet">
-    <style>
-        /* RESET */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Quattrocento Sans', sans-serif;
-            overflow-x: hidden;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-
-        /* NAVBAR */
-        #navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            z-index: 9999;
-            transition: top 0.3s ease;
-        }
-
-        #navbar.hidden {
-            top: -80px;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-family: 'Quattrocento Sans', sans-serif;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-links li {
-            cursor: pointer;
-        }
-
-        .inquire-button {
-            background-color: #fff;
-            color: #000;
-            text-decoration: none;
-            padding: 8px 16px;
-        }
-
-        /* HERO SECTION */
-        .hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* VIDEO BACKGROUND */
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -2;
-        }
-
-        .video-background video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* SHADOW OVERLAY */
-        .shadow-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            /* Initial gradient with zero opacity */
-            background: linear-gradient(to top, rgba(0,0,0,0), transparent);
-            z-index: -1;
-        }
-
-        /* HERO TEXT CONTENT */
-        .hero-content {
-            position: relative;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            padding: 0 5%;
-            z-index: 1;
-        }
-
-        .hero-content .welcome-text {
-            font-family: 'Quattrocento Sans', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .hero-content h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            font-weight: 400;
-        }
-
-        .hero-content .flair {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .hero-content button {
-            background-color: #fff;
-            color: #000;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        /* CONTENT SECTION */
-        .content {
-            min-height: 60vh;
-            padding: 50px 5%;
-            background-color: #ffffff;
-        }
-
-        .content h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .content p {
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-
-        /* ABOUT US SECTION */
-        .about {
-            min-height: 60vh;
-            padding: 50px 5%;
-            background-color: #fafafa;
-        }
-
-        .about h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .about p {
-            max-width: 800px;
-            margin: 0 auto 20px auto;
-            line-height: 1.5;
-        }
-
-        /* TREATMENTS SECTION */
-        .treatments {
-            min-height: 60vh;
-            padding: 50px 5%;
-            background-color: #e0e0e0;
-        }
-
-        .treatments h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .treatments p {
-            max-width: 800px;
-            margin: 0 auto 40px auto;
-            line-height: 1.5;
-        }
-
-        /* BOX CONTAINER using flexbox */
-        .box-container {
-            display: flex;
-            gap: 10px;
-            width: 620px;
-            margin: 0 auto;
-            justify-content: center;
-        }
-
-        .box {
-            flex: 1;
-            height: 250px;
-            background-color: #999;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: flex 0.8s ease;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .box h3 {
-            font-family: 'Quattrocento Sans', sans-serif;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hover-text {
-            font-family: 'Quattrocento Sans', sans-serif;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-            margin-top: 10px;
-        }
-
-        .box:hover .hover-text {
-            opacity: 1;
-        }
-
-        /* Flexbox hover effect for boxes */
-        .box-container:hover .box {
-            flex: 0.5;
-        }
-
-        .box-container:hover .box:hover {
-            flex: 3;
-        }
-
-        /* Price styling */
-        .price {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        /* FOOTER SECTION */
-        .footer {
-            background-color: #333;
-            color: #fff;
-            padding: 20px 5%;
-        }
-
-        .footer ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 10px;
-        }
-
-        .footer ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .footer p {
-            margin-top: 10px;
-        }
-
-        /* SIMPLE FLY-IN ANIMATION */
-        .fly-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: flyIn 1s forwards ease-in-out;
-        }
-
-        @keyframes flyIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LP/52 Landing Page</title>
+  <!-- Google Fonts: Playfair Display for main header, Dancing Script for flair text, Quattrocento Sans for general text -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Dancing+Script&family=Quattrocento+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Quattrocento Sans', sans-serif;
+      overflow-x: hidden;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+    
+    /* NAVBAR */
+    #navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      z-index: 9999;
+      transition: top 0.3s ease;
+    }
+    
+    #navbar.hidden {
+      top: -80px;
+    }
+    
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    
+    .logo {
+      font-family: 'Quattrocento Sans', sans-serif;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    
+    .nav-links li {
+      cursor: pointer;
+    }
+    
+    .inquire-button {
+      background-color: #fff;
+      color: #000;
+      text-decoration: none;
+      padding: 8px 16px;
+    }
+    
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    /* VIDEO BACKGROUND */
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -2;
+    }
+    
+    .video-background video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* SHADOW OVERLAY */
+    .shadow-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: linear-gradient(to top, rgba(0,0,0,0), transparent);
+      z-index: -1;
+    }
+    
+    /* HERO TEXT CONTENT */
+    .hero-content {
+      position: relative;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 0 5%;
+      z-index: 1;
+    }
+    
+    .hero-content .welcome-text {
+      font-family: 'Quattrocento Sans', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+    
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+    
+    .hero-content .flair {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .hero-content button {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    
+    /* CONTENT SECTION */
+    .content {
+      min-height: 60vh;
+      padding: 50px 5%;
+      background-color: #ffffff;
+    }
+    
+    .content h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    
+    .content p {
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+    
+    /* ABOUT US SECTION */
+    .about {
+      min-height: 60vh;
+      padding: 50px 5%;
+      background-color: #fafafa;
+    }
+    
+    .about h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    
+    .about p {
+      max-width: 800px;
+      margin: 0 auto 20px auto;
+      line-height: 1.5;
+    }
+    
+    /* TREATMENTS SECTION */
+    .treatments {
+      min-height: 60vh;
+      padding: 50px 5%;
+      background-color: #e0e0e0;
+    }
+    
+    .treatments h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    
+    .treatments p {
+      max-width: 800px;
+      margin: 0 auto 40px auto;
+      line-height: 1.5;
+    }
+    
+    /* BOX CONTAINER using flexbox */
+    .box-container {
+      display: flex;
+      gap: 10px;
+      width: 620px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+    
+    .box {
+      flex: 1;
+      height: 250px;
+      background-color: #999;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: flex 0.8s ease;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .box h3 {
+      font-family: 'Quattrocento Sans', sans-serif;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .hover-text {
+      font-family: 'Quattrocento Sans', sans-serif;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      margin-top: 10px;
+    }
+    
+    .box:hover .hover-text {
+      opacity: 1;
+    }
+    
+    /* Flexbox hover effect for boxes */
+    .box-container:hover .box {
+      flex: 0.5;
+    }
+    
+    .box-container:hover .box:hover {
+      flex: 3;
+    }
+    
+    /* Price styling */
+    .price {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    
+    /* FOOTER SECTION */
+    .footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px 5%;
+    }
+    
+    .footer ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+    
+    .footer ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    .footer p {
+      margin-top: 10px;
+    }
+    
+    /* SIMPLE FLY-IN ANIMATION */
+    .fly-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: flyIn 1s forwards ease-in-out;
+    }
+    
+    @keyframes flyIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+      }
+      .nav-links {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+      .hero-content .welcome-text {
+        font-size: 1.2rem;
+      }
+      .hero-content .flair {
+        font-size: 1.2rem;
+      }
+      .content, .about, .treatments {
+        padding: 30px 5%;
+      }
+      /* For the boxes, switch to a vertical layout on mobile */
+      .box-container {
+        flex-direction: column;
+        width: 90%;
+      }
+      .box {
+        flex: none;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- NAVBAR -->
-    <header id="navbar">
-        <nav>
-            <div class="logo">Lorem Ipsum</div>
-            <ul class="nav-links">
-                <li>About</li>
-                <li>Building</li>
-                <li>Location</li>
-                <li>Amenities</li>
-            </ul>
-            <a href="#" class="inquire-button">Inquire</a>
-        </nav>
-    </header>
-
-    <!-- HERO SECTION (Video at the top only) -->
-    <section class="hero">
-        <div class="video-background">
-            <video
-                src="https://videos.pexels.com/video-files/4232200/4232200-uhd_2560_1440_24fps.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-            ></video>
-        </div>
-        <!-- Shadow overlay to separate text from video -->
-        <div class="shadow-overlay"></div>
-        <div class="hero-content fly-in">
-            <p class="welcome-text">WELCOME TO</p>
-            <h1>BODY MIND SOUL</h1>
-            <p class="flair">where mindfulness meets movement</p>
-            <button id="learn-more-btn">Learn More</button>
-        </div>
-    </section>
-
-    <!-- CONTENT SECTION -->
-    <section class="content">
-        <h2 class="fly-in">Lorem ipsum dolor</h2>
-        <p class="fly-in">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non lorem ut nisi finibus aliquam.
-            Cras consequat libero sed erat ornare, at ultricies erat iaculis. Sed aliquam consectetur ornare.
-            Nulla finibus ipsum at massa bibendum vulputate.
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <nav>
+      <div class="logo">Lorem Ipsum</div>
+      <ul class="nav-links">
+        <li>About</li>
+        <li>Building</li>
+        <li>Location</li>
+        <li>Amenities</li>
+      </ul>
+      <a href="#" class="inquire-button">Inquire</a>
+    </nav>
+  </header>
+  
+  <!-- HERO SECTION (Video at the top only) -->
+  <section class="hero">
+    <div class="video-background">
+      <video 
+        src="https://videos.pexels.com/video-files/4232200/4232200-uhd_2560_1440_24fps.mp4"
+        autoplay 
+        muted 
+        loop 
+        playsinline
+      ></video>
+    </div>
+    <!-- Shadow overlay to separate text from video -->
+    <div class="shadow-overlay"></div>
+    <div class="hero-content fly-in">
+      <p class="welcome-text">WELCOME TO</p>
+      <h1>BODY MIND SOUL</h1>
+      <p class="flair">where mindfulness meets movement</p>
+      <button id="learn-more-btn">Learn More</button>
+    </div>
+  </section>
+  
+  <!-- CONTENT SECTION -->
+  <section class="content">
+    <h2 class="fly-in">Lorem ipsum dolor</h2>
+    <p class="fly-in">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non lorem ut nisi finibus aliquam. 
+      Cras consequat libero sed erat ornare, at ultricies erat iaculis. Sed aliquam consectetur ornare. 
+      Nulla finibus ipsum at massa bibendum vulputate.
+    </p>
+  </section>
+  
+  <!-- ABOUT US SECTION -->
+  <section class="about">
+    <h2 class="fly-in">About Us</h2>
+    <p class="fly-in">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sem non tincidunt pulvinar. 
+      Vivamus quis posuere orci. Curabitur tempus, justo non consequat blandit, sapien libero ullamcorper est, 
+      eget vulputate mauris elit id sapien. Donec ullamcorper convallis nisl quis faucibus. Vivamus hendrerit 
+      tortor eu eros blandit, ac consectetur magna faucibus. Pellentesque ac tortor mauris. Integer auctor sem 
+      sit amet tristique ultricies. Suspendisse pellentesque lacinia mauris, a commodo ex pulvinar sit amet. 
+      Pellentesque bibendum sagittis urna, id volutpat libero laoreet eget. Morbi commodo fringilla gravida. 
+      Nunc at nibh dictum, euismod erat a, fermentum elit.
+    </p>
+    <p class="fly-in">
+      Aenean non sapien nec quam suscipit luctus. Suspendisse vel nulla vitae lorem vestibulum pellentesque. 
+      Curabitur vitae turpis in tortor gravida scelerisque eget a leo. Etiam interdum ligula a placerat convallis. 
+      Pellentesque ac ligula quam. Fusce ultrices nisi ex, quis ultrices arcu aliquet quis. Praesent bibendum 
+      sem id congue fringilla.
+    </p>
+  </section>
+  
+  <!-- TREATMENTS SECTION -->
+  <section class="treatments fly-in">
+    <h2>Lorem ipsum treatments</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+      Curabitur bibendum tellus vel orci lacinia, eget dictum orci commodo. 
+      Vivamus vehicula imperdiet quam, in malesuada felis lobortis quis.
+    </p>
+    <div class="box-container">
+      <div class="box box1">
+        <h3>BODY</h3>
+        <p class="hover-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+          Suspendisse luctus nisi sit amet mauris vehicula, nec cursus diam imperdiet.
         </p>
-    </section>
-
-    <!-- ABOUT US SECTION -->
-    <section class="about">
-        <h2 class="fly-in">About Us</h2>
-        <p class="fly-in">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sem non tincidunt pulvinar.
-            Vivamus quis posuere orci. Curabitur tempus, justo non consequat blandit, sapien libero ullamcorper est,
-            eget vulputate mauris elit id sapien. Donec ullamcorper convallis nisl quis faucibus. Vivamus hendrerit
-            tortor eu eros blandit, ac consectetur magna faucibus. Pellentesque ac tortor mauris. Integer auctor sem
-            sit amet tristique ultricies. Suspendisse pellentesque lacinia mauris, a commodo ex pulvinar sit amet.
-            Pellentesque bibendum sagittis urna, id volutpat libero laoreet eget. Morbi commodo fringilla gravida.
-            Nunc at nibh dictum, euismod erat a, fermentum elit.
+        <span class="price">€25/session</span>
+      </div>
+      <div class="box box2">
+        <h3>MIND</h3>
+        <p class="hover-text">
+          Aenean tristique tristique libero, non consectetur magna interdum sed. 
+          Sed vel risus nec sapien posuere eleifend eget ac sem.
         </p>
-        <p class="fly-in">
-            Aenean non sapien nec quam suscipit luctus. Suspendisse vel nulla vitae lorem vestibulum pellentesque.
-            Curabitur vitae turpis in tortor gravida scelerisque eget a leo. Etiam interdum ligula a placerat convallis.
-            Pellentesque ac ligula quam. Fusce ultrices nisi ex, quis ultrices arcu aliquet quis. Praesent bibendum
-            sem id congue fringilla.
+        <span class="price">€20/session</span>
+      </div>
+      <div class="box box3">
+        <h3>SOUL</h3>
+        <p class="hover-text">
+          Pellentesque quis metus vel felis volutpat pellentesque. 
+          Nam lacinia semper sapien in cursus.
         </p>
-    </section>
-
-    <!-- TREATMENTS SECTION -->
-    <section class="treatments fly-in">
-        <h2>Lorem ipsum treatments</h2>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Curabitur bibendum tellus vel orci lacinia, eget dictum orci commodo.
-            Vivamus vehicula imperdiet quam, in malesuada felis lobortis quis.
-        </p>
-        <div class="box-container">
-            <div class="box box1">
-                <h3>BODY</h3>
-                <p class="hover-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse luctus nisi sit amet mauris vehicula, nec cursus diam imperdiet.
-                </p>
-                <span class="price"></span>
-            </div>
-            <div class="box box2">
-                <h3>MIND</h3>
-                <p class="hover-text">
-                    Aenean tristique tristique libero, non consectetur magna interdum sed.
-                    Sed vel risus nec sapien posuere eleifend eget ac sem.
-                </p>
-                <span class="price"></span>
-            </div>
-            <div class="box box3">
-                <h3>SOUL</h3>
-                <p class="hover-text">
-                    Pellentesque quis metus vel felis volutpat pellentesque.
-                    Nam lacinia semper sapien in cursus.
-                </p>
-                <span class="price"></span>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER SECTION -->
-    <footer class="footer">
-        <ul>
-            <li><a href="#">Cookies</a></li>
-            <li><a href="#">Terms</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-        <p>&copy; 2025 Your Company. All rights reserved.</p>
-    </footer>
-
-    <script>
-        let prevScrollPos = window.pageYOffset;
-        const shadowOverlay = document.querySelector('.shadow-overlay');
-
-        window.addEventListener("scroll", () => {
-            const currentScrollPos = window.pageYOffset;
-            const navbar = document.getElementById("navbar");
-
-            // Navbar hide/reveal
-            if (currentScrollPos > prevScrollPos) {
-                navbar.classList.add("hidden");
-            } else {
-                navbar.classList.remove("hidden");
-            }
-            prevScrollPos = currentScrollPos;
-
-            // Update shadow overlay opacity based on scroll position.
-            // At scroll=0 opacity is 0; at scroll=500 or more, opacity caps at 0.8.
-            let scroll = window.scrollY;
-            let maxOpacity = 0.8;
-            let opacity = Math.min((scroll / 500) * maxOpacity, maxOpacity);
-
-            if (shadowOverlay) {
-                shadowOverlay.style.background = `linear-gradient(to top, rgba(0,0,0,${opacity}), transparent)`;
-            }
-        });
-
-        // Smooth scroll to "About Us" section when "Learn More" is clicked
-        document.getElementById("learn-more-btn").addEventListener("click", () => {
-            document.querySelector(".about").scrollIntoView({ behavior: "smooth" });
-        });
-    </script>
+        <span class="price">From €75/session</span>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FOOTER SECTION -->
+  <footer class="footer">
+    <ul>
+      <li><a href="#">Cookies</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <p>&copy; 2025 Your Company. All rights reserved.</p>
+  </footer>
+  
+  <script>
+    let prevScrollPos = window.pageYOffset;
+    const shadowOverlay = document.querySelector('.shadow-overlay');
+    
+    window.addEventListener("scroll", () => {
+      const currentScrollPos = window.pageYOffset;
+      const navbar = document.getElementById("navbar");
+      
+      // Navbar hide/reveal
+      if (currentScrollPos > prevScrollPos) {
+        navbar.classList.add("hidden");
+      } else {
+        navbar.classList.remove("hidden");
+      }
+      prevScrollPos = currentScrollPos;
+      
+      // Update shadow overlay opacity based on scroll position.
+      // At scroll=0 opacity is 0; at scroll=500 or more, opacity caps at 0.8.
+      let scroll = window.scrollY;
+      let maxOpacity = 0.8;
+      let opacity = Math.min((scroll / 500) * maxOpacity, maxOpacity);
+      
+      if (shadowOverlay) {
+        shadowOverlay.style.background = `linear-gradient(to top, rgba(0,0,0,${opacity}), transparent)`;
+      }
+    });
+    
+    // Smooth scroll to "About Us" section when "Learn More" is clicked
+    document.getElementById("learn-more-btn").addEventListener("click", () => {
+      document.querySelector(".about").scrollIntoView({ behavior: "smooth" });
+    });
+  </script>
 </body>
 </html>
