@@ -27,7 +27,7 @@
       background-color: #333;
       color: #fff;
       padding: 10px 20px;
-      z-index: 9999;
+      z-index: 10000;
       transition: top 0.3s ease;
     }
     #navbar.hidden {
@@ -44,6 +44,7 @@
       font-size: 24px;
       font-weight: bold;
     }
+    /* NAV MENU & HAMBURGER */
     .nav-menu {
       display: flex;
       align-items: center;
@@ -70,6 +71,13 @@
     }
     .inquire-button:hover {
       transform: translateY(-3px);
+    }
+    /* Hamburger menu icon – visible on small screens */
+    .mobile-menu-icon {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
     }
     /* HERO SECTION */
     .hero {
@@ -118,7 +126,14 @@
       justify-content: center;
       height: 100%;
       padding: 0 5%;
-      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      /* Instead of animating on page load, we'll add "visible" when in viewport */
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+    .hero-content.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .hero-content .welcome-text {
       font-family: 'Quattrocento Sans', sans-serif;
@@ -156,11 +171,25 @@
     section h2 {
       font-size: 2rem;
       margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+    section h2.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     section p {
       max-width: 800px;
       margin: 0 auto;
       line-height: 1.5;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+    section p.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     /* TREATMENTS SECTION */
     .treatments {
@@ -176,14 +205,14 @@
       display: flex;
       gap: 10px;
       overflow-x: auto;
+      overflow-y: hidden;
       scroll-behavior: smooth;
       transition: all 0.5s ease;
-      /* Hide the scrollbar */
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
     .box-container::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera */
+      display: none;
     }
     .box {
       flex: 1;
@@ -214,7 +243,7 @@
     .box:hover .hover-text {
       opacity: 1;
     }
-    /* Desktop hover effect: hovered box expands to fill full width of 3 boxes */
+    /* Desktop hover effect: hovered box expands */
     .box-container:hover .box {
       flex: 0.5;
     }
@@ -244,6 +273,13 @@
     }
     .photo-gallery h2 {
       margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+    .photo-gallery h2.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .photo-wrapper {
       position: relative;
@@ -292,10 +328,10 @@
       transform: translateY(-50%) scale(1.1);
     }
     .photo-scroll-left {
-      left: -60px;
+      left: 10px;
     }
     .photo-scroll-right {
-      right: -60px;
+      right: 10px;
     }
     /* FOOTER */
     .footer {
@@ -322,17 +358,15 @@
     .footer p {
       margin-top: 10px;
     }
-    /* FLY-IN ANIMATION */
+    /* FLY-IN ANIMATION via IntersectionObserver */
     .fly-in {
       opacity: 0;
       transform: translateY(20px);
-      animation: flyIn 1s forwards ease-in-out;
+      transition: all 0.6s ease-out;
     }
-    @keyframes flyIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .fly-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     /* MEDIA QUERIES */
     @media (max-width: 768px) {
@@ -348,10 +382,20 @@
       }
       .nav-menu {
         flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        width: 100%;
+      }
+      .nav-menu.active {
+        max-height: 300px;
+      }
+      .mobile-menu-icon {
+        display: block;
       }
       .photo-scroll-left, .photo-scroll-right {
-        left: 5px !important;
-        right: 5px !important;
+        left: 10px !important;
+        right: 10px !important;
       }
     }
   </style>
@@ -361,14 +405,15 @@
   <header id="navbar">
     <nav>
       <div class="logo">Lorem Ipsum</div>
+      <div class="mobile-menu-icon" id="mobile-menu-icon">&#8942;</div>
       <div class="nav-menu" id="nav-menu">
         <ul class="nav-links">
-          <li>About</li>
-          <li>Building</li>
-          <li>Location</li>
-          <li>Amenities</li>
+          <li class="fly-in">About</li>
+          <li class="fly-in">Building</li>
+          <li class="fly-in">Location</li>
+          <li class="fly-in">Amenities</li>
         </ul>
-        <a href="#" class="inquire-button">Inquire</a>
+        <a href="#" class="inquire-button fly-in">Inquire</a>
       </div>
     </nav>
   </header>
@@ -390,7 +435,7 @@
       <p class="welcome-text">WELCOME TO</p>
       <h1>BODY MIND SOUL</h1>
       <p class="flair">where mindfulness meets movement</p>
-      <button id="learn-more-btn">Learn More</button>
+      <button id="learn-more-btn" class="fly-in">Learn More</button>
     </div>
   </section>
   
@@ -426,33 +471,26 @@
   
   <!-- TREATMENTS SECTION (Scrollable Boxes with Slider) -->
   <section class="treatments fly-in">
-    <h2>Lorem ipsum treatments</h2>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-      Curabitur bibendum tellus vel orci lacinia, eget dictum orci commodo. 
-      Vivamus vehicula imperdiet quam, in malesuada felis lobortis quis.
+    <h2 class="fly-in">Lorem ipsum treatments</h2>
+    <p class="fly-in">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum tellus vel orci lacinia, 
+      eget dictum orci commodo. Vivamus vehicula imperdiet quam, in malesuada felis lobortis quis.
     </p>
     <div class="box-wrapper">
       <div class="box-container" id="box-container">
-        <div class="box box1">
+        <div class="box fly-in">
           <h3>AUDIO GUIDED BREATH-WORK &amp; ICE BATH</h3>
-          <p class="hover-text">
-            Experience muscle recovery and mental strengthening.
-          </p>
+          <p class="hover-text">Experience muscle recovery and mental strengthening.</p>
           <span class="price">€25/session</span>
         </div>
-        <div class="box box2">
+        <div class="box fly-in">
           <h3>IV-INFUSION</h3>
-          <p class="hover-text">
-            Advanced IV therapies to optimize your body.
-          </p>
+          <p class="hover-text">Advanced IV therapies to optimize your body.</p>
           <span class="price">From €200</span>
         </div>
-        <div class="box box3">
+        <div class="box fly-in">
           <h3>SENSORY DEPRIVATION FLOAT</h3>
-          <p class="hover-text">
-            Deep relaxation in a minimal-stimulus environment.
-          </p>
+          <p class="hover-text">Deep relaxation in a minimal-stimulus environment.</p>
           <span class="price">€75/session</span>
         </div>
       </div>
@@ -464,22 +502,22 @@
   </section>
   
   <!-- PHOTO GALLERY SECTION -->
-  <section class="photo-gallery">
+  <section class="photo-gallery fly-in">
     <h2 class="fly-in">Our Latest Highlights</h2>
     <p class="fly-in">Swipe or click the arrows to browse the images.</p>
     <div class="photo-wrapper">
       <button class="photo-scroll-btn photo-scroll-left" id="photo-scroll-left">&#8592;</button>
       <div class="photo-container" id="photo-container">
-        <img src="https://picsum.photos/id/1015/600/400" alt="Photo 1" class="gallery-img">
-        <img src="https://picsum.photos/id/1016/600/400" alt="Photo 2" class="gallery-img">
-        <img src="https://picsum.photos/id/1019/600/400" alt="Photo 3" class="gallery-img">
+        <img src="https://picsum.photos/id/1015/600/400" alt="Photo 1" class="gallery-img fly-in">
+        <img src="https://picsum.photos/id/1016/600/400" alt="Photo 2" class="gallery-img fly-in">
+        <img src="https://picsum.photos/id/1019/600/400" alt="Photo 3" class="gallery-img fly-in">
       </div>
       <button class="photo-scroll-btn photo-scroll-right" id="photo-scroll-right">&#8594;</button>
     </div>
   </section>
   
   <!-- FOOTER SECTION -->
-  <footer class="footer">
+  <footer class="footer fly-in">
     <ul>
       <li><a href="#">Cookies</a></li>
       <li><a href="#">Terms</a></li>
@@ -489,6 +527,22 @@
   </footer>
   
   <script>
+    // IntersectionObserver for fly-in effects on scroll
+    const flyIns = document.querySelectorAll('.fly-in');
+    const observerOptions = {
+      threshold: 0.1
+    };
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Optionally unobserve after animation:
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    flyIns.forEach(el => observer.observe(el));
+
     /* 1. Navbar Hide/Reveal & Shadow Overlay */
     let prevScrollPos = window.pageYOffset;
     const shadowOverlay = document.querySelector('.shadow-overlay');
@@ -523,8 +577,8 @@
       const maxScroll = boxContainer.scrollWidth - boxContainer.clientWidth;
       const progress = maxScroll ? scrollLeft / maxScroll : 0;
       scrollProgress.style.width = (progress * 100) + "%";
-      const opacity = 0.5 + 0.5 * progress;
-      scrollProgress.style.backgroundColor = `rgba(0,0,0,${opacity})`;
+      const progOpacity = 0.5 + 0.5 * progress;
+      scrollProgress.style.backgroundColor = `rgba(0,0,0,${progOpacity})`;
     });
     
     /* 4. Photo Gallery Arrow Scrolling */
@@ -534,6 +588,13 @@
     });
     document.getElementById("photo-scroll-right").addEventListener("click", () => {
       photoContainer.scrollBy({ left: 300, behavior: "smooth" });
+    });
+    
+    /* 5. Mobile Menu Toggle (Hamburger) */
+    const mobileMenuIcon = document.getElementById("mobile-menu-icon");
+    const navMenu = document.getElementById("nav-menu");
+    mobileMenuIcon.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
     });
   </script>
 </body>
