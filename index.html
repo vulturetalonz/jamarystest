@@ -126,7 +126,6 @@
       justify-content: center;
       height: 100%;
       padding: 0 5%;
-      /* Instead of animating on page load, we'll add "visible" when in viewport */
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.6s ease-out;
@@ -199,7 +198,8 @@
       position: relative;
       max-width: 620px;
       margin: 40px auto 0;
-      overflow: hidden;
+      overflow-x: auto;
+      overflow-y: visible;
     }
     .box-container {
       display: flex;
@@ -223,7 +223,6 @@
       text-align: center;
       cursor: pointer;
       transition: flex 0.5s ease, transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      overflow: hidden;
       position: relative;
       border-radius: 12px;
     }
@@ -243,7 +242,7 @@
     .box:hover .hover-text {
       opacity: 1;
     }
-    /* Desktop hover effect: hovered box expands */
+    /* Desktop hover effect: hovered box expands to full width (3 boxes) */
     .box-container:hover .box {
       flex: 0.5;
     }
@@ -291,6 +290,7 @@
       display: flex;
       gap: 10px;
       overflow-x: auto;
+      overflow-y: hidden;
       scroll-behavior: smooth;
       transition: all 0.5s ease;
     }
@@ -305,7 +305,7 @@
     .gallery-img:hover {
       transform: translateY(-5px);
     }
-    /* Circular arrow buttons for photo gallery */
+    /* Circular arrow buttons for photo gallery positioned on sides */
     .photo-scroll-btn {
       position: absolute;
       top: 50%;
@@ -328,10 +328,10 @@
       transform: translateY(-50%) scale(1.1);
     }
     .photo-scroll-left {
-      left: 10px;
+      left: -60px;
     }
     .photo-scroll-right {
-      right: 10px;
+      right: -60px;
     }
     /* FOOTER */
     .footer {
@@ -494,7 +494,7 @@
           <span class="price">€75/session</span>
         </div>
       </div>
-      <!-- Slider indicator -->
+      <!-- Slider indicator below the boxes -->
       <div class="scroll-slider">
         <div class="scroll-progress" id="scroll-progress"></div>
       </div>
@@ -527,7 +527,7 @@
   </footer>
   
   <script>
-    // IntersectionObserver for fly-in effects on scroll
+    // IntersectionObserver for fly-in effects
     const flyIns = document.querySelectorAll('.fly-in');
     const observerOptions = {
       threshold: 0.1
@@ -536,14 +536,13 @@
       entries.forEach(entry => {
         if(entry.isIntersecting) {
           entry.target.classList.add('visible');
-          // Optionally unobserve after animation:
           observer.unobserve(entry.target);
         }
       });
     }, observerOptions);
     flyIns.forEach(el => observer.observe(el));
-
-    /* 1. Navbar Hide/Reveal & Shadow Overlay */
+    
+    // Navbar Hide/Reveal & Shadow Overlay
     let prevScrollPos = window.pageYOffset;
     const shadowOverlay = document.querySelector('.shadow-overlay');
     window.addEventListener("scroll", () => {
@@ -564,12 +563,12 @@
       }
     });
     
-    /* 2. Smooth scroll to About Us */
+    // Smooth scroll to About Us
     document.getElementById("learn-more-btn").addEventListener("click", () => {
       document.querySelector(".about").scrollIntoView({ behavior: "smooth" });
     });
     
-    /* 3. Treatments Slider Indicator */
+    // Treatments Slider Indicator
     const boxContainer = document.getElementById("box-container");
     const scrollProgress = document.getElementById("scroll-progress");
     boxContainer.addEventListener("scroll", () => {
@@ -581,7 +580,7 @@
       scrollProgress.style.backgroundColor = `rgba(0,0,0,${progOpacity})`;
     });
     
-    /* 4. Photo Gallery Arrow Scrolling */
+    // Photo Gallery Arrow Scrolling
     const photoContainer = document.getElementById("photo-container");
     document.getElementById("photo-scroll-left").addEventListener("click", () => {
       photoContainer.scrollBy({ left: -300, behavior: "smooth" });
@@ -590,7 +589,7 @@
       photoContainer.scrollBy({ left: 300, behavior: "smooth" });
     });
     
-    /* 5. Mobile Menu Toggle (Hamburger) */
+    // Mobile Menu Toggle (Hamburger)
     const mobileMenuIcon = document.getElementById("mobile-menu-icon");
     const navMenu = document.getElementById("nav-menu");
     mobileMenuIcon.addEventListener("click", () => {
