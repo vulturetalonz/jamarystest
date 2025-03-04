@@ -56,12 +56,20 @@
     }
     .nav-links li {
       cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .nav-links li:hover {
+      transform: translateY(-3px);
     }
     .inquire-button {
       background-color: #fff;
       color: #000;
       text-decoration: none;
       padding: 8px 16px;
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .inquire-button:hover {
+      transform: translateY(-3px);
     }
     /* HERO SECTION */
     .hero {
@@ -98,6 +106,7 @@
       pointer-events: none;
       background: linear-gradient(to top, rgba(0,0,0,0), transparent);
       z-index: -1;
+      transition: background 0.3s ease;
     }
     .hero-content {
       position: relative;
@@ -109,6 +118,7 @@
       justify-content: center;
       height: 100%;
       padding: 0 5%;
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
     .hero-content .welcome-text {
       font-family: 'Quattrocento Sans', sans-serif;
@@ -134,6 +144,10 @@
       border: none;
       padding: 10px 20px;
       cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .hero-content button:hover {
+      transform: translateY(-3px);
     }
     /* SECTION STYLES */
     section {
@@ -152,11 +166,10 @@
     .treatments {
       background-color: #e0e0e0;
     }
-    /* Scrollable boxes wrapper for treatments */
     .box-wrapper {
       position: relative;
       max-width: 620px;
-      margin: 40px auto 0 auto;
+      margin: 40px auto 0;
       overflow: hidden;
     }
     .box-container {
@@ -165,6 +178,12 @@
       overflow-x: auto;
       scroll-behavior: smooth;
       transition: all 0.5s ease;
+      /* Hide the scrollbar */
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    .box-container::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
     }
     .box {
       flex: 1;
@@ -174,9 +193,13 @@
       padding: 20px;
       text-align: center;
       cursor: pointer;
-      transition: flex 0.5s ease;
+      transition: flex 0.5s ease, transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       overflow: hidden;
       position: relative;
+      border-radius: 12px;
+    }
+    .box:hover {
+      transform: translateY(-5px);
     }
     .box h3 {
       margin-bottom: 10px;
@@ -191,14 +214,14 @@
     .box:hover .hover-text {
       opacity: 1;
     }
-    /* On desktop hover: expand hovered box to fill full width of 3 boxes */
+    /* Desktop hover effect: hovered box expands to fill full width of 3 boxes */
     .box-container:hover .box {
       flex: 0.5;
     }
     .box-container:hover .box:hover {
       flex: 3;
     }
-    /* Slider for treatments section */
+    /* Slider for treatments boxes */
     .scroll-slider {
       width: 100%;
       max-width: 620px;
@@ -207,12 +230,13 @@
       margin: 10px auto 0;
       border-radius: 2px;
       overflow: hidden;
+      transition: width 0.3s ease;
     }
     .scroll-progress {
       width: 0%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* starts at 50% opacity */
-      transition: background-color 0.3s ease, width 0.3s ease;
+      background-color: rgba(0,0,0,0.5);
+      transition: width 0.3s ease, background-color 0.3s ease;
     }
     /* PHOTO GALLERY SECTION */
     .photo-gallery {
@@ -224,7 +248,7 @@
     .photo-wrapper {
       position: relative;
       max-width: 900px;
-      margin: 40px auto 0 auto;
+      margin: 40px auto 0;
       overflow: hidden;
     }
     .photo-container {
@@ -238,15 +262,19 @@
       flex: 0 0 300px;
       height: 300px;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 12px;
       border: 1px solid #ccc;
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .gallery-img:hover {
+      transform: translateY(-5px);
     }
     /* Circular arrow buttons for photo gallery */
     .photo-scroll-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background-color: rgba(51, 51, 51, 0.7);
+      background-color: rgba(51,51,51,0.7);
       color: #fff;
       border: none;
       width: 40px;
@@ -257,16 +285,17 @@
       justify-content: center;
       cursor: pointer;
       z-index: 2;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
     .photo-scroll-btn:hover {
-      background-color: rgba(51, 51, 51, 0.9);
+      background-color: rgba(51,51,51,0.9);
+      transform: translateY(-50%) scale(1.1);
     }
     .photo-scroll-left {
-      left: -50px;
+      left: -60px;
     }
     .photo-scroll-right {
-      right: -50px;
+      right: -60px;
     }
     /* FOOTER */
     .footer {
@@ -285,6 +314,10 @@
       color: #fff;
       text-decoration: none;
       font-weight: bold;
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .footer ul li a:hover {
+      transform: translateY(-3px);
     }
     .footer p {
       margin-top: 10px;
@@ -298,4 +331,210 @@
     @keyframes flyIn {
       to {
         opacity: 1;
-        tran
+        transform: translateY(0);
+      }
+    }
+    /* MEDIA QUERIES */
+    @media (max-width: 768px) {
+      .hero {
+        height: 80vh;
+      }
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+      .hero-content .welcome-text,
+      .hero-content .flair {
+        font-size: 1.2rem;
+      }
+      .nav-menu {
+        flex-direction: column;
+      }
+      .photo-scroll-left, .photo-scroll-right {
+        left: 5px !important;
+        right: 5px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <nav>
+      <div class="logo">Lorem Ipsum</div>
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-links">
+          <li>About</li>
+          <li>Building</li>
+          <li>Location</li>
+          <li>Amenities</li>
+        </ul>
+        <a href="#" class="inquire-button">Inquire</a>
+      </div>
+    </nav>
+  </header>
+  
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="video-background">
+      <video 
+        src="https://videos.pexels.com/video-files/4232200/4232200-uhd_2560_1440_24fps.mp4"
+        autoplay 
+        muted 
+        loop 
+        playsinline 
+        preload="auto"
+      ></video>
+    </div>
+    <div class="shadow-overlay"></div>
+    <div class="hero-content fly-in">
+      <p class="welcome-text">WELCOME TO</p>
+      <h1>BODY MIND SOUL</h1>
+      <p class="flair">where mindfulness meets movement</p>
+      <button id="learn-more-btn">Learn More</button>
+    </div>
+  </section>
+  
+  <!-- CONTENT SECTION -->
+  <section class="content">
+    <h2 class="fly-in">Lorem ipsum dolor</h2>
+    <p class="fly-in">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non lorem ut nisi finibus aliquam. 
+      Cras consequat libero sed erat ornare, at ultricies erat iaculis. Sed aliquam consectetur ornare. 
+      Nulla finibus ipsum at massa bibendum vulputate.
+    </p>
+  </section>
+  
+  <!-- ABOUT US SECTION -->
+  <section class="about">
+    <h2 class="fly-in">About Us</h2>
+    <p class="fly-in">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sem non tincidunt pulvinar. 
+      Vivamus quis posuere orci. Curabitur tempus, justo non consequat blandit, sapien libero ullamcorper est, 
+      eget vulputate mauris elit id sapien. Donec ullamcorper convallis nisl quis faucibus. Vivamus hendrerit 
+      tortor eu eros blandit, ac consectetur magna faucibus. Pellentesque ac tortor mauris. Integer auctor sem 
+      sit amet tristique ultricies. Suspendisse pellentesque lacinia mauris, a commodo ex pulvinar sit amet. 
+      Pellentesque bibendum sagittis urna, id volutpat libero laoreet eget. Morbi commodo fringilla gravida. 
+      Nunc at nibh dictum, euismod erat a, fermentum elit.
+    </p>
+    <p class="fly-in">
+      Aenean non sapien nec quam suscipit luctus. Suspendisse vel nulla vitae lorem vestibulum pellentesque. 
+      Curabitur vitae turpis in tortor gravida scelerisque eget a leo. Etiam interdum ligula a placerat convallis. 
+      Pellentesque ac ligula quam. Fusce ultrices nisi ex, quis ultrices arcu aliquet quis. Praesent bibendum 
+      sem id congue fringilla.
+    </p>
+  </section>
+  
+  <!-- TREATMENTS SECTION (Scrollable Boxes with Slider) -->
+  <section class="treatments fly-in">
+    <h2>Lorem ipsum treatments</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+      Curabitur bibendum tellus vel orci lacinia, eget dictum orci commodo. 
+      Vivamus vehicula imperdiet quam, in malesuada felis lobortis quis.
+    </p>
+    <div class="box-wrapper">
+      <div class="box-container" id="box-container">
+        <div class="box box1">
+          <h3>AUDIO GUIDED BREATH-WORK &amp; ICE BATH</h3>
+          <p class="hover-text">
+            Experience muscle recovery and mental strengthening.
+          </p>
+          <span class="price">€25/session</span>
+        </div>
+        <div class="box box2">
+          <h3>IV-INFUSION</h3>
+          <p class="hover-text">
+            Advanced IV therapies to optimize your body.
+          </p>
+          <span class="price">From €200</span>
+        </div>
+        <div class="box box3">
+          <h3>SENSORY DEPRIVATION FLOAT</h3>
+          <p class="hover-text">
+            Deep relaxation in a minimal-stimulus environment.
+          </p>
+          <span class="price">€75/session</span>
+        </div>
+      </div>
+      <!-- Slider indicator -->
+      <div class="scroll-slider">
+        <div class="scroll-progress" id="scroll-progress"></div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- PHOTO GALLERY SECTION -->
+  <section class="photo-gallery">
+    <h2 class="fly-in">Our Latest Highlights</h2>
+    <p class="fly-in">Swipe or click the arrows to browse the images.</p>
+    <div class="photo-wrapper">
+      <button class="photo-scroll-btn photo-scroll-left" id="photo-scroll-left">&#8592;</button>
+      <div class="photo-container" id="photo-container">
+        <img src="https://picsum.photos/id/1015/600/400" alt="Photo 1" class="gallery-img">
+        <img src="https://picsum.photos/id/1016/600/400" alt="Photo 2" class="gallery-img">
+        <img src="https://picsum.photos/id/1019/600/400" alt="Photo 3" class="gallery-img">
+      </div>
+      <button class="photo-scroll-btn photo-scroll-right" id="photo-scroll-right">&#8594;</button>
+    </div>
+  </section>
+  
+  <!-- FOOTER SECTION -->
+  <footer class="footer">
+    <ul>
+      <li><a href="#">Cookies</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <p>&copy; 2025 Your Company. All rights reserved.</p>
+  </footer>
+  
+  <script>
+    /* 1. Navbar Hide/Reveal & Shadow Overlay */
+    let prevScrollPos = window.pageYOffset;
+    const shadowOverlay = document.querySelector('.shadow-overlay');
+    window.addEventListener("scroll", () => {
+      const currentScrollPos = window.pageYOffset;
+      const navbar = document.getElementById("navbar");
+      if (currentScrollPos > prevScrollPos) {
+        navbar.classList.add("hidden");
+      } else {
+        navbar.classList.remove("hidden");
+      }
+      prevScrollPos = currentScrollPos;
+      
+      let scroll = window.scrollY;
+      let maxOpacity = 0.8;
+      let opacity = Math.min((scroll / 500) * maxOpacity, maxOpacity);
+      if (shadowOverlay) {
+        shadowOverlay.style.background = `linear-gradient(to top, rgba(0,0,0,${opacity}), transparent)`;
+      }
+    });
+    
+    /* 2. Smooth scroll to About Us */
+    document.getElementById("learn-more-btn").addEventListener("click", () => {
+      document.querySelector(".about").scrollIntoView({ behavior: "smooth" });
+    });
+    
+    /* 3. Treatments Slider Indicator */
+    const boxContainer = document.getElementById("box-container");
+    const scrollProgress = document.getElementById("scroll-progress");
+    boxContainer.addEventListener("scroll", () => {
+      const scrollLeft = boxContainer.scrollLeft;
+      const maxScroll = boxContainer.scrollWidth - boxContainer.clientWidth;
+      const progress = maxScroll ? scrollLeft / maxScroll : 0;
+      scrollProgress.style.width = (progress * 100) + "%";
+      const opacity = 0.5 + 0.5 * progress;
+      scrollProgress.style.backgroundColor = `rgba(0,0,0,${opacity})`;
+    });
+    
+    /* 4. Photo Gallery Arrow Scrolling */
+    const photoContainer = document.getElementById("photo-container");
+    document.getElementById("photo-scroll-left").addEventListener("click", () => {
+      photoContainer.scrollBy({ left: -300, behavior: "smooth" });
+    });
+    document.getElementById("photo-scroll-right").addEventListener("click", () => {
+      photoContainer.scrollBy({ left: 300, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>
