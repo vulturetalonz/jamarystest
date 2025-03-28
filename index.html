@@ -563,4 +563,333 @@
 
   <!-- HERO SECTION -->
   <section class="hero">
-    <div class
+    <div class="video-background">
+      <video id="hero-video" autoplay muted loop playsinline preload="auto">
+        <!-- Fallback content if video isn't supported -->
+        <source src="" type="video/mp4">
+        <img src="https://via.placeholder.com/1280x720?text=Video+Unavailable" alt="Video placeholder">
+      </video>
+    </div>
+    <div class="shadow-overlay"></div>
+    <div class="hero-content">
+      <p class="welcome-text">WELCOME TO</p>
+      <h1>BODY MIND SOUL</h1>
+      <p class="flair">
+        welcome to our learning platform, where you will fulfill your life to truly become the best version of you
+      </p>
+      <button id="learn-more-btn">Learn More</button>
+    </div>
+  </section>
+
+  <!-- IMAGE + TEXT SECTION -->
+  <section class="image-text-section">
+    <div class="left-col">
+      <div class="img-wrapper-1by1">
+        <img
+          src="https://images.pexels.com/photos/6997986/pexels-photo-6997986.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
+          alt="Best Investment"
+        >
+        <div class="overlay-text">the best investment, is you</div>
+      </div>
+    </div>
+    <div class="right-col">
+      <h3>This is the start of your best life</h3>
+      <p>
+        Our vision is to set light on every aspect of an individual. To understand our needs to get to our higher purpose.
+        To change desires into reality. To truly feel confident in your skin wherever you go, whoever you are.
+        So we can all build stats in personal development and become a loving community where we teach, learn, love and grow.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTENT SECTION -->
+  <section class="content">
+    <h2>Lorem ipsum dolor</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non lorem ut nisi finibus aliquam.
+      Cras consequat libero sed erat ornare, at ultricies erat iaculis. Sed aliquam consectetur ornare.
+      Nulla finibus ipsum at massa bibendum vulputate.
+    </p>
+  </section>
+
+  <!-- ABOUT US SECTION -->
+  <section class="about">
+    <h2>About Us</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sem non tincidunt pulvinar.
+      Vivamus quis posuere orci. Curabitur tempus, justo non consequat blandit, sapien libero ullamcorper est,
+      eget vulputate mauris elit id sapien. Donec ullamcorper convallis nisl quis faucibus. Vivamus hendrerit
+      tortor eu eros blandit, ac consectetur magna faucibus. Pellentesque ac tortor mauris. Integer auctor sem
+      sit amet tristique ultricies. Suspendisse pellentesque lacinia mauris, a commodo ex pulvinar sit amet.
+      Pellentesque bibendum sagittis urna, id volutpat libero laoreet eget. Morbi commodo fringilla gravida.
+      Nunc at nibh dictum, euismod erat a, fermentum elit.
+    </p>
+    <p>
+      Aenean non sapien nec quam suscipit luctus. Suspendisse vel nulla vitae lorem vestibulum pellentesque.
+      Curabitur vitae turpis in tortor gravida scelerisque eget a leo. Etiam interdum ligula a placerat convallis.
+      Pellentesque ac ligula quam. Fusce ultrices nisi ex, quis ultrices arcu aliquet quis. Praesent bibendum
+      sem id congue fringilla.
+    </p>
+  </section>
+
+  <!-- TREATMENTS SECTION (3 Boxes with Individual Extra Info) -->
+  <section class="treatments">
+    <h2>Lorem ipsum treatments</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum tellus vel orci lacinia,
+      eget dictum orci commodo. Vivamus vehicula imperdiet quam, in malesuada felis lobortis quis.
+    </p>
+    <div class="box-wrapper">
+      <div class="box-container" id="box-container">
+        <div class="box" data-detail="AUDIO GUIDED BREATH-WORK &amp; ICE BATH">
+          <h3>AUDIO GUIDED BREATH-WORK &amp; ICE BATH</h3>
+          <p class="hover-text">Experience muscle recovery and mental strengthening.</p>
+          <button class="box-button">Learn More</button>
+        </div>
+        <div class="box" data-detail="IV-INFUSION">
+          <h3>IV-INFUSION</h3>
+          <p class="hover-text">Advanced IV therapies to optimize your body.</p>
+          <button class="box-button">Learn More</button>
+        </div>
+        <div class="box" data-detail="SENSORY DEPRIVATION FLOAT">
+          <h3>SENSORY DEPRIVATION FLOAT</h3>
+          <p class="hover-text">Deep relaxation in a minimal-stimulus environment.</p>
+          <button class="box-button">Learn More</button>
+        </div>
+      </div>
+      <div class="scroll-slider">
+        <div class="scroll-progress" id="scroll-progress"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL-PAGE MODAL FOR TREATMENTS -->
+  <div id="treatment-modal">
+    <div class="modal-content">
+      <span class="modal-close" id="modal-close">&times;</span>
+      <h3 id="modal-title"></h3>
+      <p>
+        <!-- Sample paragraph of Lorem Ipsum for preview -->
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula lacinia turpis,
+        in pulvinar nunc sagittis in. Quisque venenatis sem a nisl molestie, vitae pulvinar nibh vehicula.
+        Vestibulum et ligula vel libero posuere luctus. Cras eu quam et enim imperdiet dignissim.
+      </p>
+      <p>
+        Etiam vulputate sem enim, a dignissim lorem aliquet at. Duis sagittis ullamcorper augue,
+        sit amet faucibus nisi faucibus eu. Suspendisse potenti. Sed at turpis id tortor imperdiet dictum.
+      </p>
+    </div>
+  </div>
+
+  <!-- PHOTO GALLERY SECTION (Article Cards with Scroll Indicator) -->
+  <section class="photo-gallery">
+    <h2>Our Latest Highlights</h2>
+    <p>Swipe or click the arrows to browse the articles.</p>
+    <div class="photo-wrapper">
+      <button class="photo-scroll-btn photo-scroll-left" id="photo-scroll-left">&#8592;</button>
+      <div class="photo-container" id="photo-container">
+        <article class="article-card">
+          <div class="landscape-wrapper">
+            <img src="https://picsum.photos/600/200?random=4" alt="Article 1">
+          </div>
+          <h3>Article Title 1</h3>
+          <div class="byline">
+            <span>by John Doe</span>
+            <span>$10</span>
+          </div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod nisl nec consectetur.</p>
+        </article>
+        <article class="article-card">
+          <div class="landscape-wrapper">
+            <img src="https://picsum.photos/600/200?random=5" alt="Article 2">
+          </div>
+          <h3>Article Title 2</h3>
+          <div class="byline">
+            <span>by Jane Smith</span>
+            <span>$20</span>
+          </div>
+          <p>Praesent in libero vel turpis pellentesque egestas sit amet vel nunc. Donec rutrum.</p>
+        </article>
+        <article class="article-card">
+          <div class="landscape-wrapper">
+            <img src="https://picsum.photos/600/200?random=6" alt="Article 3">
+          </div>
+          <h3>Article Title 3</h3>
+          <div class="byline">
+            <span>by Alex Ray</span>
+            <span>$15</span>
+          </div>
+          <p>Donec aliquet, tortor sed accumsan bibendum, erat ligula aliquet magna, quis rutrum lorem.</p>
+        </article>
+        <article class="article-card">
+          <div class="landscape-wrapper">
+            <img src="https://picsum.photos/600/200?random=7" alt="Article 4">
+          </div>
+          <h3>Article Title 4</h3>
+          <div class="byline">
+            <span>by Sam Lee</span>
+            <span>$12</span>
+          </div>
+          <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
+        </article>
+        <article class="article-card">
+          <div class="landscape-wrapper">
+            <img src="https://picsum.photos/600/200?random=8" alt="Article 5">
+          </div>
+          <h3>Article Title 5</h3>
+          <div class="byline">
+            <span>by Mia Wong</span>
+            <span>$18</span>
+          </div>
+          <p>Nullam quis risus eget urna mollis ornare vel eu leo. Nulla vitae elit libero.</p>
+        </article>
+      </div>
+      <button class="photo-scroll-btn photo-scroll-right" id="photo-scroll-right">&#8594;</button>
+      <!-- Gallery Scroll Slider (hidden on desktop) -->
+      <div class="gallery-scroll-slider">
+        <div class="gallery-scroll-progress" id="gallery-scroll-progress"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER SECTION -->
+  <footer class="footer">
+    <ul>
+      <li><a href="#">Cookies</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Support</a></li>
+    </ul>
+    <p>&copy; 2025 Your Company. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Force all fly-in elements visible (no animation delays)
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll('.fly-in').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+    });
+
+    // Navbar hide/reveal on scroll
+    let prevScrollPos = window.pageYOffset;
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      const currentScrollPos = window.pageYOffset;
+      if (currentScrollPos > prevScrollPos) {
+        navbar.classList.add('hidden');
+      } else {
+        navbar.classList.remove('hidden');
+      }
+      prevScrollPos = currentScrollPos;
+    });
+
+    // Mobile Menu Overlay Toggle
+    const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    mobileMenuIcon.addEventListener('click', () => {
+      mobileMenuOverlay.style.display = 'flex';
+    });
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    if (mobileMenuClose) {
+      mobileMenuClose.addEventListener('click', () => {
+        mobileMenuOverlay.style.display = 'none';
+      });
+    }
+    document.querySelectorAll('#mobile-menu-overlay a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuOverlay.style.display = 'none';
+      });
+    });
+
+    // Smooth scroll to Image+Text section when Learn More is clicked (hero)
+    document.getElementById('learn-more-btn').addEventListener('click', () => {
+      document.querySelector('.image-text-section').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Treatments slider indicator update
+    const boxContainer = document.getElementById('box-container');
+    const scrollProgress = document.getElementById('scroll-progress');
+    boxContainer.addEventListener('scroll', () => {
+      const scrollLeft = boxContainer.scrollLeft;
+      const maxScroll = boxContainer.scrollWidth - boxContainer.clientWidth;
+      const progress = maxScroll ? scrollLeft / maxScroll : 0;
+      scrollProgress.style.width = (progress * 100) + '%';
+    });
+
+    // Photo gallery arrow scrolling
+    const photoContainer = document.getElementById('photo-container');
+    document.getElementById('photo-scroll-left').addEventListener('click', () => {
+      photoContainer.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+    document.getElementById('photo-scroll-right').addEventListener('click', () => {
+      photoContainer.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+    // Gallery scroll slider update (if needed)
+    const galleryScrollProgress = document.getElementById('gallery-scroll-progress');
+    const galleryContainer = document.getElementById('photo-container');
+    galleryContainer.addEventListener('scroll', () => {
+      const scrollLeft = galleryContainer.scrollLeft;
+      const maxScroll = galleryContainer.scrollWidth - galleryContainer.clientWidth;
+      const progress = maxScroll ? scrollLeft / maxScroll : 0;
+      galleryScrollProgress.style.width = (progress * 100) + '%';
+    });
+
+    // Cycle through video clips every 6 seconds
+    const heroVideo = document.getElementById('hero-video');
+    const videoSources = [
+      "https://videos.pexels.com/video-files/2711145/2711145-uhd_2560_1440_24fps.mp4",
+      "https://videos.pexels.com/video-files/7444954/7444954-uhd_2560_1440_30fps.mp4",
+      "https://videos.pexels.com/video-files/16283928/16283928-uhd_2560_1440_30fps.mp4",
+      "https://videos.pexels.com/video-files/16508221/16508221-uhd_2560_1440_30fps.mp4",
+      "https://videos.pexels.com/video-files/3126484/3126484-hd_1920_1080_30fps.mp4"
+    ];
+    let currentVideoIndex = 0;
+    function cycleVideo() {
+      heroVideo.src = videoSources[currentVideoIndex];
+      heroVideo.load();
+      heroVideo.play().catch(() => {
+        // In case playback fails, insert a placeholder image.
+        const parent = heroVideo.parentElement;
+        parent.innerHTML = `<img src="https://via.placeholder.com/1280x720?text=Video+Unavailable" alt="Video placeholder" style="width:100%; height:100%; object-fit:cover;">`;
+      });
+      currentVideoIndex = (currentVideoIndex + 1) % videoSources.length;
+    }
+    cycleVideo();
+    setInterval(cycleVideo, 6000);
+
+    // Full-Page Modal for Treatments
+    const treatmentModal = document.getElementById('treatment-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalClose = document.getElementById('modal-close');
+    let currentActiveDetail = null;
+
+    document.querySelectorAll('.box').forEach(box => {
+      const button = box.querySelector('.box-button');
+      if (button) {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const detail = box.getAttribute('data-detail');
+          // If modal is open and same detail is active, close it
+          if (treatmentModal.classList.contains('active') && currentActiveDetail === detail) {
+            treatmentModal.classList.remove('active');
+            currentActiveDetail = null;
+          } else {
+            modalTitle.innerHTML = detail;
+            treatmentModal.classList.add('active');
+            currentActiveDetail = detail;
+          }
+        });
+      }
+    });
+
+    // Close modal
+    modalClose.addEventListener('click', () => {
+      treatmentModal.classList.remove('active');
+      currentActiveDetail = null;
+    });
+  </script>
+</body>
+</html>
