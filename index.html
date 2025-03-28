@@ -216,12 +216,12 @@
     .treatments { background-color: #F6F5F3; position: relative; }
     .box-wrapper {
       position: relative;
-      max-width: 620px;
+      max-width: 100%; /* Allow full width on wider screens */
       margin: 40px auto 0;
-      overflow: hidden;
-      border-radius: 12px;
-      background-color: #F2F0EC;
       padding: 10px;
+      background-color: #F2F0EC;
+      border: 2px solid #CCC; /* retains the rim */
+      border-radius: 12px;
     }
     .box-container {
       display: flex;
@@ -230,6 +230,14 @@
       scroll-behavior: smooth;
       -ms-overflow-style: none;
       scrollbar-width: none;
+    }
+    /* On wider screens, force boxes to fit without scrolling */
+    @media (min-width: 641px) {
+      .box-container {
+        overflow-x: visible;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+      }
     }
     .box-container::-webkit-scrollbar { display: none; }
     .box {
@@ -247,11 +255,8 @@
     .box:hover { transform: translateY(-10px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     .box h3 { margin-bottom: 10px; }
     .hover-text { margin-top: 10px; }
-    /* Remove inline extra-info display from boxes */
-    .box .extra-info { display: none; }
 
-    /* Scroll slider under treatments boxes
-       Hidden on devices that can contain the boxes */
+    /* Scroll slider under treatments boxes */
     .scroll-slider {
       width: 100%;
       max-width: 620px;
@@ -272,21 +277,26 @@
       transition: width 0.3s ease;
     }
 
-    /* Treatment Overlay (expands within the box-wrapper) */
+    /* Treatment Overlay: covers the boxes within the box-wrapper */
     #treatment-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255,255,255,0.95);
-      z-index: 10;
+      top: 50%;
+      left: 50%;
+      width: 90%;
+      max-width: 600px;
+      height: auto;
+      background: #FFF; /* same as the boxes */
+      border: 2px solid #CCC;
+      border-radius: 12px;
       padding: 20px;
-      overflow-y: auto;
-      display: none;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      z-index: 10;
     }
     #treatment-overlay.active {
-      display: block;
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
     }
     #treatment-overlay .overlay-close {
       position: absolute;
@@ -534,7 +544,7 @@
       <div class="scroll-slider">
         <div class="scroll-progress" id="scroll-progress"></div>
       </div>
-      <!-- Treatment Overlay (covers the boxes when expanded) -->
+      <!-- Treatment Overlay: transitions smoothly from the center -->
       <div id="treatment-overlay">
         <span class="overlay-close" id="overlay-close">&times;</span>
         <div class="overlay-text" id="overlay-text"></div>
@@ -722,7 +732,7 @@
         button.addEventListener('click', (e) => {
           e.stopPropagation();
           const detail = box.getAttribute('data-detail');
-          // Toggle the overlay if the same detail is already active
+          // Toggle overlay if same detail is active, else update and show
           if (treatmentOverlay.classList.contains('active') && currentActiveDetail === detail) {
             treatmentOverlay.classList.remove('active');
             currentActiveDetail = null;
