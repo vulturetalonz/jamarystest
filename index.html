@@ -1,100 +1,247 @@
-/* TREATMENTS SECTION */
-.treatments {
-  background-color: #F6F5F3;
-  position: relative;
-  text-align: center;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inline CSS Example</title>
+  <style>
+    /* BASIC RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      background: #F8F5F0;
+      color: #2E2E2E;
+      text-align: center;
+    }
 
-/* The container that shrinks to fit the boxes on desktop */
-.box-wrapper {
-  display: inline-block; /* shrink to fit content on wide screens */
-  margin: 40px auto 0;   /* center horizontally */
-  background-color: #F2F0EC;
-  border: 2px solid #CCC;
-  border-radius: 12px;
-  padding: 10px;
-  /* Because of "display: inline-block", it won't fill the entire width. */
-}
+    /* IMAGE + TEXT SECTION */
+    .image-text-section {
+      display: flex;
+      flex-wrap: wrap; /* Stack on small screens */
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 50px 5%;
+      text-align: center;
+      background: #FFF;
+    }
+    .left-col,
+    .right-col {
+      flex: 1 1 300px;
+      max-width: 500px;
+    }
+    /* Force 1:1 ratio for the image */
+    .img-wrapper-1by1 {
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%; /* 1:1 ratio trick */
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .img-wrapper-1by1 img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .overlay-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      color: #FFF;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+      pointer-events: none;
+    }
+    .right-col {
+      text-align: center; /* center text for both mobile and desktop */
+    }
+    .right-col h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #2E2E2E;
+      display: inline-block;
+      margin: 0 auto;
+      padding-bottom: 5px;
+    }
+    .right-col p {
+      line-height: 1.5;
+      margin-top: 15px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-/* On small screens, let it expand to full width so it doesn't cut off boxes */
-@media (max-width: 640px) {
-  .box-wrapper {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-  }
-}
+    /* TREATMENTS SECTION */
+    .treatments {
+      background-color: #F6F5F3;
+      padding: 50px 5%;
+    }
+    .treatments h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+    .treatments p {
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.5;
+    }
+    .box-wrapper {
+      display: inline-block;  /* shrink-to-fit on desktop */
+      background-color: #F2F0EC;
+      border: 2px solid #CCC;
+      border-radius: 12px;
+      padding: 10px;
+    }
+    @media (max-width: 640px) {
+      .box-wrapper {
+        display: block;    /* go full width on mobile */
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+    .box-container {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 10px;
+      width: max-content;   /* enough width to hold all boxes side by side */
+      margin: 0 auto;       /* center them inside box-wrapper */
+      overflow-x: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .box-container::-webkit-scrollbar {
+      display: none;
+    }
+    .box {
+      width: 220px;
+      background-color: #FFF;
+      padding: 20px;
+      text-align: center;
+      border-radius: 12px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .box h3 {
+      margin-bottom: 10px;
+    }
+    .box .hover-text {
+      margin-top: 10px;
+    }
+    .box-button {
+      background-color: #EAE5DD;
+      border: none;
+      color: #2E2E2E;
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .box-button:hover {
+      background-color: #d8d2ca;
+    }
 
-/* The row of boxes */
-.box-container {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 10px;
-  /* "width: max-content" ensures container is as wide as needed for the boxes */
-  width: max-content;
-  margin: 0 auto; /* center in the box-wrapper */
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.box-container::-webkit-scrollbar {
-  display: none;
-}
+    /* Scroll slider only shown on mobile if there's overflow */
+    .scroll-slider {
+      width: 100%;
+      max-width: 620px;
+      height: 4px;
+      background-color: #CCC;
+      margin: 10px auto 0;
+      border-radius: 2px;
+      overflow: hidden;
+      display: none;
+    }
+    @media (max-width: 640px) {
+      .scroll-slider {
+        display: block;
+      }
+    }
+    .scroll-progress {
+      width: 0%;
+      height: 100%;
+      background-color: #AAA;
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
 
-/* Each box */
-.box {
-  width: 220px; /* or 250px if you prefer bigger boxes */
-  background-color: #FFF;
-  padding: 20px;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-}
-.box:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-.box h3 {
-  margin-bottom: 10px;
-}
-.hover-text {
-  margin-top: 10px;
-}
-.box-button {
-  background-color: #EAE5DD;
-  border: none;
-  color: #2E2E2E;
-  padding: 8px 16px;
-  border-radius: 4px;
-  margin-top: 10px;
-  cursor: pointer;
-}
-.box-button:hover {
-  background-color: #d8d2ca;
-}
+  <!-- IMAGE + TEXT SECTION -->
+  <section class="image-text-section">
+    <div class="left-col">
+      <div class="img-wrapper-1by1">
+        <img
+          src="https://images.pexels.com/photos/6997986/pexels-photo-6997986.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
+          alt="Best Investment"
+        >
+        <div class="overlay-text">the best investment, is you</div>
+      </div>
+    </div>
+    <div class="right-col">
+      <h3>This is the start of your best life</h3>
+      <p>
+        Our vision is to set light on every aspect of an individual. To understand our needs to get to our higher purpose.
+        To change desires into reality. To truly feel confident in your skin wherever you go, whoever you are.
+        So we can all build stats in personal development and become a loving community where we teach, learn, love and grow.
+      </p>
+    </div>
+  </section>
 
-/* Scroll slider (hidden on desktop, shows on small screens if there's overflow) */
-.scroll-slider {
-  width: 100%;
-  max-width: 620px;
-  height: 4px;
-  background-color: #CCC;
-  margin: 10px auto 0;
-  border-radius: 2px;
-  overflow: hidden;
-  display: none;
-}
-@media (max-width: 640px) {
-  .scroll-slider {
-    display: block;
-  }
-}
-.scroll-progress {
-  width: 0%;
-  height: 100%;
-  background-color: #AAA;
-  transition: width 0.3s ease;
-}
+  <!-- TREATMENTS SECTION -->
+  <section class="treatments">
+    <h2>Lorem ipsum treatments</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum tellus vel orci lacinia,
+      eget dictum orci commodo. Vivamus vehicula imperdiet quam, in malesuada felis lobortis quis.
+    </p>
+
+    <div class="box-wrapper">
+      <div class="box-container" id="box-container">
+        <div class="box">
+          <h3>AUDIO GUIDED BREATH-WORK &amp; ICE BATH</h3>
+          <p class="hover-text">Experience muscle recovery and mental strengthening.</p>
+          <button class="box-button">Learn More</button>
+        </div>
+        <div class="box">
+          <h3>IV-INFUSION</h3>
+          <p class="hover-text">Advanced IV therapies to optimize your body.</p>
+          <button class="box-button">Learn More</button>
+        </div>
+        <div class="box">
+          <h3>SENSORY DEPRIVATION FLOAT</h3>
+          <p class="hover-text">Deep relaxation in a minimal-stimulus environment.</p>
+          <button class="box-button">Learn More</button>
+        </div>
+      </div>
+      <div class="scroll-slider">
+        <div class="scroll-progress" id="scroll-progress"></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Simple JS for the scroll slider
+    const boxContainer = document.getElementById('box-container');
+    const scrollProgress = document.getElementById('scroll-progress');
+
+    if (boxContainer && scrollProgress) {
+      boxContainer.addEventListener('scroll', () => {
+        const scrollLeft = boxContainer.scrollLeft;
+        const maxScroll = boxContainer.scrollWidth - boxContainer.clientWidth;
+        const progress = maxScroll ? scrollLeft / maxScroll : 0;
+        scrollProgress.style.width = (progress * 100) + '%';
+      });
+    }
+  </script>
+
+</body>
+</html>
