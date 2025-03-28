@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LP/52 Landing Page (Revised)</title>
+  <title>LP/52 Landing Page (Re-Revised)</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Dancing+Script&family=Quattrocento+Sans&display=swap" rel="stylesheet">
@@ -126,11 +126,17 @@
       z-index: -2;
       overflow: hidden;
     }
-    /* The hero video cycles via JS */
+    /* The hero video: single source for simpler mobile playback */
     #hero-video {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      /* For iOS Safari */
+      -webkit-playsinline: true;
+      playsinline: true;
+      muted: true;
+      autoplay: true;
+      loop: true;
     }
     .shadow-overlay {
       position: absolute;
@@ -188,33 +194,34 @@
     /* IMAGE + TEXT SECTION */
     .image-text-section {
       display: flex;
-      flex-wrap: wrap; /* allows stacking on small screens */
+      flex-wrap: wrap; /* On small screens, image stacks over text */
       align-items: center;
       justify-content: center;
       gap: 40px;
       padding: 50px 5%;
+      text-align: center; /* center text on all screens */
     }
     .left-col,
     .right-col {
-      flex: 1 1 300px; /* each can shrink/grow as needed, min 300px */
-      max-width: 500px; /* optional: limit how wide they get */
+      flex: 1 1 300px; /* each can shrink/grow, min 300px */
+      max-width: 500px; /* optional: limit how wide they get on huge screens */
     }
     .left-col {
+      display: flex;
+      justify-content: center; /* center the image horizontally in the column */
       position: relative;
     }
-    /* Keep ratio for the image but allow it to shrink on small screens */
     .img-wrapper-1by1 {
+      max-width: 400px; /* limit the displayed image size on wide screens */
       width: 100%;
-      overflow: hidden;
       border-radius: 12px;
       position: relative;
+      overflow: hidden;
     }
-    /* For consistent ratio, you can do a padding-top approach or let it be auto. */
     .img-wrapper-1by1 img {
       width: 100%;
-      height: auto;
+      height: auto; /* maintain aspect ratio */
       display: block;
-      object-fit: cover;
       border-radius: 12px;
     }
     .overlay-text {
@@ -226,9 +233,12 @@
       font-size: 1.5rem;
       font-weight: bold;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+      pointer-events: none;
     }
     .right-col {
-      text-align: left; /* so the paragraph looks more natural on wide screens */
+      flex: 1 1 300px;
+      max-width: 500px;
+      /* text is centered by default from .image-text-section */
     }
     .right-col h3 {
       font-family: 'Playfair Display', serif;
@@ -236,17 +246,15 @@
       margin-bottom: 15px;
       border-bottom: 2px solid #2E2E2E;
       padding-bottom: 5px;
-      text-align: center;
+      display: inline-block; /* so underline doesn't stretch across entire width */
+      margin: 0 auto;
     }
     .right-col p {
       line-height: 1.5;
       margin-top: 15px;
-    }
-    /* On small screens, center the text */
-    @media (max-width: 640px) {
-      .right-col {
-        text-align: center;
-      }
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* SECTION STYLES */
@@ -276,6 +284,7 @@
       background-color: #F2F0EC;
       border: 2px solid #CCC; /* retains the rim */
       border-radius: 12px;
+      text-align: center; /* center text in boxes */
     }
     .box-container {
       display: flex;
@@ -284,22 +293,21 @@
       scroll-behavior: smooth;
       -ms-overflow-style: none;
       scrollbar-width: none;
+      justify-content: center; /* keep boxes centered if there's extra space */
     }
     /* On wider screens, show all boxes side by side without scrolling */
     @media (min-width: 641px) {
       .box-container {
         overflow-x: visible;
         flex-wrap: nowrap;
-        justify-content: space-between;
       }
     }
     .box-container::-webkit-scrollbar {
       display: none;
     }
     .box {
-      flex: 1;
-      min-width: 200px;
-      height: 250px;
+      flex: 1 1 200px;
+      max-width: 250px; /* so they don't stretch too wide on large screens */
       background-color: #FFF;
       padding: 20px;
       text-align: center;
@@ -379,7 +387,7 @@
       max-width: 600px;
       width: 90%;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      text-align: left;
+      text-align: center;
       position: relative;
     }
     .modal-close {
@@ -391,8 +399,8 @@
     }
     .modal-content h3 {
       margin-top: 0;
-      text-align: center;
       font-family: 'Playfair Display', serif;
+      margin-bottom: 10px;
     }
     .modal-content p {
       margin-top: 15px;
@@ -564,10 +572,24 @@
   <!-- HERO SECTION -->
   <section class="hero">
     <div class="video-background">
-      <video id="hero-video" autoplay muted loop playsinline preload="auto">
+      <!-- Single video source for simpler mobile playback -->
+      <video
+        id="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        poster="https://via.placeholder.com/1280x720?text=Loading+Video"
+      >
+        <source
+          src="https://videos.pexels.com/video-files/7444954/7444954-uhd_2560_1440_30fps.mp4"
+          type="video/mp4"
+        >
         <!-- Fallback content if video isn't supported -->
-        <source src="" type="video/mp4">
-        <img src="https://via.placeholder.com/1280x720?text=Video+Unavailable" alt="Video placeholder">
+        <img
+          src="https://via.placeholder.com/1280x720?text=Video+Unavailable"
+          alt="Video placeholder"
+        >
       </video>
     </div>
     <div class="shadow-overlay"></div>
@@ -836,29 +858,6 @@
       const progress = maxScroll ? scrollLeft / maxScroll : 0;
       galleryScrollProgress.style.width = (progress * 100) + '%';
     });
-
-    // Cycle through video clips every 6 seconds
-    const heroVideo = document.getElementById('hero-video');
-    const videoSources = [
-      "https://videos.pexels.com/video-files/2711145/2711145-uhd_2560_1440_24fps.mp4",
-      "https://videos.pexels.com/video-files/7444954/7444954-uhd_2560_1440_30fps.mp4",
-      "https://videos.pexels.com/video-files/16283928/16283928-uhd_2560_1440_30fps.mp4",
-      "https://videos.pexels.com/video-files/16508221/16508221-uhd_2560_1440_30fps.mp4",
-      "https://videos.pexels.com/video-files/3126484/3126484-hd_1920_1080_30fps.mp4"
-    ];
-    let currentVideoIndex = 0;
-    function cycleVideo() {
-      heroVideo.src = videoSources[currentVideoIndex];
-      heroVideo.load();
-      heroVideo.play().catch(() => {
-        // In case playback fails, insert a placeholder image.
-        const parent = heroVideo.parentElement;
-        parent.innerHTML = `<img src="https://via.placeholder.com/1280x720?text=Video+Unavailable" alt="Video placeholder" style="width:100%; height:100%; object-fit:cover;">`;
-      });
-      currentVideoIndex = (currentVideoIndex + 1) % videoSources.length;
-    }
-    cycleVideo();
-    setInterval(cycleVideo, 6000);
 
     // Full-Page Modal for Treatments
     const treatmentModal = document.getElementById('treatment-modal');
