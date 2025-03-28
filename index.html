@@ -149,10 +149,10 @@
       font-weight: 400;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
     }
-    .flair { 
-      font-family: 'Dancing Script', cursive; 
-      font-size: 1rem; 
-      margin-bottom: 20px; 
+    .flair {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1rem;
+      margin-bottom: 20px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
     .hero-content button {
@@ -242,31 +242,14 @@
       cursor: pointer;
       border-radius: 12px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
     }
     .box:hover { transform: translateY(-10px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     .box h3 { margin-bottom: 10px; }
     .hover-text { margin-top: 10px; }
-    /* Button toggles the extra info for this box */
-    .box-button {
-      margin-top: 15px;
-      padding: 6px 12px;
-      background-color: #EAE5DD;
-      border: none;
-      color: #2E2E2E;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .box-button:hover { background-color: #D6D2C8; }
-    /* Each box gets its own extra info */
-    .extra-info {
-      margin-top: 10px;
-      padding: 10px;
-      background-color: #EEE9E4;
-      border-radius: 8px;
-      display: none;
-      text-align: left;
-    }
-    
+    /* Remove inline extra-info display from boxes */
+    .box .extra-info { display: none; }
+
     /* Scroll slider under treatments boxes */
     .scroll-slider {
       width: 100%;
@@ -293,6 +276,11 @@
       border-radius: 12px;
       overflow: hidden;
     }
+
+    .slider {
+      display: none;
+    }
+
     .photo-container {
       display: flex;
       gap: 10px;
@@ -340,15 +328,9 @@
       font-size: 0.8rem;
       margin: 10px;
     }
-    /* Gallery scroll slider */
+    /* Gallery scroll slider – hidden on desktop */
     .gallery-scroll-slider {
-      width: 100%;
-      max-width: 900px;
-      height: 4px;
-      background-color: #eee9e4;
-      margin: 10px auto 0;
-      border-radius: 2px;
-      overflow: hidden;
+      display: none;
     }
     .gallery-scroll-progress {
       width: 0%;
@@ -381,7 +363,7 @@
     }
     .photo-scroll-left { left: 10px; }
     .photo-scroll-right { right: 10px; }
-    
+
     /* FOOTER */
     .footer {
       background-color: #EAE5DD;
@@ -404,6 +386,42 @@
 
     /* FLY-IN ANIMATION – Removed; all text forced visible */
     .fly-in { opacity: 1; transform: none; transition: none; }
+
+    /* TREATMENT MODAL (overlay for detailed extra info) */
+    #treatment-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 20000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    #treatment-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #treatment-modal .modal-content {
+      background: #FFF;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      text-align: left;
+      position: relative;
+    }
+    #treatment-modal .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -438,7 +456,11 @@
   <!-- HERO SECTION -->
   <section class="hero">
     <div class="video-background">
-      <video id="hero-video" autoplay muted loop playsinline preload="auto"></video>
+      <video id="hero-video" autoplay muted loop playsinline preload="auto">
+        <!-- Fallback content if video isn't supported -->
+        <source src="" type="video/mp4">
+        <img src="https://via.placeholder.com/1280x720?text=Video+Unavailable" alt="Video placeholder">
+      </video>
     </div>
     <div class="shadow-overlay"></div>
     <div class="hero-content">
@@ -506,27 +528,27 @@
     </p>
     <div class="box-wrapper">
       <div class="box-container" id="box-container">
-        <div class="box" data-info="info1">
+        <div class="box" data-detail="Extra info for Audio Guided Breath-work &amp; Ice Bath. Read more | Book a session | Contact us">
           <h3>AUDIO GUIDED BREATH-WORK &amp; ICE BATH</h3>
           <p class="hover-text">Experience muscle recovery and mental strengthening.</p>
           <button class="box-button">Learn More</button>
-          <div class="extra-info" style="display: none;">
+          <div class="extra-info">
             <p>Extra info for Audio Guided Breath-work &amp; Ice Bath. <a href="#">Read more</a> | <a href="#">Book a session</a> | <a href="#">Contact us</a></p>
           </div>
         </div>
-        <div class="box" data-info="info2">
+        <div class="box" data-detail="Extra info for IV Infusion. Read more | Book a session | Contact us">
           <h3>IV-INFUSION</h3>
           <p class="hover-text">Advanced IV therapies to optimize your body.</p>
           <button class="box-button">Learn More</button>
-          <div class="extra-info" style="display: none;">
+          <div class="extra-info">
             <p>Extra info for IV Infusion. <a href="#">Read more</a> | <a href="#">Book a session</a> | <a href="#">Contact us</a></p>
           </div>
         </div>
-        <div class="box" data-info="info3">
+        <div class="box" data-detail="Extra info for Sensory Deprivation Float. Read more | Book a session | Contact us">
           <h3>SENSORY DEPRIVATION FLOAT</h3>
           <p class="hover-text">Deep relaxation in a minimal-stimulus environment.</p>
           <button class="box-button">Learn More</button>
-          <div class="extra-info" style="display: none;">
+          <div class="extra-info">
             <p>Extra info for Sensory Deprivation Float. <a href="#">Read more</a> | <a href="#">Book a session</a> | <a href="#">Contact us</a></p>
           </div>
         </div>
@@ -536,6 +558,14 @@
       </div>
     </div>
   </section>
+
+  <!-- TREATMENT MODAL (hidden overlay for deeper details) -->
+  <div id="treatment-modal">
+    <div class="modal-content">
+      <span class="modal-close" id="modal-close">&times;</span>
+      <div class="modal-text" id="modal-text"></div>
+    </div>
+  </div>
 
   <!-- PHOTO GALLERY SECTION (Article Cards with Scroll Indicator) -->
   <section class="photo-gallery">
@@ -601,7 +631,7 @@
         </article>
       </div>
       <button class="photo-scroll-btn photo-scroll-right" id="photo-scroll-right">&#8594;</button>
-      <!-- Gallery Scroll Slider -->
+      <!-- Gallery Scroll Slider (hidden on desktop) -->
       <div class="gallery-scroll-slider">
         <div class="gallery-scroll-progress" id="gallery-scroll-progress"></div>
       </div>
@@ -649,7 +679,7 @@
       link.addEventListener('click', () => { mobileMenuOverlay.style.display = 'none'; });
     });
 
-    // Smooth scroll to Image+Text section when Learn More is clicked
+    // Smooth scroll to Image+Text section when Learn More is clicked (hero)
     document.getElementById('learn-more-btn').addEventListener('click', () => {
       document.querySelector('.image-text-section').scrollIntoView({ behavior: 'smooth' });
     });
@@ -673,7 +703,7 @@
       photoContainer.scrollBy({ left: 300, behavior: 'smooth' });
     });
 
-    // Gallery scroll slider update
+    // Gallery scroll slider update (if needed)
     const galleryScrollProgress = document.getElementById('gallery-scroll-progress');
     const galleryContainer = document.getElementById('photo-container');
     galleryContainer.addEventListener('scroll', () => {
@@ -696,22 +726,44 @@
     function cycleVideo() {
       heroVideo.src = videoSources[currentVideoIndex];
       heroVideo.load();
-      heroVideo.play();
+      heroVideo.play().catch(() => {
+        // In case playback fails, insert a placeholder image.
+        const parent = heroVideo.parentElement;
+        parent.innerHTML = `<img src="https://via.placeholder.com/1280x720?text=Video+Unavailable" alt="Video placeholder" style="width:100%; height:100%; object-fit:cover;">`;
+      });
       currentVideoIndex = (currentVideoIndex + 1) % videoSources.length;
     }
     cycleVideo();
     setInterval(cycleVideo, 6000);
 
-    // Treatments Extra Info: Toggle extra info box within each treatment box
+    // Treatments Extra Info: Toggle modal overlay for detailed info
+    const treatmentModal = document.getElementById('treatment-modal');
+    const modalText = document.getElementById('modal-text');
+    const modalClose = document.getElementById('modal-close');
+    let currentActiveDetail = null;
+
     document.querySelectorAll('.box').forEach(box => {
       const button = box.querySelector('.box-button');
-      const extraInfo = box.querySelector('.extra-info');
-      if (button && extraInfo) {
+      if (button) {
         button.addEventListener('click', (e) => {
           e.stopPropagation();
-          extraInfo.style.display = (extraInfo.style.display === 'block') ? 'none' : 'block';
+          const detail = box.getAttribute('data-detail');
+          // If modal already active and same detail, toggle off; else update and show
+          if (treatmentModal.classList.contains('active') && currentActiveDetail === detail) {
+            treatmentModal.classList.remove('active');
+            currentActiveDetail = null;
+          } else {
+            modalText.innerHTML = detail;
+            treatmentModal.classList.add('active');
+            currentActiveDetail = detail;
+          }
         });
       }
+    });
+    // Close modal when clicking the close icon
+    modalClose.addEventListener('click', () => {
+      treatmentModal.classList.remove('active');
+      currentActiveDetail = null;
     });
   </script>
 </body>
