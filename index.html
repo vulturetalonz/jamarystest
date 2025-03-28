@@ -213,12 +213,12 @@
     section p { max-width: 800px; margin: 0 auto; line-height: 1.5; }
 
     /* TREATMENTS SECTION (3 Boxes with Individual Extra Info) */
-    .treatments { background-color: #F6F5F3; }
+    .treatments { background-color: #F6F5F3; position: relative; }
     .box-wrapper {
       position: relative;
       max-width: 620px;
       margin: 40px auto 0;
-      overflow-x: auto;
+      overflow: hidden;
       border-radius: 12px;
       background-color: #F2F0EC;
       padding: 10px;
@@ -250,7 +250,8 @@
     /* Remove inline extra-info display from boxes */
     .box .extra-info { display: none; }
 
-    /* Scroll slider under treatments boxes */
+    /* Scroll slider under treatments boxes
+       Hidden on devices that can contain the boxes */
     .scroll-slider {
       width: 100%;
       max-width: 620px;
@@ -259,12 +260,40 @@
       margin: 10px auto 0;
       border-radius: 2px;
       overflow: hidden;
+      display: none;
+    }
+    @media (max-width: 640px) {
+      .scroll-slider { display: block; }
     }
     .scroll-progress {
       width: 0%;
       height: 100%;
       background-color: #AAA;
       transition: width 0.3s ease;
+    }
+
+    /* Treatment Overlay (expands within the box-wrapper) */
+    #treatment-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.95);
+      z-index: 10;
+      padding: 20px;
+      overflow-y: auto;
+      display: none;
+    }
+    #treatment-overlay.active {
+      display: block;
+    }
+    #treatment-overlay .overlay-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      cursor: pointer;
     }
 
     /* PHOTO GALLERY SECTION (Article Cards) */
@@ -276,11 +305,7 @@
       border-radius: 12px;
       overflow: hidden;
     }
-
-    .slider {
-      display: none;
-    }
-
+    .slider { display: none; }
     .photo-container {
       display: flex;
       gap: 10px;
@@ -329,9 +354,7 @@
       margin: 10px;
     }
     /* Gallery scroll slider – hidden on desktop */
-    .gallery-scroll-slider {
-      display: none;
-    }
+    .gallery-scroll-slider { display: none; }
     .gallery-scroll-progress {
       width: 0%;
       height: 100%;
@@ -386,42 +409,6 @@
 
     /* FLY-IN ANIMATION – Removed; all text forced visible */
     .fly-in { opacity: 1; transform: none; transition: none; }
-
-    /* TREATMENT MODAL (overlay for detailed extra info) */
-    #treatment-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 20000;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-    #treatment-modal.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    #treatment-modal .modal-content {
-      background: #FFF;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 600px;
-      text-align: left;
-      position: relative;
-    }
-    #treatment-modal .modal-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
@@ -532,40 +519,28 @@
           <h3>AUDIO GUIDED BREATH-WORK &amp; ICE BATH</h3>
           <p class="hover-text">Experience muscle recovery and mental strengthening.</p>
           <button class="box-button">Learn More</button>
-          <div class="extra-info">
-            <p>Extra info for Audio Guided Breath-work &amp; Ice Bath. <a href="#">Read more</a> | <a href="#">Book a session</a> | <a href="#">Contact us</a></p>
-          </div>
         </div>
         <div class="box" data-detail="Extra info for IV Infusion. Read more | Book a session | Contact us">
           <h3>IV-INFUSION</h3>
           <p class="hover-text">Advanced IV therapies to optimize your body.</p>
           <button class="box-button">Learn More</button>
-          <div class="extra-info">
-            <p>Extra info for IV Infusion. <a href="#">Read more</a> | <a href="#">Book a session</a> | <a href="#">Contact us</a></p>
-          </div>
         </div>
         <div class="box" data-detail="Extra info for Sensory Deprivation Float. Read more | Book a session | Contact us">
           <h3>SENSORY DEPRIVATION FLOAT</h3>
           <p class="hover-text">Deep relaxation in a minimal-stimulus environment.</p>
           <button class="box-button">Learn More</button>
-          <div class="extra-info">
-            <p>Extra info for Sensory Deprivation Float. <a href="#">Read more</a> | <a href="#">Book a session</a> | <a href="#">Contact us</a></p>
-          </div>
         </div>
       </div>
       <div class="scroll-slider">
         <div class="scroll-progress" id="scroll-progress"></div>
       </div>
+      <!-- Treatment Overlay (covers the boxes when expanded) -->
+      <div id="treatment-overlay">
+        <span class="overlay-close" id="overlay-close">&times;</span>
+        <div class="overlay-text" id="overlay-text"></div>
+      </div>
     </div>
   </section>
-
-  <!-- TREATMENT MODAL (hidden overlay for deeper details) -->
-  <div id="treatment-modal">
-    <div class="modal-content">
-      <span class="modal-close" id="modal-close">&times;</span>
-      <div class="modal-text" id="modal-text"></div>
-    </div>
-  </div>
 
   <!-- PHOTO GALLERY SECTION (Article Cards with Scroll Indicator) -->
   <section class="photo-gallery">
@@ -702,7 +677,6 @@
     document.getElementById('photo-scroll-right').addEventListener('click', () => {
       photoContainer.scrollBy({ left: 300, behavior: 'smooth' });
     });
-
     // Gallery scroll slider update (if needed)
     const galleryScrollProgress = document.getElementById('gallery-scroll-progress');
     const galleryContainer = document.getElementById('photo-container');
@@ -736,10 +710,10 @@
     cycleVideo();
     setInterval(cycleVideo, 6000);
 
-    // Treatments Extra Info: Toggle modal overlay for detailed info
-    const treatmentModal = document.getElementById('treatment-modal');
-    const modalText = document.getElementById('modal-text');
-    const modalClose = document.getElementById('modal-close');
+    // Treatments Extra Info: Toggle overlay within the box-wrapper
+    const treatmentOverlay = document.getElementById('treatment-overlay');
+    const overlayText = document.getElementById('overlay-text');
+    const overlayClose = document.getElementById('overlay-close');
     let currentActiveDetail = null;
 
     document.querySelectorAll('.box').forEach(box => {
@@ -748,21 +722,21 @@
         button.addEventListener('click', (e) => {
           e.stopPropagation();
           const detail = box.getAttribute('data-detail');
-          // If modal already active and same detail, toggle off; else update and show
-          if (treatmentModal.classList.contains('active') && currentActiveDetail === detail) {
-            treatmentModal.classList.remove('active');
+          // Toggle the overlay if the same detail is already active
+          if (treatmentOverlay.classList.contains('active') && currentActiveDetail === detail) {
+            treatmentOverlay.classList.remove('active');
             currentActiveDetail = null;
           } else {
-            modalText.innerHTML = detail;
-            treatmentModal.classList.add('active');
+            overlayText.innerHTML = detail;
+            treatmentOverlay.classList.add('active');
             currentActiveDetail = detail;
           }
         });
       }
     });
-    // Close modal when clicking the close icon
-    modalClose.addEventListener('click', () => {
-      treatmentModal.classList.remove('active');
+    // Close overlay when clicking the close icon
+    overlayClose.addEventListener('click', () => {
+      treatmentOverlay.classList.remove('active');
       currentActiveDetail = null;
     });
   </script>
