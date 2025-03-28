@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LP/52 Landing Page</title>
+  <title>LP/52 Landing Page (Revised)</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Dancing+Script&family=Quattrocento+Sans&display=swap" rel="stylesheet">
   <style>
     /* RESET */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     /* MAIN COLOR PALETTE */
     body {
@@ -31,7 +35,9 @@
       z-index: 10000;
       transition: background 0.6s ease, top 0.3s ease;
     }
-    #navbar.hidden { top: -80px; }
+    #navbar.hidden {
+      top: -80px;
+    }
     nav {
       display: flex;
       align-items: center;
@@ -54,7 +60,9 @@
       display: flex;
       gap: 20px;
     }
-    .nav-links li { cursor: pointer; }
+    .nav-links li {
+      cursor: pointer;
+    }
     .inquire-button {
       background-color: #FFF;
       color: #FFF;
@@ -62,19 +70,25 @@
       padding: 8px 16px;
       border-radius: 4px;
     }
-    .nav-links li, .inquire-button { color: #FFF; }
+    .nav-links li,
+    .inquire-button {
+      color: #FFF;
+    }
     .mobile-menu-icon {
       display: none;
       font-size: 2rem;
       cursor: pointer;
       user-select: none;
     }
+
     /* Mobile Menu Overlay */
     #mobile-menu-overlay {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0,0,0,0.95);
       z-index: 15000;
       flex-direction: column;
@@ -105,8 +119,10 @@
     }
     .video-background {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: -2;
       overflow: hidden;
     }
@@ -118,8 +134,10 @@
     }
     .shadow-overlay {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
       background: linear-gradient(to top, rgba(0,0,0,0), transparent);
       z-index: -1;
@@ -135,12 +153,12 @@
       justify-content: center;
       height: 100%;
       padding: 0 5%;
-      /* Force text visible */
-      opacity: 1;
-      transform: none;
-      transition: none;
     }
-    .welcome-text { font-size: 1.5rem; margin-bottom: 5px; text-transform: uppercase; }
+    .welcome-text {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
     .hero-content h1 {
       font-family: 'Playfair Display', serif;
       font-size: 4rem;
@@ -163,60 +181,96 @@
       border-radius: 4px;
       cursor: pointer;
     }
-    .hero-content button:hover { transform: translateY(-3px); }
+    .hero-content button:hover {
+      transform: translateY(-3px);
+    }
 
     /* IMAGE + TEXT SECTION */
     .image-text-section {
       display: flex;
+      flex-wrap: wrap; /* allows stacking on small screens */
       align-items: center;
       justify-content: center;
       gap: 40px;
       padding: 50px 5%;
     }
-    .left-col { flex: 0 0 300px; height: 300px; position: relative; }
-    /* 1:1 Ratio using padding hack */
-    .img-wrapper-1by1 {
-      position: relative;
-      width: 100%;
-      padding-bottom: 100%;
-      border-radius: 12px;
-      overflow: hidden;
+    .left-col,
+    .right-col {
+      flex: 1 1 300px; /* each can shrink/grow as needed, min 300px */
+      max-width: 500px; /* optional: limit how wide they get */
     }
+    .left-col {
+      position: relative;
+    }
+    /* Keep ratio for the image but allow it to shrink on small screens */
+    .img-wrapper-1by1 {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+      position: relative;
+    }
+    /* For consistent ratio, you can do a padding-top approach or let it be auto. */
     .img-wrapper-1by1 img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: auto;
+      display: block;
       object-fit: cover;
+      border-radius: 12px;
     }
     .overlay-text {
       position: absolute;
-      top: 50%; left: 50%;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
       color: #FFF;
       font-size: 1.5rem;
       font-weight: bold;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
     }
-    .right-col { flex: 1; text-align: center; max-width: 600px; }
+    .right-col {
+      text-align: left; /* so the paragraph looks more natural on wide screens */
+    }
     .right-col h3 {
       font-family: 'Playfair Display', serif;
       font-size: 1.8rem;
       margin-bottom: 15px;
       border-bottom: 2px solid #2E2E2E;
       padding-bottom: 5px;
+      text-align: center;
     }
-    .right-col p { line-height: 1.5; margin-top: 15px; }
+    .right-col p {
+      line-height: 1.5;
+      margin-top: 15px;
+    }
+    /* On small screens, center the text */
+    @media (max-width: 640px) {
+      .right-col {
+        text-align: center;
+      }
+    }
 
     /* SECTION STYLES */
-    section { padding: 50px 5%; }
-    section h2 { font-size: 2rem; margin-bottom: 20px; }
-    section p { max-width: 800px; margin: 0 auto; line-height: 1.5; }
+    section {
+      padding: 50px 5%;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    section p {
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
 
     /* TREATMENTS SECTION (3 Boxes with Individual Extra Info) */
-    .treatments { background-color: #F6F5F3; position: relative; }
+    .treatments {
+      background-color: #F6F5F3;
+      position: relative;
+    }
     .box-wrapper {
       position: relative;
-      max-width: 100%; /* Allow full width on wider screens */
+      max-width: 100%;
       margin: 40px auto 0;
       padding: 10px;
       background-color: #F2F0EC;
@@ -231,7 +285,7 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    /* On wider screens, force boxes to fit without scrolling */
+    /* On wider screens, show all boxes side by side without scrolling */
     @media (min-width: 641px) {
       .box-container {
         overflow-x: visible;
@@ -239,7 +293,9 @@
         justify-content: space-between;
       }
     }
-    .box-container::-webkit-scrollbar { display: none; }
+    .box-container::-webkit-scrollbar {
+      display: none;
+    }
     .box {
       flex: 1;
       min-width: 200px;
@@ -252,9 +308,28 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
     }
-    .box:hover { transform: translateY(-10px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-    .box h3 { margin-bottom: 10px; }
-    .hover-text { margin-top: 10px; }
+    .box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .box h3 {
+      margin-bottom: 10px;
+    }
+    .hover-text {
+      margin-top: 10px;
+    }
+    .box-button {
+      background-color: #EAE5DD;
+      border: none;
+      color: #2E2E2E;
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .box-button:hover {
+      background-color: #d8d2ca;
+    }
 
     /* Scroll slider under treatments boxes */
     .scroll-slider {
@@ -268,7 +343,9 @@
       display: none;
     }
     @media (max-width: 640px) {
-      .scroll-slider { display: block; }
+      .scroll-slider {
+        display: block;
+      }
     }
     .scroll-progress {
       width: 0%;
@@ -277,37 +354,55 @@
       transition: width 0.3s ease;
     }
 
-    /* Treatment Overlay: covers the boxes within the box-wrapper */
-    #treatment-overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 90%;
-      max-width: 600px;
-      height: auto;
-      background: #FFF; /* same as the boxes */
+    /* FULL-PAGE MODAL FOR TREATMENTS */
+    #treatment-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* dark overlay behind modal */
+      z-index: 9999;
+      display: none; /* hidden by default */
+      justify-content: center;
+      align-items: center;
+    }
+    #treatment-modal.active {
+      display: flex; /* show modal */
+    }
+    .modal-content {
+      background: #FFF;
+      color: #2E2E2E;
       border: 2px solid #CCC;
       border-radius: 12px;
       padding: 20px;
-      transform: translate(-50%, -50%) scale(0);
-      opacity: 0;
-      transition: transform 0.4s ease, opacity 0.4s ease;
-      z-index: 10;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      text-align: left;
+      position: relative;
     }
-    #treatment-overlay.active {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
-    }
-    #treatment-overlay .overlay-close {
+    .modal-close {
       position: absolute;
       top: 10px;
-      right: 10px;
+      right: 15px;
       font-size: 1.5rem;
       cursor: pointer;
     }
+    .modal-content h3 {
+      margin-top: 0;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+    }
+    .modal-content p {
+      margin-top: 15px;
+      line-height: 1.6;
+    }
 
     /* PHOTO GALLERY SECTION (Article Cards) */
-    .photo-gallery { background: #F9F9F9; }
+    .photo-gallery {
+      background: #F9F9F9;
+    }
     .photo-wrapper {
       position: relative;
       max-width: 900px;
@@ -315,7 +410,9 @@
       border-radius: 12px;
       overflow: hidden;
     }
-    .slider { display: none; }
+    .slider {
+      display: none;
+    }
     .photo-container {
       display: flex;
       gap: 10px;
@@ -342,8 +439,10 @@
     }
     .landscape-wrapper img {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
     .article-card h3 {
@@ -364,7 +463,9 @@
       margin: 10px;
     }
     /* Gallery scroll slider – hidden on desktop */
-    .gallery-scroll-slider { display: none; }
+    .gallery-scroll-slider {
+      display: none;
+    }
     .gallery-scroll-progress {
       width: 0%;
       height: 100%;
@@ -394,8 +495,12 @@
       background-color: rgba(51,51,51,0.9);
       transform: translateY(-50%) scale(1.1);
     }
-    .photo-scroll-left { left: 10px; }
-    .photo-scroll-right { right: 10px; }
+    .photo-scroll-left {
+      left: 10px;
+    }
+    .photo-scroll-right {
+      right: 10px;
+    }
 
     /* FOOTER */
     .footer {
@@ -415,10 +520,16 @@
       text-decoration: none;
       font-weight: bold;
     }
-    .footer p { margin-top: 10px; }
+    .footer p {
+      margin-top: 10px;
+    }
 
     /* FLY-IN ANIMATION – Removed; all text forced visible */
-    .fly-in { opacity: 1; transform: none; transition: none; }
+    .fly-in {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   </style>
 </head>
 <body>
@@ -452,303 +563,4 @@
 
   <!-- HERO SECTION -->
   <section class="hero">
-    <div class="video-background">
-      <video id="hero-video" autoplay muted loop playsinline preload="auto">
-        <!-- Fallback content if video isn't supported -->
-        <source src="" type="video/mp4">
-        <img src="https://via.placeholder.com/1280x720?text=Video+Unavailable" alt="Video placeholder">
-      </video>
-    </div>
-    <div class="shadow-overlay"></div>
-    <div class="hero-content">
-      <p class="welcome-text">WELCOME TO</p>
-      <h1>BODY MIND SOUL</h1>
-      <p class="flair">welcome to our learning platform, where you will fulfill your life to truly become the best version of you</p>
-      <button id="learn-more-btn">Learn More</button>
-    </div>
-  </section>
-
-  <!-- IMAGE + TEXT SECTION -->
-  <section class="image-text-section">
-    <div class="left-col">
-      <div class="img-wrapper-1by1">
-        <img src="https://images.pexels.com/photos/6997986/pexels-photo-6997986.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Best Investment">
-      </div>
-      <div class="overlay-text">the best investment, is you</div>
-    </div>
-    <div class="right-col">
-      <h3>This is the start of your best life</h3>
-      <p>
-        Our vision is to set light on every aspect of an individual. To understand our needs to get to our higher purpose.
-        To change desires into reality. To truly feel confident in your skin wherever you go, whoever you are.
-        So we can all build stats in personal development and become a loving community where we teach, learn, love and grow.
-      </p>
-    </div>
-  </section>
-
-  <!-- CONTENT SECTION -->
-  <section class="content">
-    <h2>Lorem ipsum dolor</h2>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non lorem ut nisi finibus aliquam.
-      Cras consequat libero sed erat ornare, at ultricies erat iaculis. Sed aliquam consectetur ornare.
-      Nulla finibus ipsum at massa bibendum vulputate.
-    </p>
-  </section>
-
-  <!-- ABOUT US SECTION -->
-  <section class="about">
-    <h2>About Us</h2>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sem non tincidunt pulvinar.
-      Vivamus quis posuere orci. Curabitur tempus, justo non consequat blandit, sapien libero ullamcorper est,
-      eget vulputate mauris elit id sapien. Donec ullamcorper convallis nisl quis faucibus. Vivamus hendrerit
-      tortor eu eros blandit, ac consectetur magna faucibus. Pellentesque ac tortor mauris. Integer auctor sem
-      sit amet tristique ultricies. Suspendisse pellentesque lacinia mauris, a commodo ex pulvinar sit amet.
-      Pellentesque bibendum sagittis urna, id volutpat libero laoreet eget. Morbi commodo fringilla gravida.
-      Nunc at nibh dictum, euismod erat a, fermentum elit.
-    </p>
-    <p>
-      Aenean non sapien nec quam suscipit luctus. Suspendisse vel nulla vitae lorem vestibulum pellentesque.
-      Curabitur vitae turpis in tortor gravida scelerisque eget a leo. Etiam interdum ligula a placerat convallis.
-      Pellentesque ac ligula quam. Fusce ultrices nisi ex, quis ultrices arcu aliquet quis. Praesent bibendum
-      sem id congue fringilla.
-    </p>
-  </section>
-
-  <!-- TREATMENTS SECTION (3 Boxes with Individual Extra Info) -->
-  <section class="treatments">
-    <h2>Lorem ipsum treatments</h2>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum tellus vel orci lacinia,
-      eget dictum orci commodo. Vivamus vehicula imperdiet quam, in malesuada felis lobortis quis.
-    </p>
-    <div class="box-wrapper">
-      <div class="box-container" id="box-container">
-        <div class="box" data-detail="Extra info for Audio Guided Breath-work &amp; Ice Bath. Read more | Book a session | Contact us">
-          <h3>AUDIO GUIDED BREATH-WORK &amp; ICE BATH</h3>
-          <p class="hover-text">Experience muscle recovery and mental strengthening.</p>
-          <button class="box-button">Learn More</button>
-        </div>
-        <div class="box" data-detail="Extra info for IV Infusion. Read more | Book a session | Contact us">
-          <h3>IV-INFUSION</h3>
-          <p class="hover-text">Advanced IV therapies to optimize your body.</p>
-          <button class="box-button">Learn More</button>
-        </div>
-        <div class="box" data-detail="Extra info for Sensory Deprivation Float. Read more | Book a session | Contact us">
-          <h3>SENSORY DEPRIVATION FLOAT</h3>
-          <p class="hover-text">Deep relaxation in a minimal-stimulus environment.</p>
-          <button class="box-button">Learn More</button>
-        </div>
-      </div>
-      <div class="scroll-slider">
-        <div class="scroll-progress" id="scroll-progress"></div>
-      </div>
-      <!-- Treatment Overlay: transitions smoothly from the center -->
-      <div id="treatment-overlay">
-        <span class="overlay-close" id="overlay-close">&times;</span>
-        <div class="overlay-text" id="overlay-text"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PHOTO GALLERY SECTION (Article Cards with Scroll Indicator) -->
-  <section class="photo-gallery">
-    <h2>Our Latest Highlights</h2>
-    <p>Swipe or click the arrows to browse the articles.</p>
-    <div class="photo-wrapper">
-      <button class="photo-scroll-btn photo-scroll-left" id="photo-scroll-left">&#8592;</button>
-      <div class="photo-container" id="photo-container">
-        <article class="article-card">
-          <div class="landscape-wrapper">
-            <img src="https://picsum.photos/600/200?random=4" alt="Article 1">
-          </div>
-          <h3>Article Title 1</h3>
-          <div class="byline">
-            <span>by John Doe</span>
-            <span>$10</span>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod nisl nec consectetur.</p>
-        </article>
-        <article class="article-card">
-          <div class="landscape-wrapper">
-            <img src="https://picsum.photos/600/200?random=5" alt="Article 2">
-          </div>
-          <h3>Article Title 2</h3>
-          <div class="byline">
-            <span>by Jane Smith</span>
-            <span>$20</span>
-          </div>
-          <p>Praesent in libero vel turpis pellentesque egestas sit amet vel nunc. Donec rutrum.</p>
-        </article>
-        <article class="article-card">
-          <div class="landscape-wrapper">
-            <img src="https://picsum.photos/600/200?random=6" alt="Article 3">
-          </div>
-          <h3>Article Title 3</h3>
-          <div class="byline">
-            <span>by Alex Ray</span>
-            <span>$15</span>
-          </div>
-          <p>Donec aliquet, tortor sed accumsan bibendum, erat ligula aliquet magna, quis rutrum lorem.</p>
-        </article>
-        <article class="article-card">
-          <div class="landscape-wrapper">
-            <img src="https://picsum.photos/600/200?random=7" alt="Article 4">
-          </div>
-          <h3>Article Title 4</h3>
-          <div class="byline">
-            <span>by Sam Lee</span>
-            <span>$12</span>
-          </div>
-          <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
-        </article>
-        <article class="article-card">
-          <div class="landscape-wrapper">
-            <img src="https://picsum.photos/600/200?random=8" alt="Article 5">
-          </div>
-          <h3>Article Title 5</h3>
-          <div class="byline">
-            <span>by Mia Wong</span>
-            <span>$18</span>
-          </div>
-          <p>Nullam quis risus eget urna mollis ornare vel eu leo. Nulla vitae elit libero.</p>
-        </article>
-      </div>
-      <button class="photo-scroll-btn photo-scroll-right" id="photo-scroll-right">&#8594;</button>
-      <!-- Gallery Scroll Slider (hidden on desktop) -->
-      <div class="gallery-scroll-slider">
-        <div class="gallery-scroll-progress" id="gallery-scroll-progress"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER SECTION -->
-  <footer class="footer">
-    <ul>
-      <li><a href="#">Cookies</a></li>
-      <li><a href="#">Terms</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Privacy</a></li>
-      <li><a href="#">Support</a></li>
-    </ul>
-    <p>&copy; 2025 Your Company. All rights reserved.</p>
-  </footer>
-
-  <script>
-    // Force all fly-in elements visible (no animation delays)
-    document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll('.fly-in').forEach(el => {
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-      });
-    });
-
-    // Navbar hide/reveal on scroll
-    let prevScrollPos = window.pageYOffset;
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      const currentScrollPos = window.pageYOffset;
-      if (currentScrollPos > prevScrollPos) { navbar.classList.add('hidden'); }
-      else { navbar.classList.remove('hidden'); }
-      prevScrollPos = currentScrollPos;
-    });
-
-    // Mobile Menu Overlay Toggle
-    const mobileMenuIcon = document.getElementById('mobile-menu-icon');
-    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-    mobileMenuIcon.addEventListener('click', () => { mobileMenuOverlay.style.display = 'flex'; });
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
-    if(mobileMenuClose){ mobileMenuClose.addEventListener('click', () => { mobileMenuOverlay.style.display = 'none'; }); }
-    document.querySelectorAll('#mobile-menu-overlay a').forEach(link => {
-      link.addEventListener('click', () => { mobileMenuOverlay.style.display = 'none'; });
-    });
-
-    // Smooth scroll to Image+Text section when Learn More is clicked (hero)
-    document.getElementById('learn-more-btn').addEventListener('click', () => {
-      document.querySelector('.image-text-section').scrollIntoView({ behavior: 'smooth' });
-    });
-
-    // Treatments slider indicator update
-    const boxContainer = document.getElementById('box-container');
-    const scrollProgress = document.getElementById('scroll-progress');
-    boxContainer.addEventListener('scroll', () => {
-      const scrollLeft = boxContainer.scrollLeft;
-      const maxScroll = boxContainer.scrollWidth - boxContainer.clientWidth;
-      const progress = maxScroll ? scrollLeft / maxScroll : 0;
-      scrollProgress.style.width = (progress * 100) + '%';
-    });
-
-    // Photo gallery arrow scrolling
-    const photoContainer = document.getElementById('photo-container');
-    document.getElementById('photo-scroll-left').addEventListener('click', () => {
-      photoContainer.scrollBy({ left: -300, behavior: 'smooth' });
-    });
-    document.getElementById('photo-scroll-right').addEventListener('click', () => {
-      photoContainer.scrollBy({ left: 300, behavior: 'smooth' });
-    });
-    // Gallery scroll slider update (if needed)
-    const galleryScrollProgress = document.getElementById('gallery-scroll-progress');
-    const galleryContainer = document.getElementById('photo-container');
-    galleryContainer.addEventListener('scroll', () => {
-      const scrollLeft = galleryContainer.scrollLeft;
-      const maxScroll = galleryContainer.scrollWidth - galleryContainer.clientWidth;
-      const progress = maxScroll ? scrollLeft / maxScroll : 0;
-      galleryScrollProgress.style.width = (progress * 100) + '%';
-    });
-
-    // Cycle through video clips every 6 seconds
-    const heroVideo = document.getElementById('hero-video');
-    const videoSources = [
-      "https://videos.pexels.com/video-files/2711145/2711145-uhd_2560_1440_24fps.mp4",
-      "https://videos.pexels.com/video-files/7444954/7444954-uhd_2560_1440_30fps.mp4",
-      "https://videos.pexels.com/video-files/16283928/16283928-uhd_2560_1440_30fps.mp4",
-      "https://videos.pexels.com/video-files/16508221/16508221-uhd_2560_1440_30fps.mp4",
-      "https://videos.pexels.com/video-files/3126484/3126484-hd_1920_1080_30fps.mp4"
-    ];
-    let currentVideoIndex = 0;
-    function cycleVideo() {
-      heroVideo.src = videoSources[currentVideoIndex];
-      heroVideo.load();
-      heroVideo.play().catch(() => {
-        // In case playback fails, insert a placeholder image.
-        const parent = heroVideo.parentElement;
-        parent.innerHTML = `<img src="https://via.placeholder.com/1280x720?text=Video+Unavailable" alt="Video placeholder" style="width:100%; height:100%; object-fit:cover;">`;
-      });
-      currentVideoIndex = (currentVideoIndex + 1) % videoSources.length;
-    }
-    cycleVideo();
-    setInterval(cycleVideo, 6000);
-
-    // Treatments Extra Info: Toggle overlay within the box-wrapper
-    const treatmentOverlay = document.getElementById('treatment-overlay');
-    const overlayText = document.getElementById('overlay-text');
-    const overlayClose = document.getElementById('overlay-close');
-    let currentActiveDetail = null;
-
-    document.querySelectorAll('.box').forEach(box => {
-      const button = box.querySelector('.box-button');
-      if (button) {
-        button.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const detail = box.getAttribute('data-detail');
-          // Toggle overlay if same detail is active, else update and show
-          if (treatmentOverlay.classList.contains('active') && currentActiveDetail === detail) {
-            treatmentOverlay.classList.remove('active');
-            currentActiveDetail = null;
-          } else {
-            overlayText.innerHTML = detail;
-            treatmentOverlay.classList.add('active');
-            currentActiveDetail = detail;
-          }
-        });
-      }
-    });
-    // Close overlay when clicking the close icon
-    overlayClose.addEventListener('click', () => {
-      treatmentOverlay.classList.remove('active');
-      currentActiveDetail = null;
-    });
-  </script>
-</body>
-</html>
+    <div class
