@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Complete Single-File Example – Revised Mobile</title>
+  <title>Landing Page with Video Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts – ensure these load properly -->
+  <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Dancing+Script&family=Quattrocento+Sans&display=swap" rel="stylesheet">
   <style>
     /* BASIC RESET */
     * {
@@ -74,8 +77,7 @@
       cursor: pointer;
       user-select: none;
     }
-
-    /* MOBILE MENU OVERLAY – covers the full viewport (expected) */
+    /* MOBILE MENU OVERLAY */
     #mobile-menu-overlay {
       display: none;
       position: fixed;
@@ -120,7 +122,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      /* For iOS Safari: */
       -webkit-playsinline: true;
       playsinline: true;
       muted: true;
@@ -195,7 +196,7 @@
     .img-wrapper-1by1 {
       position: relative;
       width: 100%;
-      padding-bottom: 100%; /* 1:1 ratio */
+      padding-bottom: 100%;
       border-radius: 12px;
       overflow: hidden;
     }
@@ -235,19 +236,73 @@
       margin-left: auto;
       margin-right: auto;
     }
-
-    /* MEDIA QUERY: For very small screens, stack image and text vertically */
-    @media (max-width: 480px) {
-      .image-text-section {
-        flex-direction: column;
-      }
-      .left-col, .right-col {
-        flex: 1 1 100%;
-        max-width: 100%;
+    
+    /* NEW VIDEO GALLERY SECTION */
+    .video-gallery {
+      padding: 50px 5%;
+      background: #FFF;
+      text-align: center;
+    }
+    .video-gallery h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .video-wrapper {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .video-container {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 10px;
+    }
+    /* Each video box: mobile shows 2, desktop shows 4 */
+    .video-box {
+      flex: 0 0 calc(50% - 10px);
+      position: relative;
+      padding-bottom: 100%; /* 1:1 ratio */
+      background: #000;
+    }
+    .video-box video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    @media (min-width: 768px) {
+      .video-box {
+        flex: 0 0 calc(25% - 10px);
       }
     }
+    .video-scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(51,51,51,0.7);
+      color: #FFF;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .video-scroll-btn:hover {
+      background-color: rgba(51,51,51,0.9);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .video-scroll-left {
+      left: 10px;
+    }
+    .video-scroll-right {
+      right: 10px;
+    }
 
-    /* CONTENT & ABOUT SECTIONS */
+    /* CONTENT & ABOUT US SECTIONS */
     section {
       padding: 50px 5%;
     }
@@ -271,7 +326,7 @@
       text-align: center;
     }
     .box-wrapper {
-      display: inline-block;  /* shrink-to-fit on desktop */
+      display: inline-block;
       margin: 40px auto 0;
       background-color: #F2F0EC;
       border: 2px solid #CCC;
@@ -282,7 +337,6 @@
       .box-wrapper {
         display: block;
         width: 100%;
-        max-width: 100%;
       }
     }
     .box-container {
@@ -305,7 +359,7 @@
       padding: 20px;
       text-align: center;
       border-radius: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s, box-shadow 0.3s;
       cursor: pointer;
       position: relative;
     }
@@ -350,7 +404,7 @@
       width: 0%;
       height: 100%;
       background-color: #AAA;
-      transition: width 0.3s ease;
+      transition: width 0.3s;
     }
 
     /* FULL-PAGE MODAL FOR TREATMENTS */
@@ -358,7 +412,7 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0,0,0,0.5);
       z-index: 9999;
       display: none;
       justify-content: center;
@@ -468,7 +522,7 @@
       justify-content: center;
       cursor: pointer;
       z-index: 2;
-      transition: background-color 0.3s ease, transform 0.3s ease;
+      transition: background-color 0.3s, transform 0.3s;
     }
     .photo-scroll-btn:hover {
       background-color: rgba(51,51,51,0.9);
@@ -487,7 +541,7 @@
       width: 0%;
       height: 100%;
       background-color: #d0ccc8;
-      transition: width 0.3s ease;
+      transition: width 0.3s;
     }
 
     /* FOOTER */
@@ -546,14 +600,7 @@
   <!-- HERO SECTION -->
   <section class="hero">
     <div class="video-background">
-      <video
-        id="hero-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        poster="https://via.placeholder.com/1280x720?text=Loading+Video"
-      >
+      <video id="hero-video" autoplay muted loop playsinline poster="https://via.placeholder.com/1280x720?text=Loading+Video">
         <source src="https://videos.pexels.com/video-files/7444954/7444954-uhd_2560_1440_30fps.mp4" type="video/mp4">
         <img src="https://via.placeholder.com/1280x720?text=Video+Unavailable" alt="Video placeholder">
       </video>
@@ -582,6 +629,43 @@
         To change desires into reality. To truly feel confident in your skin wherever you go, whoever you are.
         So we can all build stats in personal development and become a loving community where we teach, learn, love and grow.
       </p>
+    </div>
+  </section>
+
+  <!-- NEW VIDEO GALLERY SECTION -->
+  <section class="video-gallery">
+    <h2>Video Gallery</h2>
+    <div class="video-wrapper">
+      <button class="video-scroll-btn video-scroll-left" id="video-scroll-left">&#8592;</button>
+      <div class="video-container" id="video-container">
+        <!-- Example video boxes; replace src with your own video URLs -->
+        <div class="video-box">
+          <video muted playsinline loop>
+            <source src="https://videos.pexels.com/video-files/2711145/2711145-uhd_2560_1440_24fps.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-box">
+          <video muted playsinline loop>
+            <source src="https://videos.pexels.com/video-files/7444954/7444954-uhd_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-box">
+          <video muted playsinline loop>
+            <source src="https://videos.pexels.com/video-files/16283928/16283928-uhd_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-box">
+          <video muted playsinline loop>
+            <source src="https://videos.pexels.com/video-files/16508221/16508221-uhd_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-box">
+          <video muted playsinline loop>
+            <source src="https://videos.pexels.com/video-files/3126484/3126484-hd_1920_1080_30fps.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <button class="video-scroll-btn video-scroll-right" id="video-scroll-right">&#8594;</button>
     </div>
   </section>
 
@@ -776,7 +860,7 @@
       });
     });
 
-    // "Learn More" button from hero -> smooth scroll
+    // "Learn More" button from hero -> smooth scroll to image-text section
     document.getElementById('learn-more-btn').addEventListener('click', () => {
       document.querySelector('.image-text-section').scrollIntoView({ behavior: 'smooth' });
     });
@@ -817,6 +901,21 @@
       treatmentModal.classList.remove('active');
       currentActiveDetail = null;
     });
+
+    // Video Gallery Arrow Scrolling
+    const videoContainer = document.getElementById('video-container');
+    const videoScrollLeft = document.getElementById('video-scroll-left');
+    const videoScrollRight = document.getElementById('video-scroll-right');
+    // Calculate one video box width (assumes all boxes have same width)
+    function scrollVideoBox(direction) {
+      const videoBox = videoContainer.querySelector('.video-box');
+      if (videoBox) {
+        const boxWidth = videoBox.offsetWidth + 10; // include gap (adjust if needed)
+        videoContainer.scrollBy({ left: direction * boxWidth, behavior: 'smooth' });
+      }
+    }
+    videoScrollLeft.addEventListener('click', () => scrollVideoBox(-1));
+    videoScrollRight.addEventListener('click', () => scrollVideoBox(1));
 
     // Photo Gallery Arrow Scrolling
     const photoContainer = document.getElementById('photo-container');
