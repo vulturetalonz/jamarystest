@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Landing Page with Video Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google Fonts – ensure these load properly -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Dancing+Script&family=Quattrocento+Sans&display=swap" rel="stylesheet">
   <style>
@@ -196,7 +196,7 @@
     .img-wrapper-1by1 {
       position: relative;
       width: 100%;
-      padding-bottom: 100%;
+      padding-bottom: 100%; /* 1:1 ratio */
       border-radius: 12px;
       overflow: hidden;
     }
@@ -242,6 +242,7 @@
       padding: 50px 5%;
       background: #FFF;
       text-align: center;
+      position: relative;
     }
     .video-gallery h2 {
       font-size: 2rem;
@@ -257,14 +258,19 @@
       gap: 10px;
       overflow-x: auto;
       scroll-behavior: smooth;
-      padding-bottom: 10px;
+      width: max-content;
+      margin: 0 auto;
     }
-    /* Each video box: mobile shows 2, desktop shows 4 */
+    .video-container::-webkit-scrollbar {
+      display: none;
+    }
     .video-box {
-      flex: 0 0 calc(50% - 10px);
+      flex: 0 0 calc(50% - 10px); /* mobile: 2 per row */
       position: relative;
       padding-bottom: 100%; /* 1:1 ratio */
       background: #000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .video-box video {
       position: absolute;
@@ -274,9 +280,27 @@
     }
     @media (min-width: 768px) {
       .video-box {
-        flex: 0 0 calc(25% - 10px);
+        flex: 0 0 calc(25% - 10px); /* desktop: 4 per row */
       }
     }
+    /* Slider below video gallery – same style as treatments */
+    .video-scroll-slider {
+      width: 100%;
+      max-width: 1200px;
+      height: 4px;
+      background-color: #CCC;
+      margin: 10px auto 0;
+      border-radius: 2px;
+      overflow: hidden;
+      display: block;
+    }
+    .video-scroll-progress {
+      width: 0%;
+      height: 100%;
+      background-color: #AAA;
+      transition: width 0.3s ease;
+    }
+    /* Arrow Buttons for Video Gallery */
     .video-scroll-btn {
       position: absolute;
       top: 50%;
@@ -301,7 +325,7 @@
     .video-scroll-right {
       right: 10px;
     }
-
+    
     /* CONTENT & ABOUT US SECTIONS */
     section {
       padding: 50px 5%;
@@ -318,7 +342,7 @@
     .about {
       text-align: center;
     }
-
+    
     /* TREATMENTS SECTION */
     .treatments {
       background-color: #F6F5F3;
@@ -359,7 +383,7 @@
       padding: 20px;
       text-align: center;
       border-radius: 12px;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
       position: relative;
     }
@@ -404,9 +428,9 @@
       width: 0%;
       height: 100%;
       background-color: #AAA;
-      transition: width 0.3s;
+      transition: width 0.3s ease;
     }
-
+    
     /* FULL-PAGE MODAL FOR TREATMENTS */
     #treatment-modal {
       position: fixed;
@@ -449,7 +473,7 @@
       margin-top: 15px;
       line-height: 1.6;
     }
-
+    
     /* PHOTO GALLERY SECTION */
     .photo-gallery {
       background: #F9F9F9;
@@ -543,7 +567,7 @@
       background-color: #d0ccc8;
       transition: width 0.3s;
     }
-
+    
     /* FOOTER */
     .footer {
       background-color: #EAE5DD;
@@ -638,7 +662,6 @@
     <div class="video-wrapper">
       <button class="video-scroll-btn video-scroll-left" id="video-scroll-left">&#8592;</button>
       <div class="video-container" id="video-container">
-        <!-- Example video boxes; replace src with your own video URLs -->
         <div class="video-box">
           <video muted playsinline loop>
             <source src="https://videos.pexels.com/video-files/2711145/2711145-uhd_2560_1440_24fps.mp4" type="video/mp4">
@@ -666,6 +689,9 @@
         </div>
       </div>
       <button class="video-scroll-btn video-scroll-right" id="video-scroll-right">&#8594;</button>
+    </div>
+    <div class="video-scroll-slider">
+      <div class="video-scroll-progress" id="video-scroll-progress"></div>
     </div>
   </section>
 
@@ -906,16 +932,24 @@
     const videoContainer = document.getElementById('video-container');
     const videoScrollLeft = document.getElementById('video-scroll-left');
     const videoScrollRight = document.getElementById('video-scroll-right');
-    // Calculate one video box width (assumes all boxes have same width)
     function scrollVideoBox(direction) {
       const videoBox = videoContainer.querySelector('.video-box');
       if (videoBox) {
-        const boxWidth = videoBox.offsetWidth + 10; // include gap (adjust if needed)
+        const boxWidth = videoBox.offsetWidth + 10; // gap adjustment
         videoContainer.scrollBy({ left: direction * boxWidth, behavior: 'smooth' });
       }
     }
     videoScrollLeft.addEventListener('click', () => scrollVideoBox(-1));
     videoScrollRight.addEventListener('click', () => scrollVideoBox(1));
+    
+    // Update Video Gallery Scroll Slider
+    const videoScrollProgress = document.getElementById('video-scroll-progress');
+    videoContainer.addEventListener('scroll', () => {
+      const scrollLeft = videoContainer.scrollLeft;
+      const maxScroll = videoContainer.scrollWidth - videoContainer.clientWidth;
+      const progress = maxScroll ? scrollLeft / maxScroll : 0;
+      videoScrollProgress.style.width = (progress * 100) + '%';
+    });
 
     // Photo Gallery Arrow Scrolling
     const photoContainer = document.getElementById('photo-container');
