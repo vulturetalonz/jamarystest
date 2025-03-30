@@ -2,19 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Complete Landing Page</title>
+  <title>Complete Landing Page – Revised Palette & Video Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google Fonts – ensure these load properly -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Dancing+Script&family=Quattrocento+Sans&display=swap" rel="stylesheet">
   <style>
+    /* ------------------------------
+       Color Palette:
+       #e7decd, #efe8db, #f4efe6, #faf7f0, #fbfaf8
+    ------------------------------ */
+    :root {
+      --color-1: #e7decd;
+      --color-2: #efe8db;
+      --color-3: #f4efe6;
+      --color-4: #faf7f0;
+      --color-5: #fbfaf8;
+    }
+
     /* ------------------------------
        Basic Reset & Global Styles 
     ------------------------------ */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Quattrocento Sans', sans-serif;
-      background: #F8F5F0;
+      background-color: var(--color-5);
       color: #2E2E2E;
       text-align: center;
       overflow-x: hidden;
@@ -27,7 +39,7 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
+      background: var(--color-3);
       padding: 10px 20px;
       z-index: 10000;
       transition: top 0.3s ease;
@@ -62,16 +74,16 @@
       text-decoration: none;
       color: #FFF;
     }
+    /* Mobile: hide standard menu, show mobile icon */
+    @media (max-width: 768px) {
+      .nav-menu { display: none; }
+      .mobile-menu-icon { display: block; }
+    }
     .mobile-menu-icon {
       display: none;
       font-size: 2rem;
       cursor: pointer;
       user-select: none;
-    }
-    /* Mobile: hide standard menu, show mobile icon */
-    @media (max-width: 768px) {
-      .nav-menu { display: none; }
-      .mobile-menu-icon { display: block; }
     }
     /* Mobile Menu Overlay */
     #mobile-menu-overlay {
@@ -93,8 +105,7 @@
     }
     #mobile-menu-overlay .close-btn {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 20px; right: 20px;
       font-size: 2rem;
       cursor: pointer;
       color: #FFF;
@@ -108,19 +119,17 @@
       width: 100%;
       height: 70vh;
       overflow: hidden;
-      margin-top: 60px; /* leave space for fixed navbar */
+      /* Remove extra margin so it aligns flush to top */
     }
     .video-background {
       position: absolute;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       z-index: -2;
       overflow: hidden;
     }
     #hero-video {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       -webkit-playsinline: true; playsinline: true;
       muted: true; autoplay: true; loop: true;
@@ -128,8 +137,7 @@
     .shadow-overlay {
       position: absolute;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       pointer-events: none;
       background: linear-gradient(to top, rgba(0,0,0,0), transparent);
       z-index: -1;
@@ -181,6 +189,7 @@
       gap: 40px;
       padding: 50px 5%;
       text-align: center;
+      background: var(--color-4);
     }
     .left-col, .right-col { flex: 1 1 300px; max-width: 500px; }
     .img-wrapper-1by1 {
@@ -226,11 +235,11 @@
     }
     
     /* ------------------------------
-       NEW VIDEO GALLERY SECTION
+       VIDEO GALLERY SECTION
     ------------------------------ */
     .video-gallery {
       padding: 50px 5%;
-      background: #FFF;
+      background: var(--color-2);
       text-align: center;
       position: relative;
     }
@@ -240,20 +249,19 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    .video-gallery .video-container {
+    .video-container {
       display: flex;
       gap: 20px;
       overflow-x: auto;
       scroll-behavior: smooth;
-      width: max-content;
-      margin: 0 auto;
+      width: 100%;
+      padding: 0 10px;
     }
-    .video-gallery .video-container::-webkit-scrollbar { display: none; }
-    /* Each video box: 1:1 ratio, drop shadow, smooth transition */
+    .video-container::-webkit-scrollbar { display: none; }
+    /* Using modern aspect-ratio for a 1:1 box */
     .video-box {
       flex: 0 0 calc(25% - 20px); /* 4 per row on desktop */
-      position: relative;
-      padding-bottom: 100%; /* 1:1 ratio */
+      aspect-ratio: 1 / 1;
       background: #000;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.15);
@@ -266,14 +274,15 @@
     }
     .video-box video,
     .video-box img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
     .video-overlay-text {
       position: absolute;
-      bottom: 10px; left: 10px; right: 10px;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
       color: #FFF;
       background: rgba(0,0,0,0.4);
       padding: 5px 10px;
@@ -281,7 +290,7 @@
       font-size: 0.9rem;
       pointer-events: none;
     }
-    /* Responsive: Adjust number of video boxes per row */
+    /* Responsive adjustments */
     @media (max-width: 992px) {
       .video-box { flex: 0 0 calc(33.33% - 20px); } /* 3 per row */
     }
@@ -321,7 +330,6 @@
       margin: 10px auto 0;
       border-radius: 2px;
       overflow: hidden;
-      position: relative;
     }
     .video-scroll-progress {
       width: 0%;
@@ -346,14 +354,14 @@
        TREATMENTS SECTION
     ------------------------------ */
     .treatments {
-      background: #F6F5F3;
+      background: var(--color-4);
       position: relative;
       text-align: center;
     }
     .box-wrapper {
       display: inline-block;
       margin: 40px auto 0;
-      background: #F2F0EC;
+      background: var(--color-1);
       border: 2px solid #CCC;
       border-radius: 12px;
       padding: 10px;
@@ -383,10 +391,7 @@
       cursor: pointer;
       position: relative;
     }
-    .box:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
+    .box:hover { transform: translateY(-10px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     .box h3 { margin-bottom: 10px; }
     .hover-text { margin-top: 10px; }
     .box-button {
@@ -459,7 +464,7 @@
     /* ------------------------------
        PHOTO GALLERY SECTION
     ------------------------------ */
-    .photo-gallery { background: #F9F9F9; }
+    .photo-gallery { background: var(--color-2); }
     .photo-wrapper {
       position: relative;
       max-width: 900px;
@@ -548,7 +553,7 @@
        FOOTER
     ------------------------------ */
     .footer {
-      background: #EAE5DD;
+      background: var(--color-3);
       color: #2E2E2E;
       padding: 20px 5%;
     }
@@ -636,11 +641,9 @@
   <section class="video-gallery">
     <h2>Video Gallery</h2>
     <div class="video-wrapper">
-      <!-- Arrow Buttons -->
       <button class="video-scroll-btn video-scroll-left" id="video-scroll-left">&#8592;</button>
       <button class="video-scroll-btn video-scroll-right" id="video-scroll-right">&#8594;</button>
       <div class="video-container" id="video-gallery-container">
-        <!-- Example Video Boxes -->
         <div class="video-box">
           <video muted playsinline loop>
             <source src="https://videos.pexels.com/video-files/7444954/7444954-uhd_2560_1440_30fps.mp4" type="video/mp4">
@@ -916,7 +919,7 @@
     function scrollVideoBox(direction) {
       const box = videoGalleryContainer.querySelector('.video-box');
       if (box) {
-        const boxWidth = box.offsetWidth + 20; // gap adjustment (20px gap)
+        const boxWidth = box.offsetWidth + 20; // gap adjustment
         videoGalleryContainer.scrollBy({
           left: direction * boxWidth,
           behavior: 'smooth'
@@ -925,7 +928,7 @@
     }
     videoArrowLeft.addEventListener('click', () => scrollVideoBox(-1));
     videoArrowRight.addEventListener('click', () => scrollVideoBox(1));
-    // Video Gallery scroll progress
+    // Update Video Gallery Scroll Slider
     const videoScrollProgress = document.getElementById('video-scroll-progress');
     videoGalleryContainer.addEventListener('scroll', () => {
       const scrollLeft = videoGalleryContainer.scrollLeft;
