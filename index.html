@@ -2,20 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Complete Landing Page – Muted Palette</title>
+  <title>Complete Landing Page – Updated</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google Fonts -->
+  <!-- Google Fonts – ensure these load properly -->
   <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Dancing+Script&family=Quattrocento+Sans&display=swap" rel="stylesheet">
   <style>
     /* ------------------------------
-       Muted Color Palette:
-       Adjusted from your original: 
-         #e7decd → #d8d2c0,
-         #efe8db → #e2dccf,
-         #f4efe6 → #e9e3da,
-         #faf7f0 → #f5f2eb,
-         #fbfaf8 → #f8f6f2
+       Muted Color Palette
     ------------------------------ */
     :root {
       --color-1: #d8d2c0;
@@ -59,6 +53,7 @@
     .logo {
       font-family: 'Monomakh', sans-serif;
       font-size: 18px;
+      color: #FFF; /* ensure logo is white */
     }
     .nav-menu {
       display: flex;
@@ -123,7 +118,6 @@
       width: 100%;
       height: 70vh;
       overflow: hidden;
-      /* No extra gap at top */
     }
     .video-background {
       position: absolute;
@@ -199,7 +193,7 @@
     .img-wrapper-1by1 {
       position: relative;
       width: 100%;
-      padding-bottom: 100%; /* 1:1 ratio */
+      padding-bottom: 100%;
       border-radius: 12px;
       overflow: hidden;
     }
@@ -247,8 +241,7 @@
       text-align: center;
       position: relative;
     }
-    /* Remove extra heading text above video gallery */
-    /* .video-gallery h2 { font-size: 2rem; margin-bottom: 20px; } */
+    /* No heading text above gallery as requested */
     .video-wrapper {
       position: relative;
       max-width: 1200px;
@@ -263,7 +256,7 @@
       padding: 0 10px;
     }
     .video-container::-webkit-scrollbar { display: none; }
-    /* Use modern aspect-ratio for simplicity */
+    /* Video boxes using aspect-ratio for 1:1 */
     .video-box {
       flex: 0 0 calc(25% - 20px); /* 4 per row on desktop */
       aspect-ratio: 1 / 1;
@@ -283,18 +276,7 @@
       height: 100%;
       object-fit: cover;
     }
-    .video-overlay-text {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      right: 10px;
-      color: #FFF;
-      background: rgba(0,0,0,0.4);
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-size: 0.9rem;
-      pointer-events: none;
-    }
+    /* Responsive: adjust number per row */
     @media (max-width: 992px) {
       .video-box { flex: 0 0 calc(33.33% - 20px); } /* 3 per row */
     }
@@ -371,9 +353,7 @@
       border-radius: 12px;
       padding: 10px;
     }
-    @media (max-width: 640px) {
-      .box-wrapper { display: block; width: 100%; }
-    }
+    @media (max-width: 640px) { .box-wrapper { display: block; width: 100%; } }
     .box-container {
       display: flex;
       flex-wrap: nowrap;
@@ -644,43 +624,36 @@
 
   <!-- NEW VIDEO GALLERY SECTION -->
   <section class="video-gallery">
-    <!-- (No heading text above gallery, as requested) -->
     <div class="video-wrapper">
       <button class="video-scroll-btn video-scroll-left" id="video-scroll-left">&#8592;</button>
       <button class="video-scroll-btn video-scroll-right" id="video-scroll-right">&#8594;</button>
       <div class="video-container" id="video-gallery-container">
-        <!-- Add several video boxes as placeholders -->
+        <!-- Example video boxes without overlay text labels -->
         <div class="video-box">
           <video muted playsinline loop>
             <source src="https://videos.pexels.com/video-files/7444954/7444954-uhd_2560_1440_30fps.mp4" type="video/mp4">
           </video>
-          <div class="video-overlay-text">Video 1</div>
         </div>
         <div class="video-box">
           <video muted playsinline loop>
             <source src="https://videos.pexels.com/video-files/3126484/3126484-hd_1920_1080_30fps.mp4" type="video/mp4">
           </video>
-          <div class="video-overlay-text">Video 2</div>
         </div>
         <div class="video-box">
           <video muted playsinline loop>
             <source src="https://videos.pexels.com/video-files/16283928/16283928-uhd_2560_1440_30fps.mp4" type="video/mp4">
           </video>
-          <div class="video-overlay-text">Video 3</div>
         </div>
         <div class="video-box">
           <video muted playsinline loop>
             <source src="https://videos.pexels.com/video-files/2711145/2711145-uhd_2560_1440_24fps.mp4" type="video/mp4">
           </video>
-          <div class="video-overlay-text">Video 4</div>
         </div>
         <div class="video-box">
           <img src="https://via.placeholder.com/400?text=Placeholder" alt="Placeholder">
-          <div class="video-overlay-text">Video 5</div>
         </div>
         <div class="video-box">
           <img src="https://via.placeholder.com/400?text=Placeholder" alt="Placeholder">
-          <div class="video-overlay-text">Video 6</div>
         </div>
       </div>
     </div>
@@ -929,7 +902,7 @@
     function scrollVideoBox(direction) {
       const box = videoGalleryContainer.querySelector('.video-box');
       if (box) {
-        const boxWidth = box.offsetWidth + 20;
+        const boxWidth = box.offsetWidth + 20; // gap adjustment
         videoGalleryContainer.scrollBy({
           left: direction * boxWidth,
           behavior: 'smooth'
