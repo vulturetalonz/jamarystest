@@ -1,7 +1,808 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8"><!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
+  <title>Landing Page with Video Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Dancing+Script&family=Quattrocento+Sans&display=swap" rel="stylesheet">
+  <style>
+    /* BASIC RESET */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Quattrocento Sans', sans-serif;
+      background-color: #F8F5F0;
+      color: #2E2E2E;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    #navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
+      color: #FFF;
+      padding: 10px 20px;
+      z-index: 10000;
+      transition: top 0.3s ease;
+    }
+    #navbar.hidden { top: -80px; }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-family: 'Monomakh', sans-serif;
+      font-size: 18px;
+    }
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links li { cursor: pointer; }
+    .nav-links li, .inquire-button { color: #FFF; }
+    .inquire-button {
+      background-color: #FFF;
+      color: #FFF;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+    }
+    /* Hide standard menu on mobile */
+    @media (max-width: 768px) {
+      .nav-menu { display: none; }
+      .mobile-menu-icon { display: block; }
+    }
+    .mobile-menu-icon {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    /* Mobile Menu Overlay */
+    #mobile-menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 15000;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+    }
+    #mobile-menu-overlay a {
+      font-size: 1.5rem;
+      color: #FFF;
+      text-decoration: none;
+    }
+    #mobile-menu-overlay .close-btn {
+      position: absolute;
+      top: 20px; right: 20px;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #FFF;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 70vh;
+      overflow: hidden;
+      margin-top: 60px; /* account for fixed navbar */
+    }
+    .video-background {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -2;
+      overflow: hidden;
+    }
+    #hero-video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      -webkit-playsinline: true; playsinline: true;
+      muted: true; autoplay: true; loop: true;
+    }
+    .shadow-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      background: linear-gradient(to top, rgba(0,0,0,0), transparent);
+      z-index: -1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: #FFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 0 5%;
+    }
+    .welcome-text { font-size: 1.5rem; margin-bottom: 5px; text-transform: uppercase; }
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem; margin-bottom: 10px;
+      text-transform: uppercase; font-weight: 400;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    }
+    .flair {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1rem; margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    .hero-content button {
+      background-color: #FFF; color: #2E2E2E;
+      border: none; padding: 10px 20px;
+      border-radius: 4px; cursor: pointer;
+    }
+    .hero-content button:hover { transform: translateY(-3px); }
+
+    /* IMAGE + TEXT SECTION */
+    .image-text-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 50px 5%;
+      text-align: center;
+    }
+    .left-col, .right-col {
+      flex: 1 1 300px; max-width: 500px;
+    }
+    .img-wrapper-1by1 {
+      position: relative;
+      width: 100%; padding-bottom: 100%;
+      border-radius: 12px; overflow: hidden;
+    }
+    .img-wrapper-1by1 img {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 12px;
+    }
+    .overlay-text {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      color: #FFF; font-size: 1.5rem;
+      font-weight: bold; text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+      pointer-events: none;
+    }
+    .right-col { text-align: center; }
+    .right-col h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; margin-bottom: 15px;
+      border-bottom: 2px solid #2E2E2E;
+      display: inline-block; margin: 0 auto;
+      padding-bottom: 5px;
+    }
+    .right-col p {
+      line-height: 1.5; margin-top: 15px;
+      max-width: 500px; margin-left: auto; margin-right: auto;
+    }
+
+    /* NEW VIDEO GALLERY SECTION */
+    .video-gallery {
+      padding: 50px 5%;
+      background: #FFF;
+      text-align: center;
+      position: relative;
+    }
+    .video-gallery h2 { font-size: 2rem; margin-bottom: 20px; }
+    .video-wrapper { position: relative; max-width: 1200px; margin: 0 auto; }
+    .video-container {
+      display: flex; gap: 10px;
+      overflow-x: auto; scroll-behavior: smooth;
+      width: max-content; margin: 0 auto;
+    }
+    .video-container::-webkit-scrollbar { display: none; }
+    .video-box {
+      flex: 0 0 calc(50% - 10px); /* 2 per row on mobile */
+      position: relative; padding-bottom: 100%; /* 1:1 ratio */
+      background: #000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .video-box video {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    @media (min-width: 768px) {
+      .video-box { flex: 0 0 calc(25% - 10px); } /* 4 per row on desktop */
+    }
+    .video-scroll-slider {
+      width: 100%; max-width: 1200px;
+      height: 4px; background-color: #CCC;
+      margin: 10px auto 0; border-radius: 2px;
+      overflow: hidden; display: block;
+    }
+    .video-scroll-progress {
+      width: 0%; height: 100%;
+      background-color: #AAA; transition: width 0.3s ease;
+    }
+    .video-scroll-btn {
+      position: absolute; top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(51,51,51,0.7);
+      color: #FFF; border: none;
+      width: 40px; height: 40px;
+      border-radius: 50%; cursor: pointer;
+      z-index: 2; transition: background-color 0.3s, transform 0.3s;
+    }
+    .video-scroll-btn:hover {
+      background-color: rgba(51,51,51,0.9);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .video-scroll-left { left: 10px; }
+    .video-scroll-right { right: 10px; }
+
+    /* CONTENT & ABOUT US */
+    section { padding: 50px 5%; }
+    section h2 { font-size: 2rem; margin-bottom: 20px; }
+    section p {
+      max-width: 800px; margin: 0 auto; line-height: 1.5;
+    }
+    .about { text-align: center; }
+
+    /* TREATMENTS SECTION */
+    .treatments {
+      background-color: #F6F5F3;
+      position: relative; text-align: center;
+    }
+    .box-wrapper {
+      display: inline-block;
+      margin: 40px auto 0;
+      background-color: #F2F0EC;
+      border: 2px solid #CCC;
+      border-radius: 12px; padding: 10px;
+    }
+    @media (max-width: 640px) {
+      .box-wrapper { display: block; width: 100%; }
+    }
+    .box-container {
+      display: flex; flex-wrap: nowrap; gap: 10px;
+      width: max-content; margin: 0 auto;
+      overflow-x: auto; scroll-behavior: smooth;
+      -ms-overflow-style: none; scrollbar-width: none;
+    }
+    .box-container::-webkit-scrollbar { display: none; }
+    .box {
+      width: 220px;
+      background-color: #FFF; padding: 20px;
+      text-align: center; border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer; position: relative;
+    }
+    .box:hover { transform: translateY(-10px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .box h3 { margin-bottom: 10px; }
+    .hover-text { margin-top: 10px; }
+    .box-button {
+      background-color: #EAE5DD; border: none;
+      color: #2E2E2E; padding: 8px 16px;
+      border-radius: 4px; margin-top: 10px;
+      cursor: pointer;
+    }
+    .box-button:hover { background-color: #d8d2ca; }
+    .scroll-slider {
+      width: 100%; max-width: 620px;
+      height: 4px; background-color: #CCC;
+      margin: 10px auto 0; border-radius: 2px;
+      overflow: hidden; display: none;
+    }
+    @media (max-width: 640px) { .scroll-slider { display: block; } }
+    .scroll-progress {
+      width: 0%; height: 100%;
+      background-color: #AAA; transition: width 0.3s ease;
+    }
+
+    /* FULL-PAGE MODAL FOR TREATMENTS */
+    #treatment-modal {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 9999; display: none;
+      justify-content: center; align-items: center;
+    }
+    #treatment-modal.active { display: flex; }
+    .modal-content {
+      background: #FFF; color: #2E2E2E;
+      border: 2px solid #CCC; border-radius: 12px;
+      padding: 20px; max-width: 600px;
+      width: 90%; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      text-align: center; position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 10px; right: 15px;
+      font-size: 1.5rem; cursor: pointer;
+    }
+    .modal-content h3 {
+      margin-top: 0; font-family: 'Playfair Display', serif;
+      margin-bottom: 10px;
+    }
+    .modal-content p { margin-top: 15px; line-height: 1.6; }
+
+    /* PHOTO GALLERY SECTION */
+    .photo-gallery { background: #F9F9F9; }
+    .photo-wrapper {
+      position: relative; max-width: 900px;
+      margin: 40px auto 0; border-radius: 12px;
+      overflow: hidden;
+    }
+    .photo-container {
+      display: flex; gap: 10px;
+      overflow-x: auto; scroll-behavior: smooth;
+    }
+    .article-card {
+      flex: 0 0 300px;
+      background: #FFF; border-radius: 12px;
+      overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin: 10px; text-align: left;
+      display: flex; flex-direction: column;
+    }
+    .landscape-wrapper {
+      position: relative; width: 100%;
+      padding-bottom: 33.33%; overflow: hidden;
+    }
+    .landscape-wrapper img {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .article-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; margin: 10px;
+      border-bottom: 1px solid #CCC;
+      padding-bottom: 5px;
+    }
+    .byline {
+      display: flex; justify-content: space-between;
+      font-size: 0.8rem; margin: 0 10px;
+    }
+    .article-card p {
+      font-size: 0.8rem; margin: 10px;
+    }
+    .photo-scroll-btn {
+      position: absolute; top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(51,51,51,0.7);
+      color: #FFF; border: none;
+      width: 40px; height: 40px;
+      border-radius: 50%; display: flex;
+      align-items: center; justify-content: center;
+      cursor: pointer; z-index: 2;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .photo-scroll-btn:hover {
+      background-color: rgba(51,51,51,0.9);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .photo-scroll-left { left: 10px; }
+    .photo-scroll-right { right: 10px; }
+    .gallery-scroll-slider { display: none; }
+    .gallery-scroll-progress {
+      width: 0%; height: 100%;
+      background-color: #d0ccc8; transition: width 0.3s;
+    }
+
+    /* FOOTER */
+    .footer {
+      background-color: #EAE5DD;
+      color: #2E2E2E;
+      padding: 20px 5%;
+    }
+    .footer ul {
+      list-style: none;
+      display: flex; justify-content: center;
+      gap: 20px; margin-bottom: 10px;
+    }
+    .footer ul li a {
+      color: #2E2E2E; text-decoration: none;
+      font-weight: bold;
+    }
+    .footer p { margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <nav>
+      <div class="logo">BMS ACADEMY</div>
+      <div class="mobile-menu-icon" id="mobile-menu-icon">&#8942;</div>
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-links">
+          <li>About</li>
+          <li>Building</li>
+          <li>Location</li>
+          <li>Amenities</li>
+          <li>Contact</li>
+        </ul>
+        <a href="#" class="inquire-button">Inquire</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu-overlay">
+    <span class="close-btn" id="mobile-menu-close">&times;</span>
+    <a href="#">About</a>
+    <a href="#">Building</a>
+    <a href="#">Location</a>
+    <a href="#">Amenities</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="video-background">
+      <video id="hero-video" autoplay muted loop playsinline poster="https://via.placeholder.com/1280x720?text=Loading+Video">
+        <source src="https://videos.pexels.com/video-files/7444954/7444954-uhd_2560_1440_30fps.mp4" type="video/mp4">
+        <img src="https://via.placeholder.com/1280x720?text=Video+Unavailable" alt="Video placeholder">
+      </video>
+    </div>
+    <div class="shadow-overlay"></div>
+    <div class="hero-content">
+      <p class="welcome-text">WELCOME TO</p>
+      <h1>BODY MIND SOUL</h1>
+      <p class="flair">welcome to our learning platform, where you will fulfill your life to truly become the best version of you</p>
+      <button id="learn-more-btn">Learn More</button>
+    </div>
+  </section>
+
+  <!-- IMAGE + TEXT SECTION -->
+  <section class="image-text-section">
+    <div class="left-col">
+      <div class="img-wrapper-1by1">
+        <img src="https://images.pexels.com/photos/6997986/pexels-photo-6997986.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Best Investment">
+        <div class="overlay-text">the best investment, is you</div>
+      </div>
+    </div>
+    <div class="right-col">
+      <h3>This is the start of your best life</h3>
+      <p>
+        Our vision is to set light on every aspect of an individual. To understand our needs to get to our higher purpose.
+        To change desires into reality. To truly feel confident in your skin wherever you go, whoever you are.
+        So we can all build stats in personal development and become a loving community where we teach, learn, love and grow.
+      </p>
+    </div>
+  </section>
+
+  <!-- NEW VIDEO GALLERY SECTION -->
+  <section class="video-gallery">
+    <h2>Video Gallery</h2>
+    <div class="video-wrapper">
+      <button class="video-scroll-btn video-scroll-left" id="video-scroll-left">&#8592;</button>
+      <div class="video-container" id="video-container">
+        <!-- Each video box has a 1:1 ratio, faint drop shadow, and smooth transition -->
+        <div class="video-box">
+          <video muted playsinline loop>
+            <source src="https://videos.pexels.com/video-files/2711145/2711145-uhd_2560_1440_24fps.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-box">
+          <video muted playsinline loop>
+            <source src="https://videos.pexels.com/video-files/7444954/7444954-uhd_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-box">
+          <video muted playsinline loop>
+            <source src="https://videos.pexels.com/video-files/16283928/16283928-uhd_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-box">
+          <video muted playsinline loop>
+            <source src="https://videos.pexels.com/video-files/16508221/16508221-uhd_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-box">
+          <video muted playsinline loop>
+            <source src="https://videos.pexels.com/video-files/3126484/3126484-hd_1920_1080_30fps.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <button class="video-scroll-btn video-scroll-right" id="video-scroll-right">&#8594;</button>
+    </div>
+    <div class="video-scroll-slider">
+      <div class="video-scroll-progress" id="video-scroll-progress"></div>
+    </div>
+  </section>
+
+  <!-- CONTENT SECTION -->
+  <section class="content">
+    <h2>Lorem ipsum dolor</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non lorem ut nisi finibus aliquam.
+      Cras consequat libero sed erat ornare, at ultricies erat iaculis. Sed aliquam consectetur ornare.
+      Nulla finibus ipsum at massa bibendum vulputate.
+    </p>
+  </section>
+
+  <!-- ABOUT US SECTION -->
+  <section class="about">
+    <h2>About Us</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sem non tincidunt pulvinar.
+      Vivamus quis posuere orci. Curabitur tempus, justo non consequat blandit, sapien libero ullamcorper est,
+      eget vulputate mauris elit id sapien. Donec ullamcorper convallis nisl quis faucibus. Vivamus hendrerit
+      tortor eu eros blandit, ac consectetur magna faucibus. Pellentesque ac tortor mauris. Integer auctor sem
+      sit amet tristique ultricies. Suspendisse pellentesque lacinia mauris, a commodo ex pulvinar sit amet.
+      Pellentesque bibendum sagittis urna, id volutpat libero laoreet eget. Morbi commodo fringilla gravida.
+      Nunc at nibh dictum, euismod erat a, fermentum elit.
+    </p>
+    <p>
+      Aenean non sapien nec quam suscipit luctus. Suspendisse vel nulla vitae lorem vestibulum pellentesque.
+      Curabitur vitae turpis in tortor gravida scelerisque eget a leo. Etiam interdum ligula a placerat convallis.
+      Pellentesque ac ligula quam. Fusce ultrices nisi ex, quis ultrices arcu aliquet quis. Praesent bibendum
+      sem id congue fringilla.
+    </p>
+  </section>
+
+  <!-- TREATMENTS SECTION -->
+  <section class="treatments">
+    <h2>Lorem ipsum treatments</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum tellus vel orci lacinia,
+      eget dictum orci commodo. Vivamus vehicula imperdiet quam, in malesuada felis lobortis quis.
+    </p>
+    <div class="box-wrapper">
+      <div class="box-container" id="box-container">
+        <div class="box" data-detail="AUDIO GUIDED BREATH-WORK &amp; ICE BATH">
+          <h3>AUDIO GUIDED BREATH-WORK &amp; ICE BATH</h3>
+          <p class="hover-text">Experience muscle recovery and mental strengthening.</p>
+          <button class="box-button">Learn More</button>
+        </div>
+        <div class="box" data-detail="IV-INFUSION">
+          <h3>IV-INFUSION</h3>
+          <p class="hover-text">Advanced IV therapies to optimize your body.</p>
+          <button class="box-button">Learn More</button>
+        </div>
+        <div class="box" data-detail="SENSORY DEPRIVATION FLOAT">
+          <h3>SENSORY DEPRIVATION FLOAT</h3>
+          <p class="hover-text">Deep relaxation in a minimal-stimulus environment.</p>
+          <button class="box-button">Learn More</button>
+        </div>
+      </div>
+      <div class="scroll-slider">
+        <div class="scroll-progress" id="scroll-progress"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL-PAGE MODAL FOR TREATMENTS -->
+  <div id="treatment-modal">
+    <div class="modal-content">
+      <span class="modal-close" id="modal-close">&times;</span>
+      <h3 id="modal-title"></h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula lacinia turpis,
+        in pulvinar nunc sagittis in. Quisque venenatis sem a nisl molestie, vitae pulvinar nibh vehicula.
+      </p>
+      <p>
+        Etiam vulputate sem enim, a dignissim lorem aliquet at. Duis sagittis ullamcorper augue,
+        sit amet faucibus nisi faucibus eu. Suspendisse potenti. Sed at turpis id tortor imperdiet dictum.
+      </p>
+    </div>
+  </div>
+
+  <!-- PHOTO GALLERY SECTION -->
+  <section class="photo-gallery">
+    <h2>Our Latest Highlights</h2>
+    <p>Swipe or click the arrows to browse the articles.</p>
+    <div class="photo-wrapper">
+      <button class="photo-scroll-btn photo-scroll-left" id="photo-scroll-left">&#8592;</button>
+      <div class="photo-container" id="photo-container">
+        <article class="article-card">
+          <div class="landscape-wrapper">
+            <img src="https://picsum.photos/600/200?random=4" alt="Article 1">
+          </div>
+          <h3>Article Title 1</h3>
+          <div class="byline">
+            <span>by John Doe</span>
+            <span>$10</span>
+          </div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod nisl nec consectetur.</p>
+        </article>
+        <article class="article-card">
+          <div class="landscape-wrapper">
+            <img src="https://picsum.photos/600/200?random=5" alt="Article 2">
+          </div>
+          <h3>Article Title 2</h3>
+          <div class="byline">
+            <span>by Jane Smith</span>
+            <span>$20</span>
+          </div>
+          <p>Praesent in libero vel turpis pellentesque egestas sit amet vel nunc. Donec rutrum.</p>
+        </article>
+        <article class="article-card">
+          <div class="landscape-wrapper">
+            <img src="https://picsum.photos/600/200?random=6" alt="Article 3">
+          </div>
+          <h3>Article Title 3</h3>
+          <div class="byline">
+            <span>by Alex Ray</span>
+            <span>$15</span>
+          </div>
+          <p>Donec aliquet, tortor sed accumsan bibendum, erat ligula aliquet magna, quis rutrum lorem.</p>
+        </article>
+        <article class="article-card">
+          <div class="landscape-wrapper">
+            <img src="https://picsum.photos/600/200?random=7" alt="Article 4">
+          </div>
+          <h3>Article Title 4</h3>
+          <div class="byline">
+            <span>by Sam Lee</span>
+            <span>$12</span>
+          </div>
+          <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
+        </article>
+        <article class="article-card">
+          <div class="landscape-wrapper">
+            <img src="https://picsum.photos/600/200?random=8" alt="Article 5">
+          </div>
+          <h3>Article Title 5</h3>
+          <div class="byline">
+            <span>by Mia Wong</span>
+            <span>$18</span>
+          </div>
+          <p>Nullam quis risus eget urna mollis ornare vel eu leo. Nulla vitae elit libero.</p>
+        </article>
+      </div>
+      <button class="photo-scroll-btn photo-scroll-right" id="photo-scroll-right">&#8594;</button>
+      <div class="gallery-scroll-slider">
+        <div class="gallery-scroll-progress" id="gallery-scroll-progress"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <ul>
+      <li><a href="#">Cookies</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Support</a></li>
+    </ul>
+    <p>&copy; 2025 Your Company. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Navbar hide/reveal on scroll
+    let prevScrollPos = window.pageYOffset;
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      const currentScrollPos = window.pageYOffset;
+      if (currentScrollPos > prevScrollPos) {
+        navbar.classList.add('hidden');
+      } else {
+        navbar.classList.remove('hidden');
+      }
+      prevScrollPos = currentScrollPos;
+    });
+
+    // Mobile Menu Overlay
+    const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    mobileMenuIcon.addEventListener('click', () => {
+      mobileMenuOverlay.style.display = 'flex';
+    });
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    if (mobileMenuClose) {
+      mobileMenuClose.addEventListener('click', () => {
+        mobileMenuOverlay.style.display = 'none';
+      });
+    }
+    document.querySelectorAll('#mobile-menu-overlay a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuOverlay.style.display = 'none';
+      });
+    });
+
+    // "Learn More" button from hero -> smooth scroll to image-text section
+    document.getElementById('learn-more-btn').addEventListener('click', () => {
+      document.querySelector('.image-text-section').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Treatments scroll progress
+    const boxContainer = document.getElementById('box-container');
+    const scrollProgress = document.getElementById('scroll-progress');
+    boxContainer.addEventListener('scroll', () => {
+      const scrollLeft = boxContainer.scrollLeft;
+      const maxScroll = boxContainer.scrollWidth - boxContainer.clientWidth;
+      const progress = maxScroll ? scrollLeft / maxScroll : 0;
+      scrollProgress.style.width = (progress * 100) + '%';
+    });
+
+    // Full-Page Modal for Treatments
+    const treatmentModal = document.getElementById('treatment-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalClose = document.getElementById('modal-close');
+    let currentActiveDetail = null;
+    document.querySelectorAll('.box').forEach(box => {
+      const button = box.querySelector('.box-button');
+      if (button) {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const detail = box.getAttribute('data-detail');
+          if (treatmentModal.classList.contains('active') && currentActiveDetail === detail) {
+            treatmentModal.classList.remove('active');
+            currentActiveDetail = null;
+          } else {
+            modalTitle.innerHTML = detail;
+            treatmentModal.classList.add('active');
+            currentActiveDetail = detail;
+          }
+        });
+      }
+    });
+    modalClose.addEventListener('click', () => {
+      treatmentModal.classList.remove('active');
+      currentActiveDetail = null;
+    });
+
+    // Video Gallery Arrow Scrolling
+    const videoContainer = document.getElementById('video-container');
+    const videoScrollLeft = document.getElementById('video-scroll-left');
+    const videoScrollRight = document.getElementById('video-scroll-right');
+    function scrollVideoBox(direction) {
+      const videoBox = videoContainer.querySelector('.video-box');
+      if (videoBox) {
+        const boxWidth = videoBox.offsetWidth + 10; // include gap
+        videoContainer.scrollBy({ left: direction * boxWidth, behavior: 'smooth' });
+      }
+    }
+    videoScrollLeft.addEventListener('click', () => scrollVideoBox(-1));
+    videoScrollRight.addEventListener('click', () => scrollVideoBox(1));
+    
+    // Update Video Gallery Scroll Slider
+    const videoScrollProgress = document.getElementById('video-scroll-progress');
+    videoContainer.addEventListener('scroll', () => {
+      const scrollLeft = videoContainer.scrollLeft;
+      const maxScroll = videoContainer.scrollWidth - videoContainer.clientWidth;
+      const progress = maxScroll ? scrollLeft / maxScroll : 0;
+      videoScrollProgress.style.width = (progress * 100) + '%';
+    });
+
+    // Photo Gallery Arrow Scrolling
+    const photoContainer = document.getElementById('photo-container');
+    document.getElementById('photo-scroll-left').addEventListener('click', () => {
+      photoContainer.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+    document.getElementById('photo-scroll-right').addEventListener('click', () => {
+      photoContainer.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+    const galleryScrollSlider = document.getElementById('gallery-scroll-progress');
+    photoContainer.addEventListener('scroll', () => {
+      const scrollLeft = photoContainer.scrollLeft;
+      const maxScroll = photoContainer.scrollWidth - photoContainer.clientWidth;
+      const progress = maxScroll ? scrollLeft / maxScroll : 0;
+      galleryScrollSlider.style.width = (progress * 100) + '%';
+    });
+  </script>
+</body>
+</html>
+
   <title>Landing Page with Video Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Google Fonts -->
