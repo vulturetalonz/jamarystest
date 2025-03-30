@@ -2,22 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Complete Landing Page – Revised Palette & Video Gallery</title>
+  <title>Complete Landing Page – Muted Palette</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Dancing+Script&family=Quattrocento+Sans&display=swap" rel="stylesheet">
   <style>
     /* ------------------------------
-       Color Palette:
-       #e7decd, #efe8db, #f4efe6, #faf7f0, #fbfaf8
+       Muted Color Palette:
+       Adjusted from your original: 
+         #e7decd → #d8d2c0,
+         #efe8db → #e2dccf,
+         #f4efe6 → #e9e3da,
+         #faf7f0 → #f5f2eb,
+         #fbfaf8 → #f8f6f2
     ------------------------------ */
     :root {
-      --color-1: #e7decd;
-      --color-2: #efe8db;
-      --color-3: #f4efe6;
-      --color-4: #faf7f0;
-      --color-5: #fbfaf8;
+      --color-1: #d8d2c0;
+      --color-2: #e2dccf;
+      --color-3: #e9e3da;
+      --color-4: #f5f2eb;
+      --color-5: #f8f6f2;
     }
 
     /* ------------------------------
@@ -33,13 +38,13 @@
     }
     
     /* ------------------------------
-       NAVBAR
+       NAVBAR (Black Gradient)
     ------------------------------ */
     #navbar {
       position: fixed;
       top: 0;
       width: 100%;
-      background: var(--color-3);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
       padding: 10px 20px;
       z-index: 10000;
       transition: top 0.3s ease;
@@ -74,7 +79,6 @@
       text-decoration: none;
       color: #FFF;
     }
-    /* Mobile: hide standard menu, show mobile icon */
     @media (max-width: 768px) {
       .nav-menu { display: none; }
       .mobile-menu-icon { display: block; }
@@ -119,7 +123,7 @@
       width: 100%;
       height: 70vh;
       overflow: hidden;
-      /* Remove extra margin so it aligns flush to top */
+      /* No extra gap at top */
     }
     .video-background {
       position: absolute;
@@ -243,7 +247,8 @@
       text-align: center;
       position: relative;
     }
-    .video-gallery h2 { font-size: 2rem; margin-bottom: 20px; }
+    /* Remove extra heading text above video gallery */
+    /* .video-gallery h2 { font-size: 2rem; margin-bottom: 20px; } */
     .video-wrapper {
       position: relative;
       max-width: 1200px;
@@ -258,7 +263,7 @@
       padding: 0 10px;
     }
     .video-container::-webkit-scrollbar { display: none; }
-    /* Using modern aspect-ratio for a 1:1 box */
+    /* Use modern aspect-ratio for simplicity */
     .video-box {
       flex: 0 0 calc(25% - 20px); /* 4 per row on desktop */
       aspect-ratio: 1 / 1;
@@ -290,7 +295,6 @@
       font-size: 0.9rem;
       pointer-events: none;
     }
-    /* Responsive adjustments */
     @media (max-width: 992px) {
       .video-box { flex: 0 0 calc(33.33% - 20px); } /* 3 per row */
     }
@@ -330,6 +334,7 @@
       margin: 10px auto 0;
       border-radius: 2px;
       overflow: hidden;
+      position: relative;
     }
     .video-scroll-progress {
       width: 0%;
@@ -639,38 +644,43 @@
 
   <!-- NEW VIDEO GALLERY SECTION -->
   <section class="video-gallery">
-    <h2>Video Gallery</h2>
+    <!-- (No heading text above gallery, as requested) -->
     <div class="video-wrapper">
       <button class="video-scroll-btn video-scroll-left" id="video-scroll-left">&#8592;</button>
       <button class="video-scroll-btn video-scroll-right" id="video-scroll-right">&#8594;</button>
       <div class="video-container" id="video-gallery-container">
+        <!-- Add several video boxes as placeholders -->
         <div class="video-box">
           <video muted playsinline loop>
             <source src="https://videos.pexels.com/video-files/7444954/7444954-uhd_2560_1440_30fps.mp4" type="video/mp4">
           </video>
-          <div class="video-overlay-text">Cool Video #1</div>
+          <div class="video-overlay-text">Video 1</div>
         </div>
         <div class="video-box">
           <video muted playsinline loop>
             <source src="https://videos.pexels.com/video-files/3126484/3126484-hd_1920_1080_30fps.mp4" type="video/mp4">
           </video>
-          <div class="video-overlay-text">Experience the Skin</div>
+          <div class="video-overlay-text">Video 2</div>
         </div>
         <div class="video-box">
           <video muted playsinline loop>
             <source src="https://videos.pexels.com/video-files/16283928/16283928-uhd_2560_1440_30fps.mp4" type="video/mp4">
           </video>
-          <div class="video-overlay-text">Renessence Therapy</div>
+          <div class="video-overlay-text">Video 3</div>
         </div>
         <div class="video-box">
           <video muted playsinline loop>
             <source src="https://videos.pexels.com/video-files/2711145/2711145-uhd_2560_1440_24fps.mp4" type="video/mp4">
           </video>
-          <div class="video-overlay-text">Session Tips</div>
+          <div class="video-overlay-text">Video 4</div>
         </div>
         <div class="video-box">
-          <img src="https://via.placeholder.com/400?text=Static+Image" alt="Placeholder">
-          <div class="video-overlay-text">Placeholder</div>
+          <img src="https://via.placeholder.com/400?text=Placeholder" alt="Placeholder">
+          <div class="video-overlay-text">Video 5</div>
+        </div>
+        <div class="video-box">
+          <img src="https://via.placeholder.com/400?text=Placeholder" alt="Placeholder">
+          <div class="video-overlay-text">Video 6</div>
         </div>
       </div>
     </div>
@@ -919,7 +929,7 @@
     function scrollVideoBox(direction) {
       const box = videoGalleryContainer.querySelector('.video-box');
       if (box) {
-        const boxWidth = box.offsetWidth + 20; // gap adjustment
+        const boxWidth = box.offsetWidth + 20;
         videoGalleryContainer.scrollBy({
           left: direction * boxWidth,
           behavior: 'smooth'
@@ -928,7 +938,6 @@
     }
     videoArrowLeft.addEventListener('click', () => scrollVideoBox(-1));
     videoArrowRight.addEventListener('click', () => scrollVideoBox(1));
-    // Update Video Gallery Scroll Slider
     const videoScrollProgress = document.getElementById('video-scroll-progress');
     videoGalleryContainer.addEventListener('scroll', () => {
       const scrollLeft = videoGalleryContainer.scrollLeft;
