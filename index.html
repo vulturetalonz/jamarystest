@@ -9,7 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Dancing+Script&family=Quattrocento+Sans&display=swap" rel="stylesheet">
   <style>
     /* BASIC RESET */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
     body {
       font-family: 'Quattrocento Sans', sans-serif;
       background-color: #F8F5F0;
@@ -17,7 +19,6 @@
       text-align: center;
       overflow-x: hidden;
     }
-
     /* NAVBAR */
     #navbar {
       position: fixed;
@@ -31,221 +32,157 @@
     }
     #navbar.hidden { top: -80px; }
     nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
     }
     .logo {
       font-family: 'Monomakh', sans-serif;
       font-size: 18px;
     }
     .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 20px;
+      display: flex; align-items: center; gap: 20px;
     }
     .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 20px;
+      list-style: none; display: flex; gap: 20px;
     }
     .nav-links li { cursor: pointer; }
     .nav-links li, .inquire-button { color: #FFF; }
     .inquire-button {
-      background-color: #FFF;
-      color: #FFF;
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 4px;
+      background-color: #FFF; color: #FFF;
+      text-decoration: none; padding: 8px 16px; border-radius: 4px;
     }
-    /* Hide standard menu on mobile */
+    /* Mobile: hide standard menu, show icon */
     @media (max-width: 768px) {
       .nav-menu { display: none; }
       .mobile-menu-icon { display: block; }
     }
     .mobile-menu-icon {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      user-select: none;
+      display: none; font-size: 2rem; cursor: pointer; user-select: none;
     }
     /* Mobile Menu Overlay */
     #mobile-menu-overlay {
       display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.95);
-      z-index: 15000;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 30px;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95); z-index: 15000;
+      flex-direction: column; justify-content: center; align-items: center; gap: 30px;
     }
     #mobile-menu-overlay a {
-      font-size: 1.5rem;
-      color: #FFF;
-      text-decoration: none;
+      font-size: 1.5rem; color: #FFF; text-decoration: none;
     }
     #mobile-menu-overlay .close-btn {
-      position: absolute;
-      top: 20px; right: 20px;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #FFF;
+      position: absolute; top: 20px; right: 20px;
+      font-size: 2rem; cursor: pointer; color: #FFF;
     }
-
     /* HERO SECTION */
     .hero {
-      position: relative;
-      width: 100%;
-      height: 70vh;
-      overflow: hidden;
-      margin-top: 60px; /* account for fixed navbar */
+      position: relative; width: 100%; height: 70vh;
+      overflow: hidden; margin-top: 60px; /* leave room for fixed navbar */
     }
     .video-background {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -2;
-      overflow: hidden;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -2; overflow: hidden;
     }
     #hero-video {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      -webkit-playsinline: true; playsinline: true;
-      muted: true; autoplay: true; loop: true;
+      width: 100%; height: 100%; object-fit: cover;
+      -webkit-playsinline: true; playsinline: true; muted: true; autoplay: true; loop: true;
     }
     .shadow-overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none;
       background: linear-gradient(to top, rgba(0,0,0,0), transparent);
       z-index: -1;
     }
     .hero-content {
-      position: relative;
-      z-index: 1;
-      color: #FFF;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      padding: 0 5%;
+      position: relative; z-index: 1;
+      color: #FFF; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      height: 100%; padding: 0 5%;
     }
     .welcome-text { font-size: 1.5rem; margin-bottom: 5px; text-transform: uppercase; }
     .hero-content h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem; margin-bottom: 10px;
-      text-transform: uppercase; font-weight: 400;
+      font-family: 'Playfair Display', serif; font-size: 4rem;
+      margin-bottom: 10px; text-transform: uppercase; font-weight: 400;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
     }
     .flair {
-      font-family: 'Dancing Script', cursive;
-      font-size: 1rem; margin-bottom: 20px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      font-family: 'Dancing Script', cursive; font-size: 1rem;
+      margin-bottom: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
     .hero-content button {
       background-color: #FFF; color: #2E2E2E;
-      border: none; padding: 10px 20px;
-      border-radius: 4px; cursor: pointer;
+      border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;
     }
     .hero-content button:hover { transform: translateY(-3px); }
-
     /* IMAGE + TEXT SECTION */
     .image-text-section {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
-      padding: 50px 5%;
-      text-align: center;
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: center; gap: 40px; padding: 50px 5%; text-align: center;
     }
-    .left-col, .right-col {
-      flex: 1 1 300px; max-width: 500px;
-    }
+    .left-col, .right-col { flex: 1 1 300px; max-width: 500px; }
     .img-wrapper-1by1 {
-      position: relative;
-      width: 100%; padding-bottom: 100%;
-      border-radius: 12px; overflow: hidden;
+      position: relative; width: 100%; padding-bottom: 100%; border-radius: 12px; overflow: hidden;
     }
     .img-wrapper-1by1 img {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       object-fit: cover; border-radius: 12px;
     }
     .overlay-text {
       position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      color: #FFF; font-size: 1.5rem;
-      font-weight: bold; text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-      pointer-events: none;
+      transform: translate(-50%, -50%); color: #FFF;
+      font-size: 1.5rem; font-weight: bold;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7); pointer-events: none;
     }
     .right-col { text-align: center; }
     .right-col h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem; margin-bottom: 15px;
-      border-bottom: 2px solid #2E2E2E;
-      display: inline-block; margin: 0 auto;
-      padding-bottom: 5px;
+      font-family: 'Playfair Display', serif; font-size: 1.8rem;
+      margin-bottom: 15px; border-bottom: 2px solid #2E2E2E;
+      display: inline-block; margin: 0 auto; padding-bottom: 5px;
     }
     .right-col p {
-      line-height: 1.5; margin-top: 15px;
-      max-width: 500px; margin-left: auto; margin-right: auto;
+      line-height: 1.5; margin-top: 15px; max-width: 500px;
+      margin-left: auto; margin-right: auto;
     }
-
     /* NEW VIDEO GALLERY SECTION */
     .video-gallery {
-      padding: 50px 5%;
-      background: #FFF;
-      text-align: center;
-      position: relative;
+      padding: 50px 5%; background: #FFF; text-align: center; position: relative;
     }
     .video-gallery h2 { font-size: 2rem; margin-bottom: 20px; }
-    .video-wrapper { position: relative; max-width: 1200px; margin: 0 auto; }
+    .video-wrapper {
+      position: relative; max-width: 1200px; margin: 0 auto;
+    }
     .video-container {
-      display: flex; gap: 10px;
-      overflow-x: auto; scroll-behavior: smooth;
+      display: flex; gap: 10px; overflow-x: auto; scroll-behavior: smooth;
       width: max-content; margin: 0 auto;
     }
     .video-container::-webkit-scrollbar { display: none; }
     .video-box {
-      flex: 0 0 calc(50% - 10px); /* 2 per row on mobile */
+      flex: 0 0 calc(50% - 10px); /* mobile: 2 per row */
       position: relative; padding-bottom: 100%; /* 1:1 ratio */
       background: #000;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+    @media (min-width: 768px) {
+      .video-box { flex: 0 0 calc(25% - 10px); } /* desktop: 4 per row */
+    }
     .video-box video {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       object-fit: cover;
     }
-    @media (min-width: 768px) {
-      .video-box { flex: 0 0 calc(25% - 10px); } /* 4 per row on desktop */
-    }
     .video-scroll-slider {
-      width: 100%; max-width: 1200px;
-      height: 4px; background-color: #CCC;
-      margin: 10px auto 0; border-radius: 2px;
+      width: 100%; max-width: 1200px; height: 4px;
+      background-color: #CCC; margin: 10px auto 0; border-radius: 2px;
       overflow: hidden; display: block;
     }
     .video-scroll-progress {
-      width: 0%; height: 100%;
-      background-color: #AAA; transition: width 0.3s ease;
+      width: 0%; height: 100%; background-color: #AAA;
+      transition: width 0.3s ease;
     }
     .video-scroll-btn {
       position: absolute; top: 50%;
       transform: translateY(-50%);
-      background-color: rgba(51,51,51,0.7);
-      color: #FFF; border: none;
-      width: 40px; height: 40px;
-      border-radius: 50%; cursor: pointer;
-      z-index: 2; transition: background-color 0.3s, transform 0.3s;
+      background-color: rgba(51,51,51,0.7); color: #FFF;
+      border: none; width: 40px; height: 40px; border-radius: 50%;
+      cursor: pointer; z-index: 2; transition: background-color 0.3s, transform 0.3s;
     }
     .video-scroll-btn:hover {
       background-color: rgba(51,51,51,0.9);
@@ -253,25 +190,18 @@
     }
     .video-scroll-left { left: 10px; }
     .video-scroll-right { right: 10px; }
-
     /* CONTENT & ABOUT US */
     section { padding: 50px 5%; }
     section h2 { font-size: 2rem; margin-bottom: 20px; }
-    section p {
-      max-width: 800px; margin: 0 auto; line-height: 1.5;
-    }
+    section p { max-width: 800px; margin: 0 auto; line-height: 1.5; }
     .about { text-align: center; }
-
     /* TREATMENTS SECTION */
     .treatments {
-      background-color: #F6F5F3;
-      position: relative; text-align: center;
+      background-color: #F6F5F3; position: relative; text-align: center;
     }
     .box-wrapper {
-      display: inline-block;
-      margin: 40px auto 0;
-      background-color: #F2F0EC;
-      border: 2px solid #CCC;
+      display: inline-block; margin: 40px auto 0;
+      background-color: #F2F0EC; border: 2px solid #CCC;
       border-radius: 12px; padding: 10px;
     }
     @media (max-width: 640px) {
@@ -285,8 +215,7 @@
     }
     .box-container::-webkit-scrollbar { display: none; }
     .box {
-      width: 220px;
-      background-color: #FFF; padding: 20px;
+      width: 220px; background-color: #FFF; padding: 20px;
       text-align: center; border-radius: 12px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer; position: relative;
@@ -295,38 +224,34 @@
     .box h3 { margin-bottom: 10px; }
     .hover-text { margin-top: 10px; }
     .box-button {
-      background-color: #EAE5DD; border: none;
-      color: #2E2E2E; padding: 8px 16px;
-      border-radius: 4px; margin-top: 10px;
+      background-color: #EAE5DD; border: none; color: #2E2E2E;
+      padding: 8px 16px; border-radius: 4px; margin-top: 10px;
       cursor: pointer;
     }
     .box-button:hover { background-color: #d8d2ca; }
     .scroll-slider {
-      width: 100%; max-width: 620px;
-      height: 4px; background-color: #CCC;
-      margin: 10px auto 0; border-radius: 2px;
-      overflow: hidden; display: none;
+      width: 100%; max-width: 620px; height: 4px;
+      background-color: #CCC; margin: 10px auto 0;
+      border-radius: 2px; overflow: hidden; display: none;
     }
     @media (max-width: 640px) { .scroll-slider { display: block; } }
     .scroll-progress {
-      width: 0%; height: 100%;
-      background-color: #AAA; transition: width 0.3s ease;
+      width: 0%; height: 100%; background-color: #AAA;
+      transition: width 0.3s ease;
     }
-
     /* FULL-PAGE MODAL FOR TREATMENTS */
     #treatment-modal {
       position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 9999; display: none;
-      justify-content: center; align-items: center;
+      background: rgba(0,0,0,0.5); z-index: 9999;
+      display: none; justify-content: center; align-items: center;
     }
     #treatment-modal.active { display: flex; }
     .modal-content {
       background: #FFF; color: #2E2E2E;
       border: 2px solid #CCC; border-radius: 12px;
-      padding: 20px; max-width: 600px;
-      width: 90%; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      padding: 20px; max-width: 600px; width: 90%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       text-align: center; position: relative;
     }
     .modal-close {
@@ -338,7 +263,6 @@
       margin-bottom: 10px;
     }
     .modal-content p { margin-top: 15px; line-height: 1.6; }
-
     /* PHOTO GALLERY SECTION */
     .photo-gallery { background: #F9F9F9; }
     .photo-wrapper {
@@ -347,12 +271,11 @@
       overflow: hidden;
     }
     .photo-container {
-      display: flex; gap: 10px;
-      overflow-x: auto; scroll-behavior: smooth;
+      display: flex; gap: 10px; overflow-x: auto;
+      scroll-behavior: smooth;
     }
     .article-card {
-      flex: 0 0 300px;
-      background: #FFF; border-radius: 12px;
+      flex: 0 0 300px; background: #FFF; border-radius: 12px;
       overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       margin: 10px; text-align: left;
       display: flex; flex-direction: column;
@@ -363,13 +286,11 @@
     }
     .landscape-wrapper img {
       position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
+      width: 100%; height: 100%; object-fit: cover;
     }
     .article-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; margin: 10px;
-      border-bottom: 1px solid #CCC;
+      font-family: 'Playfair Display', serif; font-size: 1.2rem;
+      margin: 10px; border-bottom: 1px solid #CCC;
       padding-bottom: 5px;
     }
     .byline {
@@ -382,9 +303,8 @@
     .photo-scroll-btn {
       position: absolute; top: 50%;
       transform: translateY(-50%);
-      background-color: rgba(51,51,51,0.7);
-      color: #FFF; border: none;
-      width: 40px; height: 40px;
+      background-color: rgba(51,51,51,0.7); color: #FFF;
+      border: none; width: 40px; height: 40px;
       border-radius: 50%; display: flex;
       align-items: center; justify-content: center;
       cursor: pointer; z-index: 2;
@@ -401,17 +321,15 @@
       width: 0%; height: 100%;
       background-color: #d0ccc8; transition: width 0.3s;
     }
-
     /* FOOTER */
     .footer {
-      background-color: #EAE5DD;
-      color: #2E2E2E;
+      background-color: #EAE5DD; color: #2E2E2E;
       padding: 20px 5%;
     }
     .footer ul {
-      list-style: none;
-      display: flex; justify-content: center;
-      gap: 20px; margin-bottom: 10px;
+      list-style: none; display: flex;
+      justify-content: center; gap: 20px;
+      margin-bottom: 10px;
     }
     .footer ul li a {
       color: #2E2E2E; text-decoration: none;
@@ -491,7 +409,7 @@
     <div class="video-wrapper">
       <button class="video-scroll-btn video-scroll-left" id="video-scroll-left">&#8592;</button>
       <div class="video-container" id="video-container">
-        <!-- Each video box has a 1:1 ratio, faint drop shadow, and smooth transition -->
+        <!-- Example video boxes – use your own video URLs as needed -->
         <div class="video-box">
           <video muted playsinline loop>
             <source src="https://videos.pexels.com/video-files/2711145/2711145-uhd_2560_1440_24fps.mp4" type="video/mp4">
@@ -716,7 +634,7 @@
       });
     });
 
-    // "Learn More" button from hero -> smooth scroll to image-text section
+    // "Learn More" button scroll
     document.getElementById('learn-more-btn').addEventListener('click', () => {
       document.querySelector('.image-text-section').scrollIntoView({ behavior: 'smooth' });
     });
@@ -765,7 +683,7 @@
     function scrollVideoBox(direction) {
       const videoBox = videoContainer.querySelector('.video-box');
       if (videoBox) {
-        const boxWidth = videoBox.offsetWidth + 10; // include gap
+        const boxWidth = videoBox.offsetWidth + 10; // gap adjustment
         videoContainer.scrollBy({ left: direction * boxWidth, behavior: 'smooth' });
       }
     }
