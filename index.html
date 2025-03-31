@@ -34,18 +34,19 @@
 
     /* NAVIGATION */
     header {
-      position: absolute; /* overlays video */
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 1000;
       padding: 15px 30px;
-      background: rgba(33, 24, 21, 0.6);
-      box-shadow: 0 4px 8px rgba(33,24,21,0.5);
+      /* Default mobile background */
+      background: #c3bbb7;
+      box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
-    /* Desktop mode: when header has class desktop-navbar, set logo & links to white */
+    /* Desktop mode: when header has class desktop-navbar, logo & links become white */
     header.desktop-navbar .logo,
     header.desktop-navbar nav ul li a {
       color: white;
@@ -61,7 +62,6 @@
       font-family: 'Cormorant', serif;
       font-size: 1.8rem;
       font-weight: 700;
-      /* Default: inherits from header; desktop-navbar will override */
       color: inherit;
     }
     nav ul {
@@ -123,7 +123,7 @@
       width: 100%;
       height: 100vh;
       overflow: hidden;
-      margin-top: 70px; /* account for navbar overlay */
+      margin-top: 70px; /* so video is fully behind navbar */
     }
     .video-slider video {
       width: 100%;
@@ -158,7 +158,7 @@
     /* CORE VALUES SECTION */
     .core-values {
       padding: 50px 20px;
-      background: #f0e9e6; /* light backdrop for core values */
+      background: #f0e9e6;
     }
     .core-values h2 {
       font-family: 'Cormorant', serif;
@@ -167,34 +167,29 @@
       color: #211815;
       margin-bottom: 30px;
     }
+    /* Force core boxes to stay in one row no matter the display */
     .core-values-inner {
       display: flex;
       gap: 20px;
       justify-content: center;
-      flex-wrap: wrap; /* allow wrapping on desktop */
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
-    /* On tablet/mobile, force horizontal scroll (no vertical stacking) */
-    @media (max-width: 1024px) {
-      .core-values-inner {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-      .core-values-inner::-webkit-scrollbar {
-        height: 6px;
-      }
-      .core-values-inner::-webkit-scrollbar-track {
-        background: #ddd7d5;
-        border-radius: 3px;
-      }
-      .core-values-inner::-webkit-scrollbar-thumb {
-        background: #211815;
-        border-radius: 3px;
-        transition: background 0.3s ease;
-      }
+    .core-values-inner::-webkit-scrollbar {
+      height: 6px;
+    }
+    .core-values-inner::-webkit-scrollbar-track {
+      background: #ddd7d5;
+      border-radius: 3px;
+    }
+    .core-values-inner::-webkit-scrollbar-thumb {
+      background: #211815;
+      border-radius: 3px;
+      transition: background 0.3s ease;
     }
     .core-value-box {
-      background: #ebe6e4; /* lighter color for boxes */
+      background: #ebe6e4;
       border-radius: 10px;
       padding: 20px;
       min-width: 300px;
@@ -287,6 +282,79 @@
     .article-card p {
       margin: 0 10px 15px;
       font-size: 1rem;
+    }
+
+    /* QUOTES SLIDER SECTION */
+    .quotes-section {
+      padding: 50px 20px;
+      background: #ddd7d5;
+      text-align: center;
+      position: relative;
+    }
+    .quotes-container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      cursor: pointer;
+      color: #211815;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 0.2rem 0.6rem;
+      border-radius: 50%;
+      z-index: 2;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+    .quote-arrow:hover {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    .left-arrow {
+      left: 0;
+    }
+    .right-arrow {
+      right: 0;
+    }
+    .quote-slide {
+      position: relative;
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .quote-item {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-family: 'Cormorant', serif;
+      font-size: 1.2rem;
+      padding: 0 2rem;
+      color: #211815;
+      transform: translateY(20px);
+    }
+    .quote-item.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (max-width: 480px) {
+      .quote-arrow {
+        font-size: 1.5rem;
+      }
+      .quote-item {
+        font-size: 1rem;
+      }
     }
 
     /* ARTICLE MODAL (Instagram-style) */
@@ -524,6 +592,49 @@
     </div>
   </section>
 
+  <!-- QUOTES SLIDER SECTION -->
+  <section class="quotes-section">
+    <div class="quotes-container">
+      <!-- Left arrow -->
+      <div class="quote-arrow left-arrow" id="quoteArrowLeft">&#10094;</div>
+      <!-- Quotes wrapper -->
+      <div class="quote-slide" id="quoteSlide">
+        <div class="quote-item">
+          <p>"Elevate your mind, empower your soul, and unlock the best version of yourself."</p>
+        </div>
+        <div class="quote-item">
+          <p>"True fulfillment starts when you align your passion with your purpose."</p>
+        </div>
+        <div class="quote-item">
+          <p>"This is your space to grow, explore, and create the life you truly deserve."</p>
+        </div>
+        <div class="quote-item">
+          <p>"Step beyond your limits. Break barriers. Embrace the power of your potential."</p>
+        </div>
+        <div class="quote-item">
+          <p>"Where luxury meets personal growth — your journey begins here."</p>
+        </div>
+        <div class="quote-item">
+          <p>"Your unique energy deserves a place to thrive. Let it shine."</p>
+        </div>
+        <div class="quote-item">
+          <p>"Inspiration is a lifestyle. Welcome to the space where your creativity comes alive."</p>
+        </div>
+        <div class="quote-item">
+          <p>"Happiness isn’t a moment, it’s a journey. Let us guide you to yours."</p>
+        </div>
+        <div class="quote-item">
+          <p>"Balance, beauty, and brilliance—unlock them all with every step you take."</p>
+        </div>
+        <div class="quote-item">
+          <p>"You are the architect of your life. We’re here to help you build it."</p>
+        </div>
+      </div>
+      <!-- Right arrow -->
+      <div class="quote-arrow right-arrow" id="quoteArrowRight">&#10095;</div>
+    </div>
+  </section>
+
   <!-- ARTICLE MODAL (Instagram-style) -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
@@ -597,6 +708,46 @@
     playNextVideo();
     setInterval(playNextVideo, 5000);
 
+    // Quotes Slider
+    const quoteItems = document.querySelectorAll('.quote-item');
+    const arrowLeft = document.getElementById('quoteArrowLeft');
+    const arrowRight = document.getElementById('quoteArrowRight');
+    let currentQuoteIndex = 0;
+    let quoteTimer;
+
+    function showQuote(index) {
+      quoteItems.forEach(item => {
+        item.classList.remove('active');
+      });
+      quoteItems[index].classList.add('active');
+    }
+    function nextQuote() {
+      currentQuoteIndex = (currentQuoteIndex + 1) % quoteItems.length;
+      showQuote(currentQuoteIndex);
+    }
+    function prevQuote() {
+      currentQuoteIndex = (currentQuoteIndex - 1 + quoteItems.length) % quoteItems.length;
+      showQuote(currentQuoteIndex);
+    }
+    function startQuoteTimer() {
+      quoteTimer = setInterval(nextQuote, 8000);
+    }
+    function stopQuoteTimer() {
+      clearInterval(quoteTimer);
+    }
+    arrowLeft.addEventListener('click', () => {
+      stopQuoteTimer();
+      prevQuote();
+      startQuoteTimer();
+    });
+    arrowRight.addEventListener('click', () => {
+      stopQuoteTimer();
+      nextQuote();
+      startQuoteTimer();
+    });
+    showQuote(currentQuoteIndex);
+    startQuoteTimer();
+
     // Article Cards -> Modal
     const articleCards = document.querySelectorAll('.article-card');
     const modalOverlay = document.getElementById('modalOverlay');
@@ -660,7 +811,21 @@
       }
     });
 
-    /* Navbar scroll behavior for desktop: hide drop shadow when scrolling down, show when scrolling up */
+    /* Navbar scroll behavior for desktop:
+       Hide drop shadow when scrolling down; show when scrolling up.
+       Also add desktop-navbar class for white links.
+    */
+    function updateNavbarMode() {
+      const navbar = document.getElementById('navbar');
+      if (window.innerWidth >= 768) {
+        navbar.classList.add('desktop-navbar');
+      } else {
+        navbar.classList.remove('desktop-navbar');
+      }
+    }
+    updateNavbarMode();
+    window.addEventListener('resize', updateNavbarMode);
+
     let lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('navbar');
