@@ -7,10 +7,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     /* GLOBAL RESET & BASE */
     * {
@@ -34,24 +31,24 @@
       max-width: 100%;
       display: block;
     }
-    
+
     /* NAVIGATION */
     header {
-      position: absolute; /* overlay atop video */
+      position: absolute; /* overlays video */
       top: 0;
       left: 0;
       width: 100%;
       z-index: 1000;
       padding: 15px 30px;
       background: rgba(33, 24, 21, 0.6);
-      box-shadow: 0 4px 10px rgba(33, 24, 21, 0.5);
+      box-shadow: 0 4px 8px rgba(33,24,21,0.5);
+      backdrop-filter: blur(10px);
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
-    @media (min-width: 768px) {
-      header:hover {
-        background: rgba(33, 24, 21, 0.8);
-        box-shadow: 0 6px 12px rgba(33, 24, 21, 0.7);
-      }
+    /* Desktop mode: when header has class desktop-navbar, set logo & links to white */
+    header.desktop-navbar .logo,
+    header.desktop-navbar nav ul li a {
+      color: white;
     }
     .nav-container {
       max-width: 1200px;
@@ -64,7 +61,8 @@
       font-family: 'Cormorant', serif;
       font-size: 1.8rem;
       font-weight: 700;
-      color: #211815;
+      /* Default: inherits from header; desktop-navbar will override */
+      color: inherit;
     }
     nav ul {
       display: flex;
@@ -75,7 +73,7 @@
     nav li {
       cursor: pointer;
       font-weight: 600;
-      color: white;
+      color: inherit;
     }
     .hamburger {
       display: none;
@@ -94,7 +92,7 @@
       position: absolute;
       top: 60px;
       right: 30px;
-      background: rgba(33, 24, 21, 0.8);
+      background: #c3bbb7;
       border-radius: 5px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.2);
       padding: 15px;
@@ -118,7 +116,7 @@
         display: flex;
       }
     }
-    
+
     /* TOP VIDEO SLIDER WITH OVERLAY */
     .video-slider {
       position: relative;
@@ -156,48 +154,52 @@
       font-size: 1.2rem;
       max-width: 700px;
     }
-    
+
     /* CORE VALUES SECTION */
     .core-values {
       padding: 50px 20px;
-      background: #211815;
+      background: #f0e9e6; /* light backdrop for core values */
     }
     .core-values h2 {
       font-family: 'Cormorant', serif;
       font-size: 2rem;
       text-align: center;
-      color: #fff;
+      color: #211815;
       margin-bottom: 30px;
     }
     .core-values-inner {
       display: flex;
       gap: 20px;
       justify-content: center;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+      flex-wrap: wrap; /* allow wrapping on desktop */
     }
-    .core-values-inner::-webkit-scrollbar {
-      height: 6px;
-    }
-    .core-values-inner::-webkit-scrollbar-track {
-      background: #ddd7d5;
-      border-radius: 3px;
-    }
-    .core-values-inner::-webkit-scrollbar-thumb {
-      background: #211815;
-      border-radius: 3px;
-      transition: background 0.3s ease;
-    }
-    .core-values-inner:hover::-webkit-scrollbar-thumb {
-      background: #211815;
+    /* On tablet/mobile, force horizontal scroll (no vertical stacking) */
+    @media (max-width: 1024px) {
+      .core-values-inner {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .core-values-inner::-webkit-scrollbar {
+        height: 6px;
+      }
+      .core-values-inner::-webkit-scrollbar-track {
+        background: #ddd7d5;
+        border-radius: 3px;
+      }
+      .core-values-inner::-webkit-scrollbar-thumb {
+        background: #211815;
+        border-radius: 3px;
+        transition: background 0.3s ease;
+      }
     }
     .core-value-box {
-      background: #ebe6e4;
+      background: #ebe6e4; /* lighter color for boxes */
       border-radius: 10px;
       padding: 20px;
       min-width: 300px;
       text-align: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       flex-shrink: 0;
       cursor: pointer;
       color: #211815;
@@ -205,7 +207,7 @@
     }
     .core-value-box:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
     .core-value-box h3 {
       font-family: 'Cormorant', serif;
@@ -238,7 +240,7 @@
     .dropdown-content.open {
       max-height: 500px;
     }
-    
+
     /* ARTICLES SECTION */
     .articles-section {
       padding: 50px 20px;
@@ -261,7 +263,7 @@
       width: 300px;
       background: #ebe6e4;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       overflow: hidden;
       cursor: pointer;
       color: #211815;
@@ -270,7 +272,7 @@
     }
     .article-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
     .article-card img {
       width: 100%;
@@ -286,7 +288,7 @@
       margin: 0 10px 15px;
       font-size: 1rem;
     }
-    
+
     /* ARTICLE MODAL (Instagram-style) */
     .modal-overlay {
       position: fixed;
@@ -356,7 +358,7 @@
       cursor: pointer;
       color: #211815;
     }
-    
+
     /* FOOTER */
     footer {
       padding: 40px 20px;
@@ -371,7 +373,7 @@
     footer p {
       margin: 10px 0;
     }
-    
+
     /* FLY-IN ANIMATION */
     .fly-in {
       opacity: 0;
@@ -382,7 +384,7 @@
       opacity: 1;
       transform: translateY(0);
     }
-    
+
     /* RESPONSIVE STYLES */
     @media (max-width: 768px) {
       header {
@@ -401,8 +403,7 @@
       .modal-content {
         flex-direction: column;
       }
-      .modal-img,
-      .modal-text {
+      .modal-img, .modal-text {
         flex: 1 1 100%;
       }
     }
@@ -410,7 +411,7 @@
 </head>
 <body>
   <!-- HEADER / NAVIGATION -->
-  <header>
+  <header id="navbar">
     <div class="nav-container">
       <div class="logo">BMS</div>
       <nav>
@@ -512,7 +513,7 @@
         <div class="price">$15</div>
         <p>Donec augue, tortor sodales accumsan.</p>
       </div>
-      <!-- Article Card 4 (New Placeholder) -->
+      <!-- Article Card 4 (Placeholder) -->
       <div class="article-card" data-article="4">
         <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Article 4">
         <h3>Placeholder Article</h3>
@@ -549,7 +550,7 @@
 
   <!-- JAVASCRIPT -->
   <script>
-    // Burger Menu Toggle with smooth transition
+    // Burger Menu Toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     hamburger.addEventListener('click', () => {
@@ -657,6 +658,20 @@
       if (e.target === modalOverlay) {
         modalOverlay.classList.remove('show');
       }
+    });
+
+    /* Navbar scroll behavior for desktop: hide drop shadow when scrolling down, show when scrolling up */
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.innerWidth >= 768) {
+        if (window.scrollY > lastScrollY) {
+          navbar.style.boxShadow = 'none';
+        } else {
+          navbar.style.boxShadow = '0 6px 12px rgba(33, 24, 21, 0.7)';
+        }
+      }
+      lastScrollY = window.scrollY;
     });
   </script>
 </body>
