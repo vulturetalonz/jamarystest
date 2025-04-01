@@ -40,13 +40,11 @@
       width: 100%;
       z-index: 1000;
       padding: 15px 30px;
-      /* Default mobile background */
-      background: #c3bbb7;
+      background: #c3bbb7; /* default for mobile */
       box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
-    /* Desktop mode: transparent header with white text */
     @media (min-width: 768px) {
       header.desktop-navbar {
         background: transparent;
@@ -95,7 +93,6 @@
       margin: 4px 0;
       border-radius: 2px;
     }
-    /* Mobile Menu */
     .mobile-menu {
       position: absolute;
       top: 60px;
@@ -151,7 +148,6 @@
       text-align: center;
       padding: 1rem;
     }
-    /* Landing Page Header Style */
     .sub-header {
       font-family: 'Poppins', sans-serif;
       font-size: 1rem;
@@ -187,7 +183,6 @@
       color: #211815;
       margin-bottom: 30px;
     }
-    /* Core boxes adjust to available width */
     .core-values-inner {
       display: flex;
       gap: 20px;
@@ -257,11 +252,13 @@
       color: #211815;
     }
     .articles-slider {
-      display: grid;
+      display: flex;
       gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
     .article-card {
+      min-width: 300px;
       background: #ebe6e4;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -269,6 +266,7 @@
       cursor: pointer;
       color: #211815;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex-shrink: 0;
     }
     .article-card:hover {
       transform: translateY(-5px);
@@ -359,6 +357,76 @@
       }
     }
 
+    /* ARTICLE MODAL (Instagram-style) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.show {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-content {
+      background: #fff;
+      display: flex;
+      flex-direction: row;
+      max-width: 800px;
+      width: 90%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .modal-img {
+      flex: 1 1 50%;
+      min-width: 300px;
+      background: #000;
+    }
+    .modal-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .modal-text {
+      flex: 1 1 50%;
+      padding: 2rem;
+      position: relative;
+      color: #211815;
+    }
+    .modal-text h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .modal-text .author,
+    .modal-text .price {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .modal-text p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #211815;
+    }
+
     /* FOOTER */
     footer {
       padding: 40px 20px;
@@ -390,6 +458,8 @@
       .video-overlay .main-header { font-size: 2.2rem; }
       .video-overlay .description { font-size: 1rem; padding: 0 10px; }
       .core-values-inner { flex-wrap: nowrap; }
+      .modal-content { flex-direction: column; }
+      .modal-img, .modal-text { flex: 1 1 100%; }
     }
   </style>
 </head>
@@ -446,19 +516,19 @@
       <div class="core-value-box fly-in" id="body">
         <h3>BODY</h3>
         <p>Achieve the physique you desire and embrace a healthier lifestyle.</p>
-        <a class="learn-more-btn" href="body.html">Learn More</a>
+        <button class="learn-more-btn">Learn More</button>
       </div>
       <!-- MIND -->
       <div class="core-value-box fly-in" id="mind">
         <h3>MIND</h3>
         <p>Cultivate clarity, focus, and emotional well-being to unlock your potential.</p>
-        <a class="learn-more-btn" href="mind.html">Learn More</a>
+        <button class="learn-more-btn">Learn More</button>
       </div>
       <!-- SOUL -->
       <div class="core-value-box fly-in" id="soul">
         <h3>SOUL</h3>
         <p>Nurture your spirit and find deeper fulfillment in everyday life.</p>
-        <a class="learn-more-btn" href="soul.html">Learn More</a>
+        <button class="learn-more-btn">Learn More</button>
       </div>
     </div>
   </section>
@@ -561,7 +631,7 @@
     </div>
   </section>
 
-  <!-- ARTICLE MODAL (Unused for redirecting articles) -->
+  <!-- ARTICLE MODAL (Instagram-style) -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
       <div class="modal-img">
@@ -594,13 +664,11 @@
       mobileMenu.classList.toggle('show');
     });
 
-    // (Optional) Learn More Dropdowns – if still needed
+    // Optional: if you still want the dropdown for Learn More
     const learnMoreButtons = document.querySelectorAll('.learn-more-btn');
     learnMoreButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        const targetId = btn.getAttribute('data-target');
-        const dropdown = document.getElementById(targetId);
-        dropdown.classList.toggle('open');
+        // If you had dropdown logic, handle it here
       });
     });
 
@@ -673,64 +741,83 @@
     showQuote(currentQuoteIndex);
     startQuoteTimer();
 
-    // Article Cards Redirect to Their Respective Pages
+    // Article Cards -> Instagram-style Modal
     const articleCards = document.querySelectorAll('.article-card');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalAuthor = document.getElementById('modalAuthor');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalClose = document.getElementById('modalClose');
+
     const articleData = {
       1: {
         title: "Article Title 1",
         author: "by John Doe",
         price: "$10",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        img: "https://images.pexels.com/photos/3823186/pexels-photo-3823186.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
-        link: "article1.html"
+        img: "https://images.pexels.com/photos/3823186/pexels-photo-3823186.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
       },
       2: {
         title: "Article Title 2",
         author: "by Jane Smith",
         price: "$20",
         description: "Praesent in libero vel turpis pellentesque egestas.",
-        img: "https://images.pexels.com/photos/4534666/pexels-photo-4534666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
-        link: "article2.html"
+        img: "https://images.pexels.com/photos/4534666/pexels-photo-4534666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
       },
       3: {
         title: "Article Title 3",
         author: "by Alex Ray",
         price: "$15",
         description: "Donec augue, tortor sodales accumsan bibendum, urna ligula aliquet magna.",
-        img: "https://images.pexels.com/photos/5747793/pexels-photo-5747793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
-        link: "article3.html"
+        img: "https://images.pexels.com/photos/5747793/pexels-photo-5747793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
       },
       4: {
         title: "Placeholder Article",
         author: "by Placeholder",
         price: "$0",
         description: "This is a placeholder article.",
-        img: "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        link: "article4.html"
+        img: "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       },
       5: {
         title: "Placeholder Article",
         author: "by Placeholder",
         price: "$0",
         description: "This is another placeholder article.",
-        img: "https://images.unsplash.com/photo-1593164842264-854604db2260?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        link: "article5.html"
+        img: "https://images.unsplash.com/photo-1593164842264-854604db2260?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       },
       6: {
         title: "Placeholder Article",
         author: "by Placeholder",
         price: "$0",
         description: "This is another placeholder article.",
-        img: "https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        link: "article6.html"
+        img: "https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       }
     };
+
     articleCards.forEach(card => {
       card.addEventListener('click', () => {
         const id = card.getAttribute('data-article');
         const data = articleData[id];
-        window.location.href = data.link;
+        // Fill modal with data
+        modalImg.src = data.img;
+        modalTitle.textContent = data.title;
+        modalAuthor.textContent = data.author;
+        modalPrice.textContent = data.price;
+        modalDescription.textContent = data.description;
+        // Show the modal
+        modalOverlay.classList.add('show');
       });
+    });
+
+    modalClose.addEventListener('click', () => {
+      modalOverlay.classList.remove('show');
+    });
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        modalOverlay.classList.remove('show');
+      }
     });
 
     /* Navbar scroll behavior for desktop:
