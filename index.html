@@ -7,10 +7,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" 
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     /* GLOBAL RESET & BASE */
     * {
@@ -43,20 +40,19 @@
       width: 100%;
       z-index: 1000;
       padding: 15px 30px;
-      background: #c3bbb7; /* mobile default */
+      /* Default mobile background */
+      background: #c3bbb7;
       box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
-    @media (min-width: 768px) {
-      /* Desktop: transparent header with white text */
-      header.desktop-navbar {
-        background: transparent;
-      }
-      header.desktop-navbar .logo,
-      header.desktop-navbar nav ul li a {
-        color: white;
-      }
+    /* Desktop mode: transparent header with white text */
+    header.desktop-navbar {
+      background: transparent;
+    }
+    header.desktop-navbar .logo,
+    header.desktop-navbar nav ul li a {
+      color: white;
     }
     .nav-container {
       max-width: 1200px;
@@ -97,6 +93,7 @@
       margin: 4px 0;
       border-radius: 2px;
     }
+    /* Mobile Menu */
     .mobile-menu {
       position: absolute;
       top: 60px;
@@ -150,12 +147,11 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: #ebe6e4;
       padding: 1rem;
     }
-    /* NEW HEADER STYLE */
+    /* New header style inside video overlay */
     .sub-header {
-      font-family: 'Poppins', sans-serif; /* same as nav links */
+      font-family: 'Poppins', sans-serif;
       font-size: 1rem;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -163,7 +159,7 @@
       margin-bottom: 0.5rem;
     }
     .main-header {
-      font-family: 'Cormorant', serif; /* large, elegant font */
+      font-family: 'Cormorant', serif;
       font-size: 3rem;
       margin-bottom: 1rem;
       color: #ebe6e4;
@@ -176,6 +172,9 @@
       margin: 0 auto;
       line-height: 1.4;
     }
+
+    .video-overlay h1 { display: none; }
+    .video-overlay p { display: none; }
 
     /* CORE VALUES SECTION */
     .core-values {
@@ -390,22 +389,11 @@
 
     /* RESPONSIVE STYLES */
     @media (max-width: 768px) {
-      header {
-        padding: 10px 20px;
-      }
-      .video-overlay .sub-header {
-        font-size: 0.9rem;
-      }
-      .video-overlay .main-header {
-        font-size: 2.2rem;
-      }
-      .video-overlay .description {
-        font-size: 1rem;
-        padding: 0 10px;
-      }
-      .core-values-inner {
-        flex-wrap: nowrap;
-      }
+      header { padding: 10px 20px; }
+      .video-overlay .sub-header { font-size: 0.9rem; }
+      .video-overlay .main-header { font-size: 2.2rem; }
+      .video-overlay .description { font-size: 1rem; padding: 0 10px; }
+      .core-values-inner { flex-wrap: nowrap; }
     }
   </style>
 </head>
@@ -446,13 +434,9 @@
       Your browser does not support the video tag.
     </video>
     <div class="video-overlay">
-      <!-- NEW HEADER STYLE -->
       <p class="sub-header">DISCOVER</p>
       <h1 class="main-header">BMS ACADEMY</h1>
-      <p class="description">
-        A space designed for growth and transformation. Unlock your full potential with curated content, tools, 
-        and experiences that break barriers.
-      </p>
+      <p class="description">A space designed for growth and transformation. Unlock your full potential with curated content, tools, and experiences that break barriers.</p>
     </div>
   </section>
 
@@ -485,15 +469,115 @@
   <section class="articles-section" id="articles">
     <h2>Our Latest Highlights</h2>
     <div class="articles-slider" id="articlesSlider">
-      <!-- Existing articles... -->
-      <!-- ... -->
+      <!-- Article Card 1 -->
+      <div class="article-card" data-article="1">
+        <img src="https://images.pexels.com/photos/3823186/pexels-photo-3823186.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Article 1">
+        <h3>Article Title 1</h3>
+        <div class="author">by John Doe</div>
+        <div class="price">$10</div>
+        <p>Lorem ipsum dolor sit amet.</p>
+      </div>
+      <!-- Article Card 2 -->
+      <div class="article-card" data-article="2">
+        <img src="https://images.pexels.com/photos/4534666/pexels-photo-4534666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Article 2">
+        <h3>Article Title 2</h3>
+        <div class="author">by Jane Smith</div>
+        <div class="price">$20</div>
+        <p>Praesent in libero vel turpis.</p>
+      </div>
+      <!-- Article Card 3 -->
+      <div class="article-card" data-article="3">
+        <img src="https://images.pexels.com/photos/5747793/pexels-photo-5747793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Article 3">
+        <h3>Article Title 3</h3>
+        <div class="author">by Alex Ray</div>
+        <div class="price">$15</div>
+        <p>Donec augue, tortor sodales accumsan.</p>
+      </div>
+      <!-- Article Card 4 (Placeholder) -->
+      <div class="article-card" data-article="4">
+        <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Article 4">
+        <h3>Placeholder Article</h3>
+        <div class="author">by Placeholder</div>
+        <div class="price">$0</div>
+        <p>This is a placeholder article.</p>
+      </div>
+      <!-- Article Card 5 (New Placeholder) -->
+      <div class="article-card" data-article="5">
+        <img src="https://images.unsplash.com/photo-1593164842264-854604db2260?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Article 5">
+        <h3>Placeholder Article</h3>
+        <div class="author">by Placeholder</div>
+        <div class="price">$0</div>
+        <p>This is another placeholder article.</p>
+      </div>
+      <!-- Article Card 6 (New Placeholder) -->
+      <div class="article-card" data-article="6">
+        <img src="https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Article 6">
+        <h3>Placeholder Article</h3>
+        <div class="author">by Placeholder</div>
+        <div class="price">$0</div>
+        <p>This is another placeholder article.</p>
+      </div>
     </div>
   </section>
 
   <!-- QUOTES SLIDER SECTION -->
   <section class="quotes-section">
-    <!-- ... your existing quotes code ... -->
+    <div class="quotes-container">
+      <!-- Left arrow -->
+      <div class="quote-arrow left-arrow" id="quoteArrowLeft">&#10094;</div>
+      <!-- Quotes wrapper -->
+      <div class="quote-slide" id="quoteSlide">
+        <div class="quote-item">
+          <p>"ELEVATE YOUR MIND, EMPOWER YOUR SOUL, AND UNLOCK THE BEST VERSION OF YOURSELF."</p>
+        </div>
+        <div class="quote-item">
+          <p>"TRUE FULFILLMENT STARTS WHEN YOU ALIGN YOUR PASSION WITH YOUR PURPOSE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"THIS IS YOUR SPACE TO GROW, EXPLORE, AND CREATE THE LIFE YOU TRULY DESERVE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"STEP BEYOND YOUR LIMITS. BREAK BARRIERS. EMBRACE THE POWER OF YOUR POTENTIAL."</p>
+        </div>
+        <div class="quote-item">
+          <p>"WHERE LUXURY MEETS PERSONAL GROWTH — YOUR JOURNEY BEGINS HERE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"YOUR UNIQUE ENERGY DESERVES A PLACE TO THRIVE. LET IT SHINE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"INSPIRATION IS A LIFESTYLE. WELCOME TO THE SPACE WHERE YOUR CREATIVITY COMES ALIVE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"HAPPINESS ISN’T A MOMENT, IT’S A JOURNEY. LET US GUIDE YOU TO YOURS."</p>
+        </div>
+        <div class="quote-item">
+          <p>"BALANCE, BEAUTY, AND BRILLIANCE—UNLOCK THEM ALL WITH EVERY STEP YOU TAKE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"YOU ARE THE ARCHITECT OF YOUR LIFE. WE’RE HERE TO HELP YOU BUILD IT."</p>
+        </div>
+      </div>
+      <!-- Right arrow -->
+      <div class="quote-arrow right-arrow" id="quoteArrowRight">&#10095;</div>
+    </div>
   </section>
+
+  <!-- ARTICLE MODAL (Unused for redirecting articles) -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <div class="modal-img">
+        <img src="" alt="Modal Image" id="modalImg">
+      </div>
+      <div class="modal-text">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <h3 id="modalTitle">Article Title</h3>
+        <div class="author" id="modalAuthor"></div>
+        <div class="price" id="modalPrice"></div>
+        <p id="modalDescription"></p>
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer>
@@ -505,7 +589,178 @@
 
   <!-- JAVASCRIPT -->
   <script>
-    /* your existing JS code for the nav, video slider, quotes slider, etc. */
+    // Burger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('show');
+    });
+
+    // (Optional) Learn More Dropdowns – if needed
+    const learnMoreButtons = document.querySelectorAll('.learn-more-btn');
+    learnMoreButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const dropdown = document.getElementById(targetId);
+        dropdown.classList.toggle('open');
+      });
+    });
+
+    // Fly-in Effect on Scroll
+    const flyInElements = document.querySelectorAll('.fly-in');
+    function handleScroll() {
+      flyInElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    // Top Video Slider: Cycle through videos every 5 seconds
+    const topVideo = document.getElementById('topVideo');
+    const videoSources = [
+      "https://videos.pexels.com/video-files/6998414/6998414-uhd_2560_1440_30fps.mp4",
+      "https://videos.pexels.com/video-files/29894402/12833001_2560_1440_30fps.mp4",
+      "https://videos.pexels.com/video-files/31245009/13344918_1920_1080_25fps.mp4"
+    ];
+    let currentVideo = 0;
+    function playNextVideo() {
+      topVideo.src = videoSources[currentVideo];
+      topVideo.currentTime = 0;
+      topVideo.play();
+      currentVideo = (currentVideo + 1) % videoSources.length;
+    }
+    playNextVideo();
+    setInterval(playNextVideo, 5000);
+
+    // Quotes Slider: 4 seconds per quote with slide effect
+    const quoteItems = document.querySelectorAll('.quote-item');
+    const arrowLeft = document.getElementById('quoteArrowLeft');
+    const arrowRight = document.getElementById('quoteArrowRight');
+    let currentQuoteIndex = 0;
+    let quoteTimer;
+    function showQuote(index) {
+      quoteItems.forEach(item => {
+        item.classList.remove('active');
+      });
+      quoteItems[index].classList.add('active');
+    }
+    function nextQuote() {
+      currentQuoteIndex = (currentQuoteIndex + 1) % quoteItems.length;
+      showQuote(currentQuoteIndex);
+    }
+    function prevQuote() {
+      currentQuoteIndex = (currentQuoteIndex - 1 + quoteItems.length) % quoteItems.length;
+      showQuote(currentQuoteIndex);
+    }
+    function startQuoteTimer() {
+      quoteTimer = setInterval(nextQuote, 4000);
+    }
+    function stopQuoteTimer() {
+      clearInterval(quoteTimer);
+    }
+    arrowLeft.addEventListener('click', () => {
+      stopQuoteTimer();
+      prevQuote();
+      startQuoteTimer();
+    });
+    arrowRight.addEventListener('click', () => {
+      stopQuoteTimer();
+      nextQuote();
+      startQuoteTimer();
+    });
+    showQuote(currentQuoteIndex);
+    startQuoteTimer();
+
+    // Article Cards Redirect to Their Respective Pages
+    const articleCards = document.querySelectorAll('.article-card');
+    const articleData = {
+      1: {
+        title: "Article Title 1",
+        author: "by John Doe",
+        price: "$10",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        img: "https://images.pexels.com/photos/3823186/pexels-photo-3823186.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
+        link: "article1.html"
+      },
+      2: {
+        title: "Article Title 2",
+        author: "by Jane Smith",
+        price: "$20",
+        description: "Praesent in libero vel turpis pellentesque egestas.",
+        img: "https://images.pexels.com/photos/4534666/pexels-photo-4534666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
+        link: "article2.html"
+      },
+      3: {
+        title: "Article Title 3",
+        author: "by Alex Ray",
+        price: "$15",
+        description: "Donec augue, tortor sodales accumsan bibendum, urna ligula aliquet magna.",
+        img: "https://images.pexels.com/photos/5747793/pexels-photo-5747793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
+        link: "article3.html"
+      },
+      4: {
+        title: "Placeholder Article",
+        author: "by Placeholder",
+        price: "$0",
+        description: "This is a placeholder article.",
+        img: "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        link: "article4.html"
+      },
+      5: {
+        title: "Placeholder Article",
+        author: "by Placeholder",
+        price: "$0",
+        description: "This is another placeholder article.",
+        img: "https://images.unsplash.com/photo-1593164842264-854604db2260?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        link: "article5.html"
+      },
+      6: {
+        title: "Placeholder Article",
+        author: "by Placeholder",
+        price: "$0",
+        description: "This is another placeholder article.",
+        img: "https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        link: "article6.html"
+      }
+    };
+    articleCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const id = card.getAttribute('data-article');
+        const data = articleData[id];
+        window.location.href = data.link;
+      });
+    });
+
+    /* Navbar scroll behavior for desktop:
+       - In desktop mode, header becomes transparent with white text.
+       - Remove drop shadow when scrolling down; add it when scrolling up.
+    */
+    function updateNavbarMode() {
+      const navbar = document.getElementById('navbar');
+      if (window.innerWidth >= 768) {
+        navbar.classList.add('desktop-navbar');
+      } else {
+        navbar.classList.remove('desktop-navbar');
+      }
+    }
+    updateNavbarMode();
+    window.addEventListener('resize', updateNavbarMode);
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.innerWidth >= 768) {
+        if (window.scrollY > lastScrollY) {
+          navbar.style.boxShadow = 'none';
+        } else {
+          navbar.style.boxShadow = '0 6px 12px rgba(33,24,21,0.7)';
+        }
+      }
+      lastScrollY = window.scrollY;
+    });
   </script>
 </body>
 </html>
