@@ -10,7 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     /* GLOBAL RESET & BASE */
-    * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease-in-out; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease-in-out;
+    }
     html, body {
       font-family: 'Poppins', sans-serif;
       background-color: #ddd7d5;
@@ -18,9 +23,15 @@
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
-    a { text-decoration: none; color: inherit; }
-    img, video { max-width: 100%; display: block; }
-    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    img, video {
+      max-width: 100%;
+      display: block;
+    }
+
     /* NAVIGATION */
     header {
       position: fixed;
@@ -29,21 +40,19 @@
       width: 100%;
       z-index: 1000;
       padding: 15px 30px;
-      /* Default for mobile */
+      /* Default mobile background */
       background: #c3bbb7;
       box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
-    /* Desktop mode: transparent header with drop shadow, white logo/links */
-    @media (min-width: 768px) {
-      header.desktop-navbar {
-        background: transparent;
-      }
-      header.desktop-navbar .logo,
-      header.desktop-navbar nav ul li a {
-        color: white;
-      }
+    /* Desktop mode: transparent header with white text */
+    header.desktop-navbar {
+      background: transparent;
+    }
+    header.desktop-navbar .logo,
+    header.desktop-navbar nav ul li a {
+      color: white;
     }
     .nav-container {
       max-width: 1200px;
@@ -64,15 +73,25 @@
       list-style: none;
       font-size: 0.8rem;
     }
-    nav li { cursor: pointer; font-weight: 600; color: inherit; }
-    /* Updated nav text */
+    nav li {
+      cursor: pointer;
+      font-weight: 600;
+      color: inherit;
+    }
     nav li a {
       text-transform: uppercase;
     }
-    /* Hamburger for mobile */
-    .hamburger { display: none; flex-direction: column; cursor: pointer; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
     .hamburger span {
-      width: 25px; height: 3px; background: #211815; margin: 4px 0; border-radius: 2px;
+      width: 25px;
+      height: 3px;
+      background: #211815;
+      margin: 4px 0;
+      border-radius: 2px;
     }
     /* Mobile Menu */
     .mobile-menu {
@@ -91,16 +110,26 @@
       opacity: 0;
       transition: opacity 0.4s ease;
     }
-    .mobile-menu.show { display: flex; opacity: 1; }
-    @media (max-width: 768px) { nav ul { display: none; } .hamburger { display: flex; } }
-    
+    .mobile-menu.show {
+      display: flex;
+      opacity: 1;
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
     /* TOP VIDEO SLIDER WITH OVERLAY */
     .video-slider {
       position: relative;
       width: 100%;
       height: 100vh;
       overflow: hidden;
-      margin-top: 70px; /* so video is fully behind navbar */
+      /* Video is at very top – no extra margin */
     }
     .video-slider video {
       width: 100%;
@@ -131,11 +160,11 @@
       font-size: 1.2rem;
       max-width: 700px;
     }
-    
+
     /* CORE VALUES SECTION */
     .core-values {
       padding: 50px 20px;
-      background: #f0e9e6; /* light backdrop for core values */
+      background: #f0e9e6;
     }
     .core-values h2 {
       font-family: 'Cormorant', serif;
@@ -144,7 +173,7 @@
       color: #211815;
       margin-bottom: 30px;
     }
-    /* Force core boxes to remain in one row on all displays */
+    /* Force core boxes to remain in one horizontal row always */
     .core-values-inner {
       display: flex;
       gap: 20px;
@@ -153,15 +182,23 @@
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
-    .core-values-inner::-webkit-scrollbar { height: 6px; }
-    .core-values-inner::-webkit-scrollbar-track { background: #ddd7d5; border-radius: 3px; }
-    .core-values-inner::-webkit-scrollbar-thumb { background: #211815; border-radius: 3px; transition: background 0.3s ease; }
-    .core-values-inner:hover::-webkit-scrollbar-thumb { background: #211815; }
+    .core-values-inner::-webkit-scrollbar {
+      height: 6px;
+    }
+    .core-values-inner::-webkit-scrollbar-track {
+      background: #ddd7d5;
+      border-radius: 3px;
+    }
+    .core-values-inner::-webkit-scrollbar-thumb {
+      background: #211815;
+      border-radius: 3px;
+      transition: background 0.3s ease;
+    }
     .core-value-box {
       background: #ebe6e4;
       border-radius: 10px;
       padding: 20px;
-      min-width: 300px;
+      width: 250px; /* fixed width to ensure full display */
       text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       flex-shrink: 0;
@@ -169,13 +206,19 @@
       color: #211815;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .core-value-box:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+    .core-value-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
     .core-value-box h3 {
       font-family: 'Cormorant', serif;
       font-size: 1.8rem;
       margin-bottom: 1rem;
     }
-    .core-value-box p { font-size: 0.95rem; margin-bottom: 1rem; }
+    .core-value-box p {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
     .learn-more-btn {
       background: #211815;
       color: #ebe6e4;
@@ -195,7 +238,9 @@
       line-height: 1.4;
       color: #ebe6e4;
     }
-    .dropdown-content.open { max-height: 500px; }
+    .dropdown-content.open {
+      max-height: 500px;
+    }
 
     /* ARTICLES SECTION */
     .articles-section {
@@ -248,7 +293,7 @@
     /* QUOTES SLIDER SECTION */
     .quotes-section {
       padding: 50px 20px;
-      background: #ebe6e4; /* swapped with footer */
+      background: #ebe6e4;
       text-align: center;
       position: relative;
     }
@@ -272,7 +317,9 @@
       transition: background 0.3s ease;
       user-select: none;
     }
-    .quote-arrow:hover { background: rgba(255,255,255,0.9); }
+    .quote-arrow:hover {
+      background: rgba(255,255,255,0.9);
+    }
     .left-arrow { left: 0; }
     .right-arrow { right: 0; }
     .quote-slide {
@@ -305,8 +352,12 @@
       transform: translateX(0);
     }
     @media (max-width: 480px) {
-      .quote-arrow { font-size: 1.5rem; }
-      .quote-item { font-size: 1rem; }
+      .quote-arrow {
+        font-size: 1.5rem;
+      }
+      .quote-item {
+        font-size: 1rem;
+      }
     }
 
     /* ARTICLE MODAL (Instagram-style) */
@@ -379,7 +430,7 @@
       color: #211815;
     }
 
-    /* FOOTER (swapped background with quotes section) */
+    /* FOOTER (Swapped background with quotes section) */
     footer {
       padding: 40px 20px;
       text-align: center;
@@ -405,12 +456,25 @@
 
     /* RESPONSIVE STYLES */
     @media (max-width: 768px) {
-      header { padding: 10px 20px; }
-      .video-overlay h1 { font-size: 2rem; }
-      .video-overlay p { font-size: 1rem; padding: 0 10px; }
-      .core-values-inner { flex-wrap: nowrap; }
-      .modal-content { flex-direction: column; }
-      .modal-img, .modal-text { flex: 1 1 100%; }
+      header {
+        padding: 10px 20px;
+      }
+      .video-overlay h1 {
+        font-size: 2rem;
+      }
+      .video-overlay p {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+      .core-values-inner {
+        flex-wrap: nowrap;
+      }
+      .modal-content {
+        flex-direction: column;
+      }
+      .modal-img, .modal-text {
+        flex: 1 1 100%;
+      }
     }
   </style>
 </head>
@@ -422,7 +486,7 @@
       <nav>
         <ul>
           <li><a href="#">GET TO KNOW</a></li>
-          <li><a href="#">COLLABORATE</a></li>
+          <li><a href="#">COLLABORATE WITH US</a></li>
           <li><a href="#">BODY</a></li>
           <li><a href="#">MIND</a></li>
           <li><a href="#">SOUL</a></li>
@@ -462,7 +526,7 @@
     <div class="core-values-inner">
       <!-- BODY -->
       <div class="core-value-box fly-in" id="body">
-        <h3>Body</h3>
+        <h3>BODY</h3>
         <p>Achieve the physique you desire and embrace a healthier lifestyle.</p>
         <button class="learn-more-btn" data-target="bodyDropdown">Learn More</button>
         <div class="dropdown-content" id="bodyDropdown">
@@ -471,7 +535,7 @@
       </div>
       <!-- MIND -->
       <div class="core-value-box fly-in" id="mind">
-        <h3>Mind</h3>
+        <h3>MIND</h3>
         <p>Cultivate clarity, focus, and emotional well-being to unlock your potential.</p>
         <button class="learn-more-btn" data-target="mindDropdown">Learn More</button>
         <div class="dropdown-content" id="mindDropdown">
@@ -480,7 +544,7 @@
       </div>
       <!-- SOUL -->
       <div class="core-value-box fly-in" id="soul">
-        <h3>Soul</h3>
+        <h3>SOUL</h3>
         <p>Nurture your spirit and find deeper fulfillment in everyday life.</p>
         <button class="learn-more-btn" data-target="soulDropdown">Learn More</button>
         <div class="dropdown-content" id="soulDropdown">
@@ -645,7 +709,7 @@
     playNextVideo();
     setInterval(playNextVideo, 5000);
 
-    // Quotes Slider: 4 seconds per quote, sliding effect
+    // Quotes Slider: 4 seconds per quote with slide effect
     const quoteItems = document.querySelectorAll('.quote-item');
     const arrowLeft = document.getElementById('quoteArrowLeft');
     const arrowRight = document.getElementById('quoteArrowRight');
@@ -735,19 +799,26 @@
         modalOverlay.classList.add('show');
       });
     });
-    modalClose.addEventListener('click', () => { modalOverlay.classList.remove('show'); });
+    modalClose.addEventListener('click', () => {
+      modalOverlay.classList.remove('show');
+    });
     modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) { modalOverlay.classList.remove('show'); }
+      if (e.target === modalOverlay) {
+        modalOverlay.classList.remove('show');
+      }
     });
 
     /* Navbar scroll behavior for desktop:
-       - Add desktop-navbar class for white links.
-       - Hide drop shadow when scrolling down; show when scrolling up.
+       - In desktop mode, header becomes transparent with white text.
+       - Remove drop shadow when scrolling down; add it when scrolling up.
     */
     function updateNavbarMode() {
       const navbar = document.getElementById('navbar');
-      if (window.innerWidth >= 768) { navbar.classList.add('desktop-navbar'); }
-      else { navbar.classList.remove('desktop-navbar'); }
+      if (window.innerWidth >= 768) {
+        navbar.classList.add('desktop-navbar');
+      } else {
+        navbar.classList.remove('desktop-navbar');
+      }
     }
     updateNavbarMode();
     window.addEventListener('resize', updateNavbarMode);
@@ -755,8 +826,11 @@
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('navbar');
       if (window.innerWidth >= 768) {
-        if (window.scrollY > lastScrollY) { navbar.style.boxShadow = 'none'; }
-        else { navbar.style.boxShadow = '0 6px 12px rgba(33,24,21,0.7)'; }
+        if (window.scrollY > lastScrollY) {
+          navbar.style.boxShadow = 'none';
+        } else {
+          navbar.style.boxShadow = '0 6px 12px rgba(33,24,21,0.7)';
+        }
       }
       lastScrollY = window.scrollY;
     });
