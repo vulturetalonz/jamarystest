@@ -10,12 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     /* GLOBAL RESET & BASE */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      transition: all 0.3s ease-in-out;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease-in-out; }
     html, body {
       font-family: 'Poppins', sans-serif;
       background-color: #ddd7d5;
@@ -23,14 +18,8 @@
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    img, video {
-      max-width: 100%;
-      display: block;
-    }
+    a { text-decoration: none; color: inherit; }
+    img, video { max-width: 100%; display: block; }
     
     /* NAVIGATION */
     header {
@@ -40,15 +29,21 @@
       width: 100%;
       z-index: 1000;
       padding: 15px 30px;
-      background: #c3bbb7; /* Mobile default */
+      /* Default for mobile */
+      background: #c3bbb7;
       box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
-    /* Desktop mode: when header has .desktop-navbar, logo and links turn white */
-    header.desktop-navbar .logo,
-    header.desktop-navbar nav ul li a {
-      color: white;
+    /* Desktop mode: transparent header with drop shadow, white logo/links */
+    @media (min-width: 768px) {
+      header.desktop-navbar {
+        background: transparent;
+      }
+      header.desktop-navbar .logo,
+      header.desktop-navbar nav ul li a {
+        color: white;
+      }
     }
     .nav-container {
       max-width: 1200px;
@@ -69,22 +64,15 @@
       list-style: none;
       font-size: 0.8rem;
     }
-    nav li {
-      cursor: pointer;
-      font-weight: 600;
-      color: inherit;
+    nav li { cursor: pointer; font-weight: 600; color: inherit; }
+    /* Updated nav text */
+    nav li a {
+      text-transform: uppercase;
     }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
+    /* Hamburger for mobile */
+    .hamburger { display: none; flex-direction: column; cursor: pointer; }
     .hamburger span {
-      width: 25px;
-      height: 3px;
-      background: #211815;
-      margin: 4px 0;
-      border-radius: 2px;
+      width: 25px; height: 3px; background: #211815; margin: 4px 0; border-radius: 2px;
     }
     /* Mobile Menu */
     .mobile-menu {
@@ -103,18 +91,8 @@
       opacity: 0;
       transition: opacity 0.4s ease;
     }
-    .mobile-menu.show {
-      display: flex;
-      opacity: 1;
-    }
-    @media (max-width: 768px) {
-      nav ul {
-        display: none;
-      }
-      .hamburger {
-        display: flex;
-      }
-    }
+    .mobile-menu.show { display: flex; opacity: 1; }
+    @media (max-width: 768px) { nav ul { display: none; } .hamburger { display: flex; } }
     
     /* TOP VIDEO SLIDER WITH OVERLAY */
     .video-slider {
@@ -122,7 +100,7 @@
       width: 100%;
       height: 100vh;
       overflow: hidden;
-      margin-top: 70px; /* so video appears fully behind navbar */
+      margin-top: 70px; /* so video is fully behind navbar */
     }
     .video-slider video {
       width: 100%;
@@ -157,7 +135,7 @@
     /* CORE VALUES SECTION */
     .core-values {
       padding: 50px 20px;
-      background: #f0e9e6;
+      background: #f0e9e6; /* light backdrop for core values */
     }
     .core-values h2 {
       font-family: 'Cormorant', serif;
@@ -166,7 +144,7 @@
       color: #211815;
       margin-bottom: 30px;
     }
-    /* Force the core boxes to remain in one row on all displays */
+    /* Force core boxes to remain in one row on all displays */
     .core-values-inner {
       display: flex;
       gap: 20px;
@@ -175,18 +153,10 @@
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
-    .core-values-inner::-webkit-scrollbar {
-      height: 6px;
-    }
-    .core-values-inner::-webkit-scrollbar-track {
-      background: #ddd7d5;
-      border-radius: 3px;
-    }
-    .core-values-inner::-webkit-scrollbar-thumb {
-      background: #211815;
-      border-radius: 3px;
-      transition: background 0.3s ease;
-    }
+    .core-values-inner::-webkit-scrollbar { height: 6px; }
+    .core-values-inner::-webkit-scrollbar-track { background: #ddd7d5; border-radius: 3px; }
+    .core-values-inner::-webkit-scrollbar-thumb { background: #211815; border-radius: 3px; transition: background 0.3s ease; }
+    .core-values-inner:hover::-webkit-scrollbar-thumb { background: #211815; }
     .core-value-box {
       background: #ebe6e4;
       border-radius: 10px;
@@ -199,19 +169,13 @@
       color: #211815;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .core-value-box:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    }
+    .core-value-box:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
     .core-value-box h3 {
       font-family: 'Cormorant', serif;
       font-size: 1.8rem;
       margin-bottom: 1rem;
     }
-    .core-value-box p {
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-    }
+    .core-value-box p { font-size: 0.95rem; margin-bottom: 1rem; }
     .learn-more-btn {
       background: #211815;
       color: #ebe6e4;
@@ -231,9 +195,7 @@
       line-height: 1.4;
       color: #ebe6e4;
     }
-    .dropdown-content.open {
-      max-height: 500px;
-    }
+    .dropdown-content.open { max-height: 500px; }
 
     /* ARTICLES SECTION */
     .articles-section {
@@ -286,7 +248,7 @@
     /* QUOTES SLIDER SECTION */
     .quotes-section {
       padding: 50px 20px;
-      background: #ddd7d5;
+      background: #ebe6e4; /* swapped with footer */
       text-align: center;
       position: relative;
     }
@@ -310,15 +272,9 @@
       transition: background 0.3s ease;
       user-select: none;
     }
-    .quote-arrow:hover {
-      background: rgba(255,255,255,0.9);
-    }
-    .left-arrow {
-      left: 0;
-    }
-    .right-arrow {
-      right: 0;
-    }
+    .quote-arrow:hover { background: rgba(255,255,255,0.9); }
+    .left-arrow { left: 0; }
+    .right-arrow { right: 0; }
     .quote-slide {
       position: relative;
       width: 100%;
@@ -342,12 +298,17 @@
       font-size: 1.2rem;
       padding: 0 2rem;
       color: #211815;
+      text-transform: uppercase;
     }
     .quote-item.active {
       opacity: 1;
       transform: translateX(0);
     }
-    
+    @media (max-width: 480px) {
+      .quote-arrow { font-size: 1.5rem; }
+      .quote-item { font-size: 1rem; }
+    }
+
     /* ARTICLE MODAL (Instagram-style) */
     .modal-overlay {
       position: fixed;
@@ -418,20 +379,18 @@
       color: #211815;
     }
 
-    /* FOOTER */
+    /* FOOTER (swapped background with quotes section) */
     footer {
       padding: 40px 20px;
       text-align: center;
-      background: #ebe6e4;
+      background: #ddd7d5;
       color: #211815;
     }
     footer .footer-content {
       max-width: 1200px;
       margin: 0 auto;
     }
-    footer p {
-      margin: 10px 0;
-    }
+    footer p { margin: 10px 0; }
 
     /* FLY-IN ANIMATION */
     .fly-in {
@@ -446,25 +405,12 @@
 
     /* RESPONSIVE STYLES */
     @media (max-width: 768px) {
-      header {
-        padding: 10px 20px;
-      }
-      .video-overlay h1 {
-        font-size: 2rem;
-      }
-      .video-overlay p {
-        font-size: 1rem;
-        padding: 0 10px;
-      }
-      .core-values-inner {
-        flex-wrap: nowrap;
-      }
-      .modal-content {
-        flex-direction: column;
-      }
-      .modal-img, .modal-text {
-        flex: 1 1 100%;
-      }
+      header { padding: 10px 20px; }
+      .video-overlay h1 { font-size: 2rem; }
+      .video-overlay p { font-size: 1rem; padding: 0 10px; }
+      .core-values-inner { flex-wrap: nowrap; }
+      .modal-content { flex-direction: column; }
+      .modal-img, .modal-text { flex: 1 1 100%; }
     }
   </style>
 </head>
@@ -475,14 +421,14 @@
       <div class="logo">BMS</div>
       <nav>
         <ul>
-          <li><a href="#">Get to know us</a></li>
-          <li><a href="#">Collaborate with us</a></li>
-          <li><a href="#">Body</a></li>
-          <li><a href="#">Mind</a></li>
-          <li><a href="#">Soul</a></li>
-          <li><a href="#">Our app</a></li>
-          <li><a href="#">Personal advice</a></li>
-          <li><a href="#">Forum</a></li>
+          <li><a href="#">GET TO KNOW</a></li>
+          <li><a href="#">COLLABORATE</a></li>
+          <li><a href="#">BODY</a></li>
+          <li><a href="#">MIND</a></li>
+          <li><a href="#">SOUL</a></li>
+          <li><a href="#">OUR APP</a></li>
+          <li><a href="#">PERSONAL ADVICE</a></li>
+          <li><a href="#">FORUM</a></li>
         </ul>
       </nav>
       <div class="hamburger" id="hamburger">
@@ -491,9 +437,9 @@
         <span></span>
       </div>
       <div class="mobile-menu" id="mobileMenu">
-        <a href="#videoSlider">Videos</a>
-        <a href="#coreValues">Core Values</a>
-        <a href="#articles">Articles</a>
+        <a href="#videoSlider">VIDEOS</a>
+        <a href="#coreValues">CORE VALUES</a>
+        <a href="#articles">ARTICLES</a>
       </div>
     </div>
   </header>
@@ -591,34 +537,34 @@
       <!-- Quotes wrapper -->
       <div class="quote-slide" id="quoteSlide">
         <div class="quote-item">
-          <p>"Elevate your mind, empower your soul, and unlock the best version of yourself."</p>
+          <p>"ELEVATE YOUR MIND, EMPOWER YOUR SOUL, AND UNLOCK THE BEST VERSION OF YOURSELF."</p>
         </div>
         <div class="quote-item">
-          <p>"True fulfillment starts when you align your passion with your purpose."</p>
+          <p>"TRUE FULFILLMENT STARTS WHEN YOU ALIGN YOUR PASSION WITH YOUR PURPOSE."</p>
         </div>
         <div class="quote-item">
-          <p>"This is your space to grow, explore, and create the life you truly deserve."</p>
+          <p>"THIS IS YOUR SPACE TO GROW, EXPLORE, AND CREATE THE LIFE YOU TRULY DESERVE."</p>
         </div>
         <div class="quote-item">
-          <p>"Step beyond your limits. Break barriers. Embrace the power of your potential."</p>
+          <p>"STEP BEYOND YOUR LIMITS. BREAK BARRIERS. EMBRACE THE POWER OF YOUR POTENTIAL."</p>
         </div>
         <div class="quote-item">
-          <p>"Where luxury meets personal growth — your journey begins here."</p>
+          <p>"WHERE LUXURY MEETS PERSONAL GROWTH — YOUR JOURNEY BEGINS HERE."</p>
         </div>
         <div class="quote-item">
-          <p>"Your unique energy deserves a place to thrive. Let it shine."</p>
+          <p>"YOUR UNIQUE ENERGY DESERVES A PLACE TO THRIVE. LET IT SHINE."</p>
         </div>
         <div class="quote-item">
-          <p>"Inspiration is a lifestyle. Welcome to the space where your creativity comes alive."</p>
+          <p>"INSPIRATION IS A LIFESTYLE. WELCOME TO THE SPACE WHERE YOUR CREATIVITY COMES ALIVE."</p>
         </div>
         <div class="quote-item">
-          <p>"Happiness isn’t a moment, it’s a journey. Let us guide you to yours."</p>
+          <p>"HAPPINESS ISN’T A MOMENT, IT’S A JOURNEY. LET US GUIDE YOU TO YOURS."</p>
         </div>
         <div class="quote-item">
-          <p>"Balance, beauty, and brilliance—unlock them all with every step you take."</p>
+          <p>"BALANCE, BEAUTY, AND BRILLIANCE—UNLOCK THEM ALL WITH EVERY STEP YOU TAKE."</p>
         </div>
         <div class="quote-item">
-          <p>"You are the architect of your life. We’re here to help you build it."</p>
+          <p>"YOU ARE THE ARCHITECT OF YOUR LIFE. WE’RE HERE TO HELP YOU BUILD IT."</p>
         </div>
       </div>
       <!-- Right arrow -->
@@ -699,7 +645,7 @@
     playNextVideo();
     setInterval(playNextVideo, 5000);
 
-    // Quotes Slider
+    // Quotes Slider: 4 seconds per quote, sliding effect
     const quoteItems = document.querySelectorAll('.quote-item');
     const arrowLeft = document.getElementById('quoteArrowLeft');
     const arrowRight = document.getElementById('quoteArrowRight');
@@ -789,26 +735,19 @@
         modalOverlay.classList.add('show');
       });
     });
-    modalClose.addEventListener('click', () => {
-      modalOverlay.classList.remove('show');
-    });
+    modalClose.addEventListener('click', () => { modalOverlay.classList.remove('show'); });
     modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) {
-        modalOverlay.classList.remove('show');
-      }
+      if (e.target === modalOverlay) { modalOverlay.classList.remove('show'); }
     });
 
     /* Navbar scroll behavior for desktop:
-       Hide drop shadow when scrolling down; show when scrolling up.
-       Also add desktop-navbar class for white links.
+       - Add desktop-navbar class for white links.
+       - Hide drop shadow when scrolling down; show when scrolling up.
     */
     function updateNavbarMode() {
       const navbar = document.getElementById('navbar');
-      if (window.innerWidth >= 768) {
-        navbar.classList.add('desktop-navbar');
-      } else {
-        navbar.classList.remove('desktop-navbar');
-      }
+      if (window.innerWidth >= 768) { navbar.classList.add('desktop-navbar'); }
+      else { navbar.classList.remove('desktop-navbar'); }
     }
     updateNavbarMode();
     window.addEventListener('resize', updateNavbarMode);
@@ -816,11 +755,8 @@
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('navbar');
       if (window.innerWidth >= 768) {
-        if (window.scrollY > lastScrollY) {
-          navbar.style.boxShadow = 'none';
-        } else {
-          navbar.style.boxShadow = '0 6px 12px rgba(33,24,21,0.7)';
-        }
+        if (window.scrollY > lastScrollY) { navbar.style.boxShadow = 'none'; }
+        else { navbar.style.boxShadow = '0 6px 12px rgba(33,24,21,0.7)'; }
       }
       lastScrollY = window.scrollY;
     });
