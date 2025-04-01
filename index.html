@@ -47,12 +47,14 @@
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
     /* Desktop mode: transparent header with white text */
-    header.desktop-navbar {
-      background: transparent;
-    }
-    header.desktop-navbar .logo,
-    header.desktop-navbar nav ul li a {
-      color: white;
+    @media (min-width: 768px) {
+      header.desktop-navbar {
+        background: transparent;
+      }
+      header.desktop-navbar .logo,
+      header.desktop-navbar nav ul li a {
+        color: white;
+      }
     }
     .nav-container {
       max-width: 1200px;
@@ -129,7 +131,6 @@
       width: 100%;
       height: 100vh;
       overflow: hidden;
-      /* Video is at very top – no extra margin */
     }
     .video-slider video {
       width: 100%;
@@ -198,7 +199,8 @@
       background: #faf4f1;
       border-radius: 10px;
       padding: 20px;
-      width: 250px; /* fixed width to ensure full display */
+      width: 250px;
+      min-height: 250px; /* Ensure full display on mobile */
       text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       flex-shrink: 0;
@@ -227,6 +229,11 @@
       cursor: pointer;
       font-size: 0.9rem;
       border-radius: 4px;
+    }
+    /* Each Learn More button now redirects to a separate page */
+    .learn-more-btn a {
+      color: #ebe6e4;
+      text-transform: uppercase;
     }
     .dropdown-content {
       max-height: 0;
@@ -310,7 +317,7 @@
       font-size: 2rem;
       cursor: pointer;
       color: #211815;
-      background: rgb(255 255 255 / 0%);
+      background: rgba(255,255,255,0.6);
       padding: 0.2rem 0.6rem;
       border-radius: 50%;
       z-index: 2;
@@ -456,25 +463,12 @@
 
     /* RESPONSIVE STYLES */
     @media (max-width: 768px) {
-      header {
-        padding: 10px 20px;
-      }
-      .video-overlay h1 {
-        font-size: 2rem;
-      }
-      .video-overlay p {
-        font-size: 1rem;
-        padding: 0 10px;
-      }
-      .core-values-inner {
-        flex-wrap: nowrap;
-      }
-      .modal-content {
-        flex-direction: column;
-      }
-      .modal-img, .modal-text {
-        flex: 1 1 100%;
-      }
+      header { padding: 10px 20px; }
+      .video-overlay h1 { font-size: 2rem; }
+      .video-overlay p { font-size: 1rem; padding: 0 10px; }
+      .core-values-inner { flex-wrap: nowrap; }
+      .modal-content { flex-direction: column; }
+      .modal-img, .modal-text { flex: 1 1 100%; }
     }
   </style>
 </head>
@@ -528,28 +522,19 @@
       <div class="core-value-box fly-in" id="body">
         <h3>BODY</h3>
         <p>Achieve the physique you desire and embrace a healthier lifestyle.</p>
-        <button class="learn-more-btn" data-target="bodyDropdown">Learn More</button>
-        <div class="dropdown-content" id="bodyDropdown">
-          <p>Our programs focus on strength, flexibility, and nutrition to help you reach your fitness goals.</p>
-        </div>
+        <a class="learn-more-btn" href="body.html">Learn More</a>
       </div>
       <!-- MIND -->
       <div class="core-value-box fly-in" id="mind">
         <h3>MIND</h3>
         <p>Cultivate clarity, focus, and emotional well-being to unlock your potential.</p>
-        <button class="learn-more-btn" data-target="mindDropdown">Learn More</button>
-        <div class="dropdown-content" id="mindDropdown">
-          <p>Learn mindfulness techniques, effective time management, and productivity hacks.</p>
-        </div>
+        <a class="learn-more-btn" href="mind.html">Learn More</a>
       </div>
       <!-- SOUL -->
       <div class="core-value-box fly-in" id="soul">
         <h3>SOUL</h3>
         <p>Nurture your spirit and find deeper fulfillment in everyday life.</p>
-        <button class="learn-more-btn" data-target="soulDropdown">Learn More</button>
-        <div class="dropdown-content" id="soulDropdown">
-          <p>Explore meditation, introspection, and creative outlets to connect with your authentic self.</p>
-        </div>
+        <a class="learn-more-btn" href="soul.html">Learn More</a>
       </div>
     </div>
   </section>
@@ -589,6 +574,22 @@
         <div class="author">by Placeholder</div>
         <div class="price">$0</div>
         <p>This is a placeholder article.</p>
+      </div>
+      <!-- Article Card 5 (New Placeholder) -->
+      <div class="article-card" data-article="5">
+        <img src="https://images.unsplash.com/photo-1593164842264-854604db2260?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Article 5">
+        <h3>Placeholder Article</h3>
+        <div class="author">by Placeholder</div>
+        <div class="price">$0</div>
+        <p>This is another placeholder article.</p>
+      </div>
+      <!-- Article Card 6 (New Placeholder) -->
+      <div class="article-card" data-article="6">
+        <img src="https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Article 6">
+        <h3>Placeholder Article</h3>
+        <div class="author">by Placeholder</div>
+        <div class="price">$0</div>
+        <p>This is another placeholder article.</p>
       </div>
     </div>
   </section>
@@ -669,7 +670,7 @@
       mobileMenu.classList.toggle('show');
     });
 
-    // Learn More Dropdowns
+    // Learn More Dropdowns (now replaced by links, so this can be removed if not needed)
     const learnMoreButtons = document.querySelectorAll('.learn-more-btn');
     learnMoreButtons.forEach(btn => {
       btn.addEventListener('click', () => {
