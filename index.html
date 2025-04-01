@@ -47,12 +47,14 @@
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
     /* Desktop mode: transparent header with white text */
-    header.desktop-navbar {
-      background: transparent;
-    }
-    header.desktop-navbar .logo,
-    header.desktop-navbar nav ul li a {
-      color: white;
+    @media (min-width: 768px) {
+      header.desktop-navbar {
+        background: transparent;
+      }
+      header.desktop-navbar .logo,
+      header.desktop-navbar nav ul li a {
+        color: white;
+      }
     }
     .nav-container {
       max-width: 1200px;
@@ -149,7 +151,7 @@
       text-align: center;
       padding: 1rem;
     }
-    /* New header style inside video overlay */
+    /* Landing Page Header Style */
     .sub-header {
       font-family: 'Poppins', sans-serif;
       font-size: 1rem;
@@ -173,9 +175,6 @@
       line-height: 1.4;
     }
 
-    .video-overlay h1 { display: none; }
-    .video-overlay p { display: none; }
-
     /* CORE VALUES SECTION */
     .core-values {
       padding: 50px 20px;
@@ -188,6 +187,7 @@
       color: #211815;
       margin-bottom: 30px;
     }
+    /* Core boxes adjust to available width */
     .core-values-inner {
       display: flex;
       gap: 20px;
@@ -212,11 +212,10 @@
       background: #faf4f1;
       border-radius: 10px;
       padding: 20px;
-      width: 250px;
-      min-height: 250px;
+      flex: 1 1 250px;
+      max-width: 300px;
       text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      flex-shrink: 0;
       cursor: pointer;
       color: #211815;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -258,13 +257,11 @@
       color: #211815;
     }
     .articles-slider {
-      display: flex;
+      display: grid;
       gap: 20px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
     .article-card {
-      width: 300px;
       background: #ebe6e4;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -272,7 +269,6 @@
       cursor: pointer;
       color: #211815;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      flex-shrink: 0;
     }
     .article-card:hover {
       transform: translateY(-5px);
@@ -436,7 +432,9 @@
     <div class="video-overlay">
       <p class="sub-header">DISCOVER</p>
       <h1 class="main-header">BMS ACADEMY</h1>
-      <p class="description">A space designed for growth and transformation. Unlock your full potential with curated content, tools, and experiences that break barriers.</p>
+      <p class="description">
+        A space designed for growth and transformation. Unlock your full potential with curated content, tools, and experiences that break barriers.
+      </p>
     </div>
   </section>
 
@@ -596,7 +594,7 @@
       mobileMenu.classList.toggle('show');
     });
 
-    // (Optional) Learn More Dropdowns – if needed
+    // (Optional) Learn More Dropdowns – if still needed
     const learnMoreButtons = document.querySelectorAll('.learn-more-btn');
     learnMoreButtons.forEach(btn => {
       btn.addEventListener('click', () => {
