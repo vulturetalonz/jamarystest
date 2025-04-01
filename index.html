@@ -174,7 +174,7 @@
       color: #211815;
       margin-bottom: 30px;
     }
-    /* Force core boxes to remain in one horizontal row always */
+    /* Force core boxes in one horizontal row always */
     .core-values-inner {
       display: flex;
       gap: 20px;
@@ -200,7 +200,7 @@
       border-radius: 10px;
       padding: 20px;
       width: 250px;
-      min-height: 250px; /* Ensure full display on mobile */
+      min-height: 250px;
       text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       flex-shrink: 0;
@@ -229,24 +229,6 @@
       cursor: pointer;
       font-size: 0.9rem;
       border-radius: 4px;
-    }
-    /* Each Learn More button now redirects to a separate page */
-    .learn-more-btn a {
-      color: #ebe6e4;
-      text-transform: uppercase;
-    }
-    .dropdown-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease;
-      text-align: left;
-      margin-top: 1rem;
-      font-size: 0.9rem;
-      line-height: 1.4;
-      color: #a79a95;
-    }
-    .dropdown-content.open {
-      max-height: 500px;
     }
 
     /* ARTICLES SECTION */
@@ -367,7 +349,7 @@
       }
     }
 
-    /* ARTICLE MODAL (Instagram-style) */
+    /* ARTICLE MODAL (Unused now, since articles redirect) */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -637,7 +619,7 @@
     </div>
   </section>
 
-  <!-- ARTICLE MODAL (Instagram-style) -->
+  <!-- ARTICLE MODAL (Unused for redirecting articles) -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
       <div class="modal-img">
@@ -670,7 +652,7 @@
       mobileMenu.classList.toggle('show');
     });
 
-    // Learn More Dropdowns (now replaced by links, so this can be removed if not needed)
+    // (Optional) Learn More Dropdowns - if needed, remove if Learn More now is a link
     const learnMoreButtons = document.querySelectorAll('.learn-more-btn');
     learnMoreButtons.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -749,64 +731,64 @@
     showQuote(currentQuoteIndex);
     startQuoteTimer();
 
-    // Article Cards -> Modal
+    // Article Cards Redirect to Their Respective Pages
     const articleCards = document.querySelectorAll('.article-card');
-    const modalOverlay = document.getElementById('modalOverlay');
-    const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalAuthor = document.getElementById('modalAuthor');
-    const modalPrice = document.getElementById('modalPrice');
-    const modalDescription = document.getElementById('modalDescription');
-    const modalClose = document.getElementById('modalClose');
     const articleData = {
       1: {
         title: "Article Title 1",
         author: "by John Doe",
         price: "$10",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        img: "https://images.pexels.com/photos/3823186/pexels-photo-3823186.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
+        img: "https://images.pexels.com/photos/3823186/pexels-photo-3823186.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
+        link: "article1.html"
       },
       2: {
         title: "Article Title 2",
         author: "by Jane Smith",
         price: "$20",
         description: "Praesent in libero vel turpis pellentesque egestas.",
-        img: "https://images.pexels.com/photos/4534666/pexels-photo-4534666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
+        img: "https://images.pexels.com/photos/4534666/pexels-photo-4534666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
+        link: "article2.html"
       },
       3: {
         title: "Article Title 3",
         author: "by Alex Ray",
         price: "$15",
         description: "Donec augue, tortor sodales accumsan bibendum, urna ligula aliquet magna.",
-        img: "https://images.pexels.com/photos/5747793/pexels-photo-5747793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
+        img: "https://images.pexels.com/photos/5747793/pexels-photo-5747793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2",
+        link: "article3.html"
       },
       4: {
         title: "Placeholder Article",
         author: "by Placeholder",
         price: "$0",
         description: "This is a placeholder article.",
-        img: "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        img: "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        link: "article4.html"
+      },
+      5: {
+        title: "Placeholder Article",
+        author: "by Placeholder",
+        price: "$0",
+        description: "This is another placeholder article.",
+        img: "https://images.unsplash.com/photo-1593164842264-854604db2260?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        link: "article5.html"
+      },
+      6: {
+        title: "Placeholder Article",
+        author: "by Placeholder",
+        price: "$0",
+        description: "This is another placeholder article.",
+        img: "https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        link: "article6.html"
       }
     };
     articleCards.forEach(card => {
       card.addEventListener('click', () => {
         const id = card.getAttribute('data-article');
         const data = articleData[id];
-        modalImg.src = data.img;
-        modalTitle.textContent = data.title;
-        modalAuthor.textContent = data.author;
-        modalPrice.textContent = data.price;
-        modalDescription.textContent = data.description;
-        modalOverlay.classList.add('show');
+        window.location.href = data.link;
       });
-    });
-    modalClose.addEventListener('click', () => {
-      modalOverlay.classList.remove('show');
-    });
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) {
-        modalOverlay.classList.remove('show');
-      }
     });
 
     /* Navbar scroll behavior for desktop:
