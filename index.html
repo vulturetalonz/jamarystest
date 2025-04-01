@@ -31,7 +31,7 @@
       max-width: 100%;
       display: block;
     }
-
+    
     /* NAVIGATION */
     header {
       position: fixed;
@@ -40,13 +40,12 @@
       width: 100%;
       z-index: 1000;
       padding: 15px 30px;
-      /* Default mobile background */
-      background: #c3bbb7;
+      background: #c3bbb7; /* Mobile default */
       box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
-    /* Desktop mode: when header has class desktop-navbar, logo & links become white */
+    /* Desktop mode: when header has .desktop-navbar, logo and links turn white */
     header.desktop-navbar .logo,
     header.desktop-navbar nav ul li a {
       color: white;
@@ -116,14 +115,14 @@
         display: flex;
       }
     }
-
+    
     /* TOP VIDEO SLIDER WITH OVERLAY */
     .video-slider {
       position: relative;
       width: 100%;
       height: 100vh;
       overflow: hidden;
-      margin-top: 70px; /* so video is fully behind navbar */
+      margin-top: 70px; /* so video appears fully behind navbar */
     }
     .video-slider video {
       width: 100%;
@@ -136,7 +135,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(33, 24, 21, 0.4);
+      background: rgba(33,24,21,0.4);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -154,7 +153,7 @@
       font-size: 1.2rem;
       max-width: 700px;
     }
-
+    
     /* CORE VALUES SECTION */
     .core-values {
       padding: 50px 20px;
@@ -167,7 +166,7 @@
       color: #211815;
       margin-bottom: 30px;
     }
-    /* Force core boxes to stay in one row no matter the display */
+    /* Force the core boxes to remain in one row on all displays */
     .core-values-inner {
       display: flex;
       gap: 20px;
@@ -304,7 +303,7 @@
       font-size: 2rem;
       cursor: pointer;
       color: #211815;
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255,255,255,0.6);
       padding: 0.2rem 0.6rem;
       border-radius: 50%;
       z-index: 2;
@@ -312,7 +311,7 @@
       user-select: none;
     }
     .quote-arrow:hover {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255,255,255,0.9);
     }
     .left-arrow {
       left: 0;
@@ -332,6 +331,7 @@
     .quote-item {
       position: absolute;
       opacity: 0;
+      transform: translateX(50px);
       transition: opacity 0.8s ease, transform 0.8s ease;
       width: 100%;
       display: flex;
@@ -342,21 +342,12 @@
       font-size: 1.2rem;
       padding: 0 2rem;
       color: #211815;
-      transform: translateY(20px);
     }
     .quote-item.active {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(0);
     }
-    @media (max-width: 480px) {
-      .quote-arrow {
-        font-size: 1.5rem;
-      }
-      .quote-item {
-        font-size: 1rem;
-      }
-    }
-
+    
     /* ARTICLE MODAL (Instagram-style) */
     .modal-overlay {
       position: fixed;
@@ -714,7 +705,6 @@
     const arrowRight = document.getElementById('quoteArrowRight');
     let currentQuoteIndex = 0;
     let quoteTimer;
-
     function showQuote(index) {
       quoteItems.forEach(item => {
         item.classList.remove('active');
@@ -730,7 +720,7 @@
       showQuote(currentQuoteIndex);
     }
     function startQuoteTimer() {
-      quoteTimer = setInterval(nextQuote, 8000);
+      quoteTimer = setInterval(nextQuote, 4000);
     }
     function stopQuoteTimer() {
       clearInterval(quoteTimer);
@@ -757,7 +747,6 @@
     const modalPrice = document.getElementById('modalPrice');
     const modalDescription = document.getElementById('modalDescription');
     const modalClose = document.getElementById('modalClose');
-
     const articleData = {
       1: {
         title: "Article Title 1",
@@ -788,7 +777,6 @@
         img: "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       }
     };
-
     articleCards.forEach(card => {
       card.addEventListener('click', () => {
         const id = card.getAttribute('data-article');
@@ -801,7 +789,6 @@
         modalOverlay.classList.add('show');
       });
     });
-
     modalClose.addEventListener('click', () => {
       modalOverlay.classList.remove('show');
     });
@@ -825,7 +812,6 @@
     }
     updateNavbarMode();
     window.addEventListener('resize', updateNavbarMode);
-
     let lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('navbar');
@@ -833,7 +819,7 @@
         if (window.scrollY > lastScrollY) {
           navbar.style.boxShadow = 'none';
         } else {
-          navbar.style.boxShadow = '0 6px 12px rgba(33, 24, 21, 0.7)';
+          navbar.style.boxShadow = '0 6px 12px rgba(33,24,21,0.7)';
         }
       }
       lastScrollY = window.scrollY;
