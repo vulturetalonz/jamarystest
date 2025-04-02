@@ -40,7 +40,7 @@
       width: 100%;
       z-index: 1000;
       padding: 15px 30px;
-      background: #c3bbb7; /* default mobile background */
+      background: #c3bbb7; /* default for mobile */
       box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
       transition: background 0.3s ease, box-shadow 0.3s ease;
@@ -93,7 +93,6 @@
       margin: 4px 0;
       border-radius: 2px;
     }
-    /* Mobile Menu */
     .mobile-menu {
       position: absolute;
       top: 60px;
@@ -114,7 +113,6 @@
       display: flex;
       opacity: 1;
     }
-    /* New rule: apply same navbar link styling to mobile menu links */
     .mobile-menu a {
       text-transform: uppercase;
       font-family: 'Poppins', sans-serif;
@@ -212,6 +210,7 @@
       border-radius: 3px;
       transition: background 0.3s ease;
     }
+    /* Adjust core boxes to fill available space and align Learn More buttons */
     .core-value-box {
       background: #faf4f1;
       border-radius: 10px;
@@ -222,6 +221,9 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       cursor: pointer;
       color: #211815;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .core-value-box:hover {
@@ -246,6 +248,7 @@
       font-size: 0.9rem;
       border-radius: 4px;
       text-transform: uppercase;
+      margin-top: auto;
     }
 
     /* ARTICLES SECTION */
@@ -265,6 +268,19 @@
       gap: 20px;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
+    }
+    /* Apply smooth scrollbar styling to articles slider */
+    .articles-slider::-webkit-scrollbar {
+      height: 6px;
+    }
+    .articles-slider::-webkit-scrollbar-track {
+      background: #ddd7d5;
+      border-radius: 3px;
+    }
+    .articles-slider::-webkit-scrollbar-thumb {
+      background: #211815;
+      border-radius: 3px;
+      transition: background 0.3s ease;
     }
     .article-card {
       width: 300px;
@@ -671,7 +687,13 @@
       mobileMenu.classList.toggle('show');
     });
 
-    // Optional: if you still want any dropdown logic for Learn More buttons, add here
+    // Optional: if you still want any dropdown logic for "Learn More"
+    const learnMoreButtons = document.querySelectorAll('.learn-more-btn');
+    learnMoreButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Dropdown logic, if needed
+      });
+    });
 
     // Fly-in Effect on Scroll
     const flyInElements = document.querySelectorAll('.fly-in');
