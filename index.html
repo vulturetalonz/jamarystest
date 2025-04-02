@@ -7,10 +7,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     /* GLOBAL RESET & BASE */
     * {
@@ -43,7 +40,7 @@
       width: 100%;
       z-index: 1000;
       padding: 15px 30px;
-      background: #c3bbb7; /* default for mobile */
+      background: #c3bbb7; /* default mobile background */
       box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
       transition: background 0.3s ease, box-shadow 0.3s ease;
@@ -96,6 +93,7 @@
       margin: 4px 0;
       border-radius: 2px;
     }
+    /* Mobile Menu */
     .mobile-menu {
       position: absolute;
       top: 60px;
@@ -115,6 +113,14 @@
     .mobile-menu.show {
       display: flex;
       opacity: 1;
+    }
+    /* New rule: apply same navbar link styling to mobile menu links */
+    .mobile-menu a {
+      text-transform: uppercase;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: inherit;
     }
     @media (max-width: 768px) {
       nav ul {
@@ -151,7 +157,6 @@
       text-align: center;
       padding: 1rem;
     }
-    /* Landing Page Header */
     .sub-header {
       font-family: 'Poppins', sans-serif;
       font-size: 1rem;
@@ -442,9 +447,7 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    footer p {
-      margin: 10px 0;
-    }
+    footer p { margin: 10px 0; }
 
     /* FLY-IN ANIMATION */
     .fly-in {
@@ -459,29 +462,11 @@
 
     /* RESPONSIVE STYLES */
     @media (max-width: 768px) {
-      header {
-        padding: 10px 20px;
-      }
-      .video-overlay .sub-header {
-        font-size: 0.9rem;
-      }
-      .video-overlay .main-header {
-        font-size: 2.2rem;
-      }
-      .video-overlay .description {
-        font-size: 1rem;
-        padding: 0 10px;
-      }
-      .core-values-inner {
-        flex-wrap: nowrap;
-      }
-      .modal-content {
-        flex-direction: column;
-      }
-      .modal-img,
-      .modal-text {
-        flex: 1 1 100%;
-      }
+      header { padding: 10px 20px; }
+      .video-overlay .sub-header { font-size: 0.9rem; }
+      .video-overlay .main-header { font-size: 2.2rem; }
+      .video-overlay .description { font-size: 1rem; padding: 0 10px; }
+      .core-values-inner { flex-wrap: nowrap; }
     }
   </style>
 </head>
@@ -591,7 +576,7 @@
         <div class="price">$0</div>
         <p>This is a placeholder article.</p>
       </div>
-      <!-- Article Card 5 -->
+      <!-- Article Card 5 (New Placeholder) -->
       <div class="article-card" data-article="5">
         <img src="https://images.unsplash.com/photo-1593164842264-854604db2260?q=80&w=1974&auto=compress&cs=tinysrgb&fit=crop" alt="Article 5">
         <h3>Placeholder Article</h3>
@@ -599,7 +584,7 @@
         <div class="price">$0</div>
         <p>This is another placeholder article.</p>
       </div>
-      <!-- Article Card 6 -->
+      <!-- Article Card 6 (New Placeholder) -->
       <div class="article-card" data-article="6">
         <img src="https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop" alt="Article 6">
         <h3>Placeholder Article</h3>
@@ -686,13 +671,7 @@
       mobileMenu.classList.toggle('show');
     });
 
-    // Optional: if you still want the dropdown for "Learn More"
-    const learnMoreButtons = document.querySelectorAll('.learn-more-btn');
-    learnMoreButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // If you had dropdown logic, handle it here
-      });
-    });
+    // Optional: if you still want any dropdown logic for Learn More buttons, add here
 
     // Fly-in Effect on Scroll
     const flyInElements = document.querySelectorAll('.fly-in');
@@ -724,7 +703,7 @@
     playNextVideo();
     setInterval(playNextVideo, 5000);
 
-    // Quotes Slider: 4 seconds per quote
+    // Quotes Slider: 4 seconds per quote with slide effect
     const quoteItems = document.querySelectorAll('.quote-item');
     const arrowLeft = document.getElementById('quoteArrowLeft');
     const arrowRight = document.getElementById('quoteArrowRight');
@@ -822,13 +801,11 @@
       card.addEventListener('click', () => {
         const id = card.getAttribute('data-article');
         const data = articleData[id];
-        // Fill modal
         modalImg.src = data.img;
         modalTitle.textContent = data.title;
         modalAuthor.textContent = data.author;
         modalPrice.textContent = data.price;
         modalDescription.textContent = data.description;
-        // Show the modal
         modalOverlay.classList.add('show');
       });
     });
@@ -856,7 +833,6 @@
     }
     updateNavbarMode();
     window.addEventListener('resize', updateNavbarMode);
-
     let lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('navbar');
