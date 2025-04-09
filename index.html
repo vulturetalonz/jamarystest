@@ -7,8 +7,8 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" 
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap"
     rel="stylesheet"
   >
   <style>
@@ -34,7 +34,7 @@
       max-width: 100%;
       display: block;
     }
-
+    
     /* NAVIGATION */
     header {
       position: fixed;
@@ -43,7 +43,7 @@
       width: 100%;
       z-index: 1000;
       padding: 15px 30px;
-      background: #c3bbb7; 
+      background: #c3bbb7;
       box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
       transition: background 0.3s ease, box-shadow 0.3s ease;
@@ -131,7 +131,7 @@
         display: flex;
       }
     }
-
+    
     /* TOP VIDEO SLIDER WITH OVERLAY */
     .video-slider {
       position: relative;
@@ -180,11 +180,10 @@
       margin: 0 auto;
       line-height: 1.4;
     }
-
-    /* CUSTOM BUTTON (lift effect) */
+    
+    /* CUSTOM BUTTON (Lift Effect) */
     .lift-btn {
       display: inline-block;
-      margin-top: 20px;
       padding: 0.7rem 1.2rem;
       font-family: 'Poppins', sans-serif;
       font-size: 0.9rem;
@@ -206,7 +205,7 @@
       left: 0;
       background: #211815;
       z-index: -1;
-      transition: all 0.4s ease;
+      transition: height 0.4s ease;
     }
     .lift-btn:hover::before {
       height: 100%;
@@ -214,7 +213,7 @@
     .lift-btn:hover {
       color: #ebe6e4;
     }
-
+    
     /* CORE VALUES SECTION */
     .core-values {
       padding: 50px 20px;
@@ -286,7 +285,7 @@
       text-transform: uppercase;
       margin-top: auto;
     }
-
+    
     /* ARTICLES SECTION */
     .articles-section {
       padding: 50px 20px;
@@ -349,7 +348,7 @@
       margin: 0 10px 15px;
       font-size: 1rem;
     }
-
+    
     /* QUOTES SLIDER SECTION */
     .quotes-section {
       padding: 50px 20px;
@@ -419,45 +418,72 @@
         font-size: 1rem;
       }
     }
-
-    /*
-      ABOUT US SECTION:
-      Uses a background image with text in lower-left
-      and a custom button in lower-right corner
-    */
+    
+    /* ABOUT US SECTION */
     .about-us-section {
       position: relative;
-      width: 100%;
-      min-height: 400px;
-      background: url('https://images.pexels.com/photos/3823039/pexels-photo-3823039.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')
-                 no-repeat center center;
-      background-size: cover;
+      margin: 40px 20px;
+      border-radius: 20px 0 0 20px; /* Rounded bottom-left and top-right */
       overflow: hidden;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    /* Container for the text in lower-left corner */
+    .about-us-section img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .about-us-section .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.3);
+    }
     .about-us-content {
       position: absolute;
       bottom: 20px;
       left: 20px;
-      color: #fff;
-      max-width: 400px;
+      color: #211815; /* darker text */
+      max-width: 60%;
     }
     .about-us-content h2 {
       font-family: 'Cormorant', serif;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       margin-bottom: 10px;
     }
     .about-us-content p {
-      font-size: 0.95rem;
-      line-height: 1.6;
+      font-size: 0.85rem;
+      line-height: 1.4;
     }
-    /* Button in lower-right corner */
     .about-us-btn {
       position: absolute;
       bottom: 20px;
       right: 20px;
     }
-
+    
+    /* FOOTER */
+    footer {
+      padding: 40px 20px;
+      text-align: center;
+      background: #ddd7d5;
+      color: #211815;
+    }
+    footer .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    footer .footer-content a {
+      color: #211815;
+      text-decoration: underline;
+      margin: 0 5px;
+    }
+    footer p {
+      margin: 10px 0;
+    }
+    
     /* ARTICLE MODAL (Instagram-style) */
     .modal-overlay {
       position: fixed;
@@ -527,25 +553,7 @@
       cursor: pointer;
       color: #211815;
     }
-
-    /* FOOTER */
-    footer {
-      padding: 40px 20px;
-      text-align: center;
-      background: #ddd7d5;
-      color: #211815;
-    }
-    footer .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    footer .footer-content a {
-      color: #211815;
-      text-decoration: underline;
-      margin: 0 5px;
-    }
-    footer p { margin: 10px 0; }
-
+    
     /* FLY-IN ANIMATION */
     .fly-in {
       opacity: 0;
@@ -556,7 +564,7 @@
       opacity: 1;
       transform: translateY(0);
     }
-
+    
     /* RESPONSIVE STYLES */
     @media (max-width: 768px) {
       header {
@@ -575,11 +583,9 @@
       .core-values-inner {
         flex-wrap: nowrap;
       }
-      /* Adjust about-us-section text for small screens */
       .about-us-content {
         left: 10px;
-        right: 10px;
-        bottom: 60px;
+        bottom: 40px;
         max-width: 80%;
       }
       .about-us-content h2 {
@@ -621,8 +627,8 @@
       </div>
     </div>
   </header>
-
-  <!-- TOP VIDEO SLIDER (SINGLE LOOPING VIDEO) -->
+  
+  <!-- TOP VIDEO SLIDER WITH OVERLAY -->
   <section class="video-slider" id="videoSlider">
     <video id="topVideo" autoplay muted loop playsinline>
       <source src="https://raw.githubusercontent.com/vulturetalonz/jamarystest/main/BA30CCE4-61DD-43EE-AF28-74B22AED7C89.mov" type="video/quicktime">
@@ -636,7 +642,7 @@
       </p>
     </div>
   </section>
-
+  
   <!-- CORE VALUES SECTION -->
   <section class="core-values" id="coreValues">
     <h2>Our Core Values</h2>
@@ -661,7 +667,7 @@
       </div>
     </div>
   </section>
-
+  
   <!-- ARTICLES SECTION -->
   <section class="articles-section" id="articles">
     <h2>Our Latest Highlights</h2>
@@ -716,7 +722,7 @@
       </div>
     </div>
   </section>
-
+  
   <!-- QUOTES SLIDER SECTION -->
   <section class="quotes-section">
     <div class="quotes-container">
@@ -756,22 +762,23 @@
       <div class="quote-arrow right-arrow" id="quoteArrowRight">&#10095;</div>
     </div>
   </section>
-
-  <!-- ABOUT US SECTION (BACKGROUND IMAGE, TEXT LOWER-LEFT, BUTTON LOWER-RIGHT) -->
+  
+  <!-- ABOUT US SECTION -->
   <section class="about-us-section" id="aboutUs">
-    <!-- Text in lower-left corner -->
-    <div class="about-us-content">
-      <h2>About Us</h2>
+    <!-- The background image is set via CSS in this section -->
+    <img src="https://images.pexels.com/photos/4226802/pexels-photo-4226802.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="About Us Background" style="display:block; width:100%; height:auto; border-top-right-radius: 20px; border-bottom-left-radius: 20px; margin: 20px auto;">
+    <!-- Overlay container for text and button -->
+    <div class="about-us-content" style="position: absolute; bottom: 20px; left: 20px; color: #211815; max-width: 40%; font-size: 0.85rem;">
+      <h2 style="font-family: 'Cormorant', serif; font-size: 1.4rem; margin-bottom: 8px;">About Us</h2>
       <p>
         Step into a space designed for your growth and transformation. At BodyMindSoulCLUB, we empower you to unlock your full potential with curated content, tools, and experiences that help you break through barriers and align with your true self. Whether you're seeking new skills, deeper awareness, or creative inspiration, we provide the resources and community you need to thrive. Embrace a life of fulfillment, balance, and lasting happiness—because you deserve to live at your highest potential.
       </p>
     </div>
-    <!-- Button in lower-right corner -->
-    <button class="lift-btn about-us-btn">
+    <button class="lift-btn about-us-btn" style="position: absolute; bottom: 20px; right: 20px;">
       More Info →
     </button>
   </section>
-
+  
   <!-- ARTICLE MODAL (Instagram-style) -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
@@ -787,7 +794,7 @@
       </div>
     </div>
   </div>
-
+  
   <!-- FOOTER -->
   <footer>
     <div class="footer-content">
@@ -798,7 +805,7 @@
       <p>&copy; 2025 BMS. All Rights Reserved.</p>
     </div>
   </footer>
-
+  
   <!-- JAVASCRIPT -->
   <script>
     // Burger Menu Toggle
@@ -807,7 +814,7 @@
     hamburger.addEventListener('click', () => {
       mobileMenu.classList.toggle('show');
     });
-
+  
     // Fly-in Effect on Scroll
     const flyInElements = document.querySelectorAll('.fly-in');
     function handleScroll() {
@@ -820,8 +827,8 @@
     }
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-
-    // Quotes Slider: 4 seconds per quote, with slide effect
+  
+    // Quotes Slider: 4 seconds per quote with slide effect
     const quoteItems = document.querySelectorAll('.quote-item');
     const arrowLeft = document.getElementById('quoteArrowLeft');
     const arrowRight = document.getElementById('quoteArrowRight');
@@ -859,7 +866,7 @@
     });
     showQuote(currentQuoteIndex);
     startQuoteTimer();
-
+  
     // Article Cards -> Instagram-style Modal
     const articleCards = document.querySelectorAll('.article-card');
     const modalOverlay = document.getElementById('modalOverlay');
@@ -869,7 +876,7 @@
     const modalPrice = document.getElementById('modalPrice');
     const modalDescription = document.getElementById('modalDescription');
     const modalClose = document.getElementById('modalClose');
-
+  
     const articleData = {
       1: {
         title: "Article Title 1",
@@ -914,12 +921,11 @@
         img: "https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop"
       }
     };
-
+  
     articleCards.forEach(card => {
       card.addEventListener('click', () => {
         const id = card.getAttribute('data-article');
         const data = articleData[id];
-        // Fill the modal
         modalImg.src = data.img;
         modalTitle.textContent = data.title;
         modalAuthor.textContent = data.author;
@@ -928,7 +934,7 @@
         modalOverlay.classList.add('show');
       });
     });
-
+  
     modalClose.addEventListener('click', () => {
       modalOverlay.classList.remove('show');
     });
@@ -937,7 +943,7 @@
         modalOverlay.classList.remove('show');
       }
     });
-
+  
     /* Navbar scroll behavior for desktop:
        - In desktop mode, header becomes transparent with white text.
        - Remove drop shadow when scrolling down; add it when scrolling up.
@@ -952,7 +958,7 @@
     }
     updateNavbarMode();
     window.addEventListener('resize', updateNavbarMode);
-
+  
     let lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('navbar');
