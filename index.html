@@ -7,7 +7,10 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" 
+    rel="stylesheet"
+  >
   <style>
     /* GLOBAL RESET & BASE */
     * {
@@ -40,7 +43,7 @@
       width: 100%;
       z-index: 1000;
       padding: 15px 30px;
-      background: #c3bbb7; /* default for mobile */
+      background: #c3bbb7; /* default mobile background */
       box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
       transition: background 0.3s ease, box-shadow 0.3s ease;
@@ -93,7 +96,6 @@
       margin: 4px 0;
       border-radius: 2px;
     }
-    /* Mobile Menu */
     .mobile-menu {
       position: absolute;
       top: 60px;
@@ -114,7 +116,6 @@
       display: flex;
       opacity: 1;
     }
-    /* Apply same styling to mobile menu links */
     .mobile-menu a {
       text-transform: uppercase;
       font-family: 'Poppins', sans-serif;
@@ -157,7 +158,6 @@
       text-align: center;
       padding: 1rem;
     }
-    /* Landing Page Header */
     .sub-header {
       font-family: 'Poppins', sans-serif;
       font-size: 1rem;
@@ -179,6 +179,40 @@
       max-width: 700px;
       margin: 0 auto;
       line-height: 1.4;
+    }
+
+    /* CUSTOM BUTTON (lift effect) */
+    .lift-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 0.7rem 1.2rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      color: #211815;
+      background: transparent;
+      border: 2px solid #211815;
+      border-radius: 30px;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .lift-btn::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 0%;
+      bottom: 0;
+      left: 0;
+      background: #211815;
+      z-index: -1;
+      transition: all 0.4s ease;
+    }
+    .lift-btn:hover::before {
+      height: 100%;
+    }
+    .lift-btn:hover {
+      color: #ebe6e4; /* text color on hover */
     }
 
     /* CORE VALUES SECTION */
@@ -386,6 +420,26 @@
       }
     }
 
+    /* ABOUT US SECTION (NEW) */
+    .about-us-section {
+      padding: 50px 20px;
+      background: #fafafa;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .about-us-section h2 {
+      font-family: 'Cormorant', serif;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #211815;
+    }
+    .about-us-section p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #211815;
+    }
+
     /* ARTICLE MODAL (Instagram-style) */
     .modal-overlay {
       position: fixed;
@@ -467,14 +521,12 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    footer p { 
-      margin: 10px 0; 
-    }
     footer .footer-content a {
       color: #211815;
       text-decoration: underline;
       margin: 0 5px;
     }
+    footer p { margin: 10px 0; }
 
     /* FLY-IN ANIMATION */
     .fly-in {
@@ -489,11 +541,22 @@
 
     /* RESPONSIVE STYLES */
     @media (max-width: 768px) {
-      header { padding: 10px 20px; }
-      .video-overlay .sub-header { font-size: 0.9rem; }
-      .video-overlay .main-header { font-size: 2.2rem; }
-      .video-overlay .description { font-size: 1rem; padding: 0 10px; }
-      .core-values-inner { flex-wrap: nowrap; }
+      header {
+        padding: 10px 20px;
+      }
+      .video-overlay .sub-header {
+        font-size: 0.9rem;
+      }
+      .video-overlay .main-header {
+        font-size: 2.2rem;
+      }
+      .video-overlay .description {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+      .core-values-inner {
+        flex-wrap: nowrap;
+      }
     }
   </style>
 </head>
@@ -504,14 +567,14 @@
       <div class="logo">BMS</div>
       <nav>
         <ul>
-          <li><a href="#">GET TO KNOW</a></li>
-          <li><a href="#">COLLABORATE WITH US</a></li>
-          <li><a href="#">BODY</a></li>
-          <li><a href="#">MIND</a></li>
-          <li><a href="#">SOUL</a></li>
-          <li><a href="#">OUR APP</a></li>
-          <li><a href="#">PERSONAL ADVICE</a></li>
-          <li><a href="#">FORUM</a></li>
+          <li><a href="get-to-know.html">GET TO KNOW</a></li>
+          <li><a href="collaborate.html">COLLABORATE WITH US</a></li>
+          <li><a href="body.html">BODY</a></li>
+          <li><a href="mind.html">MIND</a></li>
+          <li><a href="soul.html">SOUL</a></li>
+          <li><a href="our-app.html">OUR APP</a></li>
+          <li><a href="personal-advice.html">PERSONAL ADVICE</a></li>
+          <li><a href="forum.html">FORUM</a></li>
         </ul>
       </nav>
       <div class="hamburger" id="hamburger">
@@ -529,8 +592,7 @@
 
   <!-- TOP VIDEO SLIDER WITH OVERLAY -->
   <section class="video-slider" id="videoSlider">
-    <video id="topVideo" autoplay muted playsinline>
-      <!-- Use the GitHub raw URL for the .mov video -->
+    <video id="topVideo" autoplay muted loop playsinline>
       <source src="https://raw.githubusercontent.com/vulturetalonz/jamarystest/main/BA30CCE4-61DD-43EE-AF28-74B22AED7C89.mov" type="video/quicktime">
       Your browser does not support the video tag.
     </video>
@@ -540,6 +602,10 @@
       <p class="description">
         A space designed for growth and transformation. Unlock your full potential with curated content, tools, and experiences that break barriers.
       </p>
+      <!-- CUSTOM BUTTON below main header -->
+      <button class="lift-btn" onclick="document.getElementById('aboutUs').scrollIntoView({behavior: 'smooth'})">
+        MORE INFO →
+      </button>
     </div>
   </section>
 
@@ -572,7 +638,7 @@
   <section class="articles-section" id="articles">
     <h2>Our Latest Highlights</h2>
     <div class="articles-slider" id="articlesSlider">
-      <!-- Article Card 1 -->
+      <!-- Article Cards... -->
       <div class="article-card" data-article="1">
         <img src="https://images.pexels.com/photos/3823186/pexels-photo-3823186.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Article 1">
         <h3>Article Title 1</h3>
@@ -580,7 +646,7 @@
         <div class="price">$10</div>
         <p>Lorem ipsum dolor sit amet.</p>
       </div>
-      <!-- Article Card 2 -->
+      <!-- More article cards from your code ... -->
       <div class="article-card" data-article="2">
         <img src="https://images.pexels.com/photos/4534666/pexels-photo-4534666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Article 2">
         <h3>Article Title 2</h3>
@@ -588,7 +654,6 @@
         <div class="price">$20</div>
         <p>Praesent in libero vel turpis.</p>
       </div>
-      <!-- Article Card 3 -->
       <div class="article-card" data-article="3">
         <img src="https://images.pexels.com/photos/5747793/pexels-photo-5747793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Article 3">
         <h3>Article Title 3</h3>
@@ -596,7 +661,6 @@
         <div class="price">$15</div>
         <p>Donec augue, tortor sodales accumsan.</p>
       </div>
-      <!-- Article Card 4 (Placeholder) -->
       <div class="article-card" data-article="4">
         <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop" alt="Article 4">
         <h3>Placeholder Article</h3>
@@ -604,7 +668,6 @@
         <div class="price">$0</div>
         <p>This is a placeholder article.</p>
       </div>
-      <!-- Article Card 5 (New Placeholder) -->
       <div class="article-card" data-article="5">
         <img src="https://images.unsplash.com/photo-1593164842264-854604db2260?q=80&w=1974&auto=compress&cs=tinysrgb&fit=crop" alt="Article 5">
         <h3>Placeholder Article</h3>
@@ -612,7 +675,6 @@
         <div class="price">$0</div>
         <p>This is another placeholder article.</p>
       </div>
-      <!-- Article Card 6 (New Placeholder) -->
       <div class="article-card" data-article="6">
         <img src="https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop" alt="Article 6">
         <h3>Placeholder Article</h3>
@@ -626,9 +688,7 @@
   <!-- QUOTES SLIDER SECTION -->
   <section class="quotes-section">
     <div class="quotes-container">
-      <!-- Left arrow -->
       <div class="quote-arrow left-arrow" id="quoteArrowLeft">&#10094;</div>
-      <!-- Quotes wrapper -->
       <div class="quote-slide" id="quoteSlide">
         <div class="quote-item">
           <p>"ELEVATE YOUR MIND, EMPOWER YOUR SOUL, AND UNLOCK THE BEST VERSION OF YOURSELF."</p>
@@ -661,9 +721,16 @@
           <p>"YOU ARE THE ARCHITECT OF YOUR LIFE. WE’RE HERE TO HELP YOU BUILD IT."</p>
         </div>
       </div>
-      <!-- Right arrow -->
       <div class="quote-arrow right-arrow" id="quoteArrowRight">&#10095;</div>
     </div>
+  </section>
+
+  <!-- ABOUT US SECTION -->
+  <section class="about-us-section" id="aboutUs">
+    <h2>About Us</h2>
+    <p>
+      Step into a space designed for your growth and transformation. At BodyMindSoulCLUB, we empower you to unlock your full potential with curated content, tools, and experiences that help you break through barriers and align with your true self. Whether you're seeking new skills, deeper awareness, or creative inspiration, we provide the resources and community you need to thrive. Embrace a life of fulfillment, balance, and lasting happiness—because you deserve to live at your highest potential.
+    </p>
   </section>
 
   <!-- ARTICLE MODAL (Instagram-style) -->
@@ -702,14 +769,6 @@
       mobileMenu.classList.toggle('show');
     });
 
-    // Optional: if dropdown logic for "Learn More" is needed
-    const learnMoreButtons = document.querySelectorAll('.learn-more-btn');
-    learnMoreButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Dropdown logic, if needed
-      });
-    });
-
     // Fly-in Effect on Scroll
     const flyInElements = document.querySelectorAll('.fly-in');
     function handleScroll() {
@@ -722,21 +781,6 @@
     }
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-
-    // Top Video Slider: Cycle through videos every 5 seconds
-    const topVideo = document.getElementById('topVideo');
-    const videoSources = [
-      "https://raw.githubusercontent.com/vulturetalonz/jamarystest/main/BA30CCE4-61DD-43EE-AF28-74B22AED7C89.mov"
-    ];
-    let currentVideo = 0;
-    function playNextVideo() {
-      topVideo.src = videoSources[currentVideo];
-      topVideo.currentTime = 0;
-      topVideo.play();
-      currentVideo = (currentVideo + 1) % videoSources.length;
-    }
-    playNextVideo();
-    setInterval(playNextVideo, 5000);
 
     // Quotes Slider: 4 seconds per quote with slide effect
     const quoteItems = document.querySelectorAll('.quote-item');
@@ -836,11 +880,13 @@
       card.addEventListener('click', () => {
         const id = card.getAttribute('data-article');
         const data = articleData[id];
+        // Fill the modal with data
         modalImg.src = data.img;
         modalTitle.textContent = data.title;
         modalAuthor.textContent = data.author;
         modalPrice.textContent = data.price;
         modalDescription.textContent = data.description;
+        // Show the modal
         modalOverlay.classList.add('show');
       });
     });
@@ -868,6 +914,7 @@
     }
     updateNavbarMode();
     window.addEventListener('resize', updateNavbarMode);
+
     let lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('navbar');
