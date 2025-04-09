@@ -40,7 +40,7 @@
       width: 100%;
       z-index: 1000;
       padding: 15px 30px;
-      background: #c3bbb7;
+      background: #c3bbb7; /* default for mobile */
       box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
       transition: background 0.3s ease, box-shadow 0.3s ease;
@@ -93,6 +93,7 @@
       margin: 4px 0;
       border-radius: 2px;
     }
+    /* Mobile Menu */
     .mobile-menu {
       position: absolute;
       top: 60px;
@@ -113,6 +114,7 @@
       display: flex;
       opacity: 1;
     }
+    /* Apply same styling to mobile menu links */
     .mobile-menu a {
       text-transform: uppercase;
       font-family: 'Poppins', sans-serif;
@@ -155,6 +157,7 @@
       text-align: center;
       padding: 1rem;
     }
+    /* Landing Page Header */
     .sub-header {
       font-family: 'Poppins', sans-serif;
       font-size: 1rem;
@@ -464,7 +467,14 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    footer p { margin: 10px 0; }
+    footer p { 
+      margin: 10px 0; 
+    }
+    footer .footer-content a {
+      color: #211815;
+      text-decoration: underline;
+      margin: 0 5px;
+    }
 
     /* FLY-IN ANIMATION */
     .fly-in {
@@ -520,7 +530,8 @@
   <!-- TOP VIDEO SLIDER WITH OVERLAY -->
   <section class="video-slider" id="videoSlider">
     <video id="topVideo" autoplay muted playsinline>
-      <source src="https://videos.pexels.com/video-files/6998414/6998414-uhd_2560_1440_30fps.mp4" type="video/mp4">
+      <!-- Use the GitHub raw URL for the .mov video -->
+      <source src="https://raw.githubusercontent.com/vulturetalonz/jamarystest/main/BA30CCE4-61DD-43EE-AF28-74B22AED7C89.mov" type="video/quicktime">
       Your browser does not support the video tag.
     </video>
     <div class="video-overlay">
@@ -674,7 +685,10 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-content">
-      <p>Cookies | Credits | Terms & Conditions | Privacy Policy</p>
+      <a href="cookies.html">Cookies</a> | 
+      <a href="credits.html">Credits</a> | 
+      <a href="terms.html">Terms &amp; Conditions</a> | 
+      <a href="privacy.html">Privacy Policy</a>
       <p>&copy; 2025 BMS. All Rights Reserved.</p>
     </div>
   </footer>
@@ -688,7 +702,7 @@
       mobileMenu.classList.toggle('show');
     });
 
-    // Optional: if you still want any dropdown logic for "Learn More"
+    // Optional: if dropdown logic for "Learn More" is needed
     const learnMoreButtons = document.querySelectorAll('.learn-more-btn');
     learnMoreButtons.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -712,9 +726,7 @@
     // Top Video Slider: Cycle through videos every 5 seconds
     const topVideo = document.getElementById('topVideo');
     const videoSources = [
-      "https://videos.pexels.com/video-files/6998414/6998414-uhd_2560_1440_30fps.mp4",
-      "https://videos.pexels.com/video-files/29894402/12833001_2560_1440_30fps.mp4",
-      "https://videos.pexels.com/video-files/31245009/13344918_1920_1080_25fps.mp4"
+      "https://raw.githubusercontent.com/vulturetalonz/jamarystest/main/BA30CCE4-61DD-43EE-AF28-74B22AED7C89.mov"
     ];
     let currentVideo = 0;
     function playNextVideo() {
