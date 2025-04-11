@@ -7,10 +7,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" 
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     /* GLOBAL RESET & BASE */
     * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
@@ -23,8 +20,8 @@
     }
     a { text-decoration: none; color: inherit; }
     img, video { display: block; max-width: 100%; }
-
-    /* HEADER */
+    
+    /* HEADER – restored to original full-width top layout */
     header {
       position: fixed;
       top: 0;
@@ -40,8 +37,8 @@
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
     }
     .logo {
       font-family: 'Cormorant', serif;
@@ -55,15 +52,10 @@
       font-size: 0.8rem;
     }
     nav li a { text-transform: uppercase; }
-    /* Mobile */
+    /* Mobile menu: same hyperlinks as desktop */
     .hamburger { display: none; flex-direction: column; cursor: pointer; }
-    .hamburger span {
-      width: 25px; height: 3px; background: #211815; margin: 4px 0; border-radius: 2px;
-    }
+    .hamburger span { width: 25px; height: 3px; background: #211815; margin: 4px 0; border-radius: 2px; }
     .mobile-menu {
-      display: none;
-      flex-direction: column;
-      gap: 15px;
       position: absolute;
       top: 60px;
       right: 30px;
@@ -71,9 +63,12 @@
       padding: 15px;
       border-radius: 5px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 1100;
       opacity: 0;
       transition: opacity 0.4s ease;
-      z-index: 1100;
     }
     .mobile-menu.show { display: flex; opacity: 1; }
     .mobile-menu a {
@@ -82,12 +77,12 @@
       font-size: 0.8rem;
       font-weight: 600;
     }
-    @media (max-width: 768px) {
+    @media (max-width:768px) {
       nav ul { display: none; }
       .hamburger { display: flex; }
     }
     
-    /* HERO SECTION */
+    /* HERO SECTION using the new Pexels video */
     .video-slider {
       position: relative;
       width: 100%;
@@ -99,6 +94,7 @@
       height: 100%;
       object-fit: cover;
     }
+    /* Simple overlay – keep text in bottom-left as before */
     .video-overlay {
       position: absolute;
       bottom: 20px;
@@ -129,7 +125,76 @@
       line-height: 1.4;
     }
     
-    /* CORE VALUES SECTION */
+    /* FLOATING PLAY BUTTON – stays in lower-right, with drop shadow */
+    .video-play-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #211815;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 2000;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .video-play-button svg {
+      fill: #ebe6e4;
+      width: 24px;
+      height: 24px;
+    }
+    .video-play-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    }
+    @media (max-width:480px) {
+      .video-play-button { width: 50px; height: 50px; }
+      .video-play-button svg { width: 20px; height: 20px; }
+    }
+    
+    /* VIDEO MODAL – only the video, no white gaps */
+    .modal-overlay.video-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.video-modal.show { display: flex; opacity: 1; }
+    .modal-content {
+      width: 90%;
+      max-width: 800px;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .modal-video { width: 100%; height: auto; object-fit: cover; }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #ebe6e4;
+      cursor: pointer;
+      z-index: 10;
+    }
+    
+    /* CORE VALUES SECTION – restored to earlier approved widths */
     .core-values {
       padding: 50px 20px;
       background: #f0e9e6;
@@ -186,7 +251,7 @@
       font-size: 0.95rem;
       margin-bottom: 1rem;
     }
-    /* Custom Learn More Button with Slide-Up Hover Effect */
+    /* Custom Learn More Button with Slide-Up Animation */
     .learn-more-btn {
       background: #211815;
       color: #ebe6e4;
@@ -329,7 +394,10 @@
       color: #211815;
       text-transform: uppercase;
     }
-    .quote-item.active { opacity: 1; transform: translateX(0); }
+    .quote-item.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
     @media (max-width:480px) {
       .quote-arrow { font-size: 1.5rem; }
       .quote-item { font-size: 1rem; }
@@ -340,8 +408,7 @@
       position: relative;
       margin: 40px 20px;
       max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
@@ -350,8 +417,9 @@
       width: 100%;
       height: auto;
       border-radius: 20px;
+      margin: 0;
     }
-    /* Remove extra overlay/backdrop */
+    /* Remove any additional backdrop overlay */
     .about-us-content {
       position: absolute;
       bottom: 20px;
@@ -771,48 +839,12 @@
     const modalDescription = document.getElementById('modalDescription');
     const modalClose = document.getElementById('modalClose');
     const articleData = {
-      1: {
-        title: "Article Title 1",
-        author: "by John Doe",
-        price: "$10",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        img: "https://images.pexels.com/photos/3823186/pexels-photo-3823186.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
-      },
-      2: {
-        title: "Article Title 2",
-        author: "by Jane Smith",
-        price: "$20",
-        description: "Praesent in libero vel turpis pellentesque egestas.",
-        img: "https://images.pexels.com/photos/4534666/pexels-photo-4534666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
-      },
-      3: {
-        title: "Article Title 3",
-        author: "by Alex Ray",
-        price: "$15",
-        description: "Donec augue, tortor sodales accumsan bibendum, urna ligula aliquet magna.",
-        img: "https://images.pexels.com/photos/5747793/pexels-photo-5747793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
-      },
-      4: {
-        title: "Placeholder Article",
-        author: "by Placeholder",
-        price: "$0",
-        description: "This is a placeholder article.",
-        img: "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop"
-      },
-      5: {
-        title: "Placeholder Article",
-        author: "by Placeholder",
-        price: "$0",
-        description: "This is another placeholder article.",
-        img: "https://images.unsplash.com/photo-1593164842264-854604db2260?q=80&w=1974&auto=compress&cs=tinysrgb&fit=crop"
-      },
-      6: {
-        title: "Placeholder Article",
-        author: "by Placeholder",
-        price: "$0",
-        description: "This is another placeholder article.",
-        img: "https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop"
-      }
+      1: { title: "Article Title 1", author: "by John Doe", price: "$10", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", img: "https://images.pexels.com/photos/3823186/pexels-photo-3823186.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" },
+      2: { title: "Article Title 2", author: "by Jane Smith", price: "$20", description: "Praesent in libero vel turpis pellentesque egestas.", img: "https://images.pexels.com/photos/4534666/pexels-photo-4534666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" },
+      3: { title: "Article Title 3", author: "by Alex Ray", price: "$15", description: "Donec augue, tortor sodales accumsan bibendum, urna ligula aliquet magna.", img: "https://images.pexels.com/photos/5747793/pexels-photo-5747793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" },
+      4: { title: "Placeholder Article", author: "by Placeholder", price: "$0", description: "This is a placeholder article.", img: "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop" },
+      5: { title: "Placeholder Article", author: "by Placeholder", price: "$0", description: "This is another placeholder article.", img: "https://images.unsplash.com/photo-1593164842264-854604db2260?q=80&w=1974&auto=compress&cs=tinysrgb&fit=crop" },
+      6: { title: "Placeholder Article", author: "by Placeholder", price: "$0", description: "This is another placeholder article.", img: "https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop" }
     };
     articleCards.forEach(card => {
       card.addEventListener('click', () => {
@@ -827,7 +859,7 @@
       });
     });
     modalClose.addEventListener('click', () => { modalOverlay.classList.remove('show'); });
-    modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) { modalOverlay.classList.remove('show'); } });
+    modalOverlay.addEventListener('click', e => { if(e.target === modalOverlay) modalOverlay.classList.remove('show'); });
     
     // Video Modal Functions
     function openVideoModal() {
@@ -841,7 +873,7 @@
     // Navbar Scroll Behavior
     function updateNavbarMode() {
       const navbar = document.getElementById('navbar');
-      if (window.innerWidth >= 768) { navbar.classList.add('desktop-navbar'); }
+      if (window.innerWidth >= 768) { navbar.classList.add('desktop-navbar'); } 
       else { navbar.classList.remove('desktop-navbar'); }
     }
     updateNavbarMode();
