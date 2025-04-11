@@ -7,10 +7,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" 
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     /* GLOBAL RESET & BASE */
     * {
@@ -31,10 +28,10 @@
       color: inherit;
     }
     img, video {
-      max-width: 100%;
       display: block;
+      max-width: 100%;
     }
-    
+
     /* NAVIGATION */
     header {
       position: fixed;
@@ -123,8 +120,8 @@
       nav ul { display: none; }
       .hamburger { display: flex; }
     }
-    
-    /* HERO SECTION (with Video Background) */
+
+    /* HERO SECTION */
     .video-slider {
       position: relative;
       width: 100%;
@@ -138,8 +135,10 @@
     }
     .video-overlay {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(33,24,21,0.4);
       display: flex;
       flex-direction: column;
@@ -171,7 +170,7 @@
       line-height: 1.4;
     }
     
-    /* FLOATING VIDEO PLAY BUTTON */
+    /* FLOATING PLAY BUTTON */
     .video-play-button {
       position: fixed;
       bottom: 20px;
@@ -198,7 +197,6 @@
       transform: scale(1.1);
       box-shadow: 0 6px 12px rgba(0,0,0,0.4);
     }
-    /* Responsive adjustments for play button */
     @media (max-width: 480px) {
       .video-play-button {
         width: 50px;
@@ -211,11 +209,12 @@
     }
     
     /* VIDEO MODAL */
-    .modal-overlay,
     .modal-overlay.video-modal {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       background: rgba(0,0,0,0.7);
       backdrop-filter: blur(5px);
       display: none;
@@ -225,50 +224,23 @@
       opacity: 0;
       transition: opacity 0.3s ease;
     }
-    .modal-overlay.show,
     .modal-overlay.video-modal.show {
       display: flex;
       opacity: 1;
     }
     .modal-content {
-      background: #fff;
+      background: #000; /* No white gap */
       display: flex;
-      flex-direction: row;
-      max-width: 800px;
+      flex-direction: column;
       width: 90%;
+      max-width: 800px;
       border-radius: 8px;
       overflow: hidden;
     }
-    .modal-img {
-      flex: 1 1 50%;
-      min-width: 300px;
-      background: #000;
-    }
-    .modal-img img,
-    .modal-img video {
+    .modal-video {
       width: 100%;
-      height: 100%;
+      height: auto;
       object-fit: cover;
-    }
-    .modal-text {
-      flex: 1 1 50%;
-      padding: 2rem;
-      position: relative;
-      color: #211815;
-    }
-    .modal-text h3 {
-      font-family: 'Cormorant', serif;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .modal-text .author,
-    .modal-text .price {
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-    }
-    .modal-text p {
-      font-size: 0.95rem;
-      line-height: 1.6;
     }
     .modal-close {
       position: absolute;
@@ -278,7 +250,8 @@
       border: none;
       font-size: 1.5rem;
       cursor: pointer;
-      color: #211815;
+      color: #ebe6e4;
+      z-index: 10;
     }
     
     /* CORE VALUES SECTION */
@@ -479,12 +452,8 @@
       transform: translateX(0);
     }
     @media (max-width: 480px) {
-      .quote-arrow {
-        font-size: 1.5rem;
-      }
-      .quote-item {
-        font-size: 1rem;
-      }
+      .quote-arrow { font-size: 1.5rem; }
+      .quote-item { font-size: 1rem; }
     }
     
     /* ABOUT US SECTION */
@@ -499,19 +468,18 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
     .about-us-section img {
+      display: block;
       width: 100%;
       height: auto;
-      display: block;
       border-radius: 20px;
+      margin: 0;
     }
     .about-us-section::after {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
-      /* Gradient: lighter at top, subtle shadow at bottom */
       background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0.2) 100%);
       pointer-events: none;
     }
@@ -557,8 +525,76 @@
       text-decoration: underline;
       margin: 0 5px;
     }
-    footer p {
-      margin: 10px 0;
+    footer p { margin: 10px 0; }
+    
+    /* MODAL for Articles (Instagram-style) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.show {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-content {
+      background: #fff;
+      display: flex;
+      flex-direction: row;
+      max-width: 800px;
+      width: 90%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .modal-img {
+      flex: 1 1 50%;
+      min-width: 300px;
+      background: #000;
+    }
+    .modal-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .modal-text {
+      flex: 1 1 50%;
+      padding: 2rem;
+      position: relative;
+      color: #211815;
+    }
+    .modal-text h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .modal-text .author,
+    .modal-text .price {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .modal-text p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #211815;
     }
     
     /* FLY-IN ANIMATION */
@@ -624,7 +660,7 @@
   <!-- TOP VIDEO SLIDER (Hero Section) -->
   <section class="video-slider" id="videoSlider">
     <video id="topVideo" autoplay muted loop playsinline>
-      <source src="https://raw.githubusercontent.com/vulturetalonz/jamarystest/main/BA30CCE4-61DD-43EE-AF28-74B22AED7C89.mov" type="video/quicktime">
+      <source src="https://res.cloudinary.com/dbligv54z/video/upload/BA30CCE4-61DD-43EE-AF28-74B22AED7C89_yl8anh.mov" type="video/quicktime">
       Your browser does not support the video tag.
     </video>
     <div class="video-overlay">
@@ -636,21 +672,20 @@
     </div>
   </section>
   
-  <!-- Floating Play Button -->
+  <!-- FLOATING PLAY BUTTON -->
   <button class="video-play-button" onclick="openVideoModal()">
-    <!-- A simple SVG play icon -->
     <svg viewBox="0 0 64 64">
-      <circle cx="32" cy="32" r="32" fill="none"/>
+      <!-- Simple play icon: triangle -->
       <polygon points="26,20 26,44 46,32" />
     </svg>
   </button>
   
-  <!-- VIDEO MODAL -->
+  <!-- VIDEO MODAL (for playing video full screen) -->
   <div class="modal-overlay video-modal" id="videoModal">
     <div class="modal-content">
       <div class="modal-img">
-        <video id="modalVideo" controls autoplay>
-          <source src="https://raw.githubusercontent.com/vulturetalonz/jamarystest/main/BA30CCE4-61DD-43EE-AF28-74B22AED7C89.mov" type="video/quicktime">
+        <video id="modalVideo" controls autoplay class="modal-video">
+          <source src="https://res.cloudinary.com/dbligv54z/video/upload/BA30CCE4-61DD-43EE-AF28-74B22AED7C89_yl8anh.mov" type="video/quicktime">
           Your browser does not support the video tag.
         </video>
       </div>
@@ -956,7 +991,6 @@
     }
     document.getElementById("videoModalClose").addEventListener("click", function() {
       document.getElementById("videoModal").classList.remove("show");
-      // Pause video when modal closes
       document.getElementById("modalVideo").pause();
     });
   
