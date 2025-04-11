@@ -7,10 +7,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     /* GLOBAL RESET & BASE */
     * {
@@ -47,10 +44,14 @@
       box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
     }
-    @media (min-width:768px) {
-      header.desktop-navbar { background: transparent; }
+    @media (min-width: 768px) {
+      header.desktop-navbar {
+        background: transparent;
+      }
       header.desktop-navbar .logo,
-      header.desktop-navbar nav ul li a { color: white; }
+      header.desktop-navbar nav ul li a {
+        color: white;
+      }
     }
     .nav-container {
       max-width: 1200px;
@@ -110,7 +111,7 @@
       font-size: 0.8rem;
       font-weight: 600;
     }
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       nav ul { display: none; }
       .hamburger { display: flex; }
     }
@@ -127,13 +128,13 @@
       height: 100%;
       object-fit: cover;
     }
-    /* Overlay with text positioned in the bottom-left */
+    /* Text overlay positioned in bottom-left */
     .video-overlay {
       position: absolute;
       bottom: 20px;
       left: 20px;
       padding: 20px;
-      background: rgba(0,0,0,0.3); /* optional semi-transparent bg to improve contrast */
+      background: rgba(0,0,0,0.3);  /* optional for legibility */
       border-radius: 5px;
     }
     .video-overlay .sub-header {
@@ -185,7 +186,7 @@
       transform: scale(1.1);
       box-shadow: 0 6px 12px rgba(0,0,0,0.4);
     }
-    @media (max-width:480px) {
+    @media (max-width: 480px) {
       .video-play-button {
         width: 50px;
         height: 50px;
@@ -216,7 +217,7 @@
     .modal-content {
       width: 90%;
       max-width: 800px;
-      background: #000; /* No white gap */
+      background: #000;  /* Only the video; no white gaps */
       border-radius: 8px;
       overflow: hidden;
     }
@@ -296,6 +297,7 @@
       font-size: 0.95rem;
       margin-bottom: 1rem;
     }
+    /* Custom Learn More button with slide-up hover effect */
     .learn-more-btn {
       background: #211815;
       color: #ebe6e4;
@@ -306,8 +308,21 @@
       border-radius: 4px;
       text-transform: uppercase;
       margin-top: auto;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
     }
+    .learn-more-btn::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: rgba(0,0,0,0.2);
+      transition: height 0.3s ease;
+      z-index: -1;
+    }
+    .learn-more-btn:hover::after { height: 100%; }
     
     /* ARTICLES SECTION */
     .articles-section {
@@ -455,15 +470,7 @@
       height: auto;
       border-radius: 20px;
     }
-    .about-us-section::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0.2) 100%);
-      pointer-events: none;
-    }
+    /* Remove the overlay/backdrop from About Us text */
     .about-us-content {
       position: absolute;
       bottom: 20px;
@@ -472,9 +479,7 @@
       padding: 15px;
       color: #211815;
       max-width: 60%;
-      background: rgba(255,255,255,0.8);
-      border-radius: 5px;
-      margin: 10px;
+      /* No background */
     }
     .about-us-content h2 {
       font-family: 'Cormorant', serif;
@@ -669,7 +674,7 @@
   <!-- VIDEO MODAL -->
   <div class="modal-overlay video-modal" id="videoModal">
     <div class="modal-content">
-      <div class="modal-video-container" style="position: relative; width: 100%; height: auto;">
+      <div class="modal-video-container" style="position: relative; width: 100%;">
         <video id="modalVideo" controls autoplay class="modal-video">
           <source src="https://res.cloudinary.com/dbligv54z/video/upload/BA30CCE4-61DD-43EE-AF28-74B22AED7C89_yl8anh.mov" type="video/quicktime">
           Your browser does not support the video tag.
@@ -833,22 +838,26 @@
   
   <!-- JAVASCRIPT -->
   <script>
-    // Burger Menu Toggle - Same links in mobile menu as wide display
+    // Burger Menu Toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('show'); });
-    
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('show');
+    });
+  
     // Fly-in Effect on Scroll
     const flyInElements = document.querySelectorAll('.fly-in');
     function handleScroll() {
       flyInElements.forEach(el => {
         const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) { el.classList.add('visible'); }
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add('visible');
+        }
       });
     }
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-    
+  
     // Quotes Slider
     const quoteItems = document.querySelectorAll('.quote-item');
     const arrowLeft = document.getElementById('quoteArrowLeft');
@@ -856,7 +865,9 @@
     let currentQuoteIndex = 0;
     let quoteTimer;
     function showQuote(index) {
-      quoteItems.forEach(item => { item.classList.remove('active'); });
+      quoteItems.forEach(item => {
+        item.classList.remove('active');
+      });
       quoteItems[index].classList.add('active');
     }
     function nextQuote() {
@@ -877,7 +888,7 @@
     arrowRight.addEventListener('click', () => { stopQuoteTimer(); nextQuote(); startQuoteTimer(); });
     showQuote(currentQuoteIndex);
     startQuoteTimer();
-    
+  
     // Article Modal (Instagram-style)
     const articleCards = document.querySelectorAll('.article-card');
     const modalOverlay = document.getElementById('modalOverlay');
@@ -887,7 +898,6 @@
     const modalPrice = document.getElementById('modalPrice');
     const modalDescription = document.getElementById('modalDescription');
     const modalClose = document.getElementById('modalClose');
-    
     const articleData = {
       1: {
         title: "Article Title 1",
@@ -946,7 +956,7 @@
     });
     modalClose.addEventListener('click', () => { modalOverlay.classList.remove('show'); });
     modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) { modalOverlay.classList.remove('show'); } });
-    
+  
     /* Video Modal Functions */
     function openVideoModal() {
       document.getElementById("videoModal").classList.add("show");
@@ -955,8 +965,8 @@
       document.getElementById("videoModal").classList.remove("show");
       document.getElementById("modalVideo").pause();
     });
-    
-    /* Navbar scroll behavior */
+  
+    /* Navbar scroll behavior for desktop */
     function updateNavbarMode() {
       const navbar = document.getElementById('navbar');
       if (window.innerWidth >= 768) { navbar.classList.add('desktop-navbar'); } 
@@ -964,7 +974,6 @@
     }
     updateNavbarMode();
     window.addEventListener('resize', updateNavbarMode);
-    
     let lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('navbar');
