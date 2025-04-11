@@ -576,6 +576,66 @@
       transform: translateY(0);
     }
     
+    /* NEW: Circular Video Modal Button */
+    .video-modal-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background: #211815;
+      color: #ebe6e4;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 2000;
+      font-size: 1.5rem;
+    }
+    /* NEW: Video Modal Overlay and Content */
+    .video-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 3000;
+    }
+    .video-modal-overlay.show {
+      display: flex;
+    }
+    .video-modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 80%;
+    }
+    .video-modal-content video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+    .video-modal-close {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #211815;
+      color: #ebe6e4;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    
     /* RESPONSIVE STYLES */
     @media (max-width: 768px) {
       header {
@@ -644,7 +704,7 @@
   <!-- TOP VIDEO SLIDER WITH OVERLAY -->
   <section class="video-slider" id="videoSlider">
     <video id="topVideo" autoplay muted loop playsinline>
-      <source src="https://raw.githubusercontent.com/vulturetalonz/jamarystest/main/BA30CCE4-61DD-43EE-AF28-74B22AED7C89.mov" type="video/quicktime">
+      <source src="https://videos.pexels.com/video-files/4057714/4057714-uhd_2560_1440_30fps.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
     <div class="video-overlay">
@@ -794,6 +854,18 @@
         <div class="price" id="modalPrice"></div>
         <p id="modalDescription"></p>
       </div>
+    </div>
+  </div>
+  
+  <!-- NEW: Video Modal Button and Overlay -->
+  <div class="video-modal-btn" id="videoModalBtn">&#9654;</div>
+  <div class="video-modal-overlay" id="videoModalOverlay">
+    <div class="video-modal-content">
+      <button class="video-modal-close" id="videoModalClose">&times;</button>
+      <video controls autoplay>
+        <source src="https://videos.pexels.com/video-files/4057714/4057714-uhd_2560_1440_30fps.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
     </div>
   </div>
   
@@ -972,6 +1044,25 @@
         }
       }
       lastScrollY = window.scrollY;
+    });
+  
+    // NEW: Video Modal Button and Overlay Logic
+    const videoModalBtn = document.getElementById('videoModalBtn');
+    const videoModalOverlay = document.getElementById('videoModalOverlay');
+    const videoModalClose = document.getElementById('videoModalClose');
+  
+    videoModalBtn.addEventListener('click', () => {
+      videoModalOverlay.classList.add('show');
+    });
+  
+    videoModalClose.addEventListener('click', () => {
+      videoModalOverlay.classList.remove('show');
+    });
+  
+    videoModalOverlay.addEventListener('click', (e) => {
+      if (e.target === videoModalOverlay) {
+        videoModalOverlay.classList.remove('show');
+      }
     });
   </script>
 </body>
