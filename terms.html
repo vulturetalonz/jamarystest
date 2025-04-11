@@ -1,1 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMS - BodyMindSoul</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+  <style>
+    /* GLOBAL RESET & BASE */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease-in-out;
+    }
+    html, body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #ddd7d5;
+      color: #211815;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    img, video {
+      max-width: 100%;
+      display: block;
+    }
 
+    /* NAVIGATION */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 15px 30px;
+      background: #c3bbb7;
+      box-shadow: 0 4px 8px rgba(33,24,21,0.1);
+      backdrop-filter: blur(10px);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    @media (min-width: 768px) {
+      header.desktop-navbar {
+        background: transparent;
+      }
+      header.desktop-navbar .logo,
+      header.desktop-navbar nav ul li a {
+        color: white;
+      }
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Cormorant', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: inherit;
+    }
+    nav ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      font-size: 0.8rem;
+    }
+    nav li {
+      cursor: pointer;
+      font-weight: 600;
+      color: inherit;
+    }
+    nav li a {
+      text-transform: uppercase;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #211815;
+      margin: 4px 0;
+      border-radius: 2px;
+    }
+    .mobile-menu {
+      position: absolute;
+      top: 60px;
+      right: 30px;
+      background: #c3bbb7;
+      border-radius: 5px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      padding: 15px;
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      font-size: 0.9rem;
+      z-index: 1100;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .mobile-menu.show {
+      display: flex;
+      opacity: 1;
+    }
+    .mobile-menu a {
+      text-transform: uppercase;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: inherit;
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* TOP VIDEO SLIDER WITH OVERLAY */
+    .video-slider {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .video-slider video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(33,24,21,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+    }
+    .sub-header {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ebe6e4;
+      margin-bottom: 0.5rem;
+    }
+    .main-header {
+      font-family: 'Cormorant', serif;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #ebe6e4;
+    }
+    .description {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      color: #ebe6e4;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+
+    /* CUSTOM BUTTON (Lift Effect) */
+    .lift-btn {
+      display: inline-block;
+      padding: 0.7rem 1.2rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      color: #211815;
+      background: transparent;
+      border: 2px solid #211815;
+      border-radius: 30px;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .lift-btn::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 0%;
+      bottom: 0;
+      left: 0;
+      background: #211815;
+      z-index: -1;
+      transition: height 0.4s ease;
+    }
+    .lift-btn:hover::before {
+      height: 100%;
+    }
+    .lift-btn:hover {
+      color: #ebe6e4;
+    }
+
+    /* CORE VALUES SECTION */
+    .core-values {
+      padding: 50px 20px;
+      background: #f0e9e6;
+    }
+    .core-values h2 {
+      font-family: 'Cormorant', serif;
+      font-size: 2rem;
+      text-align: center;
+      color: #211815;
+      margin-bottom: 30px;
+    }
+    .core-values-inner {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .core-values-inner::-webkit-scrollbar {
+      height: 6px;
+    }
+    .core-values-inner::-webkit-scrollbar-track {
+      background: #ddd7d5;
+      border-radius: 3px;
+    }
+    .core-values-inner::-webkit-scrollbar-thumb {
+      background: #211815;
+      border-radius: 3px;
+      transition: background 0.3s ease;
+    }
+    .core-value-box {
+      background: #faf4f1;
+      border-radius: 10px;
+      padding: 20px;
+      flex: 1 1 250px;
+      max-width: 300px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      color: #211815;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .core-value-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .core-value-box h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .core-value-box p {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .learn-more-btn {
+      background: #211815;
+      color: #ebe6e4;
+      padding: 0.5rem 1rem;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      margin-top: auto;
+    }
+
+    /* ARTICLES SECTION */
+    .articles-section {
+      padding: 50px 20px;
+      background: #ddd7d5;
+      text-align: center;
+    }
+    .articles-section h2 {
+      font-family: 'Cormorant', serif;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #211815;
+    }
+    .articles-slider {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .articles-slider::-webkit-scrollbar {
+      height: 6px;
+    }
+    .articles-slider::-webkit-scrollbar-track {
+      background: #ddd7d5;
+      border-radius: 3px;
+    }
+    .articles-slider::-webkit-scrollbar-thumb {
+      background: #211815;
+      border-radius: 3px;
+      transition: background 0.3s ease;
+    }
+    .article-card {
+      width: 300px;
+      height: 400px;
+      background: #ebe6e4;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      cursor: pointer;
+      color: #211815;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .article-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .article-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .article-card h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 1.5rem;
+      margin: 15px 10px 5px;
+    }
+    .article-card p {
+      margin: 0 10px 15px;
+      font-size: 1rem;
+    }
+
+    /* QUOTES SLIDER SECTION */
+    .quotes-section {
+      padding: 50px 20px;
+      background: #ebe6e4;
+      text-align: center;
+      position: relative;
+    }
+    .quotes-container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      cursor: pointer;
+      color: #211815;
+      background: rgba(255,255,255,0.6);
+      padding: 0.2rem 0.6rem;
+      border-radius: 50%;
+      z-index: 2;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+    .quote-arrow:hover {
+      background: rgba(255,255,255,0.9);
+    }
+    .left-arrow { left: 0; }
+    .right-arrow { right: 0; }
+    .quote-slide {
+      position: relative;
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .quote-item {
+      position: absolute;
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-family: 'Cormorant', serif;
+      font-size: 1.7rem;
+      padding: 0 2rem;
+      color: #211815;
+      text-transform: uppercase;
+    }
+    .quote-item.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    @media (max-width: 480px) {
+      .quote-arrow {
+        font-size: 1.5rem;
+      }
+      .quote-item {
+        font-size: 1rem;
+      }
+    }
+
+    /* ABOUT US SECTION */
+    .about-us-section {
+      position: relative;
+      margin: 40px 20px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 0 20px 20px 0; /* Rounded top-right and bottom-left */
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    .about-us-section img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-top-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+      margin: 0;
+    }
+    /* Gradient overlay for subtle light/shadow effect */
+    .about-us-section::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0.2) 100%);
+      pointer-events: none;
+    }
+    .about-us-content {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      padding: 10px;
+      color: #211815; /* darker text */
+      max-width: 60%;
+      background: rgba(255,255,255,0.7);
+      border-radius: 5px;
+    }
+    .about-us-content h2 {
+      font-family: 'Cormorant', serif;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+    .about-us-content p {
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+    .about-us-btn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    /* ARTICLE MODAL (Instagram-style) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.show {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-content {
+      background: #fff;
+      display: flex;
+      flex-direction: row;
+      max-width: 800px;
+      width: 90%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .modal-img {
+      flex: 1 1 50%;
+      min-width: 300px;
+      background: #000;
+    }
+    .modal-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .modal-text {
+      flex: 1 1 50%;
+      padding: 2rem;
+      position: relative;
+      color: #211815;
+    }
+    .modal-text h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .modal-text .author,
+    .modal-text .price {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .modal-text p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #211815;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 20px;
+      text-align: center;
+      background: #ddd7d5;
+      color: #211815;
+    }
+    footer .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    footer .footer-content a {
+      color: #211815;
+      text-decoration: underline;
+      margin: 0 5px;
+    }
+    footer p {
+      margin: 10px 0;
+    }
+
+    /* FLY-IN ANIMATION */
+    .fly-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    .fly-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* NEW: Circular Video Modal Button */
+    .video-modal-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background: #211815;
+      color: #ebe6e4;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 2000;
+      font-size: 1.5rem;
+    }
+    /* NEW: Video Modal Overlay and Content */
+    .video-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 3000;
+    }
+    .video-modal-overlay.show {
+      display: flex;
+    }
+    .video-modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 80%;
+    }
+    .video-modal-content video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+    .video-modal-close {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #211815;
+      color: #ebe6e4;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* RESPONSIVE STYLES */
+    @media (max-width: 768px) {
+      header {
+        padding: 10px 20px;
+      }
+      .video-overlay .sub-header {
+        font-size: 0.9rem;
+      }
+      .video-overlay .main-header {
+        font-size: 2.2rem;
+      }
+      .video-overlay .description {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+      .core-values-inner {
+        flex-wrap: nowrap;
+      }
+      .about-us-content {
+        left: 10px;
+        right: 10px;
+        bottom: 40px;
+        max-width: 80%;
+        font-size: 0.65rem;
+      }
+      .about-us-content h2 {
+        font-size: 1.2rem;
+      }
+      .about-us-btn {
+        bottom: 10px;
+        right: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER / NAVIGATION -->
+  <header id="navbar">
+    <div class="nav-container">
+      <div class="logo">BMS</div>
+      <nav>
+        <ul>
+          <li><a href="get-to-know.html">GET TO KNOW</a></li>
+          <li><a href="collaborate.html">COLLABORATE WITH US</a></li>
+          <li><a href="body.html">BODY</a></li>
+          <li><a href="mind.html">MIND</a></li>
+          <li><a href="soul.html">SOUL</a></li>
+          <li><a href="our-app.html">OUR APP</a></li>
+          <li><a href="personal-advice.html">PERSONAL ADVICE</a></li>
+          <li><a href="forum.html">FORUM</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#videoSlider">VIDEOS</a>
+        <a href="#coreValues">CORE VALUES</a>
+        <a href="#articles">ARTICLES</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- TOP VIDEO SLIDER WITH OVERLAY -->
+  <section class="video-slider" id="videoSlider">
+    <video id="topVideo" autoplay muted loop playsinline>
+      <source src="https://videos.pexels.com/video-files/4057714/4057714-uhd_2560_1440_30fps.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay">
+      <p class="sub-header">DISCOVER</p>
+      <h1 class="main-header">TERMS</h1>
+      <p class="description">
+        These Terms and Conditions govern your use of the BodyMindSoulCLUB platform, including all services, features, and content offered.
+      </p>
+    </div>
+  </section>
+
+  <!-- CORE VALUES SECTION -->
+  <section class="core-values" id="coreValues">
+    <h2>Terms & Conditions</h2>
+                         <p>  </p><p>
+<b>1. Introduction   </b>
+Welcome to BodyMindSoulCLUB! By accessing or using the Platform, you agree to comply with these Terms. If you do not agree, do not use the Platform.​
+                         </p><p>
+<b>2. Account Registration​</b>
+                           </p><p>
+You may need to create an account to access certain features of the Platform. When registering, you agree to provide accurate and up-to-date information.​
+                           </p><p>
+You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.​
+                        </p><p>
+<b>3. User Conduct</b>​
+                        </p><p>
+You agree not to use the Platform in any manner that violates applicable laws or harms others. Specifically, you will:​
+                                     </p><p>
+Refrain from using offensive, discriminatory, or harmful language.​
+                                               </p><p>
+Not upload harmful content (e.g., viruses, malware, or spam).​
+                                       </p><p>
+Not engage in fraudulent or illegal activities.​
+                                      </p><p>
+<b>4. Subscriptions and Payments</b>​
+                                    </p><p>
+Some features of the Platform may require paid subscriptions. By subscribing, you agree to pay the fees specified. Payment transactions will be processed securely.​
+                           </p><p>
+<b>5. Termination​</b>
+                           </p><p>
+We reserve the right to suspend or terminate your access to the Platform at any time, especially in case of violation of these Terms.​
+                               </p><p>
+<b>6. Disclaimers</b>​
+                           </p><p>
+The Platform is provided “as is” and “as available.” We do not guarantee uninterrupted or error-free access. To the fullest extent permitted by law, we disclaim liability for any damages resulting from the use of the Platform.
+    </div>             </p></p>
+  </section>
+
+
+
+  <!-- QUOTES SLIDER SECTION -->
+  <section class="quotes-section">
+    <div class="quotes-container">
+      <div class="quote-arrow left-arrow" id="quoteArrowLeft">&#10094;</div>
+      <div class="quote-slide" id="quoteSlide">
+        <div class="quote-item">
+          <p>"ELEVATE YOUR MIND, EMPOWER YOUR SOUL, AND UNLOCK THE BEST VERSION OF YOURSELF."</p>
+        </div>
+        <div class="quote-item">
+          <p>"TRUE FULFILLMENT STARTS WHEN YOU ALIGN YOUR PASSION WITH YOUR PURPOSE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"THIS IS YOUR SPACE TO GROW, EXPLORE, AND CREATE THE LIFE YOU TRULY DESERVE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"STEP BEYOND YOUR LIMITS. BREAK BARRIERS. EMBRACE THE POWER OF YOUR POTENTIAL."</p>
+        </div>
+        <div class="quote-item">
+          <p>"WHERE LUXURY MEETS PERSONAL GROWTH — YOUR JOURNEY BEGINS HERE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"YOUR UNIQUE ENERGY DESERVES A PLACE TO THRIVE. LET IT SHINE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"INSPIRATION IS A LIFESTYLE. WELCOME TO THE SPACE WHERE YOUR CREATIVITY COMES ALIVE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"HAPPINESS ISN’T A MOMENT, IT’S A JOURNEY. LET US GUIDE YOU TO YOURS."</p>
+        </div>
+        <div class="quote-item">
+          <p>"BALANCE, BEAUTY, AND BRILLIANCE—UNLOCK THEM ALL WITH EVERY STEP YOU TAKE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"YOU ARE THE ARCHITECT OF YOUR LIFE. WE’RE HERE TO HELP YOU BUILD IT."</p>
+        </div>
+      </div>
+      <div class="quote-arrow right-arrow" id="quoteArrowRight">&#10095;</div>
+    </div>
+  </section>
+
+
+
+  <!-- FOOTER -->
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Burger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('show');
+    });
+
+    // Fly-in Effect on Scroll
+    const flyInElements = document.querySelectorAll('.fly-in');
+    function handleScroll() {
+      flyInElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    // Quotes Slider: 4 seconds per quote with slide effect
+    const quoteItems = document.querySelectorAll('.quote-item');
+    const arrowLeft = document.getElementById('quoteArrowLeft');
+    const arrowRight = document.getElementById('quoteArrowRight');
+    let currentQuoteIndex = 0;
+    let quoteTimer;
+    function showQuote(index) {
+      quoteItems.forEach(item => {
+        item.classList.remove('active');
+      });
+      quoteItems[index].classList.add('active');
+    }
+    function nextQuote() {
+      currentQuoteIndex = (currentQuoteIndex + 1) % quoteItems.length;
+      showQuote(currentQuoteIndex);
+    }
+    function prevQuote() {
+      currentQuoteIndex = (currentQuoteIndex - 1 + quoteItems.length) % quoteItems.length;
+      showQuote(currentQuoteIndex);
+    }
+    function startQuoteTimer() {
+      quoteTimer = setInterval(nextQuote, 4000);
+    }
+    function stopQuoteTimer() {
+      clearInterval(quoteTimer);
+    }
+    arrowLeft.addEventListener('click', () => {
+      stopQuoteTimer();
+      prevQuote();
+      startQuoteTimer();
+    });
+    arrowRight.addEventListener('click', () => {
+      stopQuoteTimer();
+      nextQuote();
+      startQuoteTimer();
+    });
+    showQuote(currentQuoteIndex);
+    startQuoteTimer();
+
+
+
+    modalClose.addEventListener('click', () => {
+      modalOverlay.classList.remove('show');
+    });
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        modalOverlay.classList.remove('show');
+      }
+    });
+
+    /* Navbar scroll behavior for desktop:
+       - In desktop mode, header becomes transparent with white text.
+       - Remove drop shadow when scrolling down; add it when scrolling up.
+    */
+    function updateNavbarMode() {
+      const navbar = document.getElementById('navbar');
+      if (window.innerWidth >= 768) {
+        navbar.classList.add('desktop-navbar');
+      } else {
+        navbar.classList.remove('desktop-navbar');
+      }
+    }
+    updateNavbarMode();
+    window.addEventListener('resize', updateNavbarMode);
+
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.innerWidth >= 768) {
+        if (window.scrollY > lastScrollY) {
+          navbar.style.boxShadow = 'none';
+        } else {
+          navbar.style.boxShadow = '0 6px 12px rgba(33,24,21,0.7)';
+        }
+      }
+      lastScrollY = window.scrollY;
+    });
+
+    // NEW: Video Modal Button and Overlay Logic
+    const videoModalBtn = document.getElementById('videoModalBtn');
+    const videoModalOverlay = document.getElementById('videoModalOverlay');
+    const videoModalClose = document.getElementById('videoModalClose');
+
+    videoModalBtn.addEventListener('click', () => {
+      videoModalOverlay.classList.add('show');
+    });
+
+    videoModalClose.addEventListener('click', () => {
+      videoModalOverlay.classList.remove('show');
+    });
+
+    videoModalOverlay.addEventListener('click', (e) => {
+      if (e.target === videoModalOverlay) {
+        videoModalOverlay.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
