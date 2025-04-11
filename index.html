@@ -17,7 +17,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease;
     }
     html, body {
       font-family: 'Poppins', sans-serif;
@@ -46,7 +46,6 @@
       background: #c3bbb7;
       box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
-      transition: background 0.3s ease, box-shadow 0.3s ease;
     }
     @media (min-width: 768px) {
       header.desktop-navbar {
@@ -68,7 +67,6 @@
       font-family: 'Cormorant', serif;
       font-size: 1.8rem;
       font-weight: 700;
-      color: inherit;
     }
     nav ul {
       display: flex;
@@ -79,7 +77,6 @@
     nav li {
       cursor: pointer;
       font-weight: 600;
-      color: inherit;
     }
     nav li a {
       text-transform: uppercase;
@@ -121,18 +118,13 @@
       font-family: 'Poppins', sans-serif;
       font-size: 0.8rem;
       font-weight: 600;
-      color: inherit;
     }
     @media (max-width: 768px) {
-      nav ul {
-        display: none;
-      }
-      .hamburger {
-        display: flex;
-      }
+      nav ul { display: none; }
+      .hamburger { display: flex; }
     }
     
-    /* TOP VIDEO SLIDER WITH OVERLAY */
+    /* HERO SECTION (with Video Background) */
     .video-slider {
       position: relative;
       width: 100%;
@@ -146,10 +138,8 @@
     }
     .video-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: rgba(33,24,21,0.4);
       display: flex;
       flex-direction: column;
@@ -181,37 +171,114 @@
       line-height: 1.4;
     }
     
-    /* CUSTOM BUTTON (Lift Effect) */
-    .lift-btn {
-      display: inline-block;
-      padding: 0.7rem 1.2rem;
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.9rem;
-      color: #211815;
-      background: transparent;
-      border: 2px solid #211815;
-      border-radius: 30px;
-      text-transform: uppercase;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .lift-btn::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 0%;
-      bottom: 0;
-      left: 0;
+    /* FLOATING VIDEO PLAY BUTTON */
+    .video-play-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
       background: #211815;
-      z-index: -1;
-      transition: height 0.4s ease;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 2000;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .lift-btn:hover::before {
+    .video-play-button svg {
+      fill: #ebe6e4;
+      width: 24px;
+      height: 24px;
+    }
+    .video-play-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    }
+    /* Responsive adjustments for play button */
+    @media (max-width: 480px) {
+      .video-play-button {
+        width: 50px;
+        height: 50px;
+      }
+      .video-play-button svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    
+    /* VIDEO MODAL */
+    .modal-overlay,
+    .modal-overlay.video-modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.show,
+    .modal-overlay.video-modal.show {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-content {
+      background: #fff;
+      display: flex;
+      flex-direction: row;
+      max-width: 800px;
+      width: 90%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .modal-img {
+      flex: 1 1 50%;
+      min-width: 300px;
+      background: #000;
+    }
+    .modal-img img,
+    .modal-img video {
+      width: 100%;
       height: 100%;
+      object-fit: cover;
     }
-    .lift-btn:hover {
-      color: #ebe6e4;
+    .modal-text {
+      flex: 1 1 50%;
+      padding: 2rem;
+      position: relative;
+      color: #211815;
+    }
+    .modal-text h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .modal-text .author,
+    .modal-text .price {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .modal-text p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #211815;
     }
     
     /* CORE VALUES SECTION */
@@ -284,6 +351,7 @@
       border-radius: 4px;
       text-transform: uppercase;
       margin-top: auto;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
     
     /* ARTICLES SECTION */
@@ -426,7 +494,7 @@
       max-width: 900px;
       margin-left: auto;
       margin-right: auto;
-      border-radius: 0 20px 20px 0; /* Rounded top-right and bottom-left */
+      border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
@@ -434,11 +502,8 @@
       width: 100%;
       height: auto;
       display: block;
-      border-top-right-radius: 20px;
-      border-bottom-left-radius: 20px;
-      margin: 0;
+      border-radius: 20px;
     }
-    /* Gradient overlay for subtle light/shadow effect */
     .about-us-section::after {
       content: "";
       position: absolute;
@@ -446,6 +511,7 @@
       left: 0;
       width: 100%;
       height: 100%;
+      /* Gradient: lighter at top, subtle shadow at bottom */
       background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0.2) 100%);
       pointer-events: none;
     }
@@ -455,9 +521,9 @@
       left: 20px;
       right: 20px;
       padding: 10px;
-      color: #211815; /* darker text */
+      color: #211815;
       max-width: 60%;
-      background: none;
+      background: rgba(255,255,255,0.7);
       border-radius: 5px;
     }
     .about-us-content h2 {
@@ -473,76 +539,6 @@
       position: absolute;
       bottom: 20px;
       right: 20px;
-    }
-    
-    /* ARTICLE MODAL (Instagram-style) */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(5px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .modal-overlay.show {
-      display: flex;
-      opacity: 1;
-    }
-    .modal-content {
-      background: #fff;
-      display: flex;
-      flex-direction: row;
-      max-width: 800px;
-      width: 90%;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .modal-img {
-      flex: 1 1 50%;
-      min-width: 300px;
-      background: #000;
-    }
-    .modal-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .modal-text {
-      flex: 1 1 50%;
-      padding: 2rem;
-      position: relative;
-      color: #211815;
-    }
-    .modal-text h3 {
-      font-family: 'Cormorant', serif;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .modal-text .author,
-    .modal-text .price {
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-    }
-    .modal-text p {
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    .modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #211815;
     }
     
     /* FOOTER */
@@ -578,22 +574,11 @@
     
     /* RESPONSIVE STYLES */
     @media (max-width: 768px) {
-      header {
-        padding: 10px 20px;
-      }
-      .video-overlay .sub-header {
-        font-size: 0.9rem;
-      }
-      .video-overlay .main-header {
-        font-size: 2.2rem;
-      }
-      .video-overlay .description {
-        font-size: 1rem;
-        padding: 0 10px;
-      }
-      .core-values-inner {
-        flex-wrap: nowrap;
-      }
+      header { padding: 10px 20px; }
+      .video-overlay .sub-header { font-size: 0.9rem; }
+      .video-overlay .main-header { font-size: 2.2rem; }
+      .video-overlay .description { font-size: 1rem; padding: 0 10px; }
+      .core-values-inner { flex-wrap: nowrap; }
       .about-us-content {
         left: 10px;
         right: 10px;
@@ -601,13 +586,8 @@
         max-width: 80%;
         font-size: 0.65rem;
       }
-      .about-us-content h2 {
-        font-size: 1.2rem;
-      }
-      .about-us-btn {
-        bottom: 10px;
-        right: 10px;
-      }
+      .about-us-content h2 { font-size: 1.2rem; }
+      .about-us-btn { bottom: 10px; right: 10px; }
     }
   </style>
 </head>
@@ -641,7 +621,7 @@
     </div>
   </header>
   
-  <!-- TOP VIDEO SLIDER WITH OVERLAY -->
+  <!-- TOP VIDEO SLIDER (Hero Section) -->
   <section class="video-slider" id="videoSlider">
     <video id="topVideo" autoplay muted loop playsinline>
       <source src="https://raw.githubusercontent.com/vulturetalonz/jamarystest/main/BA30CCE4-61DD-43EE-AF28-74B22AED7C89.mov" type="video/quicktime">
@@ -655,6 +635,30 @@
       </p>
     </div>
   </section>
+  
+  <!-- Floating Play Button -->
+  <button class="video-play-button" onclick="openVideoModal()">
+    <!-- A simple SVG play icon -->
+    <svg viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="32" fill="none"/>
+      <polygon points="26,20 26,44 46,32" />
+    </svg>
+  </button>
+  
+  <!-- VIDEO MODAL -->
+  <div class="modal-overlay video-modal" id="videoModal">
+    <div class="modal-content">
+      <div class="modal-img">
+        <video id="modalVideo" controls autoplay>
+          <source src="https://raw.githubusercontent.com/vulturetalonz/jamarystest/main/BA30CCE4-61DD-43EE-AF28-74B22AED7C89.mov" type="video/quicktime">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="modal-text">
+        <button class="modal-close" id="videoModalClose">&times;</button>
+      </div>
+    </div>
+  </div>
   
   <!-- CORE VALUES SECTION -->
   <section class="core-values" id="coreValues">
@@ -946,10 +950,17 @@
       }
     });
   
-    /* Navbar scroll behavior for desktop:
-       - In desktop mode, header becomes transparent with white text.
-       - Remove drop shadow when scrolling down; add it when scrolling up.
-    */
+    /* Video Modal Functions */
+    function openVideoModal() {
+      document.getElementById("videoModal").classList.add("show");
+    }
+    document.getElementById("videoModalClose").addEventListener("click", function() {
+      document.getElementById("videoModal").classList.remove("show");
+      // Pause video when modal closes
+      document.getElementById("modalVideo").pause();
+    });
+  
+    /* Navbar scroll behavior for desktop */
     function updateNavbarMode() {
       const navbar = document.getElementById('navbar');
       if (window.innerWidth >= 768) {
