@@ -44,7 +44,7 @@
       box-shadow: 0 4px 8px rgba(33,24,21,0.1);
       backdrop-filter: blur(10px);
     }
-    @media (min-width: 768px) {
+    @media (min-width:768px) {
       header.desktop-navbar {
         background: transparent;
       }
@@ -111,12 +111,12 @@
       font-size: 0.8rem;
       font-weight: 600;
     }
-    @media (max-width: 768px) {
+    @media (max-width:768px) {
       nav ul { display: none; }
       .hamburger { display: flex; }
     }
     
-    /* HERO SECTION (Video Background) */
+    /* HERO SECTION */
     .video-slider {
       position: relative;
       width: 100%;
@@ -128,13 +128,13 @@
       height: 100%;
       object-fit: cover;
     }
-    /* Text overlay positioned in bottom-left */
+    /* Simple overlay text in bottom-left */
     .video-overlay {
       position: absolute;
       bottom: 20px;
       left: 20px;
       padding: 20px;
-      background: rgba(0,0,0,0.3);  /* optional for legibility */
+      background: rgba(0,0,0,0.3);
       border-radius: 5px;
     }
     .video-overlay .sub-header {
@@ -186,7 +186,7 @@
       transform: scale(1.1);
       box-shadow: 0 6px 12px rgba(0,0,0,0.4);
     }
-    @media (max-width: 480px) {
+    @media (max-width:480px) {
       .video-play-button {
         width: 50px;
         height: 50px;
@@ -213,11 +213,14 @@
       opacity: 0;
       transition: opacity 0.3s ease;
     }
-    .modal-overlay.video-modal.show { display: flex; opacity: 1; }
+    .modal-overlay.video-modal.show {
+      display: flex;
+      opacity: 1;
+    }
     .modal-content {
       width: 90%;
       max-width: 800px;
-      background: #000;  /* Only the video; no white gaps */
+      background: #000;
       border-radius: 8px;
       overflow: hidden;
     }
@@ -297,7 +300,7 @@
       font-size: 0.95rem;
       margin-bottom: 1rem;
     }
-    /* Custom Learn More button with slide-up hover effect */
+    /* Custom Learn More Button with Slide-Up Hover Effect */
     .learn-more-btn {
       background: #211815;
       color: #ebe6e4;
@@ -322,7 +325,9 @@
       transition: height 0.3s ease;
       z-index: -1;
     }
-    .learn-more-btn:hover::after { height: 100%; }
+    .learn-more-btn:hover::after {
+      height: 100%;
+    }
     
     /* ARTICLES SECTION */
     .articles-section {
@@ -465,12 +470,10 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
     .about-us-section img {
-      display: block;
       width: 100%;
       height: auto;
       border-radius: 20px;
     }
-    /* Remove the overlay/backdrop from About Us text */
     .about-us-content {
       position: absolute;
       bottom: 20px;
@@ -479,7 +482,6 @@
       padding: 15px;
       color: #211815;
       max-width: 60%;
-      /* No background */
     }
     .about-us-content h2 {
       font-family: 'Cormorant', serif;
@@ -512,7 +514,9 @@
       text-decoration: underline;
       margin: 0 5px;
     }
-    footer p { margin: 10px 0; }
+    footer p {
+      margin: 10px 0;
+    }
     
     /* MODAL for Articles */
     .modal-overlay {
@@ -838,13 +842,13 @@
   
   <!-- JAVASCRIPT -->
   <script>
-    // Burger Menu Toggle
+    // Burger Menu Toggle (mobile uses the same hyperlinks)
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     hamburger.addEventListener('click', () => {
       mobileMenu.classList.toggle('show');
     });
-  
+    
     // Fly-in Effect on Scroll
     const flyInElements = document.querySelectorAll('.fly-in');
     function handleScroll() {
@@ -857,7 +861,7 @@
     }
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-  
+    
     // Quotes Slider
     const quoteItems = document.querySelectorAll('.quote-item');
     const arrowLeft = document.getElementById('quoteArrowLeft');
@@ -865,9 +869,7 @@
     let currentQuoteIndex = 0;
     let quoteTimer;
     function showQuote(index) {
-      quoteItems.forEach(item => {
-        item.classList.remove('active');
-      });
+      quoteItems.forEach(item => { item.classList.remove('active'); });
       quoteItems[index].classList.add('active');
     }
     function nextQuote() {
@@ -888,7 +890,7 @@
     arrowRight.addEventListener('click', () => { stopQuoteTimer(); nextQuote(); startQuoteTimer(); });
     showQuote(currentQuoteIndex);
     startQuoteTimer();
-  
+    
     // Article Modal (Instagram-style)
     const articleCards = document.querySelectorAll('.article-card');
     const modalOverlay = document.getElementById('modalOverlay');
@@ -898,6 +900,7 @@
     const modalPrice = document.getElementById('modalPrice');
     const modalDescription = document.getElementById('modalDescription');
     const modalClose = document.getElementById('modalClose');
+    
     const articleData = {
       1: {
         title: "Article Title 1",
@@ -956,7 +959,7 @@
     });
     modalClose.addEventListener('click', () => { modalOverlay.classList.remove('show'); });
     modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) { modalOverlay.classList.remove('show'); } });
-  
+    
     /* Video Modal Functions */
     function openVideoModal() {
       document.getElementById("videoModal").classList.add("show");
@@ -965,15 +968,16 @@
       document.getElementById("videoModal").classList.remove("show");
       document.getElementById("modalVideo").pause();
     });
-  
-    /* Navbar scroll behavior for desktop */
+    
+    /* Navbar scroll behavior */
     function updateNavbarMode() {
       const navbar = document.getElementById('navbar');
-      if (window.innerWidth >= 768) { navbar.classList.add('desktop-navbar'); } 
+      if (window.innerWidth >= 768) { navbar.classList.add('desktop-navbar'); }
       else { navbar.classList.remove('desktop-navbar'); }
     }
     updateNavbarMode();
     window.addEventListener('resize', updateNavbarMode);
+    
     let lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('navbar');
