@@ -670,7 +670,7 @@
     }
   
 /* ——————————————————————————————— */
-/* 1) FORCE CORE-VALUES TO STACK AT ≤600px */
+/* 1) FORCE CORE-VALUES TO STACK AT ≤500px */
 @media (max-width: 500px) {
   .core-values-inner {
     display: flex !important;
@@ -688,28 +688,75 @@
 }
 
 /* ——————————————————————————————— */
-/* 2) CONTAIN ABOUT-US TEXT OVERLAY */
-.about-us { 
-  position: relative;
-  overflow: hidden;
-}
+/* 2) ABOUT US TEXT ADJUSTMENTS */
 .about-us-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  z-index: 10;
-  max-height: 100%;
-  overflow-y: auto;
+  background: transparent !important;
+  color: #211815 !important;
+}
+@media (max-width: 768px) {
+  .about-us-content { font-size: 1rem; }
+}
+@media (max-width: 500px) {
+  .about-us-content { font-size: 0.9rem; }
 }
 
-/* Optional: bump the Learn More button down */
-.about-us-content .lift-btn {
-  margin-top: 1rem;
+/* ——————————————————————————————— */
+/* 3) ARTICLE MODAL LAYOUT (Instagram-style) */
+.modal-content {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 1rem;
+  max-width: 90%;
 }
+.modal-content .modal-img, .modal-content .modal-text {
+  flex: 1 1 50% !important;
+}
+.modal-content .modal-img img {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 500px) {
+  .modal-content { flex-direction: column !important; }
+}
+
+.modal-content .modal-img img {
+  max-width: 300px !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+
+.about-us {
+  position: relative !important;
+  overflow: hidden !important;
+}
+.about-us img {
+  display: block;
+}
+.about-us-content {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 1rem !important;
+  background: transparent !important;
+  color: #211815 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* ————————— MOBILE NAVBAR LINKS SYNC ————————— */
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const desktopLinks = document.querySelector('nav ul').innerHTML;
+    mobileMenu.innerHTML = desktopLinks;
+  });
+</script>
 </style>
 </head>
 <body>
@@ -750,7 +797,7 @@
     </video>
     <div class="video-overlay">
       <p class="sub-header">DISCOVER</p>
-      <h1 class="main-header">BMS CLUB</h1>
+      <h1 class="main-header">BMS ACADEMY</h1>
       <p class="description">
         A space designed for growth and transformation. Unlock your full potential with curated content, tools, and experiences that break barriers.
       </p>
@@ -1106,5 +1153,44 @@
       }
     });
   </script>
+
+/* ————————— MODAL IMAGE SIZE ADJUSTMENT ————————— */
+.modal-content .modal-img img {
+  max-width: 300px !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* ————————— ABOUT-US OVERLAY FIX ————————— */
+.about-us {
+  position: relative !important;
+  overflow: hidden !important;
+}
+.about-us img {
+  display: block;
+}
+.about-us-content {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 1rem !important;
+  background: transparent !important;
+  color: #211815 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* ————————— MOBILE NAVBAR LINKS SYNC ————————— */
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const desktopLinks = document.querySelector('nav ul').innerHTML;
+    mobileMenu.innerHTML = desktopLinks;
+  });
+</script>
 </body>
 </html>
