@@ -668,7 +668,49 @@
         right: 10px;
       }
     }
-  </style>
+  
+/* ——————————————————————————————— */
+/* 1) FORCE CORE-VALUES TO STACK AT ≤600px */
+@media (max-width: 500px) {
+  .core-values-inner {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    overflow-x: hidden !important;
+    padding: 0 10px !important;
+    justify-content: center !important;
+  }
+  .core-value-box {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 20px !important;
+    scroll-snap-align: unset !important;
+  }
+}
+
+/* ——————————————————————————————— */
+/* 2) CONTAIN ABOUT-US TEXT OVERLAY */
+.about-us { 
+  position: relative;
+  overflow: hidden;
+}
+.about-us-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  z-index: 10;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+/* Optional: bump the Learn More button down */
+.about-us-content .lift-btn {
+  margin-top: 1rem;
+}
+</style>
 </head>
 <body>
   <!-- HEADER / NAVIGATION -->
