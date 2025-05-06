@@ -7,8 +7,8 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" 
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap"
     rel="stylesheet"
   >
   <style>
@@ -34,7 +34,7 @@
       max-width: 100%;
       display: block;
     }
-    
+
     /* NAVIGATION */
     header {
       position: fixed;
@@ -131,7 +131,7 @@
         display: flex;
       }
     }
-    
+
     /* TOP VIDEO SLIDER WITH OVERLAY */
     .video-slider {
       position: relative;
@@ -180,7 +180,7 @@
       margin: 0 auto;
       line-height: 1.4;
     }
-    
+
     /* CUSTOM BUTTON (Lift Effect) */
     .lift-btn {
       display: inline-block;
@@ -213,7 +213,7 @@
     .lift-btn:hover {
       color: #ebe6e4;
     }
-    
+
     /* CORE VALUES SECTION */
     .core-values {
       padding: 50px 20px;
@@ -285,7 +285,7 @@
       text-transform: uppercase;
       margin-top: auto;
     }
-    
+
     /* ARTICLES SECTION */
     .articles-section {
       padding: 50px 20px;
@@ -348,7 +348,7 @@
       margin: 0 10px 15px;
       font-size: 1rem;
     }
-    
+
     /* QUOTES SLIDER SECTION */
     .quotes-section {
       padding: 50px 20px;
@@ -418,62 +418,127 @@
         font-size: 1rem;
       }
     }
-    
-    /* ABOUT US SECTION */
-    .about-us-section {
-      position: relative;
-      margin: 40px 20px;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-      border-radius: 20px
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    }
-    .about-us-section img {
-      width: 100%;
-      height: auto;
-      filter: grayscale(40%);
-      display: block;
-      margin: 0;
-    }
-    /* Gradient overlay for subtle light/shadow effect */
-    .about-us-section::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0.2) 100%);
-      pointer-events: none;
-    }
-    .about-us-content {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
-      padding: 10px;
-      color: #211815; /* darker text */
-      max-width: 60%;
-      background: rgba(255,255,255,0);
-      border-radius: 5px;
-    }
-    .about-us-content h2 {
-      font-family: 'Cormorant', serif;
-      font-size: 1.4rem;
-      margin-bottom: 8px;
-    }
-    .about-us-content p {
-      font-size: 0.75rem;
-      line-height: 1.4;
-    }
-    .about-us-btn {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-    }
-    
+
+ /* UPDATED ABOUT US SECTION */
+.about-us-section {
+  position: relative;
+  margin: 40px 0;
+  overflow: hidden;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.about-us-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: none;
+}
+
+.about-us-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(33, 24, 21, 0.4); /* Dark overlay for better text contrast */
+  pointer-events: none;
+}
+
+.about-us-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 1.5rem;
+  color: #ebe6e4; /* Light text color */
+  max-width: 100%;
+  background: transparent;
+  border-radius: 0;
+}
+
+.about-us-content h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.about-us-content p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.about-us-btn {
+  position: relative; /* Change from absolute to relative */
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  border: 2px solid #ebe6e4;
+  color: #ebe6e4;
+  border-radius: 30px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin-top: 0; /* Adjust as needed */
+  transition: all 0.3s ease;
+}
+
+.about-us-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-arrow {
+  display: inline-block;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.about-us-btn:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+/* Desktop Adjustments */
+@media (min-width: 768px) {
+  .about-us-section {
+    aspect-ratio: 2.2/1; /* Match the desktop reference aspect ratio */
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-us-content {
+    left: 3rem;
+    bottom: 50%;
+    transform: translateY(50%);
+    max-width: 450px;
+    padding: 0;
+  }
+
+  .about-us-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-us-content p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .about-us-btn {
+    margin-top: 0;
+    padding: 0.8rem 2rem;
+  }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 767px) {
+  .about-us-section {
+    aspect-ratio: 4/5; /* Match the mobile reference aspect ratio */
+  }
+}
+
     /* ARTICLE MODAL (Instagram-style) */
     .modal-overlay {
       position: fixed;
@@ -543,7 +608,7 @@
       cursor: pointer;
       color: #211815;
     }
-    
+
     /* FOOTER */
     footer {
       padding: 40px 20px;
@@ -563,7 +628,7 @@
     footer p {
       margin: 10px 0;
     }
-    
+
     /* FLY-IN ANIMATION */
     .fly-in {
       opacity: 0;
@@ -574,7 +639,7 @@
       opacity: 1;
       transform: translateY(0);
     }
-    
+
     /* NEW: Circular Video Modal Button */
     .video-modal-btn {
       position: fixed;
@@ -634,7 +699,7 @@
       font-size: 1rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
-    
+
     /* RESPONSIVE STYLES */
     @media (max-width: 768px) {
       header {
@@ -668,7 +733,7 @@
         right: 10px;
       }
     }
-  
+
 /* ——————————————————————————————— */
 /* 1) FORCE CORE-VALUES TO STACK AT ≤500px */
 @media (max-width: 500px) {
@@ -750,13 +815,13 @@
 }
 
 /* ————————— MOBILE NAVBAR LINKS SYNC ————————— */
-<script>
+
   document.addEventListener('DOMContentLoaded', function() {
     const mobileMenu = document.querySelector('.mobile-menu');
     const desktopLinks = document.querySelector('nav ul').innerHTML;
     mobileMenu.innerHTML = desktopLinks;
   });
-</script>
+
 </style>
 </head>
 <body>
@@ -788,7 +853,7 @@
       </div>
     </div>
   </header>
-  
+
   <!-- TOP VIDEO SLIDER WITH OVERLAY -->
   <section class="video-slider" id="videoSlider">
     <video id="topVideo" autoplay muted loop playsinline>
@@ -803,7 +868,7 @@
       </p>
     </div>
   </section>
-  
+
   <!-- CORE VALUES SECTION -->
   <section class="core-values" id="coreValues">
     <h2>Our Core Values</h2>
@@ -825,7 +890,7 @@
       </div>
     </div>
   </section>
-  
+
   <!-- ARTICLES SECTION -->
   <section class="articles-section" id="articles">
     <h2>Our Latest Highlights</h2>
@@ -874,7 +939,7 @@
       </div>
     </div>
   </section>
-  
+
   <!-- QUOTES SLIDER SECTION -->
   <section class="quotes-section">
     <div class="quotes-container">
@@ -914,21 +979,32 @@
       <div class="quote-arrow right-arrow" id="quoteArrowRight">&#10095;</div>
     </div>
   </section>
-  
-  <!-- ABOUT US SECTION -->
-  <section class="about-us-section" id="aboutUs">
-    <img src="https://images.pexels.com/photos/4226802/pexels-photo-4226802.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="About Us Background">
-    <div class="about-us-content">
-      <h2>About Us</h2>
-      <p>
-        Step into a space designed for your growth and transformation. At BodyMindSoulCLUB, we empower you to unlock your full potential with curated content, tools, and experiences that help you break through barriers and align with your true self. Whether you're seeking new skills, deeper awareness, or creative inspiration, we provide the resources and community you need to thrive. Embrace a life of fulfillment, balance, and lasting happiness—because you deserve to live at your highest potential.
-      </p>
-    </div>
-    <button class="lift-btn about-us-btn">
-      More Info →
-    </button>
-  </section>
-  
+
+ <!-- ABOUT US SECTION -->
+<section class="about-us-section">
+  <!-- Using picture element for responsive images -->
+  <picture>
+    <!-- Mobile image -->
+    <source media="(max-width: 768px)" srcset="https://images.pexels.com/photos/4226802/pexels-photo-4226802.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+    <!-- Desktop image -->
+    <img src="https://images.pexels.com/photos/4226802/pexels-photo-4226802.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wellness Studio yoga practice" class="about-us-img">
+  </picture>
+
+  <!-- Dark overlay for better text readability -->
+  <div class="about-us-overlay"></div>
+
+  <!-- Content container -->
+  <div class="about-us-content">
+    <h2>WELL-BEING STUDIO</h2>
+    <p>A space to silence the mind, strengthen the spirit & heal the body. At the Well-being Studio, we gather practices, group classes, experiences, and inspiration all under one roof to develop your physical and mental strength through various styles of yoga, breath work, and meditation.</p>
+  </div>
+
+  <!-- Button with arrow -->
+  <a href="#more-info" class="about-us-btn lift-btn">
+    MORE INFO <span class="btn-arrow">→</span>
+  </a>
+</section>
+
   <!-- ARTICLE MODAL (Instagram-style) -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
@@ -944,7 +1020,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- NEW: Video Modal Button and Overlay -->
   <div class="video-modal-btn" id="videoModalBtn">&#9654;</div>
   <div class="video-modal-overlay" id="videoModalOverlay">
@@ -956,18 +1032,18 @@
       </video>
     </div>
   </div>
-  
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-content">
-      <a href="cookies.html">Cookies</a> | 
-      <a href="credits.html">Credits</a> | 
-      <a href="terms.html">Terms &amp; Conditions</a> | 
+      <a href="cookies.html">Cookies</a> |
+      <a href="credits.html">Credits</a> |
+      <a href="terms.html">Terms &amp; Conditions</a> |
       <a href="privacy.html">Privacy Policy</a>
       <p>&copy; 2025 BMS. All Rights Reserved.</p>
     </div>
   </footer>
-  
+
   <!-- JAVASCRIPT -->
   <script>
     // Burger Menu Toggle
@@ -976,7 +1052,7 @@
     hamburger.addEventListener('click', () => {
       mobileMenu.classList.toggle('show');
     });
-  
+
     // Fly-in Effect on Scroll
     const flyInElements = document.querySelectorAll('.fly-in');
     function handleScroll() {
@@ -989,7 +1065,7 @@
     }
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-  
+
     // Quotes Slider: 4 seconds per quote with slide effect
     const quoteItems = document.querySelectorAll('.quote-item');
     const arrowLeft = document.getElementById('quoteArrowLeft');
@@ -1028,7 +1104,7 @@
     });
     showQuote(currentQuoteIndex);
     startQuoteTimer();
-  
+
     // Article Cards -> Instagram-style Modal
     const articleCards = document.querySelectorAll('.article-card');
     const modalOverlay = document.getElementById('modalOverlay');
@@ -1038,7 +1114,7 @@
     const modalPrice = document.getElementById('modalPrice');
     const modalDescription = document.getElementById('modalDescription');
     const modalClose = document.getElementById('modalClose');
-  
+
     const articleData = {
       1: {
         title: "Article Title 1",
@@ -1083,7 +1159,7 @@
         img: "https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop"
       }
     };
-  
+
     articleCards.forEach(card => {
       card.addEventListener('click', () => {
         const id = card.getAttribute('data-article');
@@ -1096,7 +1172,7 @@
         modalOverlay.classList.add('show');
       });
     });
-  
+
     modalClose.addEventListener('click', () => {
       modalOverlay.classList.remove('show');
     });
@@ -1105,7 +1181,7 @@
         modalOverlay.classList.remove('show');
       }
     });
-  
+
     /* Navbar scroll behavior for desktop:
        - In desktop mode, header becomes transparent with white text.
        - Remove drop shadow when scrolling down; add it when scrolling up.
@@ -1120,7 +1196,7 @@
     }
     updateNavbarMode();
     window.addEventListener('resize', updateNavbarMode);
-  
+
     let lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('navbar');
@@ -1133,20 +1209,20 @@
       }
       lastScrollY = window.scrollY;
     });
-  
+
     // NEW: Video Modal Button and Overlay Logic
     const videoModalBtn = document.getElementById('videoModalBtn');
     const videoModalOverlay = document.getElementById('videoModalOverlay');
     const videoModalClose = document.getElementById('videoModalClose');
-  
+
     videoModalBtn.addEventListener('click', () => {
       videoModalOverlay.classList.add('show');
     });
-  
+
     videoModalClose.addEventListener('click', () => {
       videoModalOverlay.classList.remove('show');
     });
-  
+
     videoModalOverlay.addEventListener('click', (e) => {
       if (e.target === videoModalOverlay) {
         videoModalOverlay.classList.remove('show');
@@ -1154,37 +1230,6 @@
     });
   </script>
 
-/* ————————— MODAL IMAGE SIZE ADJUSTMENT ————————— */
-.modal-content .modal-img img {
-  max-width: 300px !important;
-  width: 100% !important;
-  height: auto !important;
-}
-
-/* ————————— ABOUT-US OVERLAY FIX ————————— */
-.about-us {
-  position: relative !important;
-  overflow: hidden !important;
-}
-.about-us img {
-  display: block;
-}
-.about-us-content {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  padding: 1rem !important;
-  background: transparent !important;
-  color: #211815 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-}
-
-/* ————————— MOBILE NAVBAR LINKS SYNC ————————— */
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const mobileMenu = document.querySelector('.mobile-menu');
