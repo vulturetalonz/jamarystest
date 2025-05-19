@@ -110,7 +110,8 @@
       font-size: 0.9rem;
       z-index: 1100;
       opacity: 0;
-      transition: opacity 0.4s ease;
+      backdrop-filter: blur(10px);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
     }
     .mobile-menu.show {
       display: flex;
@@ -1062,6 +1063,15 @@
 
   <!-- JAVASCRIPT -->
   <script>
+
+const ham = document.querySelector('.hamburger');
+  const menu = document.querySelector('.site-navbar nav ul');
+
+  ham.addEventListener('click', () => {
+    menu.classList.toggle('show');
+    ham.classList.toggle('active');
+  });
+
     // Burger Menu Toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
