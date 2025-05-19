@@ -96,7 +96,31 @@
       margin: 4px 0;
       border-radius: 2px;
     }
-
+    .mobile-menu {
+      position: absolute;
+      top: 60px;
+      right: 30px;
+      background: #c3bbb7;
+      border-radius: 5px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      padding: 15px;
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      font-size: 0.9rem;
+      z-index: 1100;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .mobile-menu.show {
+      display: flex;
+      opacity: 1;
+    }
+    .mobile-menu a {
+      text-transform: uppercase;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
       color: inherit;
     }
     @media (max-width: 768px) {
@@ -1038,15 +1062,6 @@
 
   <!-- JAVASCRIPT -->
   <script>
-
-const ham = document.querySelector('.hamburger');
-  const menu = document.querySelector('.site-navbar nav ul');
-
-  ham.addEventListener('click', () => {
-    menu.classList.toggle('show');
-    ham.classList.toggle('active');
-  });
-
     // Burger Menu Toggle
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
