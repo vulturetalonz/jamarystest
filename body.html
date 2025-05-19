@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BodyMindSoul - Body Courses</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* GLOBAL RESET & BASE */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { font-family: 'Poppins', sans-serif; color: #333; background: #f5f5f5; }
+    a { text-decoration: none; }
+
+    /* NAVBAR */
+    .site-navbar { position: fixed; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(33,24,21,0.5); backdrop-filter: blur(10px); z-index: 100; }
+    .site-navbar .logo { font-family: 'Cormorant', serif; font-size: 1.5rem; color: #ebe6e4; }
+    .site-navbar nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    .site-navbar nav ul li a { font-size: 0.9rem; color: #ebe6e4; text-transform: uppercase; }
+
+    /* HEADER VIDEO SECTION */
+    .hero { position: relative; width: 100%; height: 60vh; overflow: hidden; margin-top: 4rem; }
+    .hero video { width: 100%; height: 100%; object-fit: cover; }
+    .hero .hero-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Cormorant', serif; font-size: 4rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
+
+    /* COURSES GRID */
+    .courses { display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem; max-width: 1200px; margin: auto; }
+    .course-box { background: #fff; border-radius: 8px; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .course-box h3 { font-family: 'Cormorant', serif; margin-bottom: 1rem; }
+    .course-box ul { list-style: disc inside; margin-bottom: 1rem; }
+    .learn-more-btn { display: inline-block; padding: 0.5rem 1rem; font-family: 'Poppins', sans-serif; font-size: 0.8rem; text-transform: uppercase; color: #ebe6e4; background: #211815; border: none; border-radius: 30px; cursor: pointer; position: relative; overflow: hidden; max-width: 140px; text-align: center; }
+    .learn-more-btn::after { content: "→"; margin-left: 6px; transition: transform 0.3s; }
+    .learn-more-btn:hover::after { transform: translateX(4px); }
+
+    /* RESPONSIVE GRID */
+    @media (min-width: 768px) {
+      .courses { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .courses { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-navbar">
+    <div class="logo">BodyMindSoul</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="body.html">Body</a></li>
+        <li><a href="mind.html">Mind</a></li>
+        <li><a href="soul.html">Soul</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section with Video -->
+  <section class="hero">
+    <video src="path/to/your-landing-video.mp4" autoplay muted loop playsinline></video>
+    <div class="hero-text">Body</div>
+  </section>
+
+  <!-- Courses Grid -->
+  <section class="courses">
+    <div class="course-box">
+      <h3>Yoga Fundamentals</h3>
+      <ul>
+        <li>Beginner-friendly stretches</li>
+        <li>Alignment principles</li>
+        <li>Breathing techniques</li>
+      </ul>
+      <button class="learn-more-btn">Learn More</button>
+    </div>
+    <div class="course-box">
+      <h3>Pilates Core</h3>
+      <ul>
+        <li>Core strengthening</li>
+        <li>Stability exercises</li>
+        <li>Flexibility focus</li>
+      </ul>
+      <button class="learn-more-btn">Learn More</button>
+    </div>
+    <div class="course-box">
+      <h3>HIIT Workouts</h3>
+      <ul>
+        <li>Cardio intervals</li>
+        <li>Strength rounds</li>
+        <li>Recovery tips</li>
+      </ul>
+      <button class="learn-more-btn">Learn More</button>
+    </div>
+    <div class="course-box">
+      <h3>Strength Training</h3>
+      <ul>
+        <li>Proper form</li>
+        <li>Progressive overload</li>
+        <li>Equipment basics</li>
+      </ul>
+      <button class="learn-more-btn">Learn More</button>
+    </div>
+    <div class="course-box">
+      <h3>Flexibility Flow</h3>
+      <ul>
+        <li>Dynamic stretches</li>
+        <li>Mobility drills</li>
+        <li>Cooldown routines</li>
+      </ul>
+      <button class="learn-more-btn">Learn More</button>
+    </div>
+    <div class="course-box">
+      <h3>Nutrition Basics</h3>
+      <ul>
+        <li>Macro breakdown</li>
+        <li>Meal planning</li>
+        <li>Hydration guide</li>
+      </ul>
+      <button class="learn-more-btn">Learn More</button>
+    </div>
+  </section>
+</body>
+</html>
