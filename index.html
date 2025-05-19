@@ -676,7 +676,57 @@
       font-size: 1.5rem;
     }
 
-/* From Uiverse.io by cssbuttons-io */ 
+.cta {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.cta span {
+  padding-bottom: 7px;
+  letter-spacing: 4px;
+  font-size: 14px;
+  padding-right: 15px;
+  text-transform: uppercase;
+}
+
+.cta svg {
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active svg {
+  transform: scale(0.9);
+}
+
+.hover-underline-animation {
+  position: relative;
+  color: black;
+  padding-bottom: 20px;
+}
+
+.hover-underline-animation:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover-underline-animation:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
 button {
  position: relative;
  display: inline-block;
@@ -703,7 +753,7 @@ button.learn-more .circle {
  margin: 0;
  width: 3rem;
  height: 3rem;
- background: #282936;
+ background: #211815;
  border-radius: 1.625rem;
 }
 
@@ -745,7 +795,7 @@ button.learn-more .button-text {
  bottom: 0;
  padding: 0.75rem 0;
  margin: 0 0 0 1.85rem;
- color: #282936;
+ color: #211815;
  font-weight: 700;
  line-height: 1.6;
  text-align: center;
@@ -1120,10 +1170,12 @@ button:hover .button-text {
     <p>A space to silence the mind, strengthen the spirit & heal the body. At the Well-being Studio, we gather practices, group classes, experiences, and inspiration all under one roof to develop your physical and mental strength through various styles of yoga, breath work, and meditation.</p>
   </div>
 
-  <!-- Button with arrow -->
-  <a href="#more-info" class="about-us-btn lift-btn">
-    MORE INFO <span class="btn-arrow">→</span>
-  </a>
+<button class="learn-more">
+  <span class="circle" aria-hidden="true">
+  <span class="icon arrow"></span>
+  </span>
+  <span class="button-text">Learn More</span>
+</button>
 </section>
 
   <!-- ARTICLE MODAL (Instagram-style) -->
