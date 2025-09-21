@@ -699,12 +699,12 @@ coolbutton:hover .svg-icon {
     }
 
     /* FLY-IN ANIMATION */
-    .fly-in {
+    .scroll-animate {
       opacity: 0;
       transform: translateY(30px);
       transition: all 0.8s ease;
     }
-    .fly-in.visible {
+    .scroll-animate.visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -1030,9 +1030,213 @@ button:hover .button-text {
     mobileMenu.innerHTML = desktopLinks;
   });
 
-</style>
+
+    /* CLEAN: scroll animation (replacement for previous fly-in) */
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(30px) scale(0.995);
+      will-change: transform, opacity;
+      transition: opacity 700ms cubic-bezier(.2,.9,.2,1), transform 700ms cubic-bezier(.2,.9,.2,1);
+    }
+    .scroll-animate.in-view {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    /* utility for optional staggering */
+    .stagger > * { transition-delay: calc(var(--i) * 80ms); }
+
+  
+    /* Page loader (user-provided loader plus wrapper positioning) */
+    .loader-wrapper {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20000;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 320ms ease, visibility 320ms;
+      visibility: visible;
+    }
+    .loader-wrapper.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .loader {
+      width: 4px;
+      color: #000;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      box-shadow:
+        19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 0px,
+        19px 0     0 5px, 38px 0     0 5px, 57px 0     0 5px,
+        19px 19px  0 0px, 38px 19px  0 0px, 57px 19px  0 0px;
+      transform: translateX(-38px);
+      animation: l26 2s infinite linear;
+    }
+    @keyframes l26 {
+      12.5% {box-shadow:
+        19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 5px,
+        19px 0     0 5px, 38px 0     0 0px, 57px 0     0 5px,
+        19px 19px  0 0px, 38px 19px  0 0px, 57px 19px  0 0px}
+      25%   {box-shadow:
+        19px -19px 0 5px, 38px -19px 0 0px, 57px -19px 0 5px,
+        19px 0     0 0px, 38px 0     0 0px, 57px 0     0 0px,
+        19px 19px  0 0px, 38px 19px  0 5px, 57px 19px  0 0px}
+      50%   {box-shadow:
+        19px -19px 0 5px, 38px -19px 0 5px, 57px -19px 0 0px,
+        19px 0     0 0px, 38px 0     0 0px, 57px 0     0 0px,
+        19px 19px  0 0px, 38px 19px  0 0px, 57px 19px  0 5px}
+      62.5% {box-shadow:
+        19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 0px,
+        19px 0     0 5px, 38px 0     0 0px, 57px 0     0 0px,
+        19px 19px  0 0px, 38px 19px  0 5px, 57px 19px  0 5px}
+      75%   {box-shadow:
+        19px -19px 0 0px, 38px -19px 0 5px, 57px -19px 0 0px,
+        19px 0     0 0px, 38px 0     0 0px, 57px 0     0 5px,
+        19px 19px  0 0px, 38px 19px  0 0px, 57px 19px  0 5px}
+      87.5% {box-shadow:
+        19px -19px 0 0px, 38px -19px 0 5px, 57px -19px 0 0px,
+        19px 0     0 0px, 38px 0     0 5px, 57px 0     0 0px,
+        19px 19px  0 5px, 38px 19px  0 0px, 57px 19px  0 0px}
+    }
+
+  
+    /* Modal: center image at natural size, avoid stretching (Instagram-like) */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.85);
+      z-index: 16000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 200ms ease, visibility 200ms;
+      padding: 20px;
+    }
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      justify-content: center;
+      max-width: 1200px;
+      width: 100%;
+      max-height: 92vh;
+      box-sizing: border-box;
+      outline: none;
+    }
+    .modal-img {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: calc(100% - 420px);
+      max-height: 92vh;
+    }
+    .modal-img img {
+      display: block;
+      width: auto !important;
+      height: auto !important;
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+      background: transparent;
+    }
+    .modal-text {
+      color: #fff;
+      max-width: 380px;
+      overflow: auto;
+      flex: 0 0 380px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      font-size: 28px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+    /* Responsive: stack content on small screens */
+    @media (max-width: 880px) {
+      .modal-content { flex-direction: column; gap: 12px; max-width: 100%; }
+      .modal-img { max-width: 100%; }
+      .modal-text { max-width: 100%; flex: none; }
+      .modal-close { top: 10px; right: 10px; }
+    }
+
+  
+    /* Preview caption clamp */
+    .preview-caption {
+      color: #211815;
+      font-size: 0.95rem;
+      line-height: 1.2;
+      margin: 8px 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Ensure article-card image area keeps aspect and doesn't overflow */
+    .article-card img { width: 100%; height: auto; display: block; }
+
+    /* Modal image safety: ensure transparent background and contain without stretching */
+    .modal-img { background: transparent; display:flex; align-items:center; justify-content:center; }
+    .modal-img img { background: transparent; object-fit: contain; width: auto !important; height: auto !important; max-width: 90vw; max-height: 90vh; }
+
+  
+    /* Article thumbnail: fixed preview area so cards align neatly */
+    .article-card {
+      width: 300px;
+      height: 420px; /* ensure consistent card height */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+    .article-card .thumb {
+      width: 100%;
+      height: 200px; /* fixed preview image height */
+      overflow: hidden;
+      flex: 0 0 200px;
+      display: block;
+      background: #f3f1ef;
+    }
+    .article-card .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* crop to fill */
+      display: block;
+    }
+    .article-card h3 { margin: 12px 12px 6px 12px; font-size: 1.05rem; }
+    .article-card .author, .article-card .price { margin: 0 12px; font-size: 0.85rem; color: #6b605d; }
+    .article-card .preview-caption { margin: 8px 12px; }
+    /* Ensure slider row keeps spacing and hides overflow nicely */
+    .articles-slider { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 6px; }
+    @media (max-width: 480px) {
+      .article-card { width: 260px; height: 420px; }
+      .article-card .thumb { height: 170px; flex: 0 0 170px; }
+    }
+
+  </style>
 </head>
 <body>
+  <!-- Page loader -->
+  <div class="loader-wrapper" id="pageLoader" aria-hidden="true">
+    <div class="loader" role="status" aria-label="Loading content"></div>
+  </div>
+
   <!-- HEADER / NAVIGATION -->
   <header id="navbar">
     <div class="nav-container">
@@ -1081,7 +1285,7 @@ button:hover .button-text {
   <section class="core-values" id="coreValues">
     <h2>Our Core Values</h2>
     <div class="core-values-inner">
-      <div class="core-value-box fly-in" id="body">
+      <div class="core-value-box scroll-animate" id="body">
         <h3>BODY</h3>
         <p>Achieve the physique you desire and embrace a healthier lifestyle.</p>
 <button class="learn-more">
@@ -1091,7 +1295,7 @@ button:hover .button-text {
   <a href="body.html"><span class="button-text">Learn More</span></a>
 </button>
       </div>
-      <div class="core-value-box fly-in" id="mind">
+      <div class="core-value-box scroll-animate" id="mind">
         <h3>MIND</h3>
         <p>Cultivate clarity, focus, and emotional well-being to unlock your potential.</p>
         <button class="learn-more">
@@ -1101,7 +1305,7 @@ button:hover .button-text {
   <a href="mind.html"><span class="button-text">Learn More</span></a>
 </button>
       </div>
-      <div class="core-value-box fly-in" id="soul">
+      <div class="core-value-box scroll-animate" id="soul">
         <h3>SOUL</h3>
         <p>Nurture your spirit and find deeper fulfillment in everyday life.</p>
  <button class="learn-more">
@@ -1118,43 +1322,55 @@ button:hover .button-text {
   <section class="articles-section" id="articles">
     <h2>Our Latest Highlights</h2>
     <div class="articles-slider" id="articlesSlider">
-      <div class="article-card" data-article="1">
-        <img src="https://images.pexels.com/photos/3823186/pexels-photo-3823186.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Article 1">
+      <div class="article-card" data-article="1" data-full-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.">
+      <div class="thumb">
+        <img src="https://images.pexels.com/photos/3823186/pexels-photo-3823186.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Article 1"></div>
+
         <h3>Article Title 1</h3>
         <div class="author">by John Doe</div>
         <div class="price">$10</div>
         <p>Lorem ipsum dolor sit amet.</p>
       </div>
-      <div class="article-card" data-article="2">
-        <img src="https://images.pexels.com/photos/4534666/pexels-photo-4534666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Article 2">
+      <div class="article-card" data-article="2" data-full-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.">
+      <div class="thumb">
+        <img src="https://images.pexels.com/photos/4534666/pexels-photo-4534666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Article 2"></div>
+
         <h3>Article Title 2</h3>
         <div class="author">by Jane Smith</div>
         <div class="price">$20</div>
         <p>Praesent in libero vel turpis.</p>
       </div>
-      <div class="article-card" data-article="3">
-        <img src="https://images.pexels.com/photos/5747793/pexels-photo-5747793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Article 3">
+      <div class="article-card" data-article="3" data-full-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.">
+      <div class="thumb">
+        <img src="https://images.pexels.com/photos/5747793/pexels-photo-5747793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2" alt="Article 3"></div>
+
         <h3>Article Title 3</h3>
         <div class="author">by Alex Ray</div>
         <div class="price">$15</div>
         <p>Donec augue, tortor sodales accumsan.</p>
       </div>
-      <div class="article-card" data-article="4">
-        <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop" alt="Article 4">
+      <div class="article-card" data-article="4" data-full-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.">
+      <div class="thumb">
+        <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop" alt="Article 4"></div>
+
         <h3>Placeholder Article</h3>
         <div class="author">by Placeholder</div>
         <div class="price">$0</div>
         <p>This is a placeholder article.</p>
       </div>
-      <div class="article-card" data-article="5">
-        <img src="https://images.unsplash.com/photo-1593164842264-854604db2260?q=80&w=1974&auto=compress&cs=tinysrgb&fit=crop" alt="Article 5">
+      <div class="article-card" data-article="5" data-full-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.">
+      <div class="thumb">
+        <img src="https://images.unsplash.com/photo-1593164842264-854604db2260?q=80&w=1974&auto=compress&cs=tinysrgb&fit=crop" alt="Article 5"></div>
+
         <h3>Placeholder Article</h3>
         <div class="author">by Placeholder</div>
         <div class="price">$0</div>
         <p>This is another placeholder article.</p>
       </div>
-      <div class="article-card" data-article="6">
-        <img src="https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop" alt="Article 6">
+      <div class="article-card" data-article="6" data-full-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.">
+      <div class="thumb">
+        <img src="https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop" alt="Article 6"></div>
+
         <h3>Placeholder Article</h3>
         <div class="author">by Placeholder</div>
         <div class="price">$0</div>
@@ -1262,20 +1478,30 @@ const ham = document.querySelector('.hamburger');
       mobileMenu.classList.toggle('show');
     });
 
-    // Fly-in Effect on Scroll
-    const flyInElements = document.querySelectorAll('.fly-in');
-    function handleScroll() {
-      flyInElements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          el.classList.add('visible');
-        }
-      });
-    }
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    // ===== Scroll animation (clean IntersectionObserver replacement) =====
+      const animated = document.querySelectorAll('.scroll-animate');
+      if (animated.length){
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+            } else {
+              // remove so it can animate again when re-entering
+              entry.target.classList.remove('in-view');
+            }
+          });
+        }, {
+          root: null,
+          rootMargin: '0px 0px -10% 0px',
+          threshold: 0.15
+        });
+        animated.forEach((el, idx) => {
+          el.style.setProperty('--i', idx);
+          io.observe(el);
+        });
+      }
 
-    // Quotes Slider: 4 seconds per quote with slide effect
+// Quotes Slider: 4 seconds per quote with slide effect
     const quoteItems = document.querySelectorAll('.quote-item');
     const arrowLeft = document.getElementById('quoteArrowLeft');
     const arrowRight = document.getElementById('quoteArrowRight');
@@ -1443,6 +1669,78 @@ const ham = document.querySelector('.hamburger');
     const desktopLinks = document.querySelector('nav ul').innerHTML;
     mobileMenu.innerHTML = desktopLinks;
   });
+</script>
+
+  <script>
+    // Hide and remove the loader once page resources have finished loading.
+    window.addEventListener('load', function () {
+      try {
+        var loader = document.getElementById('pageLoader');
+        if (!loader) return;
+        // fade out
+        loader.classList.add('hidden');
+        // remove from DOM after transition (500ms to be safe)
+        setTimeout(function(){ if (loader && loader.parentNode) loader.parentNode.removeChild(loader); }, 600);
+      } catch (e) { console.error('Loader hide error', e); }
+    });
+  </script>
+
+<script>
+      // Enhanced modal behavior: populate caption and avoid image stretching/black areas
+      (function(){
+        const articleCards = document.querySelectorAll('.article-card');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalAuthor = document.getElementById('modalAuthor');
+        const modalPrice = document.getElementById('modalPrice');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalClose = document.getElementById('modalClose');
+
+        articleCards.forEach(card => {
+          card.style.cursor = 'pointer';
+          card.addEventListener('click', function(e){
+            const img = card.querySelector('img');
+            const title = card.querySelector('h3') ? card.querySelector('h3').textContent : '';
+            const author = card.querySelector('.author') ? card.querySelector('.author').textContent : '';
+            const price = card.querySelector('.price') ? card.querySelector('.price').textContent : '';
+            const fullCaption = card.dataset.fullCaption || '';
+
+            // clear image to avoid showing partial artifacts in some browsers while loading a new src
+            modalImg.src = '';
+            modalImg.alt = title;
+
+            // set modal text
+            if(modalTitle) modalTitle.textContent = title;
+            if(modalAuthor) modalAuthor.textContent = author;
+            if(modalPrice) modalPrice.textContent = price;
+            if(modalDescription) modalDescription.textContent = fullCaption;
+
+            // set image src after brief timeout to force reflow (helps some browsers avoid artifacts)
+            setTimeout(()=>{
+              if(img && img.src){
+                modalImg.src = img.src;
+              }
+            }, 50);
+
+            // show modal
+            if(modalOverlay) modalOverlay.classList.add('show');
+            // disable body scroll
+            document.body.style.overflow = 'hidden';
+          });
+        });
+
+        // close handlers
+        if(modalClose) modalClose.addEventListener('click', closeModal);
+        if(modalOverlay) modalOverlay.addEventListener('click', function(e){ if(e.target === modalOverlay) closeModal(); });
+
+        function closeModal(){
+          if(modalOverlay) modalOverlay.classList.remove('show');
+          document.body.style.overflow = '';
+          // remove src after hiding to free memory and avoid flashes next open
+          setTimeout(()=>{ if(modalImg) modalImg.src = ''; }, 300);
+        }
+      })();
 </script>
 </body>
 </html>
