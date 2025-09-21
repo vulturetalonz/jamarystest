@@ -1228,6 +1228,100 @@ button:hover .button-text {
       .article-card { width: 260px; height: 420px; }
       .article-card .thumb { height: 170px; flex: 0 0 170px; }
     }
+/* -------------------------
+   BMS About section (non-invasive)
+   - No color definitions (inherits site colors)
+   - Centered, responsive, clean spacing
+   ------------------------- */
+.bms-about {
+  padding: 3rem 1rem;
+  text-align: center;
+  /* do NOT set background or color here; inherit from site */
+}
+
+.bms-about-inner {
+  max-width: 48rem; /* keeps line-length readable */
+  margin: 0 auto;
+  padding: 0 0.5rem;
+}
+
+.bms-about-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  text-transform: uppercase;
+  /* color: inherit; */
+}
+
+.bms-about-headline {
+  margin: 0 0 0.75rem;
+  font-family: 'Cormorant', serif;
+  font-weight: 700;
+  line-height: 1.05;
+  /* responsive size */
+  font-size: clamp(1.6rem, 3.0vw, 2.2rem);
+}
+
+.bms-about-copy {
+  margin: 0 auto;
+  max-width: 65ch; /* optimal readable line length */
+  line-height: 1.65;
+  font-size: 1rem;
+  color: inherit;
+}
+
+.bms-about-copy p {
+  margin: 0 0 1rem 0;
+}
+
+/* tagline / emphasis */
+.bms-about-tagline {
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
+/* CTA button - uses currentColor so your CSS controls appearance */
+.bms-about-cta-wrap { margin-top: 1.25rem; }
+
+.bms-about-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 28px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 2px solid currentColor; /* respects your site's color */
+  background: transparent;        /* let site styles win if needed */
+  transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+}
+
+/* subtle hover shift for the arrow */
+.bms-about-cta .bms-cta-arrow {
+  display:inline-block;
+  transition: transform 180ms ease;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+.bms-about-cta:hover .bms-cta-arrow { transform: translateX(4px); }
+
+/* signature */
+.bms-about-signature {
+  margin-top: 0.85rem;
+  font-size: 0.9rem;
+  color: inherit;
+}
+
+/* responsive tweaks */
+@media (max-width: 640px) {
+  .bms-about { padding: 2rem 1rem; }
+  .bms-about-inner { padding: 0 0.75rem; }
+  .bms-about-headline { font-size: 1.6rem; }
+  .bms-about-copy { font-size: 0.97rem; line-height: 1.55; }
+  .bms-about-cta { padding: 0.55rem 1rem; }
+}
 
   </style>
 </head>
@@ -1280,6 +1374,50 @@ button:hover .button-text {
       </p>
     </div>
   </section>
+<!-- ABOUT US (BMS - centered, non-invasive) -->
+<section id="about-us" class="bms-about">
+  <div class="bms-about-inner">
+    <p class="bms-about-label">About us</p>
+
+    <h2 class="bms-about-headline">
+      Welcome to <span class="bms-brand-name">The Body Mind Soul Club</span>
+    </h2>
+
+    <div class="bms-about-copy">
+      <p>
+        I know what it feels like to sense that there’s more inside you — more potential, more light — and not always
+        know how to unlock it. That’s why I created The Body Mind Soul Club.
+      </p>
+
+      <p>
+        I believe every woman carries a unique light waiting to shine. Sometimes all it takes is guidance, inspiration,
+        or a fresh perspective to set that light free. This club is the safe space I always wished for: a place where
+        we grow, learn, and transform together.
+      </p>
+
+      <p>
+        Here you’ll find inspiring experts who share their knowledge, passion, and skills — from artists to healthcare
+        professionals, from coaches to creators. Every course is designed to help you move closer to your goals and align
+        with your ideal self.
+      </p>
+
+      <p>
+        But this is more than a learning platform. It’s a community — where strength and softness meet, and ambition and
+        compassion go hand in hand. We believe everyone can achieve what they want in life if they put their mind to it.
+      </p>
+    </div>
+
+    <p class="bms-about-tagline">Body. Mind. Soul. Unlock your potential.</p>
+
+    <div class="bms-about-cta-wrap">
+      <a href="aboutus.html" class="bms-about-cta" aria-label="Learn more about The Body Mind Soul Club">
+        Learn more <span class="bms-cta-arrow">→</span>
+      </a>
+    </div>
+
+    <p class="bms-about-signature">— BMS</p>
+  </div>
+</section>
 
   <!-- CORE VALUES SECTION -->
   <section class="core-values" id="coreValues">
@@ -1744,3 +1882,4 @@ const ham = document.querySelector('.hamburger');
 </script>
 </body>
 </html>
+
