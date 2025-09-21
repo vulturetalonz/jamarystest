@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMS - BodyMindSoul</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+  <style>
+    /* GLOBAL RESET & BASE */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease-in-out;
+    }
+    html, body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #ddd7d5;
+      color: #211815;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    img, video {
+      max-width: 100%;
+      display: block;
+    }
+    
+.li {
+  background: #fff;
+}
+    /* NAVIGATION */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 15px 30px;
+      background: transparent;
+      box-shadow: 0 4px 8px rgba(33,24,21,0.1);
+      backdrop-filter: blur(10px);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    @media (min-width: 1px) {
+      header.desktop-navbar {
+        background: transparent;
+      }
+      header.desktop-navbar .logo,
+      header.desktop-navbar nav ul li a {
+        color: white;
+      }
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Cormorant', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    nav ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      font-size: 0.8rem;
+    }
+    nav li {
+      cursor: pointer;
+      font-weight: 600;
+      color: inherit;
+    }
+    nav li a {
+      text-transform: uppercase;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #211815;
+      margin: 4px 0;
+      border-radius: 2px;
+    }
+    .mobile-menu {
+      position: absolute;
+      top: 60px;
+      right: 30px;
+      background: #c3bbb700;
+      border-radius: 5px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      padding: 15px;
+      backdrop-filter: blur(10px);
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      font-size: 0.9rem;
+      z-index: 1100;
+      opacity: 0;
+      backdrop-filter: blur(10px);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .mobile-menu.show {
+      display: flex;
+      opacity: 1;
+    }
+    .mobile-menu a {
+      text-transform: uppercase;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: inherit;
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* From Uiverse.io by tomaskriegelstein */ 
+coolbutton {
+  color: #ffff;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: color;
+  display: inline-flex;
+  align-items: center;
+}
+
+coolbutton:focus,
+coolbutton:hover {
+  color: white;
+}
+
+coolbutton:focus:after,
+coolbutton:hover:after {
+  width: 100%;
+  right: ;
+  left: auto; /* Ensure left is auto to override the initial value */
+}
+
+coolbutton:after {
+  content: "";
+  pointer-events: none;
+  bottom: -7px;
+  right: auto; /* Start from the right */
+  left: 0; /* Ensure left is auto to override the initial value */
+  position: absolute;
+  width: 0%;
+  height: 1px;
+  background-color: #fff;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 500ms;
+  transition-property: width, right;
+}
+
+
+coolbutton:hover .svg-icon {
+  transform: rotate(0deg);
+  fill: white;
+}
+
+    /* TOP VIDEO SLIDER WITH OVERLAY */
+    .video-slider {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .video-slider video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(33,24,21,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+    }
+    .sub-header {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ebe6e4;
+      margin-bottom: 0.5rem;
+    }
+    .main-header {
+      font-family: 'Cormorant', serif;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #ebe6e4;
+    }
+    .description {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      color: #ebe6e4;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+
+    /* CUSTOM BUTTON (Lift Effect) */
+    .lift-btn {
+      display: inline-block;
+      padding: 0.7rem 1.2rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      color: #211815;
+      background: transparent;
+      border: 2px solid #211815;
+      border-radius: 30px;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .lift-btn::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 0%;
+      bottom: 0;
+      left: 0;
+      background: #211815;
+      z-index: -1;
+      transition: height 0.4s ease;
+    }
+    .lift-btn:hover::before {
+      height: 100%;
+    }
+    .lift-btn:hover {
+      color: #ebe6e4;
+    }
+
+    /* CORE VALUES SECTION */
+    .core-values {
+      padding: 50px 20px;
+      background: #f0e9e6;
+    }
+    .core-values h2 {
+      font-family: 'Cormorant', serif;
+      font-size: 2rem;
+      text-align: center;
+      color: #211815;
+      margin-bottom: 30px;
+    }
+    .core-values-inner {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .core-values-inner::-webkit-scrollbar {
+      height: 6px;
+    }
+    .core-values-inner::-webkit-scrollbar-track {
+      background: #ddd7d5;
+      border-radius: 3px;
+    }
+    .core-values-inner::-webkit-scrollbar-thumb {
+      background: #211815;
+      border-radius: 3px;
+      transition: background 0.3s ease;
+    }
+    .core-value-box {
+      background: #faf4f1;
+      border-radius: 10px;
+      padding: 20px;
+      flex: 1 1 250px;
+      max-width: 300px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      color: #211815;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .core-value-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .core-value-box h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .core-value-box p {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+.learn-more-btn {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #ebe6e4;
+  background: #211815;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.learn-more-btn::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.learn-more-btn:hover::after {
+  transform: translateX(3px);
+}
+
+
+    /* ARTICLES SECTION */
+    .articles-section {
+      padding: 50px 20px;
+      background: #ddd7d5;
+      text-align: center;
+    }
+    .articles-section h2 {
+      font-family: 'Cormorant', serif;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #211815;
+    }
+    .articles-slider {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .articles-slider::-webkit-scrollbar {
+      height: 6px;
+    }
+    .articles-slider::-webkit-scrollbar-track {
+      background: #ddd7d5;
+      border-radius: 3px;
+    }
+    .articles-slider::-webkit-scrollbar-thumb {
+      background: #211815;
+      border-radius: 3px;
+      transition: background 0.3s ease;
+    }
+    .article-card {
+      width: 300px;
+      height: 400px;
+      background: #ebe6e4;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      cursor: pointer;
+      color: #211815;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .article-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .article-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .article-card h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 1.5rem;
+      margin: 15px 10px 5px;
+    }
+    .article-card p {
+      margin: 0 10px 15px;
+      font-size: 1rem;
+    }
+
+    /* QUOTES SLIDER SECTION */
+    .quotes-section {
+      padding: 50px 20px;
+      background: #ebe6e4;
+      text-align: center;
+      position: relative;
+    }
+    .quotes-container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      cursor: pointer;
+      color: #211815;
+      background: rgba(255,255,255,0);
+      padding: 0.2rem 0.6rem;
+      border-radius: 50%;
+      z-index: 2;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+    .quote-arrow:hover {
+      background: rgba(255,255,255,0.5);
+    }
+    .left-arrow { left: 0; }
+    .right-arrow { right: 0; }
+    .quote-slide {
+      position: relative;
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .quote-item {
+      position: absolute;
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-family: 'Cormorant', serif;
+      font-size: 1.7rem;
+      padding: 0 2rem;
+      color: #211815;
+      text-transform: uppercase;
+    }
+    .quote-item.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    @media (max-width: 480px) {
+      .quote-arrow {
+        font-size: 1.5rem;
+      }
+      .quote-item {
+        font-size: 1rem;
+      }
+    }
+
+ /* UPDATED ABOUT US SECTION */
+.about-us-section {
+  position: relative;
+  margin: 40px 0;
+  overflow: hidden;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.about-us-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: none;
+}
+
+.about-us-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(33, 24, 21, 0.4); /* Dark overlay for better text contrast */
+  pointer-events: none;
+}
+
+.about-us-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 1.5rem;
+  color: #ebe6e4; /* Light text color */
+  max-width: 100%;
+  background: transparent;
+  border-radius: 0;
+}
+
+.about-us-content h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.about-us-content p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.about-us-btn {
+  position: relative; /* Change from absolute to relative */
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  border: 2px solid #ebe6e4;
+  color: #ebe6e4;
+  border-radius: 30px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin-top: 0; /* Adjust as needed */
+  transition: all 0.3s ease;
+}
+
+.about-us-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-arrow {
+  display: inline-block;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.about-us-btn:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+/* Desktop Adjustments */
+@media (min-width: 768px) {
+  .about-us-section {
+    aspect-ratio: 2.2/1; /* Match the desktop reference aspect ratio */
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-us-content {
+    left: 3rem;
+    bottom: 50%;
+    transform: translateY(50%);
+    max-width: 450px;
+    padding: 0;
+  }
+
+  .about-us-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-us-content p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .about-us-btn {
+    margin-top: 0;
+    padding: 0.8rem 2rem;
+  }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 767px) {
+  .about-us-section {
+    aspect-ratio: 4/5; /* Match the mobile reference aspect ratio */
+  }
+}
+
+    /* ARTICLE MODAL (Instagram-style) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.show {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-content {
+      background: #fff;
+      display: flex;
+      flex-direction: row;
+      max-width: 800px;
+      width: 90%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .modal-img {
+      flex: 1 1 50%;
+      min-width: 300px;
+      background: #000;
+    }
+    .modal-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .modal-text {
+      flex: 1 1 50%;
+      padding: 2rem;
+      position: relative;
+      color: #211815;
+    }
+    .modal-text h3 {
+      font-family: 'Cormorant', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .modal-text .author,
+    .modal-text .price {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .modal-text p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #211815;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 20px;
+      text-align: center;
+      background: #ddd7d5;
+      color: #211815;
+    }
+    footer .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    footer .footer-content a {
+      color: #211815;
+      text-decoration: underline;
+      margin: 0 5px;
+    }
+    footer p {
+      margin: 10px 0;
+    }
+
+    /* FLY-IN ANIMATION */
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    .scroll-animate.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* NEW: Circular Video Modal Button */
+    .video-modal-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background: #211815;
+      color: #ebe6e4;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 2000;
+      font-size: 1.5rem;
+    }
+
+.cta {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.cta span {
+  padding-bottom: 7px;
+  letter-spacing: 4px;
+  font-size: 14px;
+  padding-right: 15px;
+  text-transform: uppercase;
+}
+
+.cta svg {
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active svg {
+  transform: scale(0.9);
+}
+
+.hover-underline-animation {
+  position: relative;
+  color: black;
+  padding-bottom: 20px;
+}
+
+.hover-underline-animation:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover-underline-animation:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+button {
+ position: relative;
+ display: inline-block;
+ cursor: pointer;
+ outline: none;
+ border: 0;
+ vertical-align: middle;
+ text-decoration: none;
+ background: transparent;
+ padding: 0;
+ font-size: inherit;
+ font-family: inherit;
+}
+
+button.learn-more {
+ width: 12rem;
+ height: auto;
+}
+
+button.learn-more .circle {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ position: relative;
+ display: block;
+ margin: 0;
+ width: 3rem;
+ height: 3rem;
+ background: #211815;
+ border-radius: 1.625rem;
+}
+
+button.learn-more .circle .icon {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ position: absolute;
+ top: 0;
+ bottom: 0;
+ margin: auto;
+ background: #fff;
+}
+
+button.learn-more .circle .icon.arrow {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ left: 0.625rem;
+ width: 1.125rem;
+ height: 0.125rem;
+ background: none;
+}
+
+button.learn-more .circle .icon.arrow::before {
+ position: absolute;
+ content: "";
+ top: -0.29rem;
+ right: 0.0625rem;
+ width: 0.625rem;
+ height: 0.625rem;
+ border-top: 0.125rem solid #fff;
+ border-right: 0.125rem solid #fff;
+ transform: rotate(45deg);
+}
+
+button.learn-more .button-text {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ position: absolute;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ padding: 0.75rem 0;
+ margin: 0 0 0 1.85rem;
+ color: #211815;
+ font-weight: 700;
+ line-height: 1.6;
+ text-align: center;
+ text-transform: uppercase;
+}
+
+button:hover .circle {
+ width: 100%;
+}
+
+button:hover .circle .icon.arrow {
+ background: #fff;
+ transform: translate(1rem, 0);
+}
+
+button:hover .button-text {
+ color: #fff;
+}
+    /* NEW: Video Modal Overlay and Content */
+    .video-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 3000;
+    }
+    .video-modal-overlay.show {
+      display: flex;
+    }
+    .video-modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 80%;
+    }
+    .video-modal-content video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+    .video-modal-close {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #211815;
+      color: #ebe6e4;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* RESPONSIVE STYLES */
+    @media (max-width: 768px) {
+      header {
+        padding: 10px 20px;
+      }
+      .video-overlay .sub-header {
+        font-size: 0.9rem;
+      }
+      .video-overlay .main-header {
+        font-size: 2.2rem;
+      }
+      .video-overlay .description {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+      .core-values-inner {
+        flex-wrap: nowrap;
+      }
+      .about-us-content {
+        left: 10px;
+        right: 10px;
+        bottom: 40px;
+        max-width: 80%;
+        font-size: 0.65rem;
+      }
+      .about-us-content h2 {
+        font-size: 1.2rem;
+      }
+      .about-us-btn {
+        bottom: 10px;
+        right: 10px;
+      }
+    }
+
+/* ——————————————————————————————— */
+/* 1) FORCE CORE-VALUES TO STACK AT ≤500px */
+@media (max-width: 500px) {
+  .core-values-inner {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    overflow-x: hidden !important;
+    padding: 0 10px !important;
+    justify-content: center !important;
+  }
+  .core-value-box {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 20px !important;
+    scroll-snap-align: unset !important;
+  }
+}
+
+/* ——————————————————————————————— */
+/* 2) ABOUT US TEXT ADJUSTMENTS */
+.about-us-content {
+  background: transparent !important;
+  color: #211815 !important;
+}
+@media (max-width: 768px) {
+  .about-us-content { font-size: 1rem; }
+}
+@media (max-width: 500px) {
+  .about-us-content { font-size: 0.9rem; }
+}
+
+/* ——————————————————————————————— */
+/* 3) ARTICLE MODAL LAYOUT (Instagram-style) */
+.modal-content {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 1rem;
+  max-width: 90%;
+}
+.modal-content .modal-img, .modal-content .modal-text {
+  flex: 1 1 50% !important;
+}
+.modal-content .modal-img img {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 500px) {
+  .modal-content { flex-direction: column !important; }
+}
+
+.modal-content .modal-img img {
+  max-width: 300px !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+
+.about-us {
+  position: relative !important;
+  overflow: hidden !important;
+}
+.about-us img {
+  display: block;
+}
+.about-us-content {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 1rem !important;
+  background: transparent !important;
+  color: #211815 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* ————————— MOBILE NAVBAR LINKS SYNC ————————— */
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const desktopLinks = document.querySelector('nav ul').innerHTML;
+    mobileMenu.innerHTML = desktopLinks;
+  });
+
+
+    /* CLEAN: scroll animation (replacement for previous fly-in) */
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(30px) scale(0.995);
+      will-change: transform, opacity;
+      transition: opacity 700ms cubic-bezier(.2,.9,.2,1), transform 700ms cubic-bezier(.2,.9,.2,1);
+    }
+    .scroll-animate.in-view {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    /* utility for optional staggering */
+    .stagger > * { transition-delay: calc(var(--i) * 80ms); }
+
+  
+    /* Page loader (user-provided loader plus wrapper positioning) */
+    .loader-wrapper {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20000;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 320ms ease, visibility 320ms;
+      visibility: visible;
+    }
+    .loader-wrapper.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .loader {
+      width: 4px;
+      color: #000;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      box-shadow:
+        19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 0px,
+        19px 0     0 5px, 38px 0     0 5px, 57px 0     0 5px,
+        19px 19px  0 0px, 38px 19px  0 0px, 57px 19px  0 0px;
+      transform: translateX(-38px);
+      animation: l26 2s infinite linear;
+    }
+    @keyframes l26 {
+      12.5% {box-shadow:
+        19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 5px,
+        19px 0     0 5px, 38px 0     0 0px, 57px 0     0 5px,
+        19px 19px  0 0px, 38px 19px  0 0px, 57px 19px  0 0px}
+      25%   {box-shadow:
+        19px -19px 0 5px, 38px -19px 0 0px, 57px -19px 0 5px,
+        19px 0     0 0px, 38px 0     0 0px, 57px 0     0 0px,
+        19px 19px  0 0px, 38px 19px  0 5px, 57px 19px  0 0px}
+      50%   {box-shadow:
+        19px -19px 0 5px, 38px -19px 0 5px, 57px -19px 0 0px,
+        19px 0     0 0px, 38px 0     0 0px, 57px 0     0 0px,
+        19px 19px  0 0px, 38px 19px  0 0px, 57px 19px  0 5px}
+      62.5% {box-shadow:
+        19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 0px,
+        19px 0     0 5px, 38px 0     0 0px, 57px 0     0 0px,
+        19px 19px  0 0px, 38px 19px  0 5px, 57px 19px  0 5px}
+      75%   {box-shadow:
+        19px -19px 0 0px, 38px -19px 0 5px, 57px -19px 0 0px,
+        19px 0     0 0px, 38px 0     0 0px, 57px 0     0 5px,
+        19px 19px  0 0px, 38px 19px  0 0px, 57px 19px  0 5px}
+      87.5% {box-shadow:
+        19px -19px 0 0px, 38px -19px 0 5px, 57px -19px 0 0px,
+        19px 0     0 0px, 38px 0     0 5px, 57px 0     0 0px,
+        19px 19px  0 5px, 38px 19px  0 0px, 57px 19px  0 0px}
+    }
+
+  
+    /* Modal: center image at natural size, avoid stretching (Instagram-like) */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.85);
+      z-index: 16000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 200ms ease, visibility 200ms;
+      padding: 20px;
+    }
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      justify-content: center;
+      max-width: 1200px;
+      width: 100%;
+      max-height: 92vh;
+      box-sizing: border-box;
+      outline: none;
+    }
+    .modal-img {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: calc(100% - 420px);
+      max-height: 92vh;
+    }
+    .modal-img img {
+      display: block;
+      width: auto !important;
+      height: auto !important;
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+      background: transparent;
+    }
+    .modal-text {
+      color: #fff;
+      max-width: 380px;
+      overflow: auto;
+      flex: 0 0 380px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      font-size: 28px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+    /* Responsive: stack content on small screens */
+    @media (max-width: 880px) {
+      .modal-content { flex-direction: column; gap: 12px; max-width: 100%; }
+      .modal-img { max-width: 100%; }
+      .modal-text { max-width: 100%; flex: none; }
+      .modal-close { top: 10px; right: 10px; }
+    }
+
+  
+    /* Preview caption clamp */
+    .preview-caption {
+      color: #211815;
+      font-size: 0.95rem;
+      line-height: 1.2;
+      margin: 8px 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Ensure article-card image area keeps aspect and doesn't overflow */
+    .article-card img { width: 100%; height: auto; display: block; }
+
+    /* Modal image safety: ensure transparent background and contain without stretching */
+    .modal-img { background: transparent; display:flex; align-items:center; justify-content:center; }
+    .modal-img img { background: transparent; object-fit: contain; width: auto !important; height: auto !important; max-width: 90vw; max-height: 90vh; }
+
+  
+    /* Article thumbnail: fixed preview area so cards align neatly */
+    .article-card {
+      width: 300px;
+      height: 420px; /* ensure consistent card height */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+    .article-card .thumb {
+      width: 100%;
+      height: 200px; /* fixed preview image height */
+      overflow: hidden;
+      flex: 0 0 200px;
+      display: block;
+      background: #f3f1ef;
+    }
+    .article-card .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* crop to fill */
+      display: block;
+    }
+    .article-card h3 { margin: 12px 12px 6px 12px; font-size: 1.05rem; }
+    .article-card .author, .article-card .price { margin: 0 12px; font-size: 0.85rem; color: #6b605d; }
+    .article-card .preview-caption { margin: 8px 12px; }
+    /* Ensure slider row keeps spacing and hides overflow nicely */
+    .articles-slider { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 6px; }
+    @media (max-width: 480px) {
+      .article-card { width: 260px; height: 420px; }
+      .article-card .thumb { height: 170px; flex: 0 0 170px; }
+    }
+/* -------------------------
+   BMS About section (non-invasive)
+   - No color definitions (inherits site colors)
+   - Centered, responsive, clean spacing
+   ------------------------- */
+.bms-about {
+  padding: 3rem 1rem;
+  text-align: justify;
+  /* do NOT set background or color here; inherit from site */
+}
+
+.bms-about-inner {
+  max-width: 48rem; /* keeps line-length readable */
+  margin: 0 auto;
+  padding: 0 0.5rem;
+}
+
+.bms-about-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  text-transform: uppercase;
+  /* color: inherit; */
+}
+
+.bms-about-headline {
+  margin: 0 0 0.75rem;
+  font-family: 'Cormorant', serif;
+  font-weight: 700;
+  line-height: 1.05;
+  /* responsive size */
+  font-size: clamp(1.6rem, 3.0vw, 2.2rem);
+}
+
+.bms-about-copy {
+  margin: 0 auto;
+  max-width: 65ch; /* optimal readable line length */
+  line-height: 1.65;
+  font-size: 1rem;
+  color: inherit;
+}
+
+.bms-about-copy p {
+  margin: 0 0 1rem 0;
+}
+
+/* tagline / emphasis */
+.bms-about-tagline {
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
+/* CTA button - uses currentColor so your CSS controls appearance */
+.bms-about-cta-wrap { margin-top: 1.25rem; }
+
+.bms-about-cta {
+  display: inline-flex;
+  align-items: justify;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 28px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 2px solid currentColor; /* respects your site's color */
+  background: transparent;        /* let site styles win if needed */
+  transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+}
+
+/* subtle hover shift for the arrow */
+.bms-about-cta .bms-cta-arrow {
+  display:inline-block;
+  transition: transform 180ms ease;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+.bms-about-cta:hover .bms-cta-arrow { transform: translateX(4px); }
+
+/* signature */
+.bms-about-signature {
+  margin-top: 0.85rem;
+  font-size: 0.9rem;
+  color: inherit;
+}
+
+/* responsive tweaks */
+@media (max-width: 640px) {
+  .bms-about { padding: 2rem 1rem; }
+  .bms-about-inner { padding: 0 0.75rem; }
+  .bms-about-headline { font-size: 1.6rem; }
+  .bms-about-copy { font-size: 0.97rem; line-height: 1.55; }
+  .bms-about-cta { padding: 0.55rem 1rem; }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Page loader -->
+  <div class="loader-wrapper" id="pageLoader" aria-hidden="true">
+    <div class="loader" role="status" aria-label="Loading content"></div>
+  </div>
+
+  <!-- HEADER / NAVIGATION -->
+  <header id="navbar">
+    <div class="nav-container">
+      <div class="logo">BMS</div>
+      <nav>
+        <ul>
+          <li><coolbutton><span><a href="get-to-know.html">GET TO KNOW</a></span></coolbutton></li>
+          <li><coolbutton><span><a href="collaborate.html">COLLABORATE</a></span></coolbutton></li>
+          <li><coolbutton><span><a href="BODY.html">BODY</a></span></coolbutton></li>
+          <li><coolbutton><span><a href="mind.html">MIND</a></span></coolbutton></li>
+          <li><coolbutton><span><a href="SOUL.html">SOUL</a></span></coolbutton></li>
+          <li><coolbutton><span><a href="app.html">OUR APP</a></span></coolbutton></li>
+          <li><coolbutton><span><a href="advice.html">PERSONAL ADVICE</a></span></coolbutton></li>
+          <li><coolbutton><span><a href="forum.html">FORUM</a></span></coolbutton></li>
+        </ul>
+      </nav>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#videoSlider">VIDEOS</a>
+        <a href="#coreValues">CORE VALUES</a>
+        <a href="#articles">ARTICLES</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- TOP VIDEO SLIDER WITH OVERLAY -->
+  <section class="video-slider" id="videoSlider">
+    <video id="topVideo" autoplay muted loop playsinline>
+      <source src="https://videos.pexels.com/video-files/4057714/4057714-uhd_2560_1440_30fps.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay">
+      <p class="sub-header">WELCOME TO</p>
+      <h1 class="main-header">ABOUT US</h1>
+      <p class="description">
+        More information our cause. Jump into what motivates us to strive to a better body, mind and soul.
+      </p>
+    </div>
+  </section>
+<!-- ABOUT US (BMS - centered, non-invasive) -->
+<section id="about-us" class="bms-about">
+  <div class="bms-about-inner">
+    <p class="bms-about-label">About us</p>
+
+    <h2 class="bms-about-headline">
+      Welcome to <span class="bms-brand-name">The Body Mind Soul Club</span>
+    </h2>
+
+    <div class="bms-about-copy">
+      <p>
+If you take the courage to do something which might feel uncomfortable in the moment and you choose to do it anyways. Your reward will be confidence even when it doesn’t come out as you thought it would. You learned something you didn’t know, which builds character and knowledge. Never see yourself as a failure, they don’t exist. The only way to fail yourself is if you never take the next step. There’s is need to rush your goals, be patient and consistent with yourself.
+      </p>
+
+      <p>
+Prove your doubt wrong and your brain recieves the evidence that you are cabable of doing all these things. Your brain is naturally wired to keep you safe, not to do all these amazing things you wish you are doing. In order to keep you safe your brain starts sending notifications. For example: You want to speak your mind at a work gathering, your brain says SOS don’t do it, you will be shamed. Or you want to stop people pleasing so much, and the next time you want to say no, your brain starts whispering they will leave you if you don’t say yes. Going to the gym, a lot of excuses can arrise in that situation as many people recall. But you have to stand by your own words. You have to gain discipline, its one of the biggest forms of selflove to keep on working and investing in yourself. Choose pain over comfort, Because the right pain grows you, comfort doesn’t.
+      </p>
+
+      <p>
+      That’s why we believe manifesting only works by doing, believe you can, then show you can. So, what are you waiting for?
+      </p>
+
+      <p>
+        Take the jump, join the club.
+      </p>
+    </div>
+
+    <p class="bms-about-tagline">Body. Mind. Soul. Unlock your potential.</p>
+
+ 
+
+</section>
+  <!-- QUOTES SLIDER SECTION -->
+  <section class="quotes-section">
+    <div class="quotes-container">
+      <div class="quote-arrow left-arrow" id="quoteArrowLeft">&#10094;</div>
+      <div class="quote-slide" id="quoteSlide">
+        <div class="quote-item">
+          <p>"ELEVATE YOUR MIND, EMPOWER YOUR SOUL, AND UNLOCK THE BEST VERSION OF YOURSELF."</p>
+        </div>
+        <div class="quote-item">
+          <p>"TRUE FULFILLMENT STARTS WHEN YOU ALIGN YOUR PASSION WITH YOUR PURPOSE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"THIS IS YOUR SPACE TO GROW, EXPLORE, AND CREATE THE LIFE YOU TRULY DESERVE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"STEP BEYOND YOUR LIMITS. BREAK BARRIERS. EMBRACE THE POWER OF YOUR POTENTIAL."</p>
+        </div>
+        <div class="quote-item">
+          <p>"WHERE LUXURY MEETS PERSONAL GROWTH — YOUR JOURNEY BEGINS HERE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"YOUR UNIQUE ENERGY DESERVES A PLACE TO THRIVE. LET IT SHINE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"INSPIRATION IS A LIFESTYLE. WELCOME TO THE SPACE WHERE YOUR CREATIVITY COMES ALIVE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"HAPPINESS ISN’T A MOMENT, IT’S A JOURNEY. LET US GUIDE YOU TO YOURS."</p>
+        </div>
+        <div class="quote-item">
+          <p>"BALANCE, BEAUTY, AND BRILLIANCE—UNLOCK THEM ALL WITH EVERY STEP YOU TAKE."</p>
+        </div>
+        <div class="quote-item">
+          <p>"YOU ARE THE ARCHITECT OF YOUR LIFE. WE’RE HERE TO HELP YOU BUILD IT."</p>
+        </div>
+      </div>
+      <div class="quote-arrow right-arrow" id="quoteArrowRight">&#10095;</div>
+    </div>
+  </section>
+
+
+
+  <!-- ARTICLE MODAL (Instagram-style) -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <div class="modal-img">
+        <img src="" alt="Modal Image" id="modalImg">
+      </div>
+      <div class="modal-text">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <h3 id="modalTitle">Article Title</h3>
+        <div class="author" id="modalAuthor"></div>
+        <div class="price" id="modalPrice"></div>
+        <p id="modalDescription"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <a href="cookies.html">Cookies</a> |
+      <a href="contact.html">Contact</a> |
+      <a href="terms.html">Terms &amp; Conditions</a> |
+      <a href="privacy.html">Privacy Policy</a>
+      <p>&copy; 2025 BMS. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+
+const ham = document.querySelector('.hamburger');
+  const menu = document.querySelector('.site-navbar nav ul');
+
+  ham.addEventListener('click', () => {
+    menu.classList.toggle('show');
+    ham.classList.toggle('active');
+  });
+
+    // Burger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('show');
+    });
+
+    // ===== Scroll animation (clean IntersectionObserver replacement) =====
+      const animated = document.querySelectorAll('.scroll-animate');
+      if (animated.length){
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+            } else {
+              // remove so it can animate again when re-entering
+              entry.target.classList.remove('in-view');
+            }
+          });
+        }, {
+          root: null,
+          rootMargin: '0px 0px -10% 0px',
+          threshold: 0.15
+        });
+        animated.forEach((el, idx) => {
+          el.style.setProperty('--i', idx);
+          io.observe(el);
+        });
+      }
+
+// Quotes Slider: 4 seconds per quote with slide effect
+    const quoteItems = document.querySelectorAll('.quote-item');
+    const arrowLeft = document.getElementById('quoteArrowLeft');
+    const arrowRight = document.getElementById('quoteArrowRight');
+    let currentQuoteIndex = 0;
+    let quoteTimer;
+    function showQuote(index) {
+      quoteItems.forEach(item => {
+        item.classList.remove('active');
+      });
+      quoteItems[index].classList.add('active');
+    }
+    function nextQuote() {
+      currentQuoteIndex = (currentQuoteIndex + 1) % quoteItems.length;
+      showQuote(currentQuoteIndex);
+    }
+    function prevQuote() {
+      currentQuoteIndex = (currentQuoteIndex - 1 + quoteItems.length) % quoteItems.length;
+      showQuote(currentQuoteIndex);
+    }
+    function startQuoteTimer() {
+      quoteTimer = setInterval(nextQuote, 4000);
+    }
+    function stopQuoteTimer() {
+      clearInterval(quoteTimer);
+    }
+    arrowLeft.addEventListener('click', () => {
+      stopQuoteTimer();
+      prevQuote();
+      startQuoteTimer();
+    });
+    arrowRight.addEventListener('click', () => {
+      stopQuoteTimer();
+      nextQuote();
+      startQuoteTimer();
+    });
+    showQuote(currentQuoteIndex);
+    startQuoteTimer();
+
+    // Article Cards -> Instagram-style Modal
+    const articleCards = document.querySelectorAll('.article-card');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalAuthor = document.getElementById('modalAuthor');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalClose = document.getElementById('modalClose');
+
+    const articleData = {
+      1: {
+        title: "Article Title 1",
+        author: "by John Doe",
+        price: "$10",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        img: "https://images.pexels.com/photos/3823186/pexels-photo-3823186.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
+      },
+      2: {
+        title: "Article Title 2",
+        author: "by Jane Smith",
+        price: "$20",
+        description: "Praesent in libero vel turpis pellentesque egestas.",
+        img: "https://images.pexels.com/photos/4534666/pexels-photo-4534666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
+      },
+      3: {
+        title: "Article Title 3",
+        author: "by Alex Ray",
+        price: "$15",
+        description: "Donec augue, tortor sodales accumsan bibendum, urna ligula aliquet magna.",
+        img: "https://images.pexels.com/photos/5747793/pexels-photo-5747793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=1260&dpr=2"
+      },
+      4: {
+        title: "Placeholder Article",
+        author: "by Placeholder",
+        price: "$0",
+        description: "This is a placeholder article.",
+        img: "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop"
+      },
+      5: {
+        title: "Placeholder Article",
+        author: "by Placeholder",
+        price: "$0",
+        description: "This is another placeholder article.",
+        img: "https://images.unsplash.com/photo-1593164842264-854604db2260?q=80&w=1974&auto=compress&cs=tinysrgb&fit=crop"
+      },
+      6: {
+        title: "Placeholder Article",
+        author: "by Placeholder",
+        price: "$0",
+        description: "This is another placeholder article.",
+        img: "https://images.unsplash.com/photo-1552196527-bffef41ef674?q=80&w=1926&auto=compress&cs=tinysrgb&fit=crop"
+      }
+    };
+
+    articleCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const id = card.getAttribute('data-article');
+        const data = articleData[id];
+        modalImg.src = data.img;
+        modalTitle.textContent = data.title;
+        modalAuthor.textContent = data.author;
+        modalPrice.textContent = data.price;
+        modalDescription.textContent = data.description;
+        modalOverlay.classList.add('show');
+      });
+    });
+
+    modalClose.addEventListener('click', () => {
+      modalOverlay.classList.remove('show');
+    });
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        modalOverlay.classList.remove('show');
+      }
+    });
+
+    /* Navbar scroll behavior for desktop:
+       - In desktop mode, header becomes transparent with white text.
+       - Remove drop shadow when scrolling down; add it when scrolling up.
+    */
+    function updateNavbarMode() {
+      const navbar = document.getElementById('navbar');
+      if (window.innerWidth >= 768) {
+        navbar.classList.add('desktop-navbar');
+      } else {
+        navbar.classList.remove('desktop-navbar');
+      }
+    }
+    updateNavbarMode();
+    window.addEventListener('resize', updateNavbarMode);
+
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.innerWidth >= 768) {
+        if (window.scrollY > lastScrollY) {
+          navbar.style.boxShadow = 'none';
+        } else {
+          navbar.style.boxShadow = '0 6px 12px rgba(33,24,21,0.7)';
+        }
+      }
+      lastScrollY = window.scrollY;
+    });
+
+    // NEW: Video Modal Button and Overlay Logic
+    const videoModalBtn = document.getElementById('videoModalBtn');
+    const videoModalOverlay = document.getElementById('videoModalOverlay');
+    const videoModalClose = document.getElementById('videoModalClose');
+
+    videoModalBtn.addEventListener('click', () => {
+      videoModalOverlay.classList.add('show');
+    });
+
+    videoModalClose.addEventListener('click', () => {
+      videoModalOverlay.classList.remove('show');
+    });
+
+    videoModalOverlay.addEventListener('click', (e) => {
+      if (e.target === videoModalOverlay) {
+        videoModalOverlay.classList.remove('show');
+      }
+    });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const desktopLinks = document.querySelector('nav ul').innerHTML;
+    mobileMenu.innerHTML = desktopLinks;
+  });
+</script>
+
+  <script>
+    // Hide and remove the loader once page resources have finished loading.
+    window.addEventListener('load', function () {
+      try {
+        var loader = document.getElementById('pageLoader');
+        if (!loader) return;
+        // fade out
+        loader.classList.add('hidden');
+        // remove from DOM after transition (500ms to be safe)
+        setTimeout(function(){ if (loader && loader.parentNode) loader.parentNode.removeChild(loader); }, 600);
+      } catch (e) { console.error('Loader hide error', e); }
+    });
+  </script>
+
+<script>
+      // Enhanced modal behavior: populate caption and avoid image stretching/black areas
+      (function(){
+        const articleCards = document.querySelectorAll('.article-card');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalAuthor = document.getElementById('modalAuthor');
+        const modalPrice = document.getElementById('modalPrice');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalClose = document.getElementById('modalClose');
+
+        articleCards.forEach(card => {
+          card.style.cursor = 'pointer';
+          card.addEventListener('click', function(e){
+            const img = card.querySelector('img');
+            const title = card.querySelector('h3') ? card.querySelector('h3').textContent : '';
+            const author = card.querySelector('.author') ? card.querySelector('.author').textContent : '';
+            const price = card.querySelector('.price') ? card.querySelector('.price').textContent : '';
+            const fullCaption = card.dataset.fullCaption || '';
+
+            // clear image to avoid showing partial artifacts in some browsers while loading a new src
+            modalImg.src = '';
+            modalImg.alt = title;
+
+            // set modal text
+            if(modalTitle) modalTitle.textContent = title;
+            if(modalAuthor) modalAuthor.textContent = author;
+            if(modalPrice) modalPrice.textContent = price;
+            if(modalDescription) modalDescription.textContent = fullCaption;
+
+            // set image src after brief timeout to force reflow (helps some browsers avoid artifacts)
+            setTimeout(()=>{
+              if(img && img.src){
+                modalImg.src = img.src;
+              }
+            }, 50);
+
+            // show modal
+            if(modalOverlay) modalOverlay.classList.add('show');
+            // disable body scroll
+            document.body.style.overflow = 'hidden';
+          });
+        });
+
+        // close handlers
+        if(modalClose) modalClose.addEventListener('click', closeModal);
+        if(modalOverlay) modalOverlay.addEventListener('click', function(e){ if(e.target === modalOverlay) closeModal(); });
+
+        function closeModal(){
+          if(modalOverlay) modalOverlay.classList.remove('show');
+          document.body.style.overflow = '';
+          // remove src after hiding to free memory and avoid flashes next open
+          setTimeout(()=>{ if(modalImg) modalImg.src = ''; }, 300);
+        }
+      })();
+</script>
+</body>
+</html>
+
+
+
+
